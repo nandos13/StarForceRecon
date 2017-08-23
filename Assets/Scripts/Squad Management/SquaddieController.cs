@@ -21,7 +21,7 @@ public class SquaddieController : MonoBehaviour
     void Start ()
     {
         // Add an event handler for squad member switching
-        stSquadManager.OnSwitchSquaddie += StSquadManager_OnSwitchSquaddie;
+        SquadManager.OnSwitchSquaddie += StSquadManager_OnSwitchSquaddie;
     }
 
     /// <summary>
@@ -29,7 +29,7 @@ public class SquaddieController : MonoBehaviour
     /// </summary>
     private void StSquadManager_OnSwitchSquaddie()
     {
-        SquaddieController currentSquaddie = stSquadManager.GetCurrentSquaddie;
+        SquaddieController currentSquaddie = SquadManager.GetCurrentSquaddie;
 
         if (currentSquaddie == this)
             SelectSquaddie();
@@ -81,7 +81,7 @@ public class SquaddieController : MonoBehaviour
     void OnDrawGizmos()
     {
         // Temporary code. Draw gizmo over selected object's head
-        if (stSquadManager.GetCurrentSquaddie == this)
+        if (SquadManager.GetCurrentSquaddie == this)
         {
             Gizmos.color = Color.cyan;
             Gizmos.DrawWireSphere(transform.position + Vector3.up * 3, 0.2f);

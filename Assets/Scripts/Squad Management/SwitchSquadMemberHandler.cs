@@ -11,6 +11,6 @@ public class SwitchSquadMemberHandler : MonoBehaviour
     {
         // Check if switch-button was pressed this frame
         if (Input.GetButtonDown("SwitchSquaddie"))
-            stSquadManager.Switch(Input.GetAxisRaw("SwitchSquaddie") < 0);    // Switch is reversed if the negative button is used
+            SquadManager.Switch(Input.GetAxisRaw("SwitchSquaddie") < 0);    // Switch is reversed if the negative button is used
     }
 }

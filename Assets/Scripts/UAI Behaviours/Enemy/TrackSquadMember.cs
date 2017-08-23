@@ -24,7 +24,7 @@ public class TrackSquadMember : MonoBehaviour
         // Find closest squaddie
 
         // Get all squad members
-        List<SquaddieController> squadMembers = stSquadManager.GetSquadMembers;
+        List<SquaddieController> squadMembers = SquadManager.GetSquadMembers;
 
         // Find closest squad member
         float minDistance = float.MaxValue;
@@ -34,7 +34,10 @@ public class TrackSquadMember : MonoBehaviour
             float distance = Vector3.Distance(member.transform.position, transform.position);
 
             if (distance < minDistance)
+            {
                 closest = member;
+                minDistance = distance;
+            }
         }
 
         // Get reference to the range property on the agent

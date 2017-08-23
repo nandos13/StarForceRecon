@@ -4,13 +4,24 @@ using UnityEngine;
 
 /* Static class for squad management. 
  * Tracks squad members, current selected member, etc. */
-public static class stSquadManager
+public static class SquadManager
 {
-    // Event info
+    #region Delegates & Events
+
     public delegate void SquadMemberSwitchEvent();
     public static event SquadMemberSwitchEvent OnSwitchSquaddie;  // This event is called every time the selected squad member is changed
 
-    // Selection variables
+    #endregion
+
+    #region Squad Selection
+
+    private static bool _canSwitchSquadMembers = true;
+    public static bool CanSwitchSquadMembers
+    {
+        get { return _canSwitchSquadMembers; }
+        set { _canSwitchSquadMembers = value; }
+    }
+
     private static List<SquaddieController> _squadMembers;
     private static int _selectedIndex;
     private static SquaddieController _selected = null;
@@ -25,7 +36,9 @@ public static class stSquadManager
         get { return _selected; }
     }
 
-    // Internal use only. Checks if there are any registered listeners for the OnSwitchSquaddie event, and calls the event if so
+    #endregion
+    
+    /// <summary>Internal use only. Checks for registered listeners before raising the switch event.</summary>
     private static void SafeFireOnSwitchSquaddie()
     {
         SquadMemberSwitchEvent switchEvent = OnSwitchSquaddie;
@@ -61,7 +74,7 @@ public static class stSquadManager
     /// </summary>
     public static void Switch(bool reverse = false)
     {
-        if (!stSettings.CanSwitchSquadMembers)
+        if (!_canSwitchSquadMembers)
             return;
 
         if (_squadMembers.Count == 0)
@@ -110,7 +123,7 @@ public static class stSquadManager
     /// </summary>
     public static bool SwitchTo(int index)
     {
-        if (!stSettings.CanSwitchSquadMembers)
+        if (!_canSwitchSquadMembers)
             return false;
 
         if (index >= 0 && index < _squadMembers.Count)

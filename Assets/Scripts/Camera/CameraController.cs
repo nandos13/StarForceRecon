@@ -123,12 +123,12 @@ public class CameraController : MonoBehaviour
         }
 
         // Set follow points to current squad members location
-        SquaddieController currentSquaddie = stSquadManager.GetCurrentSquaddie;
+        SquaddieController currentSquaddie = SquadManager.GetCurrentSquaddie;
         if (currentSquaddie)
             LookAtPosition(currentSquaddie.transform.position, _switchCharacterTime);
 
         // Add an event handler for squad member switching
-        stSquadManager.OnSwitchSquaddie += StSquadManager_OnSwitchSquaddie;
+        SquadManager.OnSwitchSquaddie += StSquadManager_OnSwitchSquaddie;
     }
     
     /// <summary>
@@ -137,7 +137,7 @@ public class CameraController : MonoBehaviour
     private void StSquadManager_OnSwitchSquaddie()
     {
         // Set the camera to switch to the new squaddie's position over _switchCharacterTime seconds.
-        SquaddieController currentSquaddie = stSquadManager.GetCurrentSquaddie;
+        SquaddieController currentSquaddie = SquadManager.GetCurrentSquaddie;
         if (currentSquaddie)
             LookAtPosition(currentSquaddie.transform.position, _switchCharacterTime);
     }
@@ -163,7 +163,7 @@ public class CameraController : MonoBehaviour
         else
         {
             // The camera is not lerping. Get a look destination that is offset from the current character's position
-            SquaddieController currentSquaddie = stSquadManager.GetCurrentSquaddie;
+            SquaddieController currentSquaddie = SquadManager.GetCurrentSquaddie;
             if (currentSquaddie)
             {
                 Vector3 characterPos = currentSquaddie.transform.position;
@@ -280,7 +280,7 @@ public class CameraController : MonoBehaviour
         if (_aimOffsetDistance > 0)
         {
             // Get a reference to the current squaddie's aim script
-            SquaddieController currentSquaddie = stSquadManager.GetCurrentSquaddie;
+            SquaddieController currentSquaddie = SquadManager.GetCurrentSquaddie;
             if (currentSquaddie)
             {
                 PlayerAim aimScript = currentSquaddie.gameObject.GetComponent<PlayerAim>();

@@ -36,10 +36,10 @@ public class SetSquadReferences : MonoBehaviour
         }
 
         // Set the list
-        stSquadManager.SetSquadList(_members);
+        SquadManager.SetSquadList(_members);
 
         // Set selected squaddie to Control mode
-        SquaddieController currentSquaddie = stSquadManager.GetCurrentSquaddie;
+        SquaddieController currentSquaddie = SquadManager.GetCurrentSquaddie;
         if (currentSquaddie)
             currentSquaddie.SelectSquaddie();
         
