@@ -145,7 +145,7 @@ public class Health : MonoBehaviour
             _timeSinceDamage = 0.0f;
 
             // Raise events
-            RaiseEvent(OnHealthChanged, damage);
+            RaiseEvent(OnHealthChanged, -damage);
             RaiseEvent(OnDamage, damage);
 
             if (_currentHealth <= 0)
@@ -160,11 +160,13 @@ public class Health : MonoBehaviour
         {
             if (heal < 0) heal *= -1.0f;
 
-            _currentHealth += heal;
+            float toHeal = (_currentHealth + heal > _maxHealth) ? (_maxHealth - _currentHealth) : heal;
+
+            _currentHealth += toHeal;
 
             // Raise events
-            RaiseEvent(OnHealthChanged, heal);
-            RaiseEvent(OnHeal, heal);
+            RaiseEvent(OnHealthChanged, toHeal);
+            RaiseEvent(OnHeal, toHeal);
         }
     }
 
