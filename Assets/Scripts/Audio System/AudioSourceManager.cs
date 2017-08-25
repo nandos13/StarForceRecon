@@ -69,9 +69,9 @@ public class AudioSourceManager : MonoBehaviour
         foreach (AudioPlayer p in _audioPlayers)
         {
             if (p.timeScaleInfluencesPlayback)
-                p.source.pitch = Time.timeScale * p.defaultPitch;
+                p.source.pitch = Time.timeScale * p.pitch;
             else
-                p.source.pitch = p.defaultPitch;
+                p.source.pitch = p.pitch;
         }
     }
 

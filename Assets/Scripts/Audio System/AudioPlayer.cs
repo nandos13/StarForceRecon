@@ -44,16 +44,12 @@ public class AudioPlayer : MonoBehaviour
         get { return _timeScaleInfluencesPlayback; }
     }
 
-    private float _defaultPitch = 1.0f;
-    private float _defaultVolume = 1.0f;
+    [Range(0.0f, 1.0f), SerializeField] private float _volume = 1.0f;
+    [Range(-3f, 3.0f), SerializeField]  private float _pitch = 1.0f;
 
-    public float defaultPitch
+    public float pitch
     {
-        get { return _defaultPitch; }
-    }
-    public float defaultVolume
-    {
-        get { return _defaultVolume; }
+        get { return _pitch; }
     }
 
     #endregion
@@ -62,14 +58,12 @@ public class AudioPlayer : MonoBehaviour
     {
         // Get ref to AudioSource component
         _source = GetComponent<AudioSource>();
+        _source.playOnAwake = false;
+        _source.hideFlags = HideFlags.HideInInspector;
 
         // Subscribe to manager
         _managerRef = AudioSourceManager.instance;
         _managerRef.RegisterPlayer(this);
-
-        // Set defaults
-        _defaultPitch = _source.pitch;
-        _defaultVolume = _source.volume;
     }
 
     private AudioClip GetAudioClip(string name)
@@ -92,7 +86,7 @@ public class AudioPlayer : MonoBehaviour
 
         if (clip)
         {
-            float shotVolume = (_defaultVolume / _source.volume) * _managerRef.GetChannelValueUnscaled(_channel);
+            float shotVolume = (_volume / _source.volume) * _managerRef.GetChannelValueUnscaled(_channel);
 
             _source.PlayOneShot(clip, shotVolume);
         }
@@ -105,7 +99,7 @@ public class AudioPlayer : MonoBehaviour
         if (clip)
         {
             _source.clip = clip;
-            _source.volume = _defaultVolume * _managerRef.GetChannelValue(_channel);
+            _source.volume = _volume * _managerRef.GetChannelValue(_channel);
             _source.PlayDelayed(delay);
         }
     }
