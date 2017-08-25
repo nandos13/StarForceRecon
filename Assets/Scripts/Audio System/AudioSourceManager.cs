@@ -151,6 +151,9 @@ public class AudioSourceManager : MonoBehaviour
             default:
                 break;
         }
+
+        // Save to PlayerPrefs
+        SaveAudioPrefs();
     }
     
 }
