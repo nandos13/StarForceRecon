@@ -64,7 +64,6 @@ public class PlayParticleOnGunFired : MonoBehaviour
 
     private void Emit(Vector3 origin, Vector3 direction)
     {
-        _ps.transform.LookAt(origin + direction);
         ParticleSystem.EmitParams p = new ParticleSystem.EmitParams();
         p.velocity = direction * _ps.main.startSpeedMultiplier;
         _ps.Emit(p, _count);
