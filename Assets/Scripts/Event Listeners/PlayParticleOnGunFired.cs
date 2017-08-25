@@ -38,7 +38,7 @@ public class PlayParticleOnGunFired : MonoBehaviour
             Debug.LogWarning("Warning: No particle system attached.", this);
     }
 
-    private void _gun_OnShotFired(Gun sender, Vector3 origin, Vector3 direction)
+    private void _gun_OnShotFired(Gun sender, Vector3 origin, Vector3 direction, Transform hitTransform)
     {
         if (_ps)
         {

@@ -7,7 +7,7 @@ public class Gun : MonoBehaviour
     #region Delegates & Events
 
     public delegate void GunEventDelegate(Gun sender);
-    public delegate void GunShotEventDelegate(Gun sender, Vector3 origin, Vector3 direction);
+    public delegate void GunShotEventDelegate(Gun sender, Vector3 origin, Vector3 direction, Transform hitTransform);
 
     public event GunEventDelegate OnReloadSuccess;
     public event GunEventDelegate OnReloadFailed;
@@ -145,12 +145,12 @@ public class Gun : MonoBehaviour
     }
 
     /// <summary>Safely raises the specified event if it has any registered listeners.</summary>
-    private void RaiseEvent(GunShotEventDelegate e, Vector3 origin, Vector3 direction)
+    private void RaiseEvent(GunShotEventDelegate e, Vector3 origin, Vector3 direction, Transform hitTransform)
     {
         // Check there are any registered listeners before firing event
         GunShotEventDelegate del = e;
         if (del != null)
-            e(this, origin, direction);
+            e(this, origin, direction, hitTransform);
     }
     
     private void HandleCooling()
@@ -278,6 +278,7 @@ public class Gun : MonoBehaviour
         _nonAllocRay.direction = spreadDirection;
         int hits = Physics.RaycastNonAlloc(_nonAllocRay, _nonAllocHits, 1000.0f, (int)_layerMask, QueryTriggerInteraction.Ignore);
 
+        Transform hitTransform = null;
         if (hits > 0)
         {
             // Sort the hits array by distance from the shot origin to find the closest hit
@@ -308,13 +309,14 @@ public class Gun : MonoBehaviour
 
             // Deal damage to the object hit
             float damage = _damage / _ammoPerShot;
+            hitTransform = _nonAllocHit.transform;
             _nonAllocHit.transform.SendMessageUpwards("ApplyDamage", damage, SendMessageOptions.DontRequireReceiver);
 
         }
         else
             Debug.DrawRay(_gunOrigin.position, spreadDirection * 10, Color.blue, 0.5f);
 
-        RaiseEvent(OnGunShotFired, _gunOrigin.position, spreadDirection);
+        RaiseEvent(OnGunShotFired, _gunOrigin.position, spreadDirection, hitTransform);
     }
 
     /// <summary>Begins a reload for this gun.</summary>
