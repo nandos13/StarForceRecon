@@ -17,7 +17,7 @@ public class PlaySoundOnGunFired : MonoBehaviour
             _gun = GetComponentInParent<Gun>();
 
         if (_gun)
-            _gun.OnShotFired += _gun_OnShotFired;
+            _gun.OnGunFired += _gun_OnShotFired;
     }
 
     private void _gun_OnShotFired(Gun sender)

@@ -7,10 +7,19 @@ public class Gun : MonoBehaviour
     #region Delegates & Events
 
     public delegate void GunEventDelegate(Gun sender);
+    public delegate void GunShotEventDelegate(Gun sender, Vector3 origin, Vector3 direction);
 
     public event GunEventDelegate OnReloadSuccess;
     public event GunEventDelegate OnReloadFailed;
-    public event GunEventDelegate OnShotFired;
+
+    /// <summary>Called once when the gun is fired.</summary>
+    public event GunEventDelegate OnGunFired;
+
+    /// <summary>
+    /// Called per shot with directional information. May be called more than once
+    /// when the gun is fired if ammoPerShot is greater than one.
+    /// </summary>
+    public event GunShotEventDelegate OnGunShotFired;
 
     #endregion
 
@@ -126,15 +135,22 @@ public class Gun : MonoBehaviour
         HandleCooling();
     }
 
-    /// <summary>
-    /// Safely raises the specified event if it has any registered listeners.
-    /// </summary>
+    /// <summary>Safely raises the specified event if it has any registered listeners.</summary>
     private void RaiseEvent(GunEventDelegate e)
     {
         // Check there are any registered listeners before firing event
         GunEventDelegate del = e;
         if (del != null)
             e(this);
+    }
+
+    /// <summary>Safely raises the specified event if it has any registered listeners.</summary>
+    private void RaiseEvent(GunShotEventDelegate e, Vector3 origin, Vector3 direction)
+    {
+        // Check there are any registered listeners before firing event
+        GunShotEventDelegate del = e;
+        if (del != null)
+            e(this, origin, direction);
     }
     
     private void HandleCooling()
@@ -224,7 +240,7 @@ public class Gun : MonoBehaviour
                     ApplyHeat(ammoThisShot);
 
                 // Fire shots
-                RaiseEvent(OnShotFired);
+                RaiseEvent(OnGunFired);
                 for (int i = 0; i < ammoThisShot; i++)
                 {
                     FireShot();
@@ -295,6 +311,10 @@ public class Gun : MonoBehaviour
             _nonAllocHit.transform.SendMessageUpwards("ApplyDamage", damage, SendMessageOptions.DontRequireReceiver);
 
         }
+        else
+            Debug.DrawRay(_gunOrigin.position, spreadDirection * 10, Color.blue, 0.5f);
+
+        RaiseEvent(OnGunShotFired, _gunOrigin.position, spreadDirection);
     }
 
     /// <summary>

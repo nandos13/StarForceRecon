@@ -36,7 +36,12 @@ public class Arsenal : MonoBehaviour
 
     public Gun currentGun
     {
-        get { return _current._gun; }
+        get
+        {
+            if (_current != null)
+                return _current._gun;
+            return null;
+        }
     }
 
     #endregion
