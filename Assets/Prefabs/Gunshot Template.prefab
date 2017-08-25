@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 198618155587887728}
   - component: {fileID: 199096408326812338}
   m_Layer: 0
-  m_Name: Particle System
+  m_Name: Gunshot Template
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -100,7 +100,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -445332717
+  randomSeed: 1822489551
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -148,8 +148,8 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 150
-      minScalar: 5
+      scalar: 180
+      minScalar: 140
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -252,7 +252,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0.4
       minScalar: 1
       maxCurve:
         serializedVersion: 2

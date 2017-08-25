@@ -317,9 +317,7 @@ public class Gun : MonoBehaviour
         RaiseEvent(OnGunShotFired, _gunOrigin.position, spreadDirection);
     }
 
-    /// <summary>
-    /// Begins a reload for this gun.
-    /// </summary>
+    /// <summary>Begins a reload for this gun.</summary>
     public void DoReload()
     {
         if (!_bottomlessClip 
