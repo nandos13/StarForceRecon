@@ -3016,7 +3016,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1500
+  far clip plane: 2500
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -3057,7 +3057,7 @@ Animator:
   m_GameObject: {fileID: 1143841111}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: da0c83e40844283419c373d95971a6ba, type: 2}
+  m_Controller: {fileID: 9100000, guid: 4047f14c1b98585418ebfd6ced713790, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
