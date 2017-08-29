@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 8c34ead2ad89e7148b720c6a168507ec
-timeCreated: 1503633819
+guid: 2b37f556dc5b89449aa3a2e924274c0d
+timeCreated: 1503979102
 licenseType: Free
 ModelImporter:
   serializedVersion: 21
@@ -9,7 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: resWallStraightEndPillar
+    4300000: resWallCornerDoorAlt
     9500000: //RootNode
   materials:
     importMaterials: 1

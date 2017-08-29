@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: fcc5bb02f003fba449e75cb69894afcc
-timeCreated: 1503633819
+guid: 249454429c26f21478f766e9c396b067
+timeCreated: 1503979101
 licenseType: Free
 ModelImporter:
   serializedVersion: 21
@@ -9,7 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: resWallStraightDoorSlide2
+    4300000: resWallStraightAltHalf
     9500000: //RootNode
   materials:
     importMaterials: 1
