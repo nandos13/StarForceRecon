@@ -13,7 +13,7 @@ public class PlayerAim : MonoBehaviour
     [SerializeField]    private Transform _gunOrigin;
     private LogOnce _gunOriginWarningMessage = null;
 
-    [SerializeField]    private LayerMask _aimableLayers = new LayerMask();
+    [SerializeField]    private LayerMask _aimableLayers = (LayerMask)1;
 
     [Header("Smart Aim")]
     [Range(2, 5), Tooltip("The number of iterations to make in each direction, positively and negatively, when searching for a better aim point.\nNOTE: Each extra iteration can result in up to 26 new raycast checks per frame (worst case scenario). Although less accurate, a lower value may slightly improve performance.")]
@@ -26,8 +26,10 @@ public class PlayerAim : MonoBehaviour
 
     private Vector3 _aimMousePoint;
     private bool _aimingAtGeometry = false;     // Tracks whether or not the mouse is over aimable geometry
+    private bool _pointFoundAtPlayerHeight = false;
     private Collider _mousePointCollider = null;
-    private Vector3 _aimPoint;
+    private Vector3 _aimPoint = Vector3.zero;
+    private Vector3 _previousValidAimPoint = Vector3.zero;
 
     /// <summary>
     /// Returns the point under the mouse. For the actual aim point, use GetAimPoint
@@ -46,7 +48,7 @@ public class PlayerAim : MonoBehaviour
     }
     public bool IsAiming
     {
-        get { return _aimingAtGeometry; }
+        get { return _aimingAtGeometry || _pointFoundAtPlayerHeight; }
     }
 
     void Awake()
@@ -66,8 +68,12 @@ public class PlayerAim : MonoBehaviour
         // Get the point under the mouse pointer
         Vector3 underMouse;
         _aimingAtGeometry = GetPointUnderMouse(out underMouse, out _mousePointCollider);
+        
+        // If mouse is not over geometry, find point on last valid hit's horizontal plane
+        if (!_aimingAtGeometry)
+            _pointFoundAtPlayerHeight = GetPointAtLastHeight(out underMouse);
 
-        if (_aimingAtGeometry)
+        if (_aimingAtGeometry || _pointFoundAtPlayerHeight)
         {
             _aimMousePoint = underMouse;
 
@@ -80,9 +86,29 @@ public class PlayerAim : MonoBehaviour
                     RaycastHit hit;
                     if (SightLineOptimizer.FindOptimalViewablePoint(out hit, _gunOrigin.position, _aimMousePoint,
                             target, true, (uint)_smartAimIterations, _aimTags, _aimableLayers, _smartAimIgnoreTags, 0.0f))
+                    {
                         _aimPoint = hit.point;
+                        _previousValidAimPoint = _aimPoint;
+                    }
                     else
+                    {
                         _aimPoint = _aimMousePoint;
+                        _previousValidAimPoint = _aimPoint;
+                    }
+                }
+                else
+                {
+                    // No collider under mouse (Point has been found off of geometry, on previous valid point's plane)
+                    Vector3 hit;
+                    if (RaycastForValidHit(out hit, _gunOrigin.position, _aimMousePoint - _gunOrigin.position))
+                    {
+                        _aimPoint = hit;
+                        _previousValidAimPoint = _aimPoint;
+                    }
+                    else
+                    {
+                        _aimPoint = underMouse;
+                    }
                 }
             }
             else
@@ -90,14 +116,72 @@ public class PlayerAim : MonoBehaviour
         }
     }
 
-    private void GetPointAtPlayerHeight()
+    private bool RaycastForValidHit(out Vector3 point, Vector3 origin, Vector3 direction)
     {
-        // TODO: Find where the ray from the camera intersects with the horizontal plane at player's height
+        Ray ray = new Ray(origin, direction);
+
+        // Get an array of all raycasthits for this ray
+        RaycastHit[] rayHits = Physics.RaycastAll(ray, 1000.0f, _aimableLayers.value);
+
+        if (rayHits.Length > 0)
+        {
+            // Sort by distance from camera
+            rayHits.SortByDistance(origin);
+
+            // Loop through each hit & compare to allowed tags to find the first valid hit
+            RaycastHit firstHit = new RaycastHit();
+            for (uint i = 0; i < rayHits.Length; i++)
+            {
+                RaycastHit hit = rayHits[i];
+
+                // Find the hit's transform tag in the aimTags list
+                string found = null;
+                found = System.Array.Find(_aimTags, delegate (string s) {
+                    return s == hit.transform.tag;
+                });
+
+                if (found != null)
+                {
+                    firstHit = hit;
+                    break;
+                }
+            }
+
+            // Check if a valid hit was found
+            if (firstHit.transform)
+            {
+                point = firstHit.point;
+                return true;
+            }
+        }
+
+        point = Vector3.zero;
+        return false;
     }
 
-    /// <summary>
-    /// Shoots a ray into the screen to find the first valid hit under the mouse pointer.
-    /// </summary>
+    /// <summary>Finds where the cursor's screenpoint-ray intersects the player's horizontal plane.</summary>
+    /// <param name="point">Out parameter for the resulting point. Only use if function returns true.</param>
+    /// <returns>Returns true if a point is found. Will only return false if the ray is parallel to the horizon.</returns>
+    private bool GetPointAtLastHeight(out Vector3 point)
+    {
+        // Get ray through main camera @ mouse position
+        Camera mainCam = Camera.main;
+        Vector3 mainCamPos = mainCam.transform.position;
+        Ray mouseRay = mainCam.ScreenPointToRay(Input.mousePosition);
+
+        Plane plane = new Plane(Vector3.up, _previousValidAimPoint);
+        float rayDist;
+        if (plane.Raycast(mouseRay, out rayDist))
+        {
+            point = mouseRay.GetPoint(rayDist);
+            return true;
+        }
+
+        point = Vector3.zero;
+        return false;
+    }
+
+    /// <summary>Shoots a ray into the screen to find the first valid hit under the mouse pointer.</summary>
     /// <param name="point">Out parameter for the resulting point. Only use if function returns true.</param>
     /// <param name="collider">Out parameter for the collider hit by the raycast. Null if no collider is under the mouse.</param>
     /// <returns>Returns true if there is valid geometry under the mouse pointer</returns>
@@ -151,7 +235,7 @@ public class PlayerAim : MonoBehaviour
 
     void OnDrawGizmosSelected()
     {
-        if (enabled && _aimingAtGeometry)
+        if (enabled && _aimingAtGeometry || _pointFoundAtPlayerHeight)
         {
             Gizmos.color = Color.red;
             if (_gunOrigin)
@@ -169,13 +253,19 @@ public class PlayerAim : MonoBehaviour
                 Gizmos.DrawLine(transform.position, _aimPoint);
             }
 
-            Bounds b = _mousePointCollider.TopParentMatchingTag().GetGroupedBounds();
-            Gizmos.DrawWireCube(b.center, b.size);
+            if (_mousePointCollider)
+            {
+                Bounds b = _mousePointCollider.TopParentMatchingTag().GetGroupedBounds();
+                Gizmos.DrawWireCube(b.center, b.size);
+            }
 
             Gizmos.color = Color.magenta;
             Gizmos.DrawWireSphere(_aimPoint, 0.21f);
             Gizmos.color = Color.blue;
             Gizmos.DrawWireSphere(_aimMousePoint, 0.19f);
+
+            Gizmos.DrawWireSphere(_previousValidAimPoint, 0.12f);
+            Gizmos.DrawWireCube(_aimMousePoint, new Vector3(1, 0, 1));
         }
     }
 }

@@ -53,6 +53,16 @@ public class ThirdPersonController : MonoBehaviour
         if (direction.magnitude != 1.0f)
             direction.Normalize();
 
+        // Convert move vector into local space
+        direction = transform.InverseTransformDirection(direction);
+
+        DoGroundCheck();
+
         // TODO
+    }
+
+    private void DoGroundCheck()
+    {
+
     }
 }
