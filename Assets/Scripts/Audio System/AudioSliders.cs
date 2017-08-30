@@ -19,6 +19,8 @@ public class AudioSliders : MonoBehaviour
 
     void Awake()
     {
+        SetSliderValues();
+
         if (_masterSlider != null)
             _masterSlider.onValueChanged.AddListener(delegate 
             { valueChanged(MASTER); }
@@ -28,6 +30,22 @@ public class AudioSliders : MonoBehaviour
             _effectsSlider.onValueChanged.AddListener(delegate
             { valueChanged(EFFECTS); }
             );
+    }
+
+    void OnEnable()
+    {
+        SetSliderValues();
+    }
+
+    private void SetSliderValues()
+    {
+        AudioSourceManager manager = AudioSourceManager.instance;
+
+        if (_masterSlider != null)
+            _masterSlider.normalizedValue = manager.GetChannelValueUnscaled(MASTER);
+
+        if (_effectsSlider != null)
+            _effectsSlider.normalizedValue = manager.GetChannelValueUnscaled(EFFECTS);
     }
 
     private void valueChanged(AudioSourceManager.AudioChannel channel)
