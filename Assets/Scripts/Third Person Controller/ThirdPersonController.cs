@@ -29,11 +29,14 @@ public class ThirdPersonController : MonoBehaviour
     [Range(90.0f, 480.0f), SerializeField]  private float _movingTurningSpeed = 360.0f;
     [Range(90.0f, 360.0f), SerializeField]  private float _stationaryTurningSpeed = 180.0f;
     [Range(1.0f, 5.0f), SerializeField]     private float _gravityMultiplier = 2.0f;
+    [Range(0.0f, 1.0f), SerializeField]     private float _runCycleLegOffset = 0.2f;
+    [Range(0.5f, 3.0f), SerializeField]     private float _moveSpeedMultiplier = 1.0f;
+    [Range(0.5f, 3.0f), SerializeField]     private float _animSpeedMultiplier = 1.0f;
 
     #endregion
 
     #region Tracker Variables
-    
+
     private RaycastHit _hit;
     private Ray _ray;
 
@@ -140,7 +143,40 @@ public class ThirdPersonController : MonoBehaviour
 
     private void UpdateAnimator(Vector3 move)
     {
+        // Update animator parameters
+        _animator.SetFloat("Forward", _forward, 0.1f, Time.deltaTime);
+        _animator.SetFloat("Turn", _turn, 0.1f, Time.deltaTime);
+        _animator.SetBool("Crouch", _crouching);
+        _animator.SetBool("Grounded", _grounded);
 
+        if (!_grounded)
+            _animator.SetFloat("AirborneVelocity", _rb.velocity.y);
+
+        // TODO: Leg stuff
+        float runCycle = Mathf.Repeat(
+            _animator.GetCurrentAnimatorStateInfo(0).normalizedTime + _runCycleLegOffset, 1);
+        float jumpLeg = (runCycle < 0.5f ? 1 : -1) * _forward;
+        if (_grounded)
+            _animator.SetFloat("JumpLeg", jumpLeg);
+
+        if (_grounded && move.magnitude > 0)
+            _animator.speed = _animSpeedMultiplier;
+        else
+            _animator.speed = 1.0f;
+    }
+
+    public void OnAnimatorMove()
+    {
+        // Overrides default root motion.
+
+        if (_grounded && Time.deltaTime > 0)
+        {
+            Vector3 v = (_animator.deltaPosition * _moveSpeedMultiplier) / Time.deltaTime;
+
+            // Preserve y velocity
+            v.y = _rb.velocity.y;
+            _rb.velocity = v;
+        }
     }
 
     private void ApplyGravity()
