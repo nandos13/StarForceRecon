@@ -8,7 +8,7 @@ AnimatorController:
   m_Name: resWallStraightDoor (3)
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: Active
+  - m_Name: DoorOpen
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -35,7 +35,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: Active
+    m_ConditionEvent: DoorOpen
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102047890787705190}
@@ -43,7 +43,7 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.32195258
+  m_TransitionDuration: 0.3239988
   m_TransitionOffset: 0
   m_ExitTime: 0.75
   m_HasExitTime: 1
@@ -59,7 +59,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: Active
+    m_ConditionEvent: DoorOpen
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102775498971808214}
@@ -67,9 +67,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.3252327
-  m_TransitionOffset: 0.0072356667
-  m_ExitTime: 0.0072361315
+  m_TransitionDuration: 0.16393405
+  m_TransitionOffset: 0.00000017881388
+  m_ExitTime: 0.49533015
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -151,7 +151,7 @@ AnimatorState:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Idle
-  m_Speed: 2
+  m_Speed: 4
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1101319710854171444}
