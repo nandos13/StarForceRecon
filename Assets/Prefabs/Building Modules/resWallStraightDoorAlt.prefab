@@ -22,8 +22,9 @@ GameObject:
   - component: {fileID: 33218005656542414}
   - component: {fileID: 23730960461382538}
   - component: {fileID: 95618918082282906}
+  - component: {fileID: 65261879087836630}
   m_Layer: 0
-  m_Name: resWallDoorSlide1_FIX
+  m_Name: resWallDoorSlide1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40,8 +41,9 @@ GameObject:
   - component: {fileID: 33862293517272122}
   - component: {fileID: 23193867308658030}
   - component: {fileID: 95759340748545336}
+  - component: {fileID: 65035556310782158}
   m_Layer: 0
-  m_Name: resWallDoorSlide2_FIX
+  m_Name: resWallDoorSlide2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -60,7 +62,7 @@ GameObject:
   - component: {fileID: 95007315571456500}
   - component: {fileID: 64221564384740734}
   m_Layer: 0
-  m_Name: resDoorAlt
+  m_Name: resWallStraight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,6 +76,9 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4666774283528904}
+  - component: {fileID: 95695158582141076}
+  - component: {fileID: 65767365787696734}
+  - component: {fileID: 114093621357363234}
   m_Layer: 0
   m_Name: resWallStraightDoorAlt
   m_TagString: Untagged
@@ -127,7 +132,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1741876940817344}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.09662138, y: 1.12689305e-17, z: -5.068075}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4073304024406582}
@@ -267,6 +272,42 @@ MeshCollider:
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: eb166cbd421ce1448a54fc1a3ed12bf4, type: 3}
+--- !u!65 &65035556310782158
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1496830377740124}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.33730254, y: 3.027631, z: 1.2502255}
+  m_Center: {x: 0, y: 1.5138155, z: -0.57488716}
+--- !u!65 &65261879087836630
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1215553704042386}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.33730254, y: 3.027631, z: 1.1999999}
+  m_Center: {x: 0, y: 1.5138155, z: 0.59999996}
+--- !u!65 &65767365787696734
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1741876940817344}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4, y: 4, z: 4}
+  m_Center: {x: 0, y: 2, z: 0}
 --- !u!95 &95007315571456500
 Animator:
   serializedVersion: 3
@@ -301,6 +342,23 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!95 &95695158582141076
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1741876940817344}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 484112a6f0e8afd45aa2171ce959d758, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!95 &95759340748545336
 Animator:
   serializedVersion: 3
@@ -318,3 +376,14 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114093621357363234
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1741876940817344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3ac688711c6dd040bc19f8cb9953909, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
