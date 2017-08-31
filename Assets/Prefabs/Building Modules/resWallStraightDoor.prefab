@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 33514703648999826}
   - component: {fileID: 23610207129362400}
   - component: {fileID: 95876733614349540}
+  - component: {fileID: 65005113135874348}
   m_Layer: 0
   m_Name: resWallDoorSlide1
   m_TagString: Untagged
@@ -58,6 +59,7 @@ GameObject:
   - component: {fileID: 33331493418352246}
   - component: {fileID: 23474374856231366}
   - component: {fileID: 95152148075063262}
+  - component: {fileID: 65147678856591230}
   m_Layer: 0
   m_Name: resWallDoorSlide2
   m_TagString: Untagged
@@ -104,7 +106,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1180211426745404}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4860596529502388}
@@ -270,6 +272,18 @@ MeshCollider:
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 83a556c82c764ab498e4a29b5e48c153, type: 3}
+--- !u!65 &65005113135874348
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1125439016761678}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.33730263, y: 3.027631, z: 1.2000002}
+  m_Center: {x: 0, y: 1.5138155, z: 0.6000001}
 --- !u!65 &65005115575088848
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -282,6 +296,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 4, y: 4, z: 4}
   m_Center: {x: 0, y: 2, z: 0}
+--- !u!65 &65147678856591230
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1359594218960748}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.33730263, y: 3.027631, z: 1.2502259}
+  m_Center: {x: 0, y: 1.5138155, z: -0.5748873}
 --- !u!95 &95152148075063262
 Animator:
   serializedVersion: 3
