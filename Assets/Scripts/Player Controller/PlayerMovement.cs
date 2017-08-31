@@ -29,4 +29,9 @@ public class PlayerMovement : MonoBehaviour
             _tpc.Move(move);
         }
     }
+
+    private void OnDisable()
+    {
+        _tpc.StopMovement();
+    }
 }

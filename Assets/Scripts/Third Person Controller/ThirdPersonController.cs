@@ -12,6 +12,7 @@ public class ThirdPersonController : MonoBehaviour
     private Rigidbody _rb = null;
     private Animator _animator = null;
     private CapsuleCollider _col = null;
+    private PlayerAim _aim = null;
 
     #endregion
 
@@ -26,8 +27,6 @@ public class ThirdPersonController : MonoBehaviour
     #region Inspector Variables
 
     [Range(0.05f, 1.5f), SerializeField]    private float _groundCheckDist = 0.1f;
-    [Range(90.0f, 480.0f), SerializeField]  private float _movingTurningSpeed = 360.0f;
-    [Range(90.0f, 360.0f), SerializeField]  private float _stationaryTurningSpeed = 180.0f;
     [Range(1.0f, 5.0f), SerializeField]     private float _gravityMultiplier = 2.0f;
     [Range(0.0f, 1.0f), SerializeField]     private float _runCycleLegOffset = 0.2f;
     [Range(0.5f, 3.0f), SerializeField]     private float _moveSpeedMultiplier = 1.0f;
@@ -43,9 +42,9 @@ public class ThirdPersonController : MonoBehaviour
     private bool _grounded = false;
     private Vector3 _groundNormal;
     private bool _crouching = false;
-
-    private float _turn = 0.0f;
+    
     private float _forward = 0.0f;
+    private float _right = 0.0f;
 
     #endregion
 
@@ -56,24 +55,37 @@ public class ThirdPersonController : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
         _animator = GetComponent<Animator>();
         _col = GetComponent<CapsuleCollider>();
+        _aim = GetComponent<PlayerAim>();
 
         // Store default values
         _colHeight = _col.height;
         _colCenter = _col.center;
         _originalGroudCheckDist = _groundCheckDist;
 
-        // Constrain rigidbody
+        // Constrain components
         _rb.constraints = RigidbodyConstraints.FreezeRotation;
+        _animator.applyRootMotion = false;
     }
 
     public void Move(Vector3 direction, bool crouch = false)
     {
+        // Face towards the aim direction
+        if (_aim)
+        {
+            // TODO: Change to common Aim script rather than PlayerAim to also work with AI
+            Vector3 aimPoint = _aim.GetAimPoint;
+            aimPoint.y = transform.position.y;
+            transform.LookAt(aimPoint);
+        }
+
         if (direction.magnitude <= 0)
+        {
+            _animator.SetBool("IsWalking", false);
             return;
+        }
         if (direction.magnitude != 1.0f)
             direction.Normalize();
 
-        // Convert move vector into local space
         direction = transform.InverseTransformDirection(direction);
 
         // Check grounded status
@@ -82,12 +94,8 @@ public class ThirdPersonController : MonoBehaviour
         // Project movement vector onto ground plane to prevent bunnyhopping off inclines, etc.
         direction = Vector3.ProjectOnPlane(direction, _groundNormal);
 
-        _turn = Mathf.Atan2(direction.x, direction.z);
         _forward = direction.z;
-
-        // Apply extra turning to help the character turn faster
-        float turnSpeed = Mathf.Lerp(_stationaryTurningSpeed, _movingTurningSpeed, _forward);
-        transform.Rotate(0, _turn * turnSpeed * Time.deltaTime, 0);
+        _right = direction.x;
 
         // Add extra gravity if airborne
         if (!_grounded)
@@ -144,20 +152,15 @@ public class ThirdPersonController : MonoBehaviour
     private void UpdateAnimator(Vector3 move)
     {
         // Update animator parameters
+        _animator.SetBool("IsWalking", true);
         _animator.SetFloat("Forward", _forward, 0.1f, Time.deltaTime);
-        _animator.SetFloat("Turn", _turn, 0.1f, Time.deltaTime);
-        _animator.SetBool("Crouch", _crouching);
+        _animator.SetFloat("Right", _right, 0.1f, Time.deltaTime);
+
+        //_animator.SetBool("Crouch", _crouching);
         _animator.SetBool("Grounded", _grounded);
-
-        if (!_grounded)
-            _animator.SetFloat("AirborneVelocity", _rb.velocity.y);
-
-        // TODO: Leg stuff
-        float runCycle = Mathf.Repeat(
-            _animator.GetCurrentAnimatorStateInfo(0).normalizedTime + _runCycleLegOffset, 1);
-        float jumpLeg = (runCycle < 0.5f ? 1 : -1) * _forward;
-        if (_grounded)
-            _animator.SetFloat("JumpLeg", jumpLeg);
+        //
+        //if (!_grounded)
+        //    _animator.SetFloat("AirborneVelocity", _rb.velocity.y);
 
         if (_grounded && move.magnitude > 0)
             _animator.speed = _animSpeedMultiplier;
@@ -200,7 +203,6 @@ public class ThirdPersonController : MonoBehaviour
 
             _grounded = true;
             _groundNormal = _hit.normal;
-            _animator.applyRootMotion = true;
         }
         else
         {
@@ -208,7 +210,11 @@ public class ThirdPersonController : MonoBehaviour
 
             _grounded = false;
             _groundNormal = Vector3.up;
-            _animator.applyRootMotion = false;
         }
+    }
+
+    public void StopMovement()
+    {
+        _animator.SetBool("IsWalking", false);
     }
 }
