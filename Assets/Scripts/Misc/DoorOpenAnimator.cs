@@ -21,7 +21,7 @@ public class DoorOpenAnimator : MonoBehaviour {
             // do we have any players left inside?
             bool playersInside = false;
             BoxCollider box = GetComponent<BoxCollider>();
-            Collider[] cols = Physics.OverlapBox(box.bounds.center, box.bounds.extents, box.transform.rotation);
+            Collider[] cols = Physics.OverlapBox(box.bounds.center, box.size/2, box.transform.rotation);
             foreach (Collider c in cols)
                 if (c.tag == "Player")
                     playersInside = true;
