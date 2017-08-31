@@ -600,27 +600,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4844310465901182, guid: 9108a61e1187e3b459d6d002e3364d2b, type: 2}
       propertyPath: m_LocalRotation.x
-      value: 0.5326752
+      value: 0.53267515
       objectReference: {fileID: 0}
     - target: {fileID: 4844310465901182, guid: 9108a61e1187e3b459d6d002e3364d2b, type: 2}
       propertyPath: m_LocalRotation.y
-      value: 0.070340455
+      value: 0.07034045
       objectReference: {fileID: 0}
     - target: {fileID: 4844310465901182, guid: 9108a61e1187e3b459d6d002e3364d2b, type: 2}
       propertyPath: m_LocalRotation.z
-      value: 0.83613276
+      value: 0.83613265
       objectReference: {fileID: 0}
     - target: {fileID: 4844310465901182, guid: 9108a61e1187e3b459d6d002e3364d2b, type: 2}
       propertyPath: m_LocalRotation.w
-      value: -0.110415146
-      objectReference: {fileID: 0}
-    - target: {fileID: 1695588918816056, guid: 9108a61e1187e3b459d6d002e3364d2b, type: 2}
-      propertyPath: m_TagString
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 1398371602606954, guid: 9108a61e1187e3b459d6d002e3364d2b, type: 2}
-      propertyPath: m_TagString
-      value: Player
+      value: -0.11041513
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9108a61e1187e3b459d6d002e3364d2b, type: 2}
@@ -1057,6 +1049,7 @@ MonoBehaviour:
   _aimableLayers:
     serializedVersion: 2
     m_Bits: 1
+  _minimumAimRange: 0.8
   _smartAimIterations: 3
   _smartAimIgnoreTags:
   - Untagged

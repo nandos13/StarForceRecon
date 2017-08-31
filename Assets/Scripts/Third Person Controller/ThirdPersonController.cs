@@ -28,16 +28,18 @@ public class ThirdPersonController : MonoBehaviour
 
     [Range(0.05f, 1.5f), SerializeField]    private float _groundCheckDist = 0.1f;
     [Range(1.0f, 5.0f), SerializeField]     private float _gravityMultiplier = 2.0f;
-    [Range(0.0f, 1.0f), SerializeField]     private float _runCycleLegOffset = 0.2f;
     [Range(0.5f, 3.0f), SerializeField]     private float _moveSpeedMultiplier = 1.0f;
     [Range(0.5f, 3.0f), SerializeField]     private float _animSpeedMultiplier = 1.0f;
+
+    [Tooltip("Damp time for direction change. Lower value will result in quicker changes in direction, but may result in choppy animation blends.")]
+    [Range(0.01f, 0.1f), SerializeField]    private float _directionalBlendDamp = 0.1f;
 
     #endregion
 
     #region Tracker Variables
 
-    private RaycastHit _hit;
-    private Ray _ray;
+    private RaycastHit _hit = new RaycastHit();
+    private Ray _ray = new Ray();
 
     private bool _grounded = false;
     private Vector3 _groundNormal;
@@ -73,9 +75,11 @@ public class ThirdPersonController : MonoBehaviour
         if (_aim)
         {
             // TODO: Change to common Aim script rather than PlayerAim to also work with AI
-            Vector3 aimPoint = _aim.GetAimPoint;
-            aimPoint.y = transform.position.y;
-            transform.LookAt(aimPoint);
+
+            Vector3 aimPoint = _aim.GetAimPoint - transform.position;
+            aimPoint.y = 0;
+            Quaternion rotation = Quaternion.LookRotation(aimPoint);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 20f);
         }
 
         if (direction.magnitude <= 0)
@@ -100,6 +104,16 @@ public class ThirdPersonController : MonoBehaviour
         // Add extra gravity if airborne
         if (!_grounded)
             ApplyGravity();
+
+        if (_grounded && Time.deltaTime > 0)
+        {
+            Vector3 v = (direction * _moveSpeedMultiplier);
+            v = transform.TransformDirection(v);
+
+            // Preserve y velocity
+            v.y = _rb.velocity.y;
+            _rb.velocity = v;
+        }
 
         ScaleCapsuleForCrouching(crouch);
         PreventStandingInLowHeadroom();
@@ -153,33 +167,16 @@ public class ThirdPersonController : MonoBehaviour
     {
         // Update animator parameters
         _animator.SetBool("IsWalking", true);
-        _animator.SetFloat("Forward", _forward, 0.1f, Time.deltaTime);
-        _animator.SetFloat("Right", _right, 0.1f, Time.deltaTime);
+        _animator.SetFloat("Forward", _forward, _directionalBlendDamp, Time.deltaTime);
+        _animator.SetFloat("Right", _right, _directionalBlendDamp, Time.deltaTime);
 
         //_animator.SetBool("Crouch", _crouching);
         _animator.SetBool("Grounded", _grounded);
-        //
-        //if (!_grounded)
-        //    _animator.SetFloat("AirborneVelocity", _rb.velocity.y);
 
         if (_grounded && move.magnitude > 0)
             _animator.speed = _animSpeedMultiplier;
         else
             _animator.speed = 1.0f;
-    }
-
-    public void OnAnimatorMove()
-    {
-        // Overrides default root motion.
-
-        if (_grounded && Time.deltaTime > 0)
-        {
-            Vector3 v = (_animator.deltaPosition * _moveSpeedMultiplier) / Time.deltaTime;
-
-            // Preserve y velocity
-            v.y = _rb.velocity.y;
-            _rb.velocity = v;
-        }
     }
 
     private void ApplyGravity()
@@ -194,10 +191,11 @@ public class ThirdPersonController : MonoBehaviour
 
     private void DoGroundCheck()
     {
-        _ray.origin = transform.position + (Vector3.up * 0.05f);
+        float radius = _col.radius * 0.8f;
+        _ray.origin = transform.position + (Vector3.up * (0.05f + radius));
         _ray.direction = Vector3.down;
-
-        if (Physics.Raycast(_ray, out _hit, _groundCheckDist))
+        
+        if (Physics.SphereCast(_ray, radius, out _hit, _groundCheckDist))
         {
             // Grounded
 
@@ -215,6 +213,29 @@ public class ThirdPersonController : MonoBehaviour
 
     public void StopMovement()
     {
-        _animator.SetBool("IsWalking", false);
+        if (_animator.gameObject.activeSelf)
+            _animator.SetBool("IsWalking", false);
+
+        Vector3 newVelocity = Vector3.zero;
+        newVelocity.y = _rb.velocity.y;
+        _rb.velocity = newVelocity;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        if (_animator)
+        {
+            if (_animator.gameObject.activeSelf)
+            {
+                if (_animator.GetBool("IsWalking"))
+                {
+                    Vector3 walkDirection = new Vector3(_animator.GetFloat("Right"), 0, _animator.GetFloat("Forward"));
+                    walkDirection = transform.TransformDirection(walkDirection);
+                    Gizmos.color = Color.blue;
+
+                    Gizmos.DrawRay(transform.position, walkDirection);
+                }
+            }
+        }
     }
 }

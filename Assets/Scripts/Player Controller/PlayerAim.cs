@@ -15,6 +15,9 @@ public class PlayerAim : MonoBehaviour
 
     [SerializeField]    private LayerMask _aimableLayers = (LayerMask)1;
 
+    [Tooltip("The minimum distance for an aim point. Prevents player from aiming at their feet and causing strange animations.")]
+    [Range(0.0f, 2.0f), SerializeField] private float _minimumAimRange = 0.6f;
+
     [Header("Smart Aim")]
     [Range(2, 5), Tooltip("The number of iterations to make in each direction, positively and negatively, when searching for a better aim point.\nNOTE: Each extra iteration can result in up to 26 new raycast checks per frame (worst case scenario). Although less accurate, a lower value may slightly improve performance.")]
     [SerializeField]    private int _smartAimIterations = 3;
@@ -76,6 +79,7 @@ public class PlayerAim : MonoBehaviour
         if (_aimingAtGeometry || _pointFoundAtPlayerHeight)
         {
             _aimMousePoint = underMouse;
+            bool trackAsPrevious = false;
 
             // Find an optimal aim-point
             if (_gunOrigin)
@@ -88,12 +92,12 @@ public class PlayerAim : MonoBehaviour
                             target, true, (uint)_smartAimIterations, _aimTags, _aimableLayers, _smartAimIgnoreTags, 0.0f))
                     {
                         _aimPoint = hit.point;
-                        _previousValidAimPoint = _aimPoint;
+                        trackAsPrevious = true;
                     }
                     else
                     {
                         _aimPoint = _aimMousePoint;
-                        _previousValidAimPoint = _aimPoint;
+                        trackAsPrevious = true;
                     }
                 }
                 else
@@ -103,7 +107,7 @@ public class PlayerAim : MonoBehaviour
                     if (RaycastForValidHit(out hit, _gunOrigin.position, _aimMousePoint - _gunOrigin.position))
                     {
                         _aimPoint = hit;
-                        _previousValidAimPoint = _aimPoint;
+                        trackAsPrevious = true;
                     }
                     else
                     {
@@ -113,6 +117,20 @@ public class PlayerAim : MonoBehaviour
             }
             else
                 _gunOriginWarningMessage.Log();
+
+            // Ensure minimum aiming distance
+            Vector3 toAimPoint = new Vector3(_aimPoint.x, transform.position.y, _aimPoint.z) - transform.position;
+            if (toAimPoint.magnitude < _minimumAimRange)
+            {
+                toAimPoint = toAimPoint.normalized * _minimumAimRange;
+                Vector3 newPoint = transform.position + toAimPoint;
+
+                _aimPoint.x = newPoint.x;
+                _aimPoint.z = newPoint.z;
+            }
+
+            if (trackAsPrevious)
+                _previousValidAimPoint = _aimPoint;
         }
     }
 
@@ -237,7 +255,7 @@ public class PlayerAim : MonoBehaviour
     {
         if (enabled && _aimingAtGeometry || _pointFoundAtPlayerHeight)
         {
-            Gizmos.color = Color.red;
+            // Draw aiming ray
             if (_gunOrigin)
             {
                 Gizmos.color = Color.green;
@@ -253,17 +271,21 @@ public class PlayerAim : MonoBehaviour
                 Gizmos.DrawLine(transform.position, _aimPoint);
             }
 
+            // Draw aim object bounds
             if (_mousePointCollider)
             {
+                Gizmos.color = Color.red;
                 Bounds b = _mousePointCollider.TopParentMatchingTag().GetGroupedBounds();
                 Gizmos.DrawWireCube(b.center, b.size);
             }
 
+            // Draw aim point + mouse point
             Gizmos.color = Color.magenta;
             Gizmos.DrawWireSphere(_aimPoint, 0.21f);
             Gizmos.color = Color.blue;
             Gizmos.DrawWireSphere(_aimMousePoint, 0.19f);
 
+            // Draw previous point for casting to plane
             Gizmos.DrawWireSphere(_previousValidAimPoint, 0.12f);
             Gizmos.DrawWireCube(_aimMousePoint, new Vector3(1, 0, 1));
         }
