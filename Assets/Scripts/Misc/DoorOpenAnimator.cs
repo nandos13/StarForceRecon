@@ -4,13 +4,26 @@ using UnityEngine;
 
 public class DoorOpenAnimator : MonoBehaviour {
 
-     
+    Animator animator;
+
+    Animator GetAnimator()
+    {
+        if (animator == null)
+            animator = GetComponent<Animator>();
+        return animator;
+    }
+
+
     void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.tag == "Player")
         {
-            gameObject.GetComponent<Animator>().SetBool("DoorOpen", true);
-          
+            bool isOpen = GetAnimator().GetBool("DoorOpen");
+            if (!isOpen)
+                gameObject.GetComponent<AudioSource>().Play();
+            GetAnimator().SetBool("DoorOpen", true);
+
+
         }
     }
 
@@ -27,8 +40,10 @@ public class DoorOpenAnimator : MonoBehaviour {
                     playersInside = true;
 
             if (playersInside == false)
-                gameObject.GetComponent<Animator>().SetBool("DoorOpen", false);
-          
+            {
+                gameObject.GetComponent<AudioSource>().Play();
+                GetAnimator().SetBool("DoorOpen", false);
+            }
         }
     }
 }
