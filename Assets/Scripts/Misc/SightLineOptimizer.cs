@@ -249,7 +249,7 @@ namespace JakePerry
             {
                 /* The specified collider is ignored by smart-aim. 
                  * Find point on ray nearest to targetPoint. */
-                _nonAllocHit = ClosestPointOnRay(sightPosition, targetPoint, validTags);
+                _nonAllocHit = ClosestPointOnRay(sightPosition, targetPoint, validTags, layerMask);
                 
                 if (_nonAllocHit.transform)
                 {
@@ -270,7 +270,8 @@ namespace JakePerry
             Debug.DrawRay(sightPosition, Vector3.up * 5);
             Debug.DrawRay(sightPosition, _nonAllocRay.direction * 10);
 
-            int hits = Physics.RaycastNonAlloc(_nonAllocRay, _nonAllocHits, Vector3.Distance(sightPosition, targetPoint) + 1.0f);
+            int hits = Physics.RaycastNonAlloc(_nonAllocRay, _nonAllocHits, Vector3.Distance(sightPosition, targetPoint) + 1.0f, 
+                                        layerMask, QueryTriggerInteraction.Ignore);
 
             if (hits > 0)
             {
@@ -385,7 +386,7 @@ namespace JakePerry
                                     // Raycast to this potential point
                                     _nonAllocRay.direction = (currentPoint - sightPosition);
                                     int hits = Physics.RaycastNonAlloc(_nonAllocRay, _nonAllocHits,
-                                        Vector3.Distance(sightPosition, currentPoint) + 1.0f, layerMask);
+                                        Vector3.Distance(sightPosition, currentPoint) + 1.0f, layerMask, QueryTriggerInteraction.Ignore);
 
                                     SortNonAllocArrayByDistance(ref _nonAllocHits, hits, sightPosition);
 
@@ -428,7 +429,7 @@ namespace JakePerry
             /* No optimal aim point was found.
              * Return first valid hit on ray to targetPoint */
 
-            _nonAllocHit = ClosestPointOnRay(sightPosition, targetPoint, validTags);
+            _nonAllocHit = ClosestPointOnRay(sightPosition, targetPoint, validTags, layerMask);
             if (_nonAllocHit.transform)
             {
                 hit = _nonAllocHit;
@@ -441,17 +442,18 @@ namespace JakePerry
 
         private static RaycastHit ClosestPointOnRay(Vector3 origin, Vector3 destination)
         {
-            return ClosestPointOnRay(origin, destination, _emptyStringArray);
+            return ClosestPointOnRay(origin, destination, _emptyStringArray, (LayerMask)1);
         }
 
-        private static RaycastHit ClosestPointOnRay(Vector3 origin, Vector3 destination, string[] validTags)
+        private static RaycastHit ClosestPointOnRay(Vector3 origin, Vector3 destination, string[] validTags, LayerMask layerMask)
         {
             Vector3 direction = destination - origin;
             _nonAllocRay.origin = origin;
             _nonAllocRay.direction = direction;
 
             // Cast ray & get number of hit objects
-            int hitCount = Physics.RaycastNonAlloc(_nonAllocRay, _nonAllocHits, Vector3.Distance(origin, direction));
+            int hitCount = Physics.RaycastNonAlloc(_nonAllocRay, _nonAllocHits, Vector3.Distance(origin, direction), 
+                                        layerMask, QueryTriggerInteraction.Ignore);
 
             // Iterate through all the hits added by this raycast & sort by dist from origin
             SortNonAllocArrayByDistance(ref _nonAllocHits, hitCount, origin);
