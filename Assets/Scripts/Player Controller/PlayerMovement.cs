@@ -6,7 +6,8 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
 
-    ThirdPersonController _tpc = null;
+    private ThirdPersonController _tpc = null;
+    private bool _rollPressed;
 
     void Awake()
     {
@@ -15,9 +16,22 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        // Get input
+        // Get directional input
         float horz = Input.GetAxisRaw("Horizontal");
         float vert = Input.GetAxisRaw("Vertical");
+
+        // Get rolling input, only true on initial key down
+        bool roll = false;
+        if (Input.GetAxisRaw("Roll") != 0)
+        {
+            if (!_rollPressed)
+            {
+                _rollPressed = true;
+                roll = true;
+            }
+        }
+        else
+            _rollPressed = false;
 
         Vector3 move = Vector3.zero;
         Camera cam = Camera.main;
@@ -26,7 +40,8 @@ public class PlayerMovement : MonoBehaviour
             Vector3 forward = Vector3.Scale(cam.transform.forward, new Vector3(1, 0, 1)).normalized;
             move = vert * forward + horz * cam.transform.right;
 
-            _tpc.Move(move);
+            // TODO: Get input for crouch
+            _tpc.Move(move, roll);
         }
     }
 

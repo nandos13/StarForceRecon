@@ -31,6 +31,10 @@ public class ThirdPersonController : MonoBehaviour
     [Range(0.5f, 3.0f), SerializeField]     private float _moveSpeedMultiplier = 1.0f;
     [Range(0.5f, 3.0f), SerializeField]     private float _animSpeedMultiplier = 1.0f;
 
+    // Rolling
+    [SerializeField]    private bool _canRoll = false;
+    [Range(0.5f, 10.0f), SerializeField]     private float _rollSpeedMultiplier = 1.0f;
+
     [Tooltip("Damp time for direction change. Lower value will result in quicker changes in direction, but may result in choppy animation blends.")]
     [Range(0.01f, 0.1f), SerializeField]    private float _directionalBlendDamp = 0.1f;
 
@@ -44,9 +48,13 @@ public class ThirdPersonController : MonoBehaviour
     private bool _grounded = false;
     private Vector3 _groundNormal;
     private bool _crouching = false;
-    
+    private bool _rolling = false;
+    private Vector3 _rollDir;
+
     private float _forward = 0.0f;
     private float _right = 0.0f;
+    private float _rollForward = 0.0f;
+    private float _rollRight = 0.0f;
 
     #endregion
 
@@ -69,9 +77,10 @@ public class ThirdPersonController : MonoBehaviour
         _animator.applyRootMotion = false;
     }
 
-    public void Move(Vector3 direction, bool crouch = false)
+    void Update()
     {
         // Face towards the aim direction
+        // TODO: This should be moved to a separate script, only used by squad members.
         if (_aim)
         {
             // TODO: Change to common Aim script rather than PlayerAim to also work with AI
@@ -81,7 +90,23 @@ public class ThirdPersonController : MonoBehaviour
             Quaternion rotation = Quaternion.LookRotation(aimPoint);
             transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 20f);
         }
+    }
 
+    void FixedUpdate()
+    {
+        // Handle rolling movement
+        if (_rolling)
+        {
+            Vector3 v = (_rollDir * _rollSpeedMultiplier);
+            //v = transform.TransformDirection(v);
+
+            v.y = _rb.velocity.y;
+            _rb.velocity = v;
+        }
+    }
+
+    public void Move(Vector3 direction, bool roll = false, bool crouch = false)
+    {
         if (direction.magnitude <= 0)
         {
             _animator.SetBool("IsWalking", false);
@@ -107,18 +132,51 @@ public class ThirdPersonController : MonoBehaviour
 
         if (_grounded && Time.deltaTime > 0)
         {
-            Vector3 v = (direction * _moveSpeedMultiplier);
-            v = transform.TransformDirection(v);
+            if (_canRoll)
+            {
+                // Should a new roll be started?
+                if (!_rolling && roll)
+                {
+                    // Start a new roll
+                    _rolling = true;
+                    _rollDir = transform.TransformDirection(direction);
 
-            // Preserve y velocity
-            v.y = _rb.velocity.y;
-            _rb.velocity = v;
+                    _rollForward = direction.z;
+                    _rollRight = direction.x;
+                }
+            }
+            else
+                _rolling = false;
+
+            // Do state-specific movement
+            if (!_rolling)
+            {
+                // Do standard grounded movement
+
+                Vector3 v = (direction * _moveSpeedMultiplier);
+                v = transform.TransformDirection(v);
+                
+                v.y = _rb.velocity.y;
+                _rb.velocity = v;
+            }
         }
 
         ScaleCapsuleForCrouching(crouch);
         PreventStandingInLowHeadroom();
 
         UpdateAnimator(direction);
+    }
+
+    private void EndRoll()
+    {
+        // End roll
+        _rolling = false;
+        _animator.SetBool("Roll", false);
+
+        // Stop roll momentum
+        Vector3 v = Vector3.zero;
+        v.y = _rb.velocity.y;
+        _rb.velocity = v;
     }
 
     private void ScaleCapsuleForCrouching(bool crouch)
@@ -167,6 +225,11 @@ public class ThirdPersonController : MonoBehaviour
     {
         // Update animator parameters
         _animator.SetBool("IsWalking", true);
+
+        _animator.SetBool("Roll", _rolling);
+        _animator.SetFloat("RollForward", _rollForward);
+        _animator.SetFloat("RollRight", _rollRight);
+
         _animator.SetFloat("Forward", _forward, _directionalBlendDamp, Time.deltaTime);
         _animator.SetFloat("Right", _right, _directionalBlendDamp, Time.deltaTime);
 
