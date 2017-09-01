@@ -41,7 +41,8 @@ GameObject:
   - component: {fileID: 65005115575088848}
   - component: {fileID: 114419077172656858}
   - component: {fileID: 95347822937673048}
-  - component: {fileID: 82783668674970754}
+  - component: {fileID: 82298582849748236}
+  - component: {fileID: 114154012901019666}
   m_Layer: 0
   m_Name: resWallStraightDoor
   m_TagString: Untagged
@@ -309,7 +310,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.33730263, y: 3.027631, z: 1.2502259}
   m_Center: {x: 0, y: 1.5138155, z: -0.5748873}
---- !u!82 &82783668674970754
+--- !u!82 &82298582849748236
 AudioSource:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -318,9 +319,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 13054b828e9b4774bb5b36ad6912fa30, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.8
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -457,6 +458,24 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114154012901019666
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1180211426745404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b9d28a4b8a195c4f8513d2784c24e9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _clips:
+  - _name: DoorOpen
+    _clip: {fileID: 8300000, guid: 13054b828e9b4774bb5b36ad6912fa30, type: 3}
+  _channel: 1
+  _timeScaleInfluencesPlayback: 1
+  _volume: 0.8
+  _pitch: 1
 --- !u!114 &114419077172656858
 MonoBehaviour:
   m_ObjectHideFlags: 1

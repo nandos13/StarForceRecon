@@ -2,26 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Animator)), RequireComponent(typeof(AudioPlayer)), RequireComponent(typeof(BoxCollider))]
 public class DoorOpenAnimator : MonoBehaviour {
 
-    Animator animator;
+    Animator _animator;
+    AudioPlayer _audioPlayer;
+    BoxCollider _box;
 
-    Animator GetAnimator()
+    void Awake()
     {
-        if (animator == null)
-            animator = GetComponent<Animator>();
-        return animator;
+        _animator = GetComponent<Animator>();
+        _audioPlayer = GetComponent<AudioPlayer>();
+        _box = GetComponent<BoxCollider>();
     }
-
-
+    
     void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.tag == "Player")
         {
-            bool isOpen = GetAnimator().GetBool("DoorOpen");
+            bool isOpen = _animator.GetBool("DoorOpen");
             if (!isOpen)
-                gameObject.GetComponent<AudioSource>().Play();
-            GetAnimator().SetBool("DoorOpen", true);
+                _audioPlayer.PlayDelayed("DoorOpen", 0.0f);
+            _animator.SetBool("DoorOpen", true);
         }
     }
 
@@ -31,16 +33,20 @@ public class DoorOpenAnimator : MonoBehaviour {
         {
             // do we have any players left inside?
             bool playersInside = false;
-            BoxCollider box = GetComponent<BoxCollider>();
-            Collider[] cols = Physics.OverlapBox(box.bounds.center, box.size/2, box.transform.rotation);
+            Collider[] cols = Physics.OverlapBox(_box.bounds.center, _box.size/2, _box.transform.rotation);
             foreach (Collider c in cols)
+            {
                 if (c.tag == "Player")
+                {
                     playersInside = true;
+                    break;
+                }
+            }
 
             if (playersInside == false)
             {
-                gameObject.GetComponent<AudioSource>().Play();
-                GetAnimator().SetBool("DoorOpen", false);
+                _audioPlayer.PlayDelayed("DoorOpen", 0.0f);
+                _animator.SetBool("DoorOpen", false);
             }
         }
     }
