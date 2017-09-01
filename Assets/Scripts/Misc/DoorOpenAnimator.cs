@@ -22,8 +22,6 @@ public class DoorOpenAnimator : MonoBehaviour {
             if (!isOpen)
                 gameObject.GetComponent<AudioSource>().Play();
             GetAnimator().SetBool("DoorOpen", true);
-
-
         }
     }
 
