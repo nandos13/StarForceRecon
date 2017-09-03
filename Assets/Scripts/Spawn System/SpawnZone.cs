@@ -67,7 +67,7 @@ public class SpawnZone : MonoBehaviour
 
     #region Member Functions
 
-    void Awake()
+    void Start()
     {
         if (_startDisabled)
             this.enabled = false;
@@ -109,10 +109,7 @@ public class SpawnZone : MonoBehaviour
         _registeredEnemies--;
     }
 
-    /// <summary>
-    /// Spawns and evenly distributes the specified number of enemies over
-    /// all attached SpawnNodes.
-    /// </summary>
+    /// <summary>Spawns and evenly distributes the specified number of enemies over all attached SpawnNodes.</summary>
     private void SpawnEnemies(int quantity)
     {
         if (quantity <= 0)
@@ -161,18 +158,14 @@ public class SpawnZone : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Adds the specified node, allowing it to spawn enemies for this zone.
-    /// </summary>
+    /// <summary>Adds the specified node, allowing it to spawn enemies for this zone.</summary>
     public void AddNode(SpawnNode node)
     {
         if (node)
             _nodes.Add(node);
     }
 
-    /// <summary>
-    /// Removes the specified node from the zone.
-    /// </summary>
+    /// <summary>Removes the specified node from the zone.</summary>
     public void RemoveNode(SpawnNode node)
     {
         if (node)

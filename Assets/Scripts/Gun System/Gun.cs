@@ -35,7 +35,7 @@ public class Gun : MonoBehaviour
     #region Target Variables
 
     [Tooltip("Which layers will be hit/ignored by the gun's shots?")]
-    [SerializeField]    private LayerMask _layerMask;
+    [SerializeField]    private LayerMask _layerMask = (LayerMask)1;
 
     #endregion
 
@@ -182,9 +182,7 @@ public class Gun : MonoBehaviour
             _heatLockUp = true;
     }
 
-    /// <summary>
-    /// Fires the gun.
-    /// </summary>
+    /// <summary>Fires the gun.</summary>
     /// <param name="usePlayerMechanics">Should semi-auto & heat mechanics be checked?</param>
     public void Fire(bool usePlayerMechanics)
     {
@@ -266,9 +264,7 @@ public class Gun : MonoBehaviour
         return spreadPoint.normalized;
     }
 
-    /// <summary>
-    /// Used internally to fire a single shot using a raycast.
-    /// </summary>
+    /// <summary>Used internally to fire a single shot using a raycast.</summary>
     private void FireShot()
     {
         Vector3 spreadDirection = GetSpreadDirection();
