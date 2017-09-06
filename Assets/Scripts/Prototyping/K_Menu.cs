@@ -3,21 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Menu : MonoBehaviour {
+public class K_Menu : MonoBehaviour {
 
-    Animator animator;
-
-    Animator GetAnimator()
-    {
-        if (animator == null)
-            animator = GetComponent<Animator>();
-        return animator;
-    }
+    Animator _animator;
 
     bool settingMenu = false;
     bool pressed = false;
-        
-    public void ButtonPress()
+
+    void Awake()
+    {
+        _animator = GetComponent<Animator>();
+    }
+
+    public void SettingsPress()
     {
         if (pressed == false)
         {
@@ -26,7 +24,7 @@ public class Menu : MonoBehaviour {
                 pressed = true;
                 Invoke("PressReset", 1f);
                 settingMenu = true;
-                GetAnimator().SetBool("SettingsMenu", true);
+                _animator.SetBool("SettingsMenu", true);
             }
 
             else if (settingMenu == true)
@@ -34,7 +32,7 @@ public class Menu : MonoBehaviour {
                 pressed = true;
                 Invoke("PressReset", 1f);
                 settingMenu = false;
-                GetAnimator().SetBool("SettingsMenu", false);
+                _animator.SetBool("SettingsMenu", false);
             }
         }
     }
