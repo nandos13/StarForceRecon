@@ -139,7 +139,7 @@ public class PlayerAim : MonoBehaviour
         Ray ray = new Ray(origin, direction);
 
         // Get an array of all raycasthits for this ray
-        RaycastHit[] rayHits = Physics.RaycastAll(ray, 1000.0f, _aimableLayers.value, QueryTriggerInteraction.Ignore);
+        RaycastHit[] rayHits = Physics.RaycastAll(ray, 1000.0f, _aimableLayers.value);
 
         if (rayHits.Length > 0)
         {
@@ -211,7 +211,7 @@ public class PlayerAim : MonoBehaviour
         Ray mouseRay = mainCam.ScreenPointToRay(Input.mousePosition);
 
         // Get an array of all raycasthits for this ray
-        RaycastHit[] rayHits = Physics.RaycastAll(mouseRay, 1000.0f, _aimableLayers.value, QueryTriggerInteraction.Ignore);
+        RaycastHit[] rayHits = Physics.RaycastAll(mouseRay, 1000.0f, _aimableLayers.value);
 
         if (rayHits.Length > 0)
         {

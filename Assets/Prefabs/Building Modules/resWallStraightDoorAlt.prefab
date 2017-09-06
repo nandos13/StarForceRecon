@@ -80,7 +80,7 @@ GameObject:
   - component: {fileID: 65767365787696734}
   - component: {fileID: 114093621357363234}
   - component: {fileID: 82457711884443430}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: resWallStraightDoorAlt
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -271,7 +271,7 @@ namespace JakePerry
             Debug.DrawRay(sightPosition, _nonAllocRay.direction * 10);
 
             int hits = Physics.RaycastNonAlloc(_nonAllocRay, _nonAllocHits, Vector3.Distance(sightPosition, targetPoint) + 1.0f, 
-                                        layerMask, QueryTriggerInteraction.Ignore);
+                                        layerMask);
 
             if (hits > 0)
             {
@@ -386,7 +386,7 @@ namespace JakePerry
                                     // Raycast to this potential point
                                     _nonAllocRay.direction = (currentPoint - sightPosition);
                                     int hits = Physics.RaycastNonAlloc(_nonAllocRay, _nonAllocHits,
-                                        Vector3.Distance(sightPosition, currentPoint) + 1.0f, layerMask, QueryTriggerInteraction.Ignore);
+                                        Vector3.Distance(sightPosition, currentPoint) + 1.0f, layerMask);
 
                                     SortNonAllocArrayByDistance(ref _nonAllocHits, hits, sightPosition);
 
@@ -453,7 +453,7 @@ namespace JakePerry
 
             // Cast ray & get number of hit objects
             int hitCount = Physics.RaycastNonAlloc(_nonAllocRay, _nonAllocHits, Vector3.Distance(origin, direction), 
-                                        layerMask, QueryTriggerInteraction.Ignore);
+                                        layerMask);
 
             // Iterate through all the hits added by this raycast & sort by dist from origin
             SortNonAllocArrayByDistance(ref _nonAllocHits, hitCount, origin);

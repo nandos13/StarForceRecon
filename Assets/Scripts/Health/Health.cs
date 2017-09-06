@@ -4,7 +4,7 @@ using UnityEngine;
 
 /* This script should be placed on each enemy & playable character in the scene.
  * Handles health, damage, healing, etc. */
-public class Health : MonoBehaviour
+public class Health : MonoBehaviour, IDamageable
 {
     #region Delegates & Events
 

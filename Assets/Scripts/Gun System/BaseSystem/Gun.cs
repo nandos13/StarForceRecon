@@ -272,7 +272,7 @@ public class Gun : MonoBehaviour
         // Raycast in this direction
         _nonAllocRay.origin = _gunOrigin.position;
         _nonAllocRay.direction = spreadDirection;
-        int hits = Physics.RaycastNonAlloc(_nonAllocRay, _nonAllocHits, 1000.0f, (int)_layerMask, QueryTriggerInteraction.Ignore);
+        int hits = Physics.RaycastNonAlloc(_nonAllocRay, _nonAllocHits, 1000.0f, (int)_layerMask);
 
         Transform hitTransform = null;
         if (hits > 0)
@@ -306,7 +306,9 @@ public class Gun : MonoBehaviour
             // Deal damage to the object hit
             float damage = _damage / _ammoPerShot;
             hitTransform = _nonAllocHit.transform;
-            _nonAllocHit.transform.SendMessageUpwards("ApplyDamage", damage, SendMessageOptions.DontRequireReceiver);
+            IDamageable d = _nonAllocHit.transform.GetComponentInParent<IDamageable>();
+            if (d != null)
+                d.ApplyDamage(damage);
 
         }
         else

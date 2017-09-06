@@ -13,6 +13,11 @@ public class LaserTest : MonoBehaviour
 	void Start ()
     {
         _aimScript = GetComponent<PlayerAim>();
+
+        if (!_line)
+            _line = GetComponent<LineRenderer>();
+
+        _line.textureMode = LineTextureMode.Tile;
     }
 	
 	void Update ()
@@ -28,6 +33,13 @@ public class LaserTest : MonoBehaviour
                 _line.enabled = true;
             else
                 _line.enabled = false;
+        }
+
+        if (_line)
+        {
+            Vector2 laserOffset = _line.material.mainTextureOffset;
+            laserOffset.x += Time.deltaTime * 0.1f;
+            _line.material.mainTextureOffset = laserOffset;
         }
 	}
 

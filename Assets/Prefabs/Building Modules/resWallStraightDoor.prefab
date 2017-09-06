@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 95347822937673048}
   - component: {fileID: 82298582849748236}
   - component: {fileID: 114154012901019666}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: resWallStraightDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}

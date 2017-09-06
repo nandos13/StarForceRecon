@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioPlayer))]
 public class PlaySoundOnGunFired : MonoBehaviour
 {
     [SerializeField]    private Gun _gun = null;
