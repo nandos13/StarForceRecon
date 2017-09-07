@@ -26,82 +26,56 @@ public class Gun : MonoBehaviour
     #region General
 
     [SerializeField]    private Transform _gunOrigin = null;
-    [Tooltip("Amount of damage done per shot. For multi-shot weapons, damage will be divided by the number of projectiles per shot.")]
-    [Range(0.1f, 10.0f), SerializeField]    private float _damage = 1.0f;
-    [Range(0.0f, 10.0f), SerializeField]    private float _spread = 0.0f;
-
-    #endregion
-
-    #region Target Variables
 
     [Tooltip("Which layers will be hit/ignored by the gun's shots?")]
     [SerializeField]    private LayerMask _layerMask = (LayerMask)1;
 
+    [SerializeField]    private GunData _gunData = null;
+
     #endregion
 
     #region Firing Variables
-
-    [SerializeField]    private bool _semiAuto = false;
+    
     public bool semiAuto
     {
-        get { return _semiAuto; }
+        get { return _gunData.semiAuto; }
     }
     private int _semiAutoFireFrameCount = 0;
     private float _timeSinceLastFire = 0.0f;
-
-    [Tooltip("Firing speed in Rounds per Minute")]
-    [Range(30.0f, 900.0f), SerializeField]  private float _fireRateRPM = 450.0f;
+    
     private float _fireWaitTime = 0.0f;
 
     #endregion
 
     #region Ammo Variables
 
-    [SerializeField]    private bool _bottomlessClip = false;
-    [SerializeField]    private bool _infiniteAmmo = false;
     [SerializeField]    private uint _startAmmo = 100;
     private uint _currentAmmo = 0;
     public uint remainingAmmoUnloaded
     {
         get { return _currentAmmo; }
     }
-
-    [Range(1, 5), SerializeField]   private uint _ammoPerShot = 1;
-    [Range(5, 100), SerializeField] private uint _clipSize = 30;
+    
     private uint _currentClip = 0;
     public uint ammoInClip
     { get { return _currentClip; } }
-
-    [Tooltip("Time in seconds taken to reload.")]
-    [Range(0.0f, 10.0f), SerializeField]    private float _reloadTime = 0.0f;
+    
     private bool _isReloading = false;
     public bool reloadRequired
     {
-        get { return (!_bottomlessClip && _currentClip == 0); }
+        get { return (!_gunData.bottomlessClip && _currentClip == 0); }
     }
     private IEnumerator _reloadCoroutine = null;
 
     #endregion
 
     #region Heat Mechanics
-
-    [SerializeField]    private bool _useHeat = false;
-    [SerializeField]    private bool _heatLocksReload = true;
+    
     [SerializeField, HideInInspector]   private float _currentHeat = 0.0f;
     private bool _heatTriggerMustRelease = false;
     private bool _heatOverThresholdReleased = false;
-
-    [Tooltip("Can't begin firing if heat is over this amount. Firing may persist past this threshold if the trigger is not released.")]
-    [Range(0.5f, 1.0f), SerializeField] private float _overheatThreshold = 0.8f;
-    [Tooltip("Firing will become available again when heat falls below this amount.")]
-    [Range(0.0f, 0.5f), SerializeField] private float _coolThreshold = 0.5f;
-
-    [Range(0.01f, 0.5f), SerializeField]    private float _heatPerShot = 0.05f;
+    
     private bool _heatLockUp = false;
-
-    [Range(0.1f, 1.0f), SerializeField] private float _heatLossPerSecond = 0.3f;
-    [Tooltip("The time in seconds the gun will need to be idle for before beginning to cool.")]
-    [SerializeField]    private AnimationCurve _coolingPauseTime = AnimationCurve.EaseInOut(0, 0.8f, 1, 2.2f);
 
     #endregion
 
@@ -113,20 +87,26 @@ public class Gun : MonoBehaviour
 
     #endregion
 
-    private void OnValidate()
-    {
-        // Get time to wait before each consecutive shot
-        _fireWaitTime = 1 / (_fireRateRPM / 60);
-    }
-
     void Awake()
     {
+        // Create clone of the specified gun data object
+        if (_gunData != null)
+        {
+            GunData cloneData = Instantiate<GunData>(_gunData);
+            _gunData = cloneData;
+        }
+        else
+        {
+            Destroy(this);
+            throw new System.MissingFieldException("No GunData specified.");
+        }
+
         // Initialize ammo
-        _currentClip = (_clipSize < _startAmmo) ? _clipSize : _startAmmo;
-        _currentAmmo = _startAmmo - _clipSize;
+        _currentClip = (_gunData.clipSize < _startAmmo) ? _gunData.clipSize : _startAmmo;
+        _currentAmmo = _startAmmo - _gunData.clipSize;
 
         // Get time to wait before each consecutive shot
-        _fireWaitTime = 1 / (_fireRateRPM / 60);
+        _fireWaitTime = 1 / (_gunData.fireRate / 60);
     }
 
     private void LateUpdate()
@@ -158,13 +138,13 @@ public class Gun : MonoBehaviour
         if (_currentHeat > 0)
         {
             // Check if the gun has been idle long enough to start cooling down
-            float timeBeforeCool = _coolingPauseTime.Evaluate(_currentHeat);
+            float timeBeforeCool = _gunData.coolingPauseTime.Evaluate(_currentHeat);
             if (_timeSinceLastFire >= timeBeforeCool)
             {
-                _currentHeat -= Time.deltaTime * _heatLossPerSecond;
+                _currentHeat -= Time.deltaTime * _gunData.heatLossPerSecond;
                 if (_currentHeat < 0) _currentHeat = 0;
 
-                if (_currentHeat < _coolThreshold)
+                if (_currentHeat < _gunData.coolingThreshold)
                     _heatLockUp = false;
             }
         }
@@ -172,13 +152,13 @@ public class Gun : MonoBehaviour
 
     private void ApplyHeat(uint shotCount)
     {
-        float heatThisShot = (float)shotCount * _heatPerShot;
+        float heatThisShot = (float)shotCount * _gunData.heatPerShot;
         _currentHeat += heatThisShot;
 
         if (_currentHeat > 1.0f)
             _currentHeat = 1.0f;
 
-        if (_currentHeat > _overheatThreshold)
+        if (_currentHeat > _gunData.overheatThreshold)
             _heatLockUp = true;
     }
 
@@ -192,13 +172,13 @@ public class Gun : MonoBehaviour
         // Has there been at least one frame where the gun was not fired? Semi-auto is ignored for AI
         bool semiAutoQualified = (Time.frameCount > _semiAutoFireFrameCount + 1)
                                     || (!usePlayerMechanics)
-                                    || (!_semiAuto);
+                                    || (!_gunData.semiAuto);
 
         // Trigger must be released before re-firing when heat reaches 100%
         if (_heatTriggerMustRelease)
             _heatTriggerMustRelease = !(Time.frameCount > _semiAutoFireFrameCount + 1);
 
-        if ((_currentHeat >= _overheatThreshold) && !_heatOverThresholdReleased)
+        if ((_currentHeat >= _gunData.overheatThreshold) && !_heatOverThresholdReleased)
             _heatOverThresholdReleased = !(Time.frameCount == _semiAutoFireFrameCount + 1);
 
         // Has the gun been locked up due to heat? Firing may persist past this threshold if not cancelled prior
@@ -219,22 +199,22 @@ public class Gun : MonoBehaviour
             _heatOverThresholdReleased = false;
 
             // Check ammo in clip
-            if (_currentClip > 0 || _bottomlessClip)
+            if (_currentClip > 0 || _gunData.bottomlessClip)
             {
-                uint ammoThisShot = _ammoPerShot;
+                uint ammoThisShot = _gunData.ammoPerShot;
 
                 // Consume ammo
-                if (!_bottomlessClip)
+                if (!_gunData.bottomlessClip)
                 {
                     // Only use ammo that is loaded in clip
-                    if (_ammoPerShot > _clipSize)
-                        ammoThisShot = _clipSize;
+                    if (_gunData.ammoPerShot > _gunData.clipSize)
+                        ammoThisShot = _gunData.clipSize;
 
                     _currentClip -= ammoThisShot;
                 }
 
                 // Apply heat
-                if (usePlayerMechanics && _useHeat)
+                if (usePlayerMechanics && _gunData.usesHeat)
                     ApplyHeat(ammoThisShot);
 
                 // Fire shots
@@ -252,7 +232,7 @@ public class Gun : MonoBehaviour
     {
         // Randomize a spread angle
         float angle = Random.Range(0, 360);
-        float spread = Random.Range(0, _spread);
+        float spread = Random.Range(0, _gunData.spread);
         float tanOfSpread = Mathf.Tan(spread * Mathf.Deg2Rad);
         
         float spreadX = Mathf.Sin(angle * Mathf.Deg2Rad) * tanOfSpread;
@@ -304,7 +284,7 @@ public class Gun : MonoBehaviour
             Debug.DrawLine(_gunOrigin.position, _nonAllocHit.point, Color.blue, 0.5f);
 
             // Deal damage to the object hit
-            float damage = _damage / _ammoPerShot;
+            float damage = _gunData.damage / _gunData.ammoPerShot;
             hitTransform = _nonAllocHit.transform;
             IDamageable d = _nonAllocHit.transform.GetComponentInParent<IDamageable>();
             if (d != null)
@@ -320,14 +300,14 @@ public class Gun : MonoBehaviour
     /// <summary>Begins a reload for this gun.</summary>
     public void DoReload()
     {
-        if (!_bottomlessClip 
-            && !(_currentClip == _clipSize)
+        if (!_gunData.bottomlessClip
+            && !(_currentClip == _gunData.clipSize)
             && !_isReloading)
         {
             // Check heat-lock state
             if (!(
-                (_useHeat && _currentHeat > _overheatThreshold)
-                && _heatLocksReload))
+                (_gunData.usesHeat && _currentHeat > _gunData.overheatThreshold)
+                && _gunData.heatLocksReloading))
             {
                 _reloadCoroutine = HandleReloadTimer();
                 StartCoroutine(_reloadCoroutine);
@@ -346,21 +326,21 @@ public class Gun : MonoBehaviour
 
     private IEnumerator HandleReloadTimer()
     {
-        uint reloadableAmmo = (_clipSize > _currentAmmo) ? _currentAmmo : _clipSize;
+        uint reloadableAmmo = (_gunData.clipSize > _currentAmmo) ? _currentAmmo : _gunData.clipSize;
 
         // Does the gun have any ammo remaining for reload?
         if (reloadableAmmo > 0)
         {
-            if (_reloadTime > 0)
+            if (_gunData.reloadTime > 0)
             {
                 _isReloading = true;
-                yield return new WaitForSeconds(_reloadTime);
+                yield return new WaitForSeconds(_gunData.reloadTime);
             }
 
             _isReloading = false;
 
-            if (_infiniteAmmo)
-                _currentClip = _clipSize;
+            if (_gunData.infiniteAmmo)
+                _currentClip = _gunData.clipSize;
             else
                 _currentClip = reloadableAmmo;
 

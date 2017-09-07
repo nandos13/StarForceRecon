@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+<<<<<<< Updated upstream:Assets/Models/Characters.meta
+guid: c23dc916ea2d8044a832c880b248f46d
+folderAsset: yes
+timeCreated: 1504761356
+=======
+guid: 23af3f05e0e2c0d48848c7e2c4f2bcf1
+timeCreated: 1504762498
+>>>>>>> Stashed changes:Assets/Scripts/Gun System/Gun Presets/RivetGun.asset.meta
+licenseType: Free
+NativeFormatImporter:
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
