@@ -22,12 +22,13 @@ GameObject:
   - component: {fileID: 33681988976838464}
   - component: {fileID: 23817625354900690}
   - component: {fileID: 95226541454339918}
+  - component: {fileID: 65779851814136804}
   m_Layer: 0
   m_Name: resFloor4x4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4773531046934990
 Transform:
@@ -81,6 +82,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1572736650782346}
   m_Mesh: {fileID: 4300000, guid: 8ba08eebd08285545ae6e60b74d7917c, type: 3}
+--- !u!65 &65779851814136804
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1572736650782346}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4, y: 0.5, z: 4}
+  m_Center: {x: 0, y: -0.25, z: 0}
 --- !u!95 &95226541454339918
 Animator:
   serializedVersion: 3
