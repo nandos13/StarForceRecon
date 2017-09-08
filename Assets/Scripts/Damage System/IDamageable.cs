@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IDamageable
+namespace JakePerry
 {
-    // TODO: Change to DamageData rather than float parameter
-    void ApplyDamage(float damage);
+    public interface IDamageable
+    {
+        void ApplyDamage(DamageData data);
+    }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using JakePerry;
 
 /* This script should be placed on each enemy & playable character in the scene.
  * Handles health, damage, healing, etc. */
@@ -18,6 +19,8 @@ public class Health : MonoBehaviour, IDamageable
     #endregion
 
     #region Health Variables
+
+    [SerializeField]    private DamageLayer _damageLayer;
 
     [Range(1, 1000), SerializeField]    private int _maxHealth = 100;
     [SerializeField, HideInInspector]   private float _currentHealth = 0.0f;
@@ -93,9 +96,7 @@ public class Health : MonoBehaviour, IDamageable
         Recharge();
     }
 
-    /// <summary>
-    /// Handles health recharge functionality when applicable.
-    /// </summary>
+    /// <summary>Handles health recharge functionality when applicable.</summary>
     private void Recharge()
     {
         // Convert threshold percentage to actual value
@@ -114,9 +115,7 @@ public class Health : MonoBehaviour, IDamageable
         }
     }
 
-    /// <summary>
-    /// Safely raises the specified event if it has any registered listeners.
-    /// </summary>
+    /// <summary>Safely raises the specified event if it has any registered listeners.</summary>
     private void RaiseEvent(DamageEventDelegate e, float damageValue)
     {
         // Check there are any registered listeners before firing event
@@ -134,22 +133,39 @@ public class Health : MonoBehaviour, IDamageable
         RaiseEvent(OnDeath, damage);
     }
 
-    /// <param name="damage">Damage to apply. Absolute value is used, use ApplyHeal to heal the entity.</param>
-    public void ApplyDamage(float damage)
+    /// <param name="damage">Damage data to apply.</param>
+    public void ApplyDamage(DamageData damage)
     {
+        if (damage == null) return;
+        if (!damage.damageMask.ContainsLayer(_damageLayer.value)) return;
+
         if (_isAlive)
         {
-            if (damage < 0) damage *= -1.0f;
+            float value = damage.damageValue;
 
-            _currentHealth -= damage;
-            _timeSinceDamage = 0.0f;
+            if (value < 0)
+            {
+                // Heal
+                value = -value;
+                float toHeal = (_currentHealth + value > _maxHealth) ? (_maxHealth - _currentHealth) : value;
+                _currentHealth += toHeal;
 
-            // Raise events
-            RaiseEvent(OnHealthChanged, -damage);
-            RaiseEvent(OnDamage, damage);
+                RaiseEvent(OnHealthChanged, toHeal);
+                RaiseEvent(OnHeal, toHeal);
+            }
+            else
+            {
+                // Damage
+
+                _currentHealth -= damage.damageValue;
+                _timeSinceDamage = 0.0f;
+
+                RaiseEvent(OnHealthChanged, -value);
+                RaiseEvent(OnDamage, value);
+            }
 
             if (_currentHealth <= 0)
-                Death(damage);
+                Death(value);
         }
     }
 
