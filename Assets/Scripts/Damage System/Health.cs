@@ -93,7 +93,8 @@ public class Health : MonoBehaviour, IDamageable
     void Update()
     {
         _timeSinceDamage += Time.deltaTime;
-        Recharge();
+        if (_rechargeWhenLow)
+            Recharge();
     }
 
     /// <summary>Handles health recharge functionality when applicable.</summary>
@@ -166,23 +167,6 @@ public class Health : MonoBehaviour, IDamageable
 
             if (_currentHealth <= 0)
                 Death(value);
-        }
-    }
-
-    /// <param name="heal">Healing to apply. Absolute value is used, use ApplyDamage to damage the entity.</param>
-    public void ApplyHeal(float heal)
-    {
-        if (_isAlive)
-        {
-            if (heal < 0) heal *= -1.0f;
-
-            float toHeal = (_currentHealth + heal > _maxHealth) ? (_maxHealth - _currentHealth) : heal;
-
-            _currentHealth += toHeal;
-
-            // Raise events
-            RaiseEvent(OnHealthChanged, toHeal);
-            RaiseEvent(OnHeal, toHeal);
         }
     }
 

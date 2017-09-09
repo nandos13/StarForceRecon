@@ -32,6 +32,7 @@ public class Gun : MonoBehaviour
     [SerializeField]    private LayerMask _layerMask = (LayerMask)1;
 
     [SerializeField]    private GunData _gunData = null;
+    [SerializeField]    private DamageData _damageData = null;
 
     #endregion
 
@@ -101,6 +102,15 @@ public class Gun : MonoBehaviour
             Destroy(this);
             throw new System.MissingFieldException("No GunData specified.");
         }
+
+        // Create clone of the specified damage data object
+        if (_damageData != null)
+        {
+            DamageData cloneData = Instantiate<DamageData>(_damageData);
+            _damageData = cloneData;
+        }
+        else
+            _damageData = DamageData.defaultValue;
 
         // Initialize ammo
         _currentClip = (_gunData.clipSize < _startAmmo) ? _gunData.clipSize : _startAmmo;
@@ -285,11 +295,12 @@ public class Gun : MonoBehaviour
             Debug.DrawLine(_gunOrigin.position, _nonAllocHit.point, Color.blue, 0.5f);
 
             // Deal damage to the object hit
-            float damage = _gunData.damage / _gunData.ammoPerShot;
+            float damage = (_gunData.damageModifier * _damageData.defaultDamage) / _gunData.ammoPerShot;
+            _damageData.damageValue = damage;
             hitTransform = _nonAllocHit.transform;
             IDamageable d = _nonAllocHit.transform.GetComponentInParent<IDamageable>();
             if (d != null)
-                d.ApplyDamage(damage);
+                d.ApplyDamage(_damageData);
 
         }
         else

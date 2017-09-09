@@ -7,8 +7,8 @@ public class GunData : ScriptableObject
 {
     #region Variables
 
-    [Tooltip("Amount of damage done per shot. For multi-shot weapons, damage will be divided by the number of projectiles per shot.")]
-    [Range(0.1f, 10.0f), SerializeField]        private float _damage = 1.0f;
+    [Tooltip("Modifier for amount of damage done per shot. For multi-shot weapons, damage will be divided by the number of projectiles per shot.")]
+    [Range(0.1f, 10.0f), SerializeField]        private float _damageModifier = 1.0f;
     [Range(0.0f, 10.0f), SerializeField]        private float _spread = 0.0f;
 
     [SerializeField]                            private bool _semiAuto = false;
@@ -43,7 +43,7 @@ public class GunData : ScriptableObject
     #region Getter properties
 
     /// <summary>Damage per fire event. Value is divided by number of projectiles in a shot.</summary>
-    public float damage { get { return _damage; } }
+    public float damageModifier { get { return _damageModifier; } }
     public float spread { get { return _spread; } }
 
     public bool semiAuto { get { return _semiAuto; } }

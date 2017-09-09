@@ -12,7 +12,7 @@ public class GunDataEditor : Editor
             int indent = EditorGUI.indentLevel;
             EditorGUI.indentLevel += 1;
 
-            SerializedProperty damageProperty = serializedObject.FindProperty("_damage");
+            SerializedProperty damageProperty = serializedObject.FindProperty("_damageModifier");
             if (damageProperty != null)
                 EditorGUILayout.PropertyField(damageProperty);
 
