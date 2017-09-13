@@ -859,6 +859,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114468216435664904, guid: c8d965513730c08428f3fc6f7d4e072f,
+        type: 2}
+      propertyPath: _rollSpeedMultiplier
+      value: 4.63
+      objectReference: {fileID: 0}
+    - target: {fileID: 114468216435664904, guid: c8d965513730c08428f3fc6f7d4e072f,
+        type: 2}
+      propertyPath: _rollTime
+      value: 0.55
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c8d965513730c08428f3fc6f7d4e072f, type: 2}
   m_IsPrefabParent: 0

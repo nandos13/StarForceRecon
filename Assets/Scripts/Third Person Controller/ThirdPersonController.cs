@@ -33,7 +33,9 @@ public class ThirdPersonController : MonoBehaviour
 
     // Rolling
     [SerializeField]    private bool _canRoll = false;
-    [Range(0.5f, 10.0f), SerializeField]     private float _rollSpeedMultiplier = 1.0f;
+    [Range(0.5f, 10.0f), SerializeField]    private float _rollSpeedMultiplier = 1.0f;
+    [Tooltip("Duration of rolling animation in seconds.")]
+    [Range(0.1f, 3.0f), SerializeField]     private float _rollTime = 1.0f;
 
     [Tooltip("Damp time for direction change. Lower value will result in quicker changes in direction, but may result in choppy animation blends.")]
     [Range(0.01f, 0.1f), SerializeField]    private float _directionalBlendDamp = 0.1f;
@@ -50,6 +52,7 @@ public class ThirdPersonController : MonoBehaviour
     private bool _crouching = false;
     private bool _rolling = false;
     private Vector3 _rollDir;
+    private float _rollTimeElapsed = 0.0f;
 
     private float _forward = 0.0f;
     private float _right = 0.0f;
@@ -81,7 +84,7 @@ public class ThirdPersonController : MonoBehaviour
     {
         // Face towards the aim direction
         // TODO: This should be moved to a separate script, only used by squad members.
-        if (_aim)
+        if (_aim && !_rolling)
         {
             // TODO: Change to common Aim script rather than PlayerAim to also work with AI
 
@@ -97,11 +100,21 @@ public class ThirdPersonController : MonoBehaviour
         // Handle rolling movement
         if (_rolling)
         {
-            Vector3 v = (_rollDir * _rollSpeedMultiplier);
-            //v = transform.TransformDirection(v);
+            // Rotate to face rolling direction
+            Quaternion rotation = Quaternion.LookRotation(_rollDir);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 20f);
 
+            // Get rolling velocity vector
+            Vector3 v = (_rollDir * _rollSpeedMultiplier);
+            
             v.y = _rb.velocity.y;
             _rb.velocity = v;
+
+            // Check for rolling end
+            _rollTimeElapsed += Time.fixedDeltaTime;
+
+            if (_rollTimeElapsed >= _rollTime)
+                EndRoll();
         }
     }
 
@@ -138,6 +151,7 @@ public class ThirdPersonController : MonoBehaviour
                 if (!_rolling && roll)
                 {
                     // Start a new roll
+                    _rollTimeElapsed = 0.0f;
                     _rolling = true;
                     _rollDir = transform.TransformDirection(direction);
 
@@ -227,8 +241,6 @@ public class ThirdPersonController : MonoBehaviour
         _animator.SetBool("IsWalking", true);
 
         _animator.SetBool("Roll", _rolling);
-        _animator.SetFloat("RollForward", _rollForward);
-        _animator.SetFloat("RollRight", _rollRight);
 
         _animator.SetFloat("Forward", _forward, _directionalBlendDamp, Time.deltaTime);
         _animator.SetFloat("Right", _right, _directionalBlendDamp, Time.deltaTime);
