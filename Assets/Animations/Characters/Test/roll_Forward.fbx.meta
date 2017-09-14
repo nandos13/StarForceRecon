@@ -191,7 +191,7 @@ ModelImporter:
     400180: Skel_root_jnt
     400182: Skel_spine01_jnt
     400184: Skel_spine02_jnt
-    7400000: Take 001
+    7400000: Roll Forward
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -206,17 +206,52 @@ ModelImporter:
     rigImportErrors: 
     rigImportWarnings: 
     animationImportErrors: 
-    animationImportWarnings: 
+    animationImportWarnings: "\nClip 'Take 001' has import animation warnings that
+      might lower retargeting quality:\nNote: Activate translation DOF on avatar to
+      improve retargeting quality.\n\t'L_Skel_forearm_jnt' is inbetween humanoid transforms
+      and has rotation animation that will be discarded.\n\t'R_Skel_forearm_jnt' is
+      inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'Skel_hip_jnt'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'L_Skel_ball_jnt'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'R_Skel_ball_jnt'
+      is inbetween humanoid transforms and has rotation animation that will be discarded.\n"
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Roll Forward
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 32
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []
@@ -247,8 +282,897 @@ ModelImporter:
   copyAvatar: 0
   humanDescription:
     serializedVersion: 2
-    human: []
-    skeleton: []
+    human:
+    - boneName: Skel_root_jnt
+      humanName: Hips
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: L_Skel_thigh_jnt
+      humanName: LeftUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: R_Skel_thigh_jnt
+      humanName: RightUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: L_Skel_knee_jnt
+      humanName: LeftLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: R_Skel_knee_jnt
+      humanName: RightLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: L_Skel_ankle_jnt
+      humanName: LeftFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: R_Skel_ankle_jnt
+      humanName: RightFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Skel_spine01_jnt
+      humanName: Spine
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Skel_spine02_jnt
+      humanName: Chest
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Skel_neck_jnt
+      humanName: Neck
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Skel_head_jnt
+      humanName: Head
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: L_Skel_clavicle_jnt
+      humanName: LeftShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: R_Skel_clavicle_jnt
+      humanName: RightShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: L_Skel_shoulder_jnt
+      humanName: LeftUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: R_Skel_shoulder_jnt
+      humanName: RightUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: L_Skel_elbow_jnt
+      humanName: LeftLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: R_Skel_elbow_jnt
+      humanName: RightLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: L_Skel_wrist_jnt
+      humanName: LeftHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: R_Skel_wrist_jnt
+      humanName: RightHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: L_Skel_toe_jnt
+      humanName: LeftToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: R_Skel_toe_jnt
+      humanName: RightToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Skel_hat_jnt
+      humanName: RightEye
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: L_Skel_thumb01
+      humanName: Left Thumb Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: L_Skel_thumb02
+      humanName: Left Thumb Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: L_Skel_thumb03
+      humanName: Left Thumb Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: L_Skel_index01
+      humanName: Left Index Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: L_Skel_index02
+      humanName: Left Index Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: L_Skel_index03
+      humanName: Left Index Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: L_Skel_middle01
+      humanName: Left Middle Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: L_Skel_middle02
+      humanName: Left Middle Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: L_Skel_middle03
+      humanName: Left Middle Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: L_Skel_ring01
+      humanName: Left Ring Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: L_Skel_ring02
+      humanName: Left Ring Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: L_Skel_ring03
+      humanName: Left Ring Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: L_Skel_pinky01
+      humanName: Left Little Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: L_Skel_pinky02
+      humanName: Left Little Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: L_Skel_pinky03
+      humanName: Left Little Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: R_Skel_thumb01
+      humanName: Right Thumb Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: R_Skel_thumb02
+      humanName: Right Thumb Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: R_Skel_thumb03
+      humanName: Right Thumb Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: R_Skel_index01
+      humanName: Right Index Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: R_Skel_index02
+      humanName: Right Index Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: R_Skel_index03
+      humanName: Right Index Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: R_Skel_middle01
+      humanName: Right Middle Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: R_Skel_middle02
+      humanName: Right Middle Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: R_Skel_middle03
+      humanName: Right Middle Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: R_Skel_ring01
+      humanName: Right Ring Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: R_Skel_ring02
+      humanName: Right Ring Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: R_Skel_ring03
+      humanName: Right Ring Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: R_Skel_pinky01
+      humanName: Right Little Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: R_Skel_pinky02
+      humanName: Right Little Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: R_Skel_pinky03
+      humanName: Right Little Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Skel_chest_jnt
+      humanName: UpperChest
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    skeleton:
+    - name: roll_Forward(Clone)
+      parentName: 
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 0.01, y: 0.01, z: 0.01}
+    - name: playerPivot_CTRL
+      parentName: roll_Forward(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: root_CTRL
+      parentName: playerPivot_CTRL
+      position: {x: -0, y: 99.7089, z: -0.846611}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Skel_root_jnt
+      parentName: playerPivot_CTRL
+      position: {x: -0, y: 99.7089, z: -0.846611}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Skel_hip_jnt
+      parentName: Skel_root_jnt
+      position: {x: -0, y: -2.73415, z: 2.3696}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Skel_thigh_jnt
+      parentName: Skel_hip_jnt
+      position: {x: -8.528621, y: -12.618382, z: -1.4363751}
+      rotation: {x: 0.5020571, y: 0.49895236, z: 0.46251675, w: 0.5339134}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Skel_knee_jnt
+      parentName: L_Skel_thigh_jnt
+      position: {x: -31.383556, y: -5.3290705e-15, z: 3.5527137e-15}
+      rotation: {x: 0.996587, y: 0.082550004, z: 5.05473e-18, w: 6.102336e-17}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Skel_ankle_jnt
+      parentName: L_Skel_knee_jnt
+      position: {x: -42.9856, y: -2.6645353e-15, z: -3.5527137e-15}
+      rotation: {x: 0.8464031, y: 0.5325306, z: -0.0016931422, w: 0.0031599733}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Skel_ball_jnt
+      parentName: L_Skel_ankle_jnt
+      position: {x: -11.517819, y: 9.769963e-15, z: 1.7763568e-15}
+      rotation: {x: -1.4477055e-12, y: 4.0400203e-13, z: -0.26879352, w: 0.9631978}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Skel_toe_jnt
+      parentName: L_Skel_ball_jnt
+      position: {x: -10.761054, y: -4.440892e-16, z: 8.881784e-15}
+      rotation: {x: -0, y: -0.7071068, z: 0, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Skel_thigh_jnt
+      parentName: Skel_hip_jnt
+      position: {x: 8.52862, y: -12.61835, z: -1.4363751}
+      rotation: {x: -0.5339163, y: 0.46251914, z: -0.49894965, w: 0.50205445}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Skel_knee_jnt
+      parentName: R_Skel_thigh_jnt
+      position: {x: 31.38358, y: 0.00000519359, z: -0.000048410588}
+      rotation: {x: 0.996587, y: 0.082550004, z: -5.038822e-18, w: -6.1024674e-17}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Skel_ankle_jnt
+      parentName: R_Skel_knee_jnt
+      position: {x: 42.985603, y: 0.000003955895, z: -0.000009748923}
+      rotation: {x: 0.8464032, y: 0.5325307, z: -0.0016906154, w: 0.0031552375}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Skel_ball_jnt
+      parentName: R_Skel_ankle_jnt
+      position: {x: 11.51782, y: -0.0000029111375, z: 0.000036260888}
+      rotation: {x: 2.9942204e-15, y: -8.3557804e-16, z: -0.26879352, w: 0.9631978}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Skel_toe_jnt
+      parentName: R_Skel_ball_jnt
+      position: {x: 10.761003, y: 0.00000033908913, z: 0.000011784215}
+      rotation: {x: -0, y: -0.7071068, z: 0, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Skel_spine01_jnt
+      parentName: Skel_root_jnt
+      position: {x: -0, y: 2.5518754, z: 2.1873217}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Skel_spine02_jnt
+      parentName: Skel_spine01_jnt
+      position: {x: -0, y: 11.939131, z: -2.1880634}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Skel_chest_jnt
+      parentName: Skel_spine02_jnt
+      position: {x: -0, y: 14.989616, z: 0.30539042}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Skel_clavicle_jnt
+      parentName: Skel_chest_jnt
+      position: {x: -5.3208523, y: 5.865409, z: 6.841238}
+      rotation: {x: -0, y: 0.10455824, z: -0.018438822, w: 0.9943478}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_FK_shoulder_jnt
+      parentName: L_Skel_clavicle_jnt
+      position: {x: -10.784169, y: -1.110867, z: -6.299276}
+      rotation: {x: 0.0904463, y: -0.12122043, z: 0.5911573, w: 0.7922488}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_FK_elbow_jnt
+      parentName: L_FK_shoulder_jnt
+      position: {x: -25.540478, y: 0.000048331887, z: 0}
+      rotation: {x: 0.000000043124864, y: 0.28372014, z: 0.000000012759724, w: 0.9589072}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_FK_forearm_jnt
+      parentName: L_FK_elbow_jnt
+      position: {x: -14.164177, y: -0.000019166137, z: -0.00001723398}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_FK_wrist_jnt
+      parentName: L_FK_forearm_jnt
+      position: {x: -15.000781, y: -0.000055262422, z: 0.00001723398}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_FK_palm_jnt
+      parentName: L_FK_wrist_jnt
+      position: {x: -9.302134, y: 0.000022618053, z: 4.5067122e-10}
+      rotation: {x: 0.0000045349343, y: 3.7136813e-12, z: 0.0000008189052, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_IK_shoulder_jnt
+      parentName: L_Skel_clavicle_jnt
+      position: {x: -10.784169, y: -1.110867, z: -6.299276}
+      rotation: {x: -0.000004006204, y: -0.0000021725602, z: 0.47671285, w: 0.87905914}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_IK_elbow_jnt
+      parentName: L_IK_shoulder_jnt
+      position: {x: -25.540478, y: 0.000048905167, z: 8.131516e-20}
+      rotation: {x: -3.5645527e-22, y: 0.19032778, z: -7.9238125e-20, w: 0.9817206}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_IK_forearm_jnt
+      parentName: L_IK_elbow_jnt
+      position: {x: -14.164177, y: -0.000019166137, z: -0.00001723398}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_IK_wrist_jnt
+      parentName: L_IK_forearm_jnt
+      position: {x: -15.000781, y: -0.000055262422, z: 0.00001723398}
+      rotation: {x: 0.0000037803436, y: 2.6156841e-12, z: 0.000000691917, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_IK_palm_jnt
+      parentName: L_IK_wrist_jnt
+      position: {x: -9.302134, y: 0.000022618053, z: 4.5067106e-10}
+      rotation: {x: 0.0000045349343, y: 3.7136813e-12, z: 0.0000008189052, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Skel_shoulder_jnt
+      parentName: L_Skel_clavicle_jnt
+      position: {x: -10.784169, y: -1.110867, z: -6.299276}
+      rotation: {x: 0.17878065, y: -0.10041867, z: 0.050573155, w: 0.9774436}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Skel_elbow_jnt
+      parentName: L_Skel_shoulder_jnt
+      position: {x: -25.540478, y: 0.000048905167, z: 1.0842022e-19}
+      rotation: {x: -0.0036116987, y: 0.027357578, z: -0.012209529, w: 0.9995447}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Skel_forearm_jnt
+      parentName: L_Skel_elbow_jnt
+      position: {x: -14.164177, y: -0.000019166137, z: -0.00001723398}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Skel_wrist_jnt
+      parentName: L_Skel_forearm_jnt
+      position: {x: -15.000781, y: -0.000055262422, z: 0.00001723398}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Skel_palm_jnt
+      parentName: L_Skel_wrist_jnt
+      position: {x: -4.5879908, y: 0.00001800913, z: 4.5067594e-10}
+      rotation: {x: 0.0000045349343, y: 3.7136813e-12, z: 0.0000008189052, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Skel_index01
+      parentName: L_Skel_palm_jnt
+      position: {x: -4.340123, y: -0.4088756, z: 2.298184}
+      rotation: {x: 0.064793326, y: 0.022520127, z: 0.08142883, w: 0.9943159}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Skel_index02
+      parentName: L_Skel_index01
+      position: {x: -3.5843644, y: 1.4210855e-14, z: 1.7763568e-14}
+      rotation: {x: 0.000000037252896, y: 0.0000010151414, z: 0.029409332, w: 0.99956745}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Skel_index03
+      parentName: L_Skel_index02
+      position: {x: -2.4817746, y: -1.4210855e-14, z: -2.842171e-14}
+      rotation: {x: 0.00000021000487, y: -0.00000084854804, z: 0.032873902, w: 0.99945956}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Skel_index_END
+      parentName: L_Skel_index03
+      position: {x: -2.2415829, y: -4.2632564e-14, z: -3.5527137e-15}
+      rotation: {x: 0, y: -0, z: -0.7071068, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Skel_middle01
+      parentName: L_Skel_palm_jnt
+      position: {x: -4.6649218, y: -0.12254697, z: 0.26255646}
+      rotation: {x: 0.059519805, y: -0.0028009708, z: 0.07984836, w: 0.99502456}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Skel_middle02
+      parentName: L_Skel_middle01
+      position: {x: -3.290261, y: -1.4210855e-14, z: 0}
+      rotation: {x: 0.000000044703473, y: 0.000001198379, z: 0.03710297, w: 0.9993115}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Skel_middle03
+      parentName: L_Skel_middle02
+      position: {x: -2.4933236, y: -2.842171e-14, z: -1.4210855e-14}
+      rotation: {x: 0.00000017140941, y: 0.0000018942477, z: 0.033860225, w: 0.9994266}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Skel_middle_END
+      parentName: L_Skel_middle03
+      position: {x: -3.0122108, y: -8.881784e-15, z: 0}
+      rotation: {x: 0, y: -0, z: -0.7071068, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Skel_pinky01
+      parentName: L_Skel_palm_jnt
+      position: {x: -3.3857112, y: -0.006604681, z: -3.546516}
+      rotation: {x: 0.00031705157, y: -0.0367287, z: 0.06060572, w: 0.99748576}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Skel_pinky02
+      parentName: L_Skel_pinky01
+      position: {x: -2.082011, y: 2.842171e-14, z: 7.993606e-15}
+      rotation: {x: 0.0000000035506669, y: 0.000000026077029, z: 0.04124536, w: 0.999149}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Skel_pinky03
+      parentName: L_Skel_pinky02
+      position: {x: -1.6608865, y: -5.684342e-14, z: -2.6645353e-15}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Skel_pinky_END
+      parentName: L_Skel_pinky03
+      position: {x: -1.7541003, y: 2.842171e-14, z: 2.6645353e-15}
+      rotation: {x: 0, y: -0, z: -0.7071068, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Skel_ring01
+      parentName: L_Skel_palm_jnt
+      position: {x: -4.1892476, y: 0.1351417, z: -1.6867024}
+      rotation: {x: 0.037923977, y: -0.022597708, z: 0.07304277, w: 0.99635136}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Skel_ring02
+      parentName: L_Skel_ring01
+      position: {x: -2.6488774, y: -2.842171e-14, z: -1.7763568e-15}
+      rotation: {x: -0.00000015273686, y: -0.0000007282941, z: 0.034637704, w: 0.9994}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Skel_ring03
+      parentName: L_Skel_ring02
+      position: {x: -2.5487938, y: 2.1316282e-14, z: 0}
+      rotation: {x: 0.000000068860935, y: 0.0000013710871, z: 0.03452542, w: 0.99940383}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Skel_ring_END
+      parentName: L_Skel_ring03
+      position: {x: -2.5531135, y: -2.4868996e-14, z: 7.1054274e-15}
+      rotation: {x: 0, y: -0, z: -0.7071068, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Skel_thumb01
+      parentName: L_Skel_wrist_jnt
+      position: {x: -2.3116882, y: -0.90651315, z: 3.3228767}
+      rotation: {x: 0.4070125, y: 0.31531587, z: -0.21602543, w: 0.8296082}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Skel_thumb02
+      parentName: L_Skel_thumb01
+      position: {x: -2.3782194, y: -8.526513e-14, z: 3.5527137e-14}
+      rotation: {x: -0.000000029802319, y: 0.000003188848, z: 0.036388565, w: 0.99933773}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Skel_thumb03
+      parentName: L_Skel_thumb02
+      position: {x: -2.5487938, y: 5.684342e-14, z: -1.0658141e-14}
+      rotation: {x: 0.00000057807455, y: 0.000001023729, z: 0.03612338, w: 0.9993474}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_Skel_thumb_END
+      parentName: L_Skel_thumb03
+      position: {x: -2.4220743, y: 7.1054274e-15, z: 0}
+      rotation: {x: 0, y: -0, z: -0.7071068, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Skel_clavicle_jnt
+      parentName: Skel_chest_jnt
+      position: {x: 5.32085, y: 5.8654776, z: 6.8412423}
+      rotation: {x: 0.9943477, y: 0.018441163, z: 0.104559265, w: -6.0886244e-17}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_FK_shoulder_jnt
+      parentName: R_Skel_clavicle_jnt
+      position: {x: 10.78415, y: 1.111, z: 6.29928}
+      rotation: {x: 0.10887684, y: -0.1299627, z: 0.6329044, w: 0.7554386}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_FK_elbow_jnt
+      parentName: R_FK_shoulder_jnt
+      position: {x: 25.540562, y: 0.000017914783, z: 6.090444e-10}
+      rotation: {x: 0.000000054778354, y: 0.36475995, z: 0.00000001628022, w: 0.9311016}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_FK_forearm_jnt
+      parentName: R_FK_elbow_jnt
+      position: {x: 14.164061, y: -0.000100690275, z: -0.00002943712}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_FK_wrist_jnt
+      parentName: R_FK_forearm_jnt
+      position: {x: 15.000816, y: 0.00010647201, z: -0.00003657876}
+      rotation: {x: 5.1028352e-17, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_FK_palm_jnt
+      parentName: R_FK_wrist_jnt
+      position: {x: 9.302157, y: -0.000081299244, z: -0.00000847037}
+      rotation: {x: 0.0000045525303, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_IK_shoulder_jnt
+      parentName: R_Skel_clavicle_jnt
+      position: {x: 10.78415, y: 1.111, z: 6.29928}
+      rotation: {x: -0.000010328222, y: -0.000005215092, z: 0.47671407, w: 0.8790584}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_IK_elbow_jnt
+      parentName: R_IK_shoulder_jnt
+      position: {x: 25.540562, y: 0.000017914783, z: 6.0904604e-10}
+      rotation: {x: 0.0000000126689885, y: 0.19032714, z: -0.0000000024553841, w: 0.98172075}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_IK_forearm_jnt
+      parentName: R_IK_elbow_jnt
+      position: {x: 14.164061, y: -0.00010021418, z: -0.000029437128}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_IK_wrist_jnt
+      parentName: R_IK_forearm_jnt
+      position: {x: 15.000816, y: 0.00010697624, z: -0.000036578753}
+      rotation: {x: 0.000010817187, y: 0.00000031562172, z: 0.0000019785546, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_IK_palm_jnt
+      parentName: R_IK_wrist_jnt
+      position: {x: 9.302157, y: -0.000093859286, z: -0.0000084696685}
+      rotation: {x: 0.000004560887, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Skel_shoulder_jnt
+      parentName: R_Skel_clavicle_jnt
+      position: {x: 10.78415, y: 1.111, z: 6.29928}
+      rotation: {x: 0.21396153, y: -0.09903605, z: 0.05158285, w: 0.97043884}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Skel_elbow_jnt
+      parentName: R_Skel_shoulder_jnt
+      position: {x: 25.540562, y: 0.000017914783, z: 6.030357e-10}
+      rotation: {x: -0.0040262933, y: 0.02346417, z: -0.0102778105, w: 0.9996638}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Skel_forearm_jnt
+      parentName: R_Skel_elbow_jnt
+      position: {x: 14.164061, y: -0.000100690275, z: -0.000029437118}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Skel_wrist_jnt
+      parentName: R_Skel_forearm_jnt
+      position: {x: 15.000816, y: 0.00010647202, z: -0.000036578756}
+      rotation: {x: 5.102835e-17, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Skel_palm_jnt
+      parentName: R_Skel_wrist_jnt
+      position: {x: 4.5879235, y: -0.00004655784, z: -0.000005220543}
+      rotation: {x: 0.000004608267, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Skel_index01
+      parentName: R_Skel_palm_jnt
+      position: {x: 4.3401785, y: 0.40892538, z: -2.2981887}
+      rotation: {x: 0.06479355, y: 0.022521868, z: 0.081428684, w: 0.9943158}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Skel_index02
+      parentName: R_Skel_index01
+      position: {x: 3.5842752, y: -0.000007253585, z: 0.000014881251}
+      rotation: {x: 0.00000029057261, y: -0.0000032018866, z: 0.02942917, w: 0.9995669}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Skel_index03
+      parentName: R_Skel_index02
+      position: {x: 2.481766, y: -0.00010644749, z: -0.000012235125}
+      rotation: {x: 0.0000014734263, y: 0.000008238166, z: 0.0328405, w: 0.99946064}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Skel_index_END
+      parentName: R_Skel_index03
+      position: {x: 2.2416203, y: 0.000031606738, z: 0.00004700936}
+      rotation: {x: 0, y: -0, z: -0.7071068, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Skel_middle01
+      parentName: R_Skel_palm_jnt
+      position: {x: 4.664925, y: 0.122538954, z: -0.26255125}
+      rotation: {x: 0.059519988, y: -0.0028017373, z: 0.07985585, w: 0.99502397}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Skel_middle02
+      parentName: R_Skel_middle01
+      position: {x: 3.2903216, y: -0.0000519175, z: -0.0000065903096}
+      rotation: {x: 0.00000015273685, y: 0.0000027006017, z: 0.03709377, w: 0.9993118}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Skel_middle03
+      parentName: R_Skel_middle02
+      position: {x: 2.4933186, y: -0.0000033006186, z: 0.000009365319}
+      rotation: {x: 0.0000002095584, y: -0.0000053502963, z: 0.03384408, w: 0.9994272}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Skel_middle_END
+      parentName: R_Skel_middle03
+      position: {x: 3.012197, y: 0.000082854436, z: -0.000013145759}
+      rotation: {x: 1.1698101e-24, y: -0.000000014901163, z: -0.7071068, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Skel_pinky01
+      parentName: R_Skel_palm_jnt
+      position: {x: 3.3856835, y: 0.0065928334, z: 3.5465677}
+      rotation: {x: 0.00031445926, y: -0.03674783, z: 0.060609963, w: 0.9974848}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Skel_pinky02
+      parentName: R_Skel_pinky01
+      position: {x: 2.0820203, y: -0.0000074614995, z: -0.00009106642}
+      rotation: {x: -0.00000013111274, y: 0.0000033862884, z: 0.041260812, w: 0.9991484}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Skel_pinky03
+      parentName: R_Skel_pinky02
+      position: {x: 1.660934, y: -0.00005131062, z: 0.0000012692997}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Skel_pinky_END
+      parentName: R_Skel_pinky03
+      position: {x: 1.7540858, y: 0.00004185153, z: 0.000031578496}
+      rotation: {x: 0, y: -0, z: -0.7071068, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Skel_ring01
+      parentName: R_Skel_palm_jnt
+      position: {x: 4.1893077, y: -0.13516931, z: 1.6867361}
+      rotation: {x: 0.03792237, y: -0.022601135, z: 0.07303474, w: 0.99635196}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Skel_ring02
+      parentName: R_Skel_ring01
+      position: {x: 2.6488476, y: 0.000050701354, z: -0.000042314794}
+      rotation: {x: 0.00000051408983, y: 0.000017212695, z: 0.034659162, w: 0.9993992}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Skel_ring03
+      parentName: R_Skel_ring02
+      position: {x: 2.548758, y: -0.000045145927, z: 0.000062163876}
+      rotation: {x: 0.00000051579156, y: -0.000017550268, z: 0.034503907, w: 0.99940455}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Skel_ring_END
+      parentName: R_Skel_ring03
+      position: {x: 2.553138, y: 0.00004491544, z: -0.00004473925}
+      rotation: {x: 0, y: -0, z: -0.7071068, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Skel_thumb01
+      parentName: R_Skel_wrist_jnt
+      position: {x: 2.3116782, y: 0.9064469, z: -3.3228629}
+      rotation: {x: 0.40020582, y: 0.29859814, z: -0.2342909, w: 0.8341357}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Skel_thumb02
+      parentName: R_Skel_thumb01
+      position: {x: 2.3782218, y: -0.000019268, z: -0.00005451988}
+      rotation: {x: -0.00000020861619, y: 0.00001764297, z: 0.03638537, w: 0.9993379}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Skel_thumb03
+      parentName: R_Skel_thumb02
+      position: {x: 2.5487936, y: -0.000011376327, z: 0.000053895834}
+      rotation: {x: -0.00000053166485, y: -0.000018376868, z: 0.036127005, w: 0.9993472}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_Skel_thumb_END
+      parentName: R_Skel_thumb03
+      position: {x: 2.4220695, y: -0.000025124833, z: -0.000074578566}
+      rotation: {x: 0, y: -0, z: -0.7071068, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Skel_neck_jnt
+      parentName: Skel_chest_jnt
+      position: {x: -0, y: 11.622798, z: 1.2447041}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Skel_head_jnt
+      parentName: Skel_neck_jnt
+      position: {x: -0, y: 7.1087956, z: 2.3695986}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Skel_hat_jnt
+      parentName: Skel_head_jnt
+      position: {x: -0, y: 16.313774, z: 2.6430137}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5
@@ -262,7 +1186,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 3
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

@@ -33,7 +33,7 @@ public class ThirdPersonController : MonoBehaviour
 
     // Rolling
     [SerializeField]    private bool _canRoll = false;
-    [Range(0.5f, 10.0f), SerializeField]    private float _rollSpeedMultiplier = 1.0f;
+    [SerializeField]    private AnimationCurve _rollSpeed = new AnimationCurve(new Keyframe(0, 10), new Keyframe(1, 0));
     [Tooltip("Duration of rolling animation in seconds.")]
     [Range(0.1f, 3.0f), SerializeField]     private float _rollTime = 1.0f;
 
@@ -82,21 +82,6 @@ public class ThirdPersonController : MonoBehaviour
 
     void Update()
     {
-        // Face towards the aim direction
-        // TODO: This should be moved to a separate script, only used by squad members.
-        if (_aim && !_rolling)
-        {
-            // TODO: Change to common Aim script rather than PlayerAim to also work with AI
-
-            Vector3 aimPoint = _aim.GetAimPoint - transform.position;
-            aimPoint.y = 0;
-            Quaternion rotation = Quaternion.LookRotation(aimPoint);
-            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 20f);
-        }
-    }
-
-    void FixedUpdate()
-    {
         // Handle rolling movement
         if (_rolling)
         {
@@ -105,16 +90,31 @@ public class ThirdPersonController : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 20f);
 
             // Get rolling velocity vector
-            Vector3 v = (_rollDir * _rollSpeedMultiplier);
-            
+            float normalizedRollTime = _rollTimeElapsed / _rollTime;
+            Vector3 v = (_rollDir * _rollSpeed.Evaluate(normalizedRollTime));
+
             v.y = _rb.velocity.y;
             _rb.velocity = v;
 
             // Check for rolling end
-            _rollTimeElapsed += Time.fixedDeltaTime;
+            _rollTimeElapsed += Time.deltaTime;
 
             if (_rollTimeElapsed >= _rollTime)
                 EndRoll();
+        }
+        else
+        {
+            // Face towards the aim direction
+            // TODO: This should be moved to a separate script, only used by squad members.
+            if (_aim)
+            {
+                // TODO: Change to common Aim script rather than PlayerAim to also work with AI
+
+                Vector3 aimPoint = _aim.GetAimPoint - transform.position;
+                aimPoint.y = 0;
+                Quaternion rotation = Quaternion.LookRotation(aimPoint);
+                transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 20f);
+            }
         }
     }
 
