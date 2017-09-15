@@ -1981,11 +1981,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd7296e94e4a0fc4e9717e39a5652306, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _groundCheckDist: 0.1
+  _groundCheckDist: 0.15
   _gravityMultiplier: 2
-  _moveSpeedMultiplier: 1
+  _moveSpeedMultiplier: 3
   _animSpeedMultiplier: 1
-  _canRoll: 0
+  _canRoll: 1
   _rollSpeed:
     serializedVersion: 2
     m_Curve:
