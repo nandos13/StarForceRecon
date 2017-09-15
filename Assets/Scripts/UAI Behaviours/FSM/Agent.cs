@@ -26,7 +26,7 @@ public class Agent : MonoBehaviour
 
 
         //// get all the action-derived classes that are siblings of us
-        //actions = GetComponents<ActionAI>();
+        actions = GetComponents<ActionAI>();
     }
     
     void Update()
