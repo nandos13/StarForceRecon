@@ -867,7 +867,7 @@ GameObject:
   - component: {fileID: 1115083774}
   m_Layer: 0
   m_Name: PlayerPrefabTemplate
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1033,11 +1033,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd7296e94e4a0fc4e9717e39a5652306, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _groundCheckDist: 0.1
+  _groundCheckDist: 0.15
   _gravityMultiplier: 2
-  _moveSpeedMultiplier: 1
-  _animSpeedMultiplier: 1
-  _canRoll: 0
+  _moveSpeedMultiplier: 2
+  _animSpeedMultiplier: 1.5
+  _canRoll: 1
   _rollSpeed:
     serializedVersion: 2
     m_Curve:
@@ -1082,10 +1082,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
+  m_Radius: 0.45
   m_Height: 1.7
   m_Direction: 1
-  m_Center: {x: 0, y: 0.8, z: 0}
+  m_Center: {x: 0, y: 0.85, z: 0}
 --- !u!95 &1115083778
 Animator:
   serializedVersion: 3
@@ -1920,6 +1920,10 @@ Prefab:
     - target: {fileID: 400002, guid: e3b5e08fde7e39a499f3124012b4d422, type: 3}
       propertyPath: m_RootOrder
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: e3b5e08fde7e39a499f3124012b4d422, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 9500000, guid: e3b5e08fde7e39a499f3124012b4d422, type: 3}

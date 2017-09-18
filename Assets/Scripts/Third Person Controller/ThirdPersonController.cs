@@ -56,8 +56,6 @@ public class ThirdPersonController : MonoBehaviour
 
     private float _forward = 0.0f;
     private float _right = 0.0f;
-    private float _rollForward = 0.0f;
-    private float _rollRight = 0.0f;
 
     #endregion
 
@@ -154,9 +152,6 @@ public class ThirdPersonController : MonoBehaviour
                     _rollTimeElapsed = 0.0f;
                     _rolling = true;
                     _rollDir = transform.TransformDirection(direction);
-
-                    _rollForward = direction.z;
-                    _rollRight = direction.x;
                 }
             }
             else
