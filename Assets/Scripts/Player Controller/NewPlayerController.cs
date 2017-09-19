@@ -12,6 +12,8 @@ namespace StarForceRecon
 
         private GameController _keyboardController = null;
         private GameController _gamepadController = null;
+        private int _lastAimMouseTime = -1;
+        private int _lastAimJoystickTime = -1;
         private int _validInputReceiveTime = -1;
 
         private Vector2 _moveDirection = Vector2.zero;
@@ -33,6 +35,7 @@ namespace StarForceRecon
 
         private ThirdPersonController _tpc = null;
 
+        private static readonly Vector2 CENTER_VIEWPORT = new Vector2(0.5f, 0.5f);
         private static readonly Vector3 SCALE_VECTOR = new Vector3(1, 0, 1);    // Used to get the camera's horizon forward, declared here to prevent memory allocation each frame
 
         #endregion
@@ -63,15 +66,19 @@ namespace StarForceRecon
         /// <param name="useJoystickAim">Should this input be treated as a joystick?</param>
         private void ModifyCursorPosition(Vector2 aimInput, bool useJoystickAim)
         {
-            const float CONTROLLER_SPEED = 1.0f;   // (Lower is faster)    // TODO: Make a sensitivity slider
+            const float CONTROLLER_SPEED = 0.03f;   // (Lower is faster)    // TODO: Make a sensitivity slider
             const float MOUSE_SPEED = 100.0f; // (Lower is slower)    // TODO: Make a mouse sensitivity slider
 
             if (useJoystickAim)
-                StarForceRecon.Cursor.Move(aimInput, CONTROLLER_SPEED, Time.deltaTime);
-            else
             {
-                StarForceRecon.Cursor.FixedMove(aimInput * MOUSE_SPEED, new Vector2(Screen.width, Screen.height));
+                //float joystickAngle = Vector2.SignedAngle(Vector2.up, aimInput);
+                //if (joystickAngle < 0) joystickAngle += 360.0f;
+                Vector2 destination = (CENTER_VIEWPORT + (aimInput / 2));   // Circular aiming
+
+                StarForceRecon.Cursor.MoveTo(destination, CONTROLLER_SPEED, Time.deltaTime);
             }
+            else
+                StarForceRecon.Cursor.FixedMove(aimInput * MOUSE_SPEED, new Vector2(Screen.width, Screen.height));
         }
 
         /// <summary>Finds where the cursor is hovering over the character's horizontal plane.</summary>
@@ -120,10 +127,17 @@ namespace StarForceRecon
         private void AimPlayerCharacter(Vector2 aimInput, GameController.ControlType type)
         {
             bool useJoystickAim = false;
-            
-            if (type == GameController.ControlType.Gamepad)
-                useJoystickAim = (aimInput.x > 0 || aimInput.y > 0);
 
+            if (type == GameController.ControlType.Gamepad)
+            {
+                // Use joystick aiming if controller has been used more recently than mouse
+                useJoystickAim = (_lastAimMouseTime + 1) < _lastAimJoystickTime;
+
+                if (aimInput.x != 0 || aimInput.y != 0) _lastAimJoystickTime = Time.frameCount;
+            }
+            else
+                if (aimInput.x != 0 || aimInput.y != 0) _lastAimMouseTime = Time.frameCount;
+            
             ModifyCursorPosition(aimInput, useJoystickAim);
         }
 
@@ -159,7 +173,7 @@ namespace StarForceRecon
 
         void GameController.ITarget.ReceiveAimInput(Vector2 aimInput, GameController.ControlType type)
         {
-            if (isActiveAndEnabled && aimInput.magnitude > 0)
+            if (isActiveAndEnabled)
             {
                 UnityEngine.Cursor.lockState = CursorLockMode.Confined;
                 UnityEngine.Cursor.visible = false;
@@ -241,6 +255,7 @@ namespace StarForceRecon
             ClampPosition();
         }
 
+        /// <summary>Smoothly move the cursor in a direction.</summary>
         /// <param name="direction">Direction to move the cursor (normalized).</param>
         /// <param name="borderTime">Time to move from one screen border to opposite border in seconds.</param>
         public static void Move(Vector2 direction, float borderTime, float deltaTime)
@@ -252,6 +267,19 @@ namespace StarForceRecon
             ClampPosition();
         }
 
+        /// <summary>Smoothly move the cursor to a particular point.</summary>
+        /// <param name="destination">Viewport point to move the cursor to [0-1][0-1].</param>
+        /// <param name="borderTime">Time to move from one screen border to opposite border in seconds.</param>
+        public static void MoveTo(Vector2 destination, float borderTime, float deltaTime)
+        {
+            if (borderTime < 0) borderTime = -borderTime;
+
+            Vector2 toDestination = destination - pos;
+            pos += toDestination * (deltaTime / borderTime);
+            ClampPosition();
+        }
+
+        /// <summary>Instantly move the cursor by a pixel amount.</summary>
         /// <param name="movement">Movement vector in pixels.</param>
         /// <param name="screenDimensions">Pixel dimensions of the screen.</param>
         public static void FixedMove(Vector2 movement, Vector2 screenDimensions)
