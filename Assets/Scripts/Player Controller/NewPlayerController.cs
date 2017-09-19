@@ -19,6 +19,18 @@ namespace StarForceRecon
 
         #endregion
 
+        #region Inspector accessible
+
+        [Tooltip("When aiming, the character will turn towards aimer when the angle from forward exceeds this value.")]
+        [SerializeField, Range(20.0f, 80.0f)]
+        private float maxHipSwivel = 50.0f;
+
+        [Tooltip("Character's turning speed in rotations/second.")]
+        [SerializeField, Range(1.0f, 2.0f)]
+        private float turningSpeed = 1.0f;
+
+        #endregion
+
         private ThirdPersonController _tpc = null;
 
         private static readonly Vector3 SCALE_VECTOR = new Vector3(1, 0, 1);    // Used to get the camera's horizon forward, declared here to prevent memory allocation each frame
@@ -36,6 +48,11 @@ namespace StarForceRecon
             _tpc = GetComponent<ThirdPersonController>();
         }
 
+        private void Update()
+        {
+            RotateToFaceAimCheck(StarForceRecon.Cursor.position, maxHipSwivel);
+        }
+
         private void FixedUpdate()
         {
             MovePlayerCharacter();
@@ -47,23 +64,63 @@ namespace StarForceRecon
         private void ModifyCursorPosition(Vector2 aimInput, bool useJoystickAim)
         {
             const float CONTROLLER_SPEED = 1.0f;   // (Lower is faster)    // TODO: Make a sensitivity slider
-            const float MOUSE_SPEED = 10.0f; // (Lower is slower)    // TODO: Make a mouse sensitivity slider
+            const float MOUSE_SPEED = 100.0f; // (Lower is slower)    // TODO: Make a mouse sensitivity slider
 
             if (useJoystickAim)
                 StarForceRecon.Cursor.Move(aimInput, CONTROLLER_SPEED, Time.deltaTime);
             else
             {
-                Vector2 destination = StarForceRecon.Cursor.position + aimInput * MOUSE_SPEED;
                 StarForceRecon.Cursor.FixedMove(aimInput * MOUSE_SPEED, new Vector2(Screen.width, Screen.height));
             }
         }
 
+        /// <summary>Finds where the cursor is hovering over the character's horizontal plane.</summary>
+        /// <param name="viewportCursorPosition">Cursor position in Viewport [0-1][0-1].</param>
+        /// <param name="intersect">Out: Resulting intersection point.</param>
+        /// <returns>True if the character's horizon plane is under the cursor.</returns>
+        private bool CharacterHorizonIntersect(Vector2 viewportCursorPosition, out Vector3 intersect)
+        {
+            Plane characterHorizon = new Plane(Vector3.up, transform.position);
+            Ray cursorRay = Camera.main.ViewportPointToRay(viewportCursorPosition);
+
+            float intersectDistance;
+            if (characterHorizon.Raycast(cursorRay, out intersectDistance))
+            {
+                intersect = cursorRay.GetPoint(intersectDistance);
+                return true;
+            }
+
+            intersect = Vector3.zero;
+            return false;
+        }
+
+        /// <summary>Ensures the character is always facing the aim cursor.</summary>
+        /// <param name="viewportCursorPosition">Cursor position in Viewport [0-1][0-1].</param>
+        /// <param name="maxAngleDifference">The maximum angle allowed between character forward and cursor point.</param>
+        private void RotateToFaceAimCheck(Vector2 viewportCursorPosition, float maxAngleDifference)
+        {
+            // Find where the cursor hovers over the character's horizontal plane
+            Vector3 cursorIntersectsPlane;
+            if (CharacterHorizonIntersect(viewportCursorPosition, out cursorIntersectsPlane))
+            {
+                Vector3 cursorIntersectLocal = cursorIntersectsPlane - transform.position;
+                // Is aim angle from character forward too large?
+                float aimTheta = Vector3.Angle(transform.forward, cursorIntersectLocal);
+                if (aimTheta > maxAngleDifference)
+                {
+                    // Rotate to face cursor
+                    float turnSpeed = (turningSpeed * 360.0f) / aimTheta;
+                    Quaternion rotation = Quaternion.LookRotation(cursorIntersectLocal);
+                    transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime * turnSpeed);
+                }
+            }
+        }
+        
         /// <summary>Makes the character aim at a certain point based on input.</summary>
         private void AimPlayerCharacter(Vector2 aimInput, GameController.ControlType type)
         {
             bool useJoystickAim = false;
-
-            // Joystick aim input is mapped directly to screenspace
+            
             if (type == GameController.ControlType.Gamepad)
                 useJoystickAim = (aimInput.x > 0 || aimInput.y > 0);
 
@@ -103,7 +160,11 @@ namespace StarForceRecon
         void GameController.ITarget.ReceiveAimInput(Vector2 aimInput, GameController.ControlType type)
         {
             if (isActiveAndEnabled && aimInput.magnitude > 0)
+            {
+                UnityEngine.Cursor.lockState = CursorLockMode.Confined;
+                UnityEngine.Cursor.visible = false;
                 AimPlayerCharacter(aimInput, type);
+            }
         }
 
         void GameController.ITarget.ReceiveMoveInput(Vector2 moveInput)
@@ -138,12 +199,32 @@ namespace StarForceRecon
             _tpc.StopMovement();
         }
 
+        /* ***************     TESTING, DELETE SOON     *************** */
+        private static GameObject cursorObjectTESTING;
+        private void OnDrawGizmosSelected()
+        {
+            if (Application.isPlaying)
+            {
+                if (cursorObjectTESTING == null)
+                {
+                    cursorObjectTESTING = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+                    cursorObjectTESTING.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+                }
+
+                // Draw cursor
+                Ray ray = Camera.main.ViewportPointToRay(StarForceRecon.Cursor.position);
+                Vector3 cursorPosition = ray.GetPoint(3.0f);
+                cursorObjectTESTING.transform.position = cursorPosition;
+            }
+        }
+        /* ***************     END TESTING     *************** */
+
         #endregion
     }
 
     public static class Cursor
     {
-        private static Vector2 pos = Vector2.zero;
+        private static Vector2 pos = new Vector2(0.5f, 0.5f);
         /// <summary>Viewport position of the cursor [0-1][0-1].</summary>
         public static Vector2 position { get { return pos; } }
 
@@ -175,8 +256,8 @@ namespace StarForceRecon
         /// <param name="screenDimensions">Pixel dimensions of the screen.</param>
         public static void FixedMove(Vector2 movement, Vector2 screenDimensions)
         {
-            pos.x = movement.x / screenDimensions.x;
-            pos.y = movement.y / screenDimensions.y;
+            pos.x += movement.x / screenDimensions.x;
+            pos.y += movement.y / screenDimensions.y;
             ClampPosition();
         }
         
