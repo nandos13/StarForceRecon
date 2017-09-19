@@ -6,6 +6,8 @@ namespace JakePerry
     {
         public DualStickController(ITarget target) : base(target)
         {
+            type = ControlType.Gamepad;
+
             // Set bindings for Movement
             actionSet.Forward.AddDefaultBinding(InputControlType.LeftStickUp);
             actionSet.Back.AddDefaultBinding(InputControlType.LeftStickDown);

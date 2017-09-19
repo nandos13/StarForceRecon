@@ -10,9 +10,8 @@ namespace JakePerry
         /// <summary>Interface for anything which is able to receive input via a GameController.</summary>
         public interface ITarget
         {
-            void ReceiveMoveInput(float horizontal, float vertical);
-            void ReceiveAimInput(float horizontal, float vertical);
-            void ReceiveAnalogAimInput(float horizontal, float vertical);
+            void ReceiveMoveInput(Vector2 moveInput);
+            void ReceiveAimInput(Vector2 aimInput, ControlType controllerType);
             void ReceiveActionInput(ActionState actionState);
         }
 
@@ -144,8 +143,9 @@ namespace JakePerry
 
         public enum ControlType
         {
-            KeyboardAndMouse,
-            Gamepad,
+            None = -1,
+            KeyboardAndMouse = 0,
+            Gamepad = 1,
         }
 
         #endregion
@@ -156,6 +156,7 @@ namespace JakePerry
         private ITarget target = null;
 
         protected GameControlActionSet actionSet = null;
+        protected ControlType type = ControlType.None;
 
         #endregion
 
@@ -191,9 +192,8 @@ namespace JakePerry
         private void Update()
         {
             // Send updated controller info to target
-            target.ReceiveMoveInput(actionSet.Horizontal.Value, actionSet.Vertical.Value);
-            target.ReceiveAimInput(actionSet.LookHorizontal.Value, actionSet.LookVertical.Value);
-            target.ReceiveAnalogAimInput(actionSet.LookHorizontalAnalog.Value, actionSet.LookVerticalAnalog.Value);
+            target.ReceiveMoveInput(new Vector2(actionSet.Horizontal.Value, actionSet.Vertical.Value));
+            target.ReceiveAimInput(new Vector2(actionSet.LookHorizontal.Value, actionSet.LookVertical.Value), type);
             target.ReceiveActionInput(GenerateActionState());
 
             OnUpdate();

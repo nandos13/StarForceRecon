@@ -1,150 +1,189 @@
 ﻿using UnityEngine;
 using JakePerry;
 
-[RequireComponent(typeof(ThirdPersonController))]
-public class NewPlayerController : MonoBehaviour, GameController.ITarget
+namespace StarForceRecon
 {
-    // TODO:
-
-    #region Variables
-
-    #region Input Controls
-
-    private GameController _keyboardController = null;
-    private GameController _gamepadController = null;
-    private int _validInputReceiveTime = -1;
-
-    private Vector2 _moveDirection = Vector2.zero;
-    private bool _rollKeyPressed = false;
-
-    private Vector2 _lookDirection = Vector2.zero;
-    private Vector2 _lookDirectionAnalog = Vector2.zero;
-    private bool _useAnalogAiming = false;
-    private Vector2 _cursorPosition = Vector2.zero;
-    
-    #endregion
-
-    private ThirdPersonController _tpc = null;
-
-    private static readonly Vector3 SCALE_VECTOR = new Vector3(1, 0, 1);    // Used to get the camera's horizon forward, declared here to prevent memory allocation each frame
-    
-    #endregion
-
-    #region Functionality
-
-    private void Awake()
+    [RequireComponent(typeof(ThirdPersonController)), DisallowMultipleComponent]
+    public class NewPlayerController : MonoBehaviour, GameController.ITarget
     {
-        // Initialize Input
-        _keyboardController = new KeyboardMouseController(this);
-        _gamepadController = new DualStickController(this);
+        #region Variables
 
-        _tpc = GetComponent<ThirdPersonController>();
-    }
+        #region Input Controls
 
-    private void Update()
-    {
-        AimPlayerCharacter();
-    }
+        private GameController _keyboardController = null;
+        private GameController _gamepadController = null;
+        private int _validInputReceiveTime = -1;
 
-    private void FixedUpdate()
-    {
-        MovePlayerCharacter();
-    }
+        private Vector2 _moveDirection = Vector2.zero;
+        private bool _rollKeyPressed = false;
 
-    /// <summary>Makes the character aim at a certain point based on pre-recorded input.</summary>
-    private void AimPlayerCharacter()
-    {
-        Vector2 finalCursorPosition;
+        #endregion
 
-        if (_useAnalogAiming)   // Should the aim input be treated as a normalized value?
-            finalCursorPosition = _lookDirectionAnalog; // Use analog aiming, where -1 to 1 are screen bounds
-        else
+        private ThirdPersonController _tpc = null;
+
+        private static readonly Vector3 SCALE_VECTOR = new Vector3(1, 0, 1);    // Used to get the camera's horizon forward, declared here to prevent memory allocation each frame
+
+        #endregion
+
+        #region Functionality
+
+        private void Awake()
         {
-            // Add aim input to cursor position
-            _cursorPosition += _lookDirection;
-            _cursorPosition.x = Mathf.Clamp(_cursorPosition.x, -1, 1);
-            _cursorPosition.y = Mathf.Clamp(_cursorPosition.y, -1, 1);
+            // Initialize Input
+            _keyboardController = new KeyboardMouseController(this);
+            _gamepadController = new DualStickController(this);
 
-            finalCursorPosition = _cursorPosition;
-        }
-    }
-
-    /// <summary>Moves the character based on input since last move.</summary>
-    private void MovePlayerCharacter()
-    {
-        Vector3 move = Vector3.zero;
-        Camera cam = Camera.main;
-        if (cam != null)
-        {
-            Vector3 forward = Vector3.Scale(cam.transform.forward, SCALE_VECTOR).normalized;
-            move = _moveDirection.y * forward + _moveDirection.x * cam.transform.right;
-
-            // TODO: Get input for crouch
-            _tpc.Move(move, _rollKeyPressed);
+            _tpc = GetComponent<ThirdPersonController>();
         }
 
-        // Reset input tracking to allow extra input to be received
-        _validInputReceiveTime = -1;
-        _rollKeyPressed = false;
-    }
-
-    #region GameController ITarget Methods
-
-    void GameController.ITarget.ReceiveActionInput(GameController.ActionState actionState)
-    {
-        if (actionState.Action1.WasPressed) // If ROLL key was pressed this frame
-            _rollKeyPressed = true;
-    }
-
-    void GameController.ITarget.ReceiveAimInput(float horizontal, float vertical)
-    {
-        _lookDirection.x = horizontal;
-        _lookDirection.y = vertical;
-    }
-
-    void GameController.ITarget.ReceiveAnalogAimInput(float horizontal, float vertical)
-    {
-        if (horizontal > 0 || vertical > 0)
+        private void FixedUpdate()
         {
-            _useAnalogAiming = true;
-
-            _lookDirectionAnalog.x = horizontal;
-            _lookDirectionAnalog.y = vertical;
+            MovePlayerCharacter();
         }
-        else
-            _useAnalogAiming = false;
-    }
 
-    void GameController.ITarget.ReceiveMoveInput(float horizontal, float vertical)
-    {
-        // Once input has been received, input is locked until the next FixedUpdate call
-        if (_validInputReceiveTime < 0)
+        /// <summary>Moves the cursor on the screen based on given input.</summary>
+        /// <param name="aimInput">The aiming input.</param>
+        /// <param name="useJoystickAim">Should this input be treated as a joystick?</param>
+        private void ModifyCursorPosition(Vector2 aimInput, bool useJoystickAim)
         {
-            _moveDirection.x = horizontal;
-            _moveDirection.y = vertical;
+            const float CONTROLLER_SPEED = 1.0f;   // (Lower is faster)    // TODO: Make a sensitivity slider
+            const float MOUSE_SPEED = 10.0f; // (Lower is slower)    // TODO: Make a mouse sensitivity slider
 
-            _validInputReceiveTime = Time.frameCount;
-        }
-        else
-        {
-            // Take the largest of movement values
-            float total = horizontal + vertical;
-            float currentTotal = _moveDirection.x + _moveDirection.y;
-
-            if (total > currentTotal)
+            if (useJoystickAim)
+                StarForceRecon.Cursor.Move(aimInput, CONTROLLER_SPEED, Time.deltaTime);
+            else
             {
-                _moveDirection.x += horizontal;
-                _moveDirection.y += vertical;
+                Vector2 destination = StarForceRecon.Cursor.position + aimInput * MOUSE_SPEED;
+                StarForceRecon.Cursor.FixedMove(aimInput * MOUSE_SPEED, new Vector2(Screen.width, Screen.height));
             }
         }
+
+        /// <summary>Makes the character aim at a certain point based on input.</summary>
+        private void AimPlayerCharacter(Vector2 aimInput, GameController.ControlType type)
+        {
+            bool useJoystickAim = false;
+
+            // Joystick aim input is mapped directly to screenspace
+            if (type == GameController.ControlType.Gamepad)
+                useJoystickAim = (aimInput.x > 0 || aimInput.y > 0);
+
+            ModifyCursorPosition(aimInput, useJoystickAim);
+        }
+
+        /// <summary>Moves the character based on input since last move.</summary>
+        private void MovePlayerCharacter()
+        {
+            Vector3 move = Vector3.zero;
+            Camera cam = Camera.main;
+            if (cam != null)
+            {
+                Vector3 forward = Vector3.Scale(cam.transform.forward, SCALE_VECTOR).normalized;
+                move = _moveDirection.y * forward + _moveDirection.x * cam.transform.right;
+
+                // TODO: Get input for crouch
+                _tpc.Move(move, _rollKeyPressed);
+            }
+
+            // Reset input tracking to allow extra input to be received
+            _validInputReceiveTime = -1;
+            _rollKeyPressed = false;
+        }
+
+        #region GameController ITarget Methods
+
+        void GameController.ITarget.ReceiveActionInput(GameController.ActionState actionState)
+        {
+            if (isActiveAndEnabled)
+            {
+                if (actionState.Action1.WasPressed) // If ROLL key was pressed this frame
+                    _rollKeyPressed = true;
+            }
+        }
+
+        void GameController.ITarget.ReceiveAimInput(Vector2 aimInput, GameController.ControlType type)
+        {
+            if (isActiveAndEnabled && aimInput.magnitude > 0)
+                AimPlayerCharacter(aimInput, type);
+        }
+
+        void GameController.ITarget.ReceiveMoveInput(Vector2 moveInput)
+        {
+            // Record input to be applied on next FixedUpdate call.
+            // Once input has been received, input is locked until the next FixedUpdate.
+            if (_validInputReceiveTime < 0)
+            {
+                _moveDirection.x = moveInput.x;
+                _moveDirection.y = moveInput.y;
+
+                _validInputReceiveTime = Time.frameCount;
+            }
+            else
+            {
+                // Take the largest of movement values
+                float total = moveInput.x + moveInput.y;
+                float currentTotal = _moveDirection.x + _moveDirection.y;
+
+                if (total > currentTotal)
+                {
+                    _moveDirection.x += moveInput.x;
+                    _moveDirection.y += moveInput.y;
+                }
+            }
+        }
+
+        #endregion
+
+        private void OnDisable()
+        {
+            _tpc.StopMovement();
+        }
+
+        #endregion
     }
 
-    #endregion
-
-    private void OnDisable()
+    public static class Cursor
     {
-        _tpc.StopMovement();
-    }
+        private static Vector2 pos = Vector2.zero;
+        /// <summary>Viewport position of the cursor [0-1][0-1].</summary>
+        public static Vector2 position { get { return pos; } }
 
-    #endregion
+        private static void ClampPosition()
+        {
+            pos.x = Mathf.Clamp01(pos.x);
+            pos.y = Mathf.Clamp01(pos.y);
+        }
+
+        /// <param name="viewportPosition">New position in viewport [0-1][0-1].</param>
+        public static void SetPosition(Vector2 viewportPosition)
+        {
+            pos = viewportPosition;
+            ClampPosition();
+        }
+
+        /// <param name="direction">Direction to move the cursor (normalized).</param>
+        /// <param name="borderTime">Time to move from one screen border to opposite border in seconds.</param>
+        public static void Move(Vector2 direction, float borderTime, float deltaTime)
+        {
+            if (borderTime < 0) borderTime = -borderTime;
+            direction.Normalize();
+            
+            pos += direction * (deltaTime / borderTime);
+            ClampPosition();
+        }
+
+        /// <param name="movement">Movement vector in pixels.</param>
+        /// <param name="screenDimensions">Pixel dimensions of the screen.</param>
+        public static void FixedMove(Vector2 movement, Vector2 screenDimensions)
+        {
+            pos.x = movement.x / screenDimensions.x;
+            pos.y = movement.y / screenDimensions.y;
+            ClampPosition();
+        }
+        
+        /// <returns>The cursor position, mapped -1 to 1.</returns>
+        public static Vector2 ToNegativeOneToOne()
+        {
+            return (pos * 2) - Vector2.one;
+        }
+    }
 }

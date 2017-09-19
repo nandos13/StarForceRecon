@@ -6,6 +6,8 @@ namespace JakePerry
     {
         public KeyboardMouseController(ITarget target) : base(target)
         {
+            type = ControlType.KeyboardAndMouse;
+
             // Set bindings for Movement
             actionSet.Forward.AddDefaultBinding(Key.W);
             actionSet.Back.AddDefaultBinding(Key.S);
