@@ -15,10 +15,10 @@ namespace JakePerry
             actionSet.Right.AddDefaultBinding(InputControlType.LeftStickRight);
 
             // Set bindings for Look
-            actionSet.LookForwardAnalog.AddDefaultBinding(InputControlType.RightStickUp);
-            actionSet.LookBackAnalog.AddDefaultBinding(InputControlType.RightStickDown);
-            actionSet.LookLeftAnalog.AddDefaultBinding(InputControlType.RightStickLeft);
-            actionSet.LookRightAnalog.AddDefaultBinding(InputControlType.RightStickRight);
+            actionSet.LookForward.AddDefaultBinding(InputControlType.RightStickUp);
+            actionSet.LookBack.AddDefaultBinding(InputControlType.RightStickDown);
+            actionSet.LookLeft.AddDefaultBinding(InputControlType.RightStickLeft);
+            actionSet.LookRight.AddDefaultBinding(InputControlType.RightStickRight);
 
             // Set bindings for D-Pad
             actionSet.DPadUp.AddDefaultBinding(InputControlType.DPadUp);

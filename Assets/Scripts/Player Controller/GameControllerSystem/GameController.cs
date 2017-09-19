@@ -39,14 +39,6 @@ namespace JakePerry
             public PlayerOneAxisAction LookHorizontal { get; private set; }
             public PlayerOneAxisAction LookVertical { get; private set; }
 
-            public PlayerAction LookForwardAnalog { get; private set; }
-            public PlayerAction LookBackAnalog { get; private set; }
-            public PlayerAction LookLeftAnalog { get; private set; }
-            public PlayerAction LookRightAnalog { get; private set; }
-
-            public PlayerOneAxisAction LookHorizontalAnalog { get; private set; }
-            public PlayerOneAxisAction LookVerticalAnalog { get; private set; }
-
             #endregion
 
             #region Actions
@@ -89,13 +81,6 @@ namespace JakePerry
                 LookRight = CreatePlayerAction("LookRight");
                 LookHorizontal = CreateOneAxisPlayerAction(LookLeft, LookRight);
                 LookVertical = CreateOneAxisPlayerAction(LookBack, LookForward);
-
-                LookForwardAnalog = CreatePlayerAction("LookForwardAnalog");
-                LookBackAnalog = CreatePlayerAction("LookBackAnalog");
-                LookLeftAnalog = CreatePlayerAction("LookLeftAnalog");
-                LookRightAnalog = CreatePlayerAction("LookRightAnalog");
-                LookHorizontalAnalog = CreateOneAxisPlayerAction(LookLeftAnalog, LookRightAnalog);
-                LookVerticalAnalog = CreateOneAxisPlayerAction(LookBackAnalog, LookForwardAnalog);
 
                 // Create actions for D-Pad
                 DPadUp = CreatePlayerAction("DPadUp");
