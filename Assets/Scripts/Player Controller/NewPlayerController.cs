@@ -3,7 +3,9 @@ using JakePerry;
 
 namespace StarForceRecon
 {
-    [RequireComponent(typeof(ThirdPersonController)), DisallowMultipleComponent]
+    [RequireComponent(typeof(ThirdPersonController)), 
+        RequireComponent(typeof(AimHandler)),
+        DisallowMultipleComponent]
     public class NewPlayerController : MonoBehaviour, GameController.ITarget
     {
         #region Variables
@@ -66,7 +68,7 @@ namespace StarForceRecon
         /// <param name="useJoystickAim">Should this input be treated as a joystick?</param>
         private void ModifyCursorPosition(Vector2 aimInput, bool useJoystickAim)
         {
-            const float CONTROLLER_SPEED = 0.03f;   // (Lower is faster)    // TODO: Make a sensitivity slider
+            const float CONTROLLER_SPEED = 0.1f;   // (Lower is faster)    // TODO: Make a sensitivity slider
             const float MOUSE_SPEED = 100.0f; // (Lower is slower)    // TODO: Make a mouse sensitivity slider
 
             if (useJoystickAim)
@@ -214,13 +216,14 @@ namespace StarForceRecon
         }
 
         /* ***************     TESTING, DELETE SOON     *************** */
-        private static GameObject cursorObjectTESTING;
+        private static GameObject cursorObjectTESTING = null;
         private void OnDrawGizmosSelected()
         {
             if (Application.isPlaying)
             {
                 if (cursorObjectTESTING == null)
                 {
+                    Debug.Log("Creating test cursor object");
                     cursorObjectTESTING = GameObject.CreatePrimitive(PrimitiveType.Sphere);
                     cursorObjectTESTING.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
                 }
