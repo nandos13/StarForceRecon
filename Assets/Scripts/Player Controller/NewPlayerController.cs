@@ -36,6 +36,7 @@ namespace StarForceRecon
         #endregion
 
         private ThirdPersonController _tpc = null;
+        private AimHandler _aimHandler = null;
 
         private static readonly Vector2 CENTER_VIEWPORT = new Vector2(0.5f, 0.5f);
         private static readonly Vector3 SCALE_VECTOR = new Vector3(1, 0, 1);    // Used to get the camera's horizon forward, declared here to prevent memory allocation each frame
@@ -50,12 +51,20 @@ namespace StarForceRecon
             _keyboardController = new KeyboardMouseController(this);
             _gamepadController = new DualStickController(this);
 
+            // Get component references
             _tpc = GetComponent<ThirdPersonController>();
+            _aimHandler = GetComponent<AimHandler>();
+
+            if (_tpc == null)
+                throw new System.MissingFieldException("No Third Person Controller component found!");
+            if (_aimHandler == null)
+                throw new System.MissingFieldException("No Aim Handler component found!");
         }
 
         private void Update()
         {
             RotateToFaceAimCheck(StarForceRecon.Cursor.position, maxHipSwivel);
+            Vector3 finalAimPoint = _aimHandler.HandlePlayerAiming(StarForceRecon.Cursor.position);
         }
 
         private void FixedUpdate()
