@@ -65,6 +65,8 @@ namespace StarForceRecon
             // Attempt to aim at the desired target point
             if (cursorIsOverObject || targetFoundAtCharacterHeight)
                 return AimAtPoint(desiredTarget, colliderUnderCursor);
+
+            return transform.position;
         }
 
         /// <summary>Attempts to aim at a target point in world space.</summary>
@@ -100,7 +102,7 @@ namespace StarForceRecon
         private bool SingleLineCheck(out Vector3 point, Vector3 origin, Vector3 direction)
         {
             Ray ray = new Ray(origin, direction);
-            int hits = Physics.RaycastNonAlloc(ray, rayHitsNonAlloc, 1000.0f, aimableLayers.value);
+            int hits = Physics.RaycastNonAlloc(ray, rayHitsNonAlloc, 1000.0f, aimableLayers.value, QueryTriggerInteraction.Collide);
             if (hits > 0)
             {
                 // Sort hits by distance
@@ -187,7 +189,7 @@ namespace StarForceRecon
                 RaycastHit hit;
                 if (FirstMatchingTag(out hit, rayHitsNonAlloc, aimTags, hits))
                 {
-                    desiredTarget = hit.transform.position;
+                    desiredTarget = hit.point;
                     colliderUnderCursor = hit.collider;
                     return true;
                 }

@@ -235,6 +235,7 @@ namespace StarForceRecon
                     Debug.Log("Creating test cursor object");
                     cursorObjectTESTING = GameObject.CreatePrimitive(PrimitiveType.Sphere);
                     cursorObjectTESTING.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+                    cursorObjectTESTING.layer = Physics.IgnoreRaycastLayer;
                 }
 
                 // Draw cursor
