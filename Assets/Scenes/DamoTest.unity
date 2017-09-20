@@ -270,7 +270,7 @@ Transform:
   m_GameObject: {fileID: 195406591}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3.755, y: 0, z: -1.461}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalScale: {x: 50, y: 50, z: 50}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
@@ -352,7 +352,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 395869887}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 5.05}
+  m_LocalPosition: {x: 0, y: 1, z: 11.07}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -382,13 +382,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 583118984}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.544, y: 0.443, z: 0.036}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.07, y: 0.443, z: 0.568}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_Children: []
   m_Father: {fileID: 816493346}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &583118986
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -694,7 +694,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 816493342}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -1.87}
+  m_LocalPosition: {x: 4.86, y: 1, z: -1.87}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 583118985}
@@ -847,6 +847,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f783e3c0b7818641a6c3236b3acb344, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetDistance: 40
+  enemyLookDistance: 50
+  attackDistance: 35
+  minDistance: 5
+  damping: 40
+  enemyMoveSpeed: 5
+  Target: {fileID: 395869891}
   slingerDmg: 1
   slingRate: 1
   slingRange: 50

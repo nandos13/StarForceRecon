@@ -2,26 +2,76 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SlingerShoot : MonoBehaviour
+public class SlingerShoot : ActionAI
 {
+
+    // behavior
+    
+    public float targetDistance;
+    public float enemyLookDistance; // not really needed. just for testing
+    public float attackDistance;
+    [Tooltip("enemies minimum distance to stop movement")]
+    public float minDistance;
+    [Tooltip("enemies speed of rotation")]
+    public float damping;
+    public float enemyMoveSpeed;
+    public Transform Target;
+    Rigidbody _Rigidbody;
+    
+    // attack
     public int slingerDmg = 1;
     public float slingRate = 1f;
     public float slingRange = 50f;
     public float slingRangeForce = 100f;
+    private float nextFire;
     public Transform slingerRangeEnd;
     private WaitForSeconds slingerDuration = new WaitForSeconds(0.1f);
-    private float nextFire;
-    private LineRenderer lineRender; 
+    private LineRenderer lineRender;
 
-    void Start()
+    public override float Evaluate(Agent a)
     {
-        lineRender = GetComponent<LineRenderer>();
-        
+        // TODO evaluate
+        return 1;
     }
 
-    void Update()
+    public override void Enter(Agent agent) { }
+    public override void Exit(Agent agent) { }
+
+void Start()
     {
-        Throw();
+        lineRender = GetComponent<LineRenderer>();
+        _Rigidbody = GetComponent<Rigidbody>();
+    }
+    
+    public override void UpdateAction(Agent agent)
+    {
+        targetDistance = Vector3.Distance(Target.position, transform.position);
+        if (targetDistance < enemyLookDistance)
+        {
+            lookAtPlayer();
+            print("look at player");
+        }
+        if (targetDistance < attackDistance)
+        {
+            attackAtPlayer();
+            Throw();
+            print("attack!");
+        }
+    }
+
+    void lookAtPlayer()
+    {
+        Quaternion rotation = Quaternion.LookRotation(Target.position - transform.position);
+        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * damping);
+    }
+
+    void attackAtPlayer()
+    {
+        _Rigidbody.velocity = (transform.forward * enemyMoveSpeed);
+        if (Vector3.Distance(transform.position, Target.position) < minDistance)
+        {
+            _Rigidbody.velocity = Vector3.zero;
+        }
     }
 
     public void Throw()
