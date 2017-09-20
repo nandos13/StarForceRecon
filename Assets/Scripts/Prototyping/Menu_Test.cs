@@ -9,10 +9,15 @@ public class Menu_Test : MonoBehaviour {
     bool _settings = false;
     bool _exit = false;
     bool pressed = false;
+    GameObject _anyCanvas, _startCanvas, _menuCanvas;
 
     void Awake()
     {
         _animator = GetComponent<Animator>();
+        _anyCanvas = GameObject.Find("Anykey");
+        _startCanvas = GameObject.Find("StartCanvas");
+        _menuCanvas = GameObject.Find("MenuCanvas");
+        _menuCanvas.SetActive(false);
     }
 
     void Update()
@@ -20,6 +25,7 @@ public class Menu_Test : MonoBehaviour {
         if(Input.GetButtonDown("Fire1"))
         {
             _animator.SetBool("AnyKey", true);
+            Destroy(_anyCanvas, 0.5f);
         }
     }
 
@@ -30,17 +36,21 @@ public class Menu_Test : MonoBehaviour {
             if (_settings == false)
             {
                 pressed = true;
-                Invoke("Reset", 1f);
+                Invoke("Reset", 1.0f);
                 _settings = true;
                 _animator.SetBool("Settings", true);
+                _startCanvas.SetActive(false);
+                _menuCanvas.SetActive(true);
             }
 
             else if (_settings == true)
             {
                 pressed = true;
-                Invoke("Reset", 1f);
+                Invoke("Reset", 1.0f);
                 _settings = false;
                 _animator.SetBool("Settings", false);
+                _startCanvas.SetActive(true);
+                _menuCanvas.SetActive(false);
             }
         }
     }
@@ -52,17 +62,19 @@ public class Menu_Test : MonoBehaviour {
             if (_exit == false)
             {
                 pressed = true;
-                Invoke("Reset", 1f);
+                Invoke("Reset", 1.0f);
                 _exit = true;
                 _animator.SetBool("Exit", true);
+                _startCanvas.SetActive(false);
             }
 
             else if (_exit == true)
             {
                 pressed = true;
-                Invoke("Reset", 1f);
+                Invoke("Reset", 1.0f);
                 _exit = false;
                 _animator.SetBool("Exit", false);
+                _startCanvas.SetActive(true);
             }
         }
     }
