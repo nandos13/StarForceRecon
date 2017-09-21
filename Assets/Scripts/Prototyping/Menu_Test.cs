@@ -11,6 +11,8 @@ public class Menu_Test : MonoBehaviour {
     bool pressed = false;
     GameObject _anyCanvas, _startCanvas, _menuCanvas;
 
+    public GameObject _door;
+
     void Awake()
     {
         _animator = GetComponent<Animator>();
@@ -36,9 +38,9 @@ public class Menu_Test : MonoBehaviour {
             if (_settings == false)
             {
                 pressed = true;
+                _animator.SetBool("Settings", true);
                 Invoke("Reset", 1.0f);
                 _settings = true;
-                _animator.SetBool("Settings", true);
                 _startCanvas.SetActive(false);
                 _menuCanvas.SetActive(true);
             }
@@ -46,9 +48,9 @@ public class Menu_Test : MonoBehaviour {
             else if (_settings == true)
             {
                 pressed = true;
+                _animator.SetBool("Settings", false);
                 Invoke("Reset", 1.0f);
                 _settings = false;
-                _animator.SetBool("Settings", false);
                 _startCanvas.SetActive(true);
                 _menuCanvas.SetActive(false);
             }
@@ -62,23 +64,38 @@ public class Menu_Test : MonoBehaviour {
             if (_exit == false)
             {
                 pressed = true;
+                _animator.SetBool("Exit", true);
                 Invoke("Reset", 1.0f);
                 _exit = true;
-                _animator.SetBool("Exit", true);
                 _startCanvas.SetActive(false);
             }
 
             else if (_exit == true)
             {
                 pressed = true;
+                _animator.SetBool("Exit", false);
                 Invoke("Reset", 1.0f);
                 _exit = false;
-                _animator.SetBool("Exit", false);
                 _startCanvas.SetActive(true);
             }
         }
     }
 
+    public void GameStart()
+    {
+        if (pressed == false)
+        {
+            pressed = true;
+            _animator.SetBool("Start", true);
+            _startCanvas.SetActive(false);
+        }
+    }
+
+
+    void DoorActivate()
+    {
+        _door.GetComponent<BoxCollider>().enabled = true;
+    }
 
     void Reset()
     {
