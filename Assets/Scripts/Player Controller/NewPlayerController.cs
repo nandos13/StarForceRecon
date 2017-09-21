@@ -1,12 +1,14 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using JakePerry;
 
 namespace StarForceRecon
 {
     [RequireComponent(typeof(ThirdPersonController)), 
         RequireComponent(typeof(AimHandler)),
+        RequireComponent(typeof(Equipment)),
         DisallowMultipleComponent]
-    public class NewPlayerController : MonoBehaviour, GameController.ITarget
+    public class NewPlayerController : MonoBehaviour, GameController.ITarget, SquadManager.IControllable
     {
         #region Variables
 
@@ -25,6 +27,8 @@ namespace StarForceRecon
 
         #region Inspector accessible
 
+        [Header("Aiming")]
+
         [Tooltip("When aiming, the character will turn towards aimer when the angle from forward exceeds this value.")]
         [SerializeField, Range(20.0f, 80.0f)]
         private float maxHipSwivel = 50.0f;
@@ -33,13 +37,41 @@ namespace StarForceRecon
         [SerializeField, Range(1.0f, 2.0f)]
         private float turningSpeed = 1.0f;
 
+        [Tooltip("When aiming at a point within this radius from the character, the character will be locked to melee attacking only.")]
+        [SerializeField, Range(2.0f, 5.0f)]
+        private float closeAimRadius = 3.0f;
+
+        [Header("Character Switching")]
+
+        [Tooltip("A list of AI scripts which will be enabled when the character is not being controlled by the player")]
+        [SerializeField]
+        private List<MonoBehaviour> aiScripts;
+        [Tooltip("A list of Player scripts which will be enabled when the character is being controlled by the player")]
+        [SerializeField]
+        private List<MonoBehaviour> playerScripts;
+
+        [Tooltip("Delay in seconds before re-enabling Controller scripts.")]
+        [SerializeField, Range(0.2f, 1.0f)]
+        private float selectionDelay = 0.2f;
+
         #endregion
+
+        #region Private State Trackers & References
 
         private ThirdPersonController _tpc = null;
         private AimHandler _aimHandler = null;
+        private Equipment _equipment = null;
 
         private static readonly Vector2 CENTER_VIEWPORT = new Vector2(0.5f, 0.5f);
-        private static readonly Vector3 SCALE_VECTOR = new Vector3(1, 0, 1);    // Used to get the camera's horizon forward, declared here to prevent memory allocation each frame
+        private static readonly Vector3 HORIZON_SCALE_VECTOR = new Vector3(1, 0, 1);
+
+        private bool aiming = false;
+        private Vector3 aimPoint = default(Vector3);
+        private bool meleeLocked = false;
+
+        private bool secondaryIsEquipped = false;
+
+        #endregion
 
         #endregion
 
@@ -47,6 +79,9 @@ namespace StarForceRecon
 
         private void Awake()
         {
+            // Register to the Squad Manager
+            SquadManager.AddSquadMember(this);
+
             // Initialize Input
             _keyboardController = new KeyboardMouseController(this);
             _gamepadController = new DualStickController(this);
@@ -54,17 +89,24 @@ namespace StarForceRecon
             // Get component references
             _tpc = GetComponent<ThirdPersonController>();
             _aimHandler = GetComponent<AimHandler>();
+            _equipment = GetComponent<Equipment>();
 
             if (_tpc == null)
-                throw new System.MissingFieldException("No Third Person Controller component found!");
+                throw new System.MissingFieldException("No Third Person Controller component found.");
             if (_aimHandler == null)
-                throw new System.MissingFieldException("No Aim Handler component found!");
+                throw new System.MissingFieldException("No Aim Handler component found.");
+            if (_equipment == null)
+                throw new System.MissingFieldException("No Equipment Holder component found.");
         }
 
         private void Update()
         {
             RotateToFaceAimCheck(StarForceRecon.Cursor.position, maxHipSwivel);
-            Vector3 finalAimPoint = _aimHandler.HandlePlayerAiming(StarForceRecon.Cursor.position);
+
+            // Find aim point, limited to minimum radius
+            aimPoint = _aimHandler.HandlePlayerAiming(StarForceRecon.Cursor.position);
+            float horizontalDistance = Vector3.Distance(transform.position, new Vector3(aimPoint.x, 0, aimPoint.z));
+            aiming = (horizontalDistance >= closeAimRadius);
         }
 
         private void FixedUpdate()
@@ -159,16 +201,37 @@ namespace StarForceRecon
             Camera cam = Camera.main;
             if (cam != null)
             {
-                Vector3 forward = Vector3.Scale(cam.transform.forward, SCALE_VECTOR).normalized;
+                Vector3 forward = Vector3.Scale(cam.transform.forward, HORIZON_SCALE_VECTOR).normalized;
                 move = _moveDirection.y * forward + _moveDirection.x * cam.transform.right;
 
                 // TODO: Get input for crouch
+                // Move character, interrupt melee if necessary
                 _tpc.Move(move, _rollKeyPressed);
+                InterruptMeleeAttack();
             }
 
             // Reset input tracking to allow extra input to be received
             _validInputReceiveTime = -1;
             _rollKeyPressed = false;
+        }
+
+        private void InterruptMeleeAttack()
+        {
+            if (meleeLocked)
+            {
+                // TODO
+                meleeLocked = false;
+            }
+        }
+
+        /// <summary>Attempts to do a melee attack.</summary>
+        private void StartMeleeAttack()
+        {
+            if (!meleeLocked)
+            {
+                // TODO
+                //meleeLocked = true;
+            }
         }
 
         #region GameController ITarget Methods
@@ -177,8 +240,37 @@ namespace StarForceRecon
         {
             if (isActiveAndEnabled)
             {
+                if (actionState.LeftBumper.WasPressed)
+                {
+                    SquadManager.Switch(true);
+                    return;
+                }
+
+                if (actionState.RightBumper.WasPressed)
+                {
+                    SquadManager.Switch(false);
+                    return;
+                }
+
                 if (actionState.Action1.WasPressed) // If ROLL key was pressed this frame
                     _rollKeyPressed = true;
+                if (_rollKeyPressed || _tpc.isRolling) return; // Prevent other actions if rolling
+
+                if (!meleeLocked && actionState.Action2.WasPressed) // If MELEE key was pressed this frame
+                    StartMeleeAttack();
+                if (meleeLocked) return; // Prevent other actions if doing a melee attack
+
+                if (actionState.Action4.WasPressed) // If WEAPON_SWITCH key was pressed this frame
+                {
+                    _equipment.PrimarySecondarySwap();
+                    // TODO: Disable firing until swap animation is done
+                    return;
+                }
+
+                if (actionState.Trigger1.IsPressed)
+                    _equipment.Use(Equipment.Slot.Primary);
+
+                // TODO: Other equipment
             }
         }
 
@@ -215,6 +307,41 @@ namespace StarForceRecon
                     _moveDirection.y += moveInput.y;
                 }
             }
+        }
+
+        #endregion
+
+        #region SquadManager IControllable Methods
+
+        private void SelectCharacter()
+        {
+            foreach (MonoBehaviour behaviour in aiScripts)
+                behaviour.enabled = false;
+
+            foreach (MonoBehaviour behaviour in playerScripts)
+                behaviour.enabled = true;
+
+            // Enable this script
+            this.enabled = true;
+        }
+
+        void SquadManager.IControllable.OnSwitchAway()
+        {
+            CancelInvoke("SelectCharacter");
+
+            foreach (MonoBehaviour behaviour in aiScripts)
+                behaviour.enabled = true;
+
+            foreach (MonoBehaviour behaviour in playerScripts)
+                behaviour.enabled = false;
+
+            // Disable this script
+            this.enabled = false;
+        }
+
+        void SquadManager.IControllable.OnSwitchTo()
+        {
+            Invoke("SelectCharacter", selectionDelay);
         }
 
         #endregion
