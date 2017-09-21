@@ -1,15 +1,15 @@
 // Shader created with Shader Forge v1.38 
 // Shader Forge (c) Neat Corporation / Joachim Holmer - http://www.acegikmo.com/shaderforge/
 // Note: Manually altering this data may prevent you from opening it in Shader Forge
-/*SF_DATA;ver:1.38;sub:START;pass:START;ps:flbk:,iptp:0,cusa:False,bamd:0,cgin:,lico:1,lgpr:1,limd:3,spmd:1,trmd:0,grmd:0,uamb:True,mssp:True,bkdf:True,hqlp:False,rprd:True,enco:False,rmgx:True,imps:True,rpth:0,vtps:0,hqsc:True,nrmq:1,nrsp:0,vomd:0,spxs:False,tesm:0,olmd:1,culm:0,bsrc:0,bdst:1,dpts:2,wrdp:True,dith:0,atcv:False,rfrpo:True,rfrpn:Refraction,coma:15,ufog:True,aust:True,igpj:False,qofs:0,qpre:1,rntp:1,fgom:False,fgoc:False,fgod:False,fgor:False,fgmd:0,fgcr:0.5,fgcg:0.5,fgcb:0.5,fgca:1,fgde:0.01,fgrn:0,fgrf:300,stcl:False,atwp:False,stva:128,stmr:255,stmw:255,stcp:6,stps:0,stfa:0,stfz:0,ofsf:0,ofsu:0,f2p0:False,fnsp:False,fnfb:False,fsmp:False;n:type:ShaderForge.SFN_Final,id:2865,x:32719,y:32712,varname:node_2865,prsc:2|diff-7736-RGB,spec-5716-OUT,gloss-1813-OUT,normal-5964-RGB,difocc-800-OUT;n:type:ShaderForge.SFN_Tex2d,id:7736,x:31921,y:32620,ptovrint:True,ptlb:Base Color,ptin:_MainTex,varname:_MainTex,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,tex:32107d6ee88450443b82b4bb8950d408,ntxv:0,isnm:False;n:type:ShaderForge.SFN_Tex2d,id:5964,x:32407,y:32978,ptovrint:True,ptlb:Normal Map,ptin:_BumpMap,varname:_BumpMap,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,tex:76df8da4799ee544a9e6dfa4132d68b7,ntxv:3,isnm:True;n:type:ShaderForge.SFN_Slider,id:1813,x:32250,y:32882,ptovrint:False,ptlb:Gloss,ptin:_Gloss,varname:_Metallic_copy,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,min:0,cur:0.8,max:1;n:type:ShaderForge.SFN_Tex2d,id:8643,x:32144,y:32701,ptovrint:False,ptlb:node_8643,ptin:_node_8643,varname:node_8643,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,tex:25f0aeac9b4c57846b379c4a99c03ebb,ntxv:3,isnm:False;n:type:ShaderForge.SFN_Lerp,id:5716,x:32347,y:32718,varname:node_5716,prsc:2|A-8643-R,B-8643-G,T-8643-B;n:type:ShaderForge.SFN_Tex2d,id:5041,x:31874,y:33036,ptovrint:False,ptlb:node_5041,ptin:_node_5041,varname:node_5041,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,tex:185fdb7ba4655af4d9ba684b7ec825a3,ntxv:0,isnm:False;n:type:ShaderForge.SFN_Lerp,id:800,x:32077,y:33073,varname:node_800,prsc:2|A-5041-R,B-5041-G,T-5041-B;proporder:5964-7736-1813-8643-5041;pass:END;sub:END;*/
+/*SF_DATA;ver:1.38;sub:START;pass:START;ps:flbk:,iptp:0,cusa:False,bamd:0,cgin:,lico:1,lgpr:1,limd:3,spmd:1,trmd:0,grmd:0,uamb:True,mssp:True,bkdf:True,hqlp:False,rprd:True,enco:False,rmgx:True,imps:True,rpth:0,vtps:0,hqsc:True,nrmq:1,nrsp:0,vomd:0,spxs:False,tesm:0,olmd:1,culm:0,bsrc:0,bdst:1,dpts:2,wrdp:True,dith:0,atcv:False,rfrpo:True,rfrpn:Refraction,coma:15,ufog:True,aust:True,igpj:False,qofs:0,qpre:1,rntp:1,fgom:False,fgoc:False,fgod:False,fgor:False,fgmd:0,fgcr:0.5,fgcg:0.5,fgcb:0.5,fgca:1,fgde:0.01,fgrn:0,fgrf:300,stcl:False,atwp:False,stva:128,stmr:255,stmw:255,stcp:6,stps:0,stfa:0,stfz:0,ofsf:0,ofsu:0,f2p0:False,fnsp:False,fnfb:False,fsmp:False;n:type:ShaderForge.SFN_Final,id:2865,x:32719,y:32712,varname:node_2865,prsc:2|diff-7736-RGB,spec-5716-OUT,gloss-1813-OUT,normal-5964-RGB,difocc-800-OUT;n:type:ShaderForge.SFN_Tex2d,id:7736,x:31921,y:32620,ptovrint:True,ptlb:Base Color,ptin:_MainTex,varname:_MainTex,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,tex:32107d6ee88450443b82b4bb8950d408,ntxv:0,isnm:False;n:type:ShaderForge.SFN_Tex2d,id:5964,x:32407,y:32978,ptovrint:True,ptlb:Normal Map,ptin:_BumpMap,varname:_BumpMap,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,tex:76df8da4799ee544a9e6dfa4132d68b7,ntxv:3,isnm:True;n:type:ShaderForge.SFN_Slider,id:1813,x:32250,y:32882,ptovrint:False,ptlb:Gloss,ptin:_Gloss,varname:_Metallic_copy,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,min:0,cur:0.8,max:1;n:type:ShaderForge.SFN_Tex2d,id:8643,x:32144,y:32701,ptovrint:False,ptlb:Metallic,ptin:_Metallic,varname:node_8643,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,tex:25f0aeac9b4c57846b379c4a99c03ebb,ntxv:3,isnm:False;n:type:ShaderForge.SFN_Lerp,id:5716,x:32347,y:32718,varname:node_5716,prsc:2|A-8643-R,B-8643-G,T-8643-B;n:type:ShaderForge.SFN_Tex2d,id:5041,x:31874,y:33036,ptovrint:False,ptlb:occlusion,ptin:_occlusion,varname:node_5041,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,tex:185fdb7ba4655af4d9ba684b7ec825a3,ntxv:0,isnm:False;n:type:ShaderForge.SFN_Lerp,id:800,x:32077,y:33073,varname:node_800,prsc:2|A-5041-R,B-5041-G,T-5041-B;proporder:5964-7736-1813-8643-5041;pass:END;sub:END;*/
 
-Shader "Shader Forge/crate" {
+Shader "crate" {
     Properties {
         _BumpMap ("Normal Map", 2D) = "bump" {}
         _MainTex ("Base Color", 2D) = "white" {}
         _Gloss ("Gloss", Range(0, 1)) = 0.8
-        _node_8643 ("node_8643", 2D) = "bump" {}
-        _node_5041 ("node_5041", 2D) = "white" {}
+        _Metallic ("Metallic", 2D) = "bump" {}
+        _occlusion ("occlusion", 2D) = "white" {}
     }
     SubShader {
         Tags {
@@ -43,8 +43,8 @@ Shader "Shader Forge/crate" {
             uniform sampler2D _MainTex; uniform float4 _MainTex_ST;
             uniform sampler2D _BumpMap; uniform float4 _BumpMap_ST;
             uniform float _Gloss;
-            uniform sampler2D _node_8643; uniform float4 _node_8643_ST;
-            uniform sampler2D _node_5041; uniform float4 _node_5041_ST;
+            uniform sampler2D _Metallic; uniform float4 _Metallic_ST;
+            uniform sampler2D _occlusion; uniform float4 _occlusion_ST;
             struct VertexInput {
                 float4 vertex : POSITION;
                 float3 normal : NORMAL;
@@ -155,8 +155,8 @@ Shader "Shader Forge/crate" {
 ////// Specular:
                 float NdotL = saturate(dot( normalDirection, lightDirection ));
                 float LdotH = saturate(dot(lightDirection, halfDirection));
-                float4 _node_8643_var = tex2D(_node_8643,TRANSFORM_TEX(i.uv0, _node_8643));
-                float3 specularColor = lerp(_node_8643_var.r,_node_8643_var.g,_node_8643_var.b);
+                float4 _Metallic_var = tex2D(_Metallic,TRANSFORM_TEX(i.uv0, _Metallic));
+                float3 specularColor = lerp(_Metallic_var.r,_Metallic_var.g,_Metallic_var.b);
                 float specularMonochrome;
                 float4 _MainTex_var = tex2D(_MainTex,TRANSFORM_TEX(i.uv0, _MainTex));
                 float3 diffuseColor = _MainTex_var.rgb; // Need this for specular when using metallic
@@ -196,8 +196,8 @@ Shader "Shader Forge/crate" {
                 float3 directDiffuse = ((1 +(fd90 - 1)*nlPow5) * (1 + (fd90 - 1)*nvPow5) * NdotL) * attenColor;
                 float3 indirectDiffuse = float3(0,0,0);
                 indirectDiffuse += gi.indirect.diffuse;
-                float4 _node_5041_var = tex2D(_node_5041,TRANSFORM_TEX(i.uv0, _node_5041));
-                indirectDiffuse *= lerp(_node_5041_var.r,_node_5041_var.g,_node_5041_var.b); // Diffuse AO
+                float4 _occlusion_var = tex2D(_occlusion,TRANSFORM_TEX(i.uv0, _occlusion));
+                indirectDiffuse *= lerp(_occlusion_var.r,_occlusion_var.g,_occlusion_var.b); // Diffuse AO
                 float3 diffuse = (directDiffuse + indirectDiffuse) * diffuseColor;
 /// Final Color:
                 float3 finalColor = diffuse + specular;
@@ -236,7 +236,7 @@ Shader "Shader Forge/crate" {
             uniform sampler2D _MainTex; uniform float4 _MainTex_ST;
             uniform sampler2D _BumpMap; uniform float4 _BumpMap_ST;
             uniform float _Gloss;
-            uniform sampler2D _node_8643; uniform float4 _node_8643_ST;
+            uniform sampler2D _Metallic; uniform float4 _Metallic_ST;
             struct VertexInput {
                 float4 vertex : POSITION;
                 float3 normal : NORMAL;
@@ -295,8 +295,8 @@ Shader "Shader Forge/crate" {
 ////// Specular:
                 float NdotL = saturate(dot( normalDirection, lightDirection ));
                 float LdotH = saturate(dot(lightDirection, halfDirection));
-                float4 _node_8643_var = tex2D(_node_8643,TRANSFORM_TEX(i.uv0, _node_8643));
-                float3 specularColor = lerp(_node_8643_var.r,_node_8643_var.g,_node_8643_var.b);
+                float4 _Metallic_var = tex2D(_Metallic,TRANSFORM_TEX(i.uv0, _Metallic));
+                float3 specularColor = lerp(_Metallic_var.r,_Metallic_var.g,_Metallic_var.b);
                 float specularMonochrome;
                 float4 _MainTex_var = tex2D(_MainTex,TRANSFORM_TEX(i.uv0, _MainTex));
                 float3 diffuseColor = _MainTex_var.rgb; // Need this for specular when using metallic
@@ -361,7 +361,7 @@ Shader "Shader Forge/crate" {
             #pragma target 3.0
             uniform sampler2D _MainTex; uniform float4 _MainTex_ST;
             uniform float _Gloss;
-            uniform sampler2D _node_8643; uniform float4 _node_8643_ST;
+            uniform sampler2D _Metallic; uniform float4 _Metallic_ST;
             struct VertexInput {
                 float4 vertex : POSITION;
                 float2 texcoord0 : TEXCOORD0;
@@ -395,8 +395,8 @@ Shader "Shader Forge/crate" {
                 float3 diffColor = _MainTex_var.rgb;
                 float specularMonochrome;
                 float3 specColor;
-                float4 _node_8643_var = tex2D(_node_8643,TRANSFORM_TEX(i.uv0, _node_8643));
-                diffColor = DiffuseAndSpecularFromMetallic( diffColor, lerp(_node_8643_var.r,_node_8643_var.g,_node_8643_var.b), specColor, specularMonochrome );
+                float4 _Metallic_var = tex2D(_Metallic,TRANSFORM_TEX(i.uv0, _Metallic));
+                diffColor = DiffuseAndSpecularFromMetallic( diffColor, lerp(_Metallic_var.r,_Metallic_var.g,_Metallic_var.b), specColor, specularMonochrome );
                 float roughness = 1.0 - _Gloss;
                 o.Albedo = diffColor + specColor * roughness * roughness * 0.5;
                 

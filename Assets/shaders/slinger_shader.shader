@@ -1,7 +1,7 @@
 // Shader created with Shader Forge v1.38 
 // Shader Forge (c) Neat Corporation / Joachim Holmer - http://www.acegikmo.com/shaderforge/
 // Note: Manually altering this data may prevent you from opening it in Shader Forge
-/*SF_DATA;ver:1.38;sub:START;pass:START;ps:flbk:,iptp:0,cusa:False,bamd:0,cgin:,lico:1,lgpr:1,limd:3,spmd:1,trmd:0,grmd:0,uamb:True,mssp:True,bkdf:True,hqlp:False,rprd:True,enco:False,rmgx:True,imps:True,rpth:0,vtps:0,hqsc:True,nrmq:1,nrsp:0,vomd:0,spxs:False,tesm:0,olmd:1,culm:0,bsrc:0,bdst:1,dpts:2,wrdp:True,dith:0,atcv:False,rfrpo:True,rfrpn:Refraction,coma:15,ufog:True,aust:True,igpj:False,qofs:0,qpre:1,rntp:1,fgom:False,fgoc:False,fgod:False,fgor:False,fgmd:0,fgcr:0.5,fgcg:0.5,fgcb:0.5,fgca:1,fgde:0.01,fgrn:0,fgrf:300,stcl:False,atwp:False,stva:128,stmr:255,stmw:255,stcp:6,stps:0,stfa:0,stfz:0,ofsf:0,ofsu:0,f2p0:False,fnsp:False,fnfb:False,fsmp:False;n:type:ShaderForge.SFN_Final,id:2865,x:32719,y:32712,varname:node_2865,prsc:2|diff-7736-RGB,spec-7353-OUT,gloss-1813-OUT,normal-5964-RGB,emission-7597-OUT,difocc-1136-OUT;n:type:ShaderForge.SFN_Tex2d,id:7736,x:31921,y:32620,ptovrint:True,ptlb:Base Color,ptin:_MainTex,varname:_MainTex,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,tex:25157b944f2310c45aa0b92b0ce2e825,ntxv:0,isnm:False;n:type:ShaderForge.SFN_Tex2d,id:5964,x:32407,y:32978,ptovrint:True,ptlb:Normal Map,ptin:_BumpMap,varname:_BumpMap,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,tex:9da835c4611732b4bbbc2484b6afb6d7,ntxv:3,isnm:True;n:type:ShaderForge.SFN_Slider,id:1813,x:32250,y:32882,ptovrint:False,ptlb:Gloss,ptin:_Gloss,varname:_Metallic_copy,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,min:0,cur:0.5134152,max:1;n:type:ShaderForge.SFN_Tex2d,id:6606,x:32309,y:32506,ptovrint:False,ptlb:Metallic,ptin:_Metallic,varname:node_6606,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,tex:49e80416bcc6c844280e98b9e0444b9e,ntxv:0,isnm:False;n:type:ShaderForge.SFN_Lerp,id:7353,x:32479,y:32523,varname:node_7353,prsc:2|A-6606-R,B-6606-G,T-6606-B;n:type:ShaderForge.SFN_Tex2d,id:9381,x:31979,y:33130,ptovrint:False,ptlb:node_9381,ptin:_node_9381,varname:node_9381,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,tex:25167bf32a40bcc409f79dae5836588d,ntxv:0,isnm:False;n:type:ShaderForge.SFN_Lerp,id:1136,x:32165,y:33147,varname:node_1136,prsc:2|A-9381-R,B-9381-G,T-9381-B;n:type:ShaderForge.SFN_Tex2d,id:4825,x:31765,y:33007,ptovrint:False,ptlb:node_4825,ptin:_node_4825,varname:node_4825,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,tex:ded30a8808eb16c44927580216d6be79,ntxv:0,isnm:False;n:type:ShaderForge.SFN_Slider,id:8069,x:31622,y:32866,ptovrint:False,ptlb:node_8069,ptin:_node_8069,varname:node_8069,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,min:0,cur:0,max:10;n:type:ShaderForge.SFN_Multiply,id:7597,x:32003,y:32823,varname:node_7597,prsc:2|A-8069-OUT,B-4825-RGB;proporder:5964-7736-1813-6606-9381-4825-8069;pass:END;sub:END;*/
+/*SF_DATA;ver:1.38;sub:START;pass:START;ps:flbk:,iptp:0,cusa:False,bamd:0,cgin:,lico:1,lgpr:1,limd:3,spmd:1,trmd:0,grmd:0,uamb:True,mssp:True,bkdf:True,hqlp:False,rprd:True,enco:False,rmgx:True,imps:True,rpth:0,vtps:0,hqsc:True,nrmq:1,nrsp:0,vomd:0,spxs:False,tesm:0,olmd:1,culm:0,bsrc:0,bdst:1,dpts:2,wrdp:True,dith:0,atcv:False,rfrpo:True,rfrpn:Refraction,coma:15,ufog:True,aust:True,igpj:False,qofs:0,qpre:1,rntp:1,fgom:False,fgoc:False,fgod:False,fgor:False,fgmd:0,fgcr:0.5,fgcg:0.5,fgcb:0.5,fgca:1,fgde:0.01,fgrn:0,fgrf:300,stcl:False,atwp:False,stva:128,stmr:255,stmw:255,stcp:6,stps:0,stfa:0,stfz:0,ofsf:0,ofsu:0,f2p0:False,fnsp:False,fnfb:False,fsmp:False;n:type:ShaderForge.SFN_Final,id:2865,x:32719,y:32712,varname:node_2865,prsc:2|diff-7736-RGB,spec-7353-OUT,gloss-1813-OUT,normal-5964-RGB,emission-7597-OUT,difocc-1136-OUT;n:type:ShaderForge.SFN_Tex2d,id:7736,x:31921,y:32620,ptovrint:True,ptlb:Base Color,ptin:_MainTex,varname:_MainTex,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,tex:25157b944f2310c45aa0b92b0ce2e825,ntxv:0,isnm:False;n:type:ShaderForge.SFN_Tex2d,id:5964,x:32470,y:33137,ptovrint:True,ptlb:Normal Map,ptin:_BumpMap,varname:_BumpMap,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,tex:9da835c4611732b4bbbc2484b6afb6d7,ntxv:3,isnm:True;n:type:ShaderForge.SFN_Slider,id:1813,x:32251,y:32946,ptovrint:False,ptlb:Gloss,ptin:_Gloss,varname:_Metallic_copy,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,min:0,cur:0.5134152,max:1;n:type:ShaderForge.SFN_Tex2d,id:6606,x:32309,y:32506,ptovrint:False,ptlb:Metallic,ptin:_Metallic,varname:node_6606,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,tex:49e80416bcc6c844280e98b9e0444b9e,ntxv:0,isnm:False;n:type:ShaderForge.SFN_Lerp,id:7353,x:32479,y:32523,varname:node_7353,prsc:2|A-6606-R,B-6606-G,T-6606-B;n:type:ShaderForge.SFN_Tex2d,id:9381,x:31979,y:33130,ptovrint:False,ptlb:occlusion,ptin:_occlusion,varname:node_9381,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,tex:25167bf32a40bcc409f79dae5836588d,ntxv:0,isnm:False;n:type:ShaderForge.SFN_Lerp,id:1136,x:32165,y:33147,varname:node_1136,prsc:2|A-9381-R,B-9381-G,T-9381-B;n:type:ShaderForge.SFN_Tex2d,id:4825,x:31666,y:32930,ptovrint:False,ptlb:emission,ptin:_emission,varname:node_4825,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,tex:ded30a8808eb16c44927580216d6be79,ntxv:0,isnm:False;n:type:ShaderForge.SFN_Slider,id:8069,x:31623,y:32829,ptovrint:False,ptlb:emission brightness,ptin:_emissionbrightness,varname:node_8069,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,min:0,cur:0,max:10;n:type:ShaderForge.SFN_Multiply,id:7597,x:32003,y:32823,varname:node_7597,prsc:2|A-8069-OUT,B-4825-RGB;proporder:5964-7736-1813-6606-9381-4825-8069;pass:END;sub:END;*/
 
 Shader "slinger" {
     Properties {
@@ -9,9 +9,9 @@ Shader "slinger" {
         _MainTex ("Base Color", 2D) = "white" {}
         _Gloss ("Gloss", Range(0, 1)) = 0.5134152
         _Metallic ("Metallic", 2D) = "white" {}
-        _node_9381 ("node_9381", 2D) = "white" {}
-        _node_4825 ("node_4825", 2D) = "white" {}
-        _node_8069 ("node_8069", Range(0, 10)) = 0
+        _occlusion ("occlusion", 2D) = "white" {}
+        _emission ("emission", 2D) = "white" {}
+        _emissionbrightness ("emission brightness", Range(0, 10)) = 0
     }
     SubShader {
         Tags {
@@ -46,9 +46,9 @@ Shader "slinger" {
             uniform sampler2D _BumpMap; uniform float4 _BumpMap_ST;
             uniform float _Gloss;
             uniform sampler2D _Metallic; uniform float4 _Metallic_ST;
-            uniform sampler2D _node_9381; uniform float4 _node_9381_ST;
-            uniform sampler2D _node_4825; uniform float4 _node_4825_ST;
-            uniform float _node_8069;
+            uniform sampler2D _occlusion; uniform float4 _occlusion_ST;
+            uniform sampler2D _emission; uniform float4 _emission_ST;
+            uniform float _emissionbrightness;
             struct VertexInput {
                 float4 vertex : POSITION;
                 float3 normal : NORMAL;
@@ -200,12 +200,12 @@ Shader "slinger" {
                 float3 directDiffuse = ((1 +(fd90 - 1)*nlPow5) * (1 + (fd90 - 1)*nvPow5) * NdotL) * attenColor;
                 float3 indirectDiffuse = float3(0,0,0);
                 indirectDiffuse += gi.indirect.diffuse;
-                float4 _node_9381_var = tex2D(_node_9381,TRANSFORM_TEX(i.uv0, _node_9381));
-                indirectDiffuse *= lerp(_node_9381_var.r,_node_9381_var.g,_node_9381_var.b); // Diffuse AO
+                float4 _occlusion_var = tex2D(_occlusion,TRANSFORM_TEX(i.uv0, _occlusion));
+                indirectDiffuse *= lerp(_occlusion_var.r,_occlusion_var.g,_occlusion_var.b); // Diffuse AO
                 float3 diffuse = (directDiffuse + indirectDiffuse) * diffuseColor;
 ////// Emissive:
-                float4 _node_4825_var = tex2D(_node_4825,TRANSFORM_TEX(i.uv0, _node_4825));
-                float3 emissive = (_node_8069*_node_4825_var.rgb);
+                float4 _emission_var = tex2D(_emission,TRANSFORM_TEX(i.uv0, _emission));
+                float3 emissive = (_emissionbrightness*_emission_var.rgb);
 /// Final Color:
                 float3 finalColor = diffuse + specular + emissive;
                 fixed4 finalRGBA = fixed4(finalColor,1);
@@ -244,8 +244,8 @@ Shader "slinger" {
             uniform sampler2D _BumpMap; uniform float4 _BumpMap_ST;
             uniform float _Gloss;
             uniform sampler2D _Metallic; uniform float4 _Metallic_ST;
-            uniform sampler2D _node_4825; uniform float4 _node_4825_ST;
-            uniform float _node_8069;
+            uniform sampler2D _emission; uniform float4 _emission_ST;
+            uniform float _emissionbrightness;
             struct VertexInput {
                 float4 vertex : POSITION;
                 float3 normal : NORMAL;
@@ -371,8 +371,8 @@ Shader "slinger" {
             uniform sampler2D _MainTex; uniform float4 _MainTex_ST;
             uniform float _Gloss;
             uniform sampler2D _Metallic; uniform float4 _Metallic_ST;
-            uniform sampler2D _node_4825; uniform float4 _node_4825_ST;
-            uniform float _node_8069;
+            uniform sampler2D _emission; uniform float4 _emission_ST;
+            uniform float _emissionbrightness;
             struct VertexInput {
                 float4 vertex : POSITION;
                 float2 texcoord0 : TEXCOORD0;
@@ -400,8 +400,8 @@ Shader "slinger" {
                 UnityMetaInput o;
                 UNITY_INITIALIZE_OUTPUT( UnityMetaInput, o );
                 
-                float4 _node_4825_var = tex2D(_node_4825,TRANSFORM_TEX(i.uv0, _node_4825));
-                o.Emission = (_node_8069*_node_4825_var.rgb);
+                float4 _emission_var = tex2D(_emission,TRANSFORM_TEX(i.uv0, _emission));
+                o.Emission = (_emissionbrightness*_emission_var.rgb);
                 
                 float4 _MainTex_var = tex2D(_MainTex,TRANSFORM_TEX(i.uv0, _MainTex));
                 float3 diffColor = _MainTex_var.rgb;

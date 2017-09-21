@@ -1,7 +1,7 @@
 // Shader created with Shader Forge v1.38 
 // Shader Forge (c) Neat Corporation / Joachim Holmer - http://www.acegikmo.com/shaderforge/
 // Note: Manually altering this data may prevent you from opening it in Shader Forge
-/*SF_DATA;ver:1.38;sub:START;pass:START;ps:flbk:,iptp:0,cusa:False,bamd:0,cgin:,lico:1,lgpr:1,limd:3,spmd:1,trmd:1,grmd:1,uamb:True,mssp:True,bkdf:True,hqlp:False,rprd:True,enco:False,rmgx:True,imps:True,rpth:0,vtps:0,hqsc:True,nrmq:1,nrsp:0,vomd:0,spxs:False,tesm:0,olmd:1,culm:0,bsrc:0,bdst:7,dpts:2,wrdp:False,dith:0,atcv:False,rfrpo:True,rfrpn:Refraction,coma:15,ufog:True,aust:True,igpj:True,qofs:0,qpre:3,rntp:2,fgom:False,fgoc:False,fgod:False,fgor:False,fgmd:0,fgcr:0.5,fgcg:0.5,fgcb:0.5,fgca:1,fgde:0.01,fgrn:0,fgrf:300,stcl:False,atwp:False,stva:128,stmr:255,stmw:255,stcp:6,stps:0,stfa:0,stfz:0,ofsf:0,ofsu:0,f2p0:False,fnsp:False,fnfb:False,fsmp:False;n:type:ShaderForge.SFN_Final,id:2865,x:32719,y:32712,varname:node_2865,prsc:2|diff-1528-OUT,spec-358-OUT,gloss-1813-OUT,alpha-1690-OUT,refract-3933-OUT;n:type:ShaderForge.SFN_Color,id:6665,x:31930,y:32669,ptovrint:False,ptlb:Color,ptin:_Color,varname:_Color,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,c1:0.234086,c2:0.3161765,c3:0.2231834,c4:1;n:type:ShaderForge.SFN_Tex2d,id:5964,x:31991,y:33170,ptovrint:True,ptlb:Normal Map,ptin:_BumpMap,varname:_BumpMap,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,ntxv:3,isnm:True|UVIN-4501-UVOUT;n:type:ShaderForge.SFN_Slider,id:358,x:32250,y:32780,ptovrint:False,ptlb:Metallic,ptin:_Metallic,varname:node_358,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,min:0,cur:0.9614561,max:1;n:type:ShaderForge.SFN_Slider,id:1813,x:32250,y:32882,ptovrint:False,ptlb:Gloss,ptin:_Gloss,varname:_Metallic_copy,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,min:0,cur:0.910174,max:1;n:type:ShaderForge.SFN_Slider,id:1690,x:31811,y:33049,ptovrint:False,ptlb:opacity,ptin:_opacity,varname:node_1690,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,min:-10,cur:-7.628706,max:10;n:type:ShaderForge.SFN_TexCoord,id:4501,x:31764,y:33209,varname:node_4501,prsc:2,uv:0,uaff:False;n:type:ShaderForge.SFN_Multiply,id:3933,x:32440,y:33059,varname:node_3933,prsc:2|A-8395-OUT,B-2016-OUT;n:type:ShaderForge.SFN_Slider,id:2016,x:31764,y:33397,ptovrint:False,ptlb:refraction,ptin:_refraction,varname:node_2016,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,min:0,cur:1,max:1;n:type:ShaderForge.SFN_ComponentMask,id:8395,x:32181,y:33067,varname:node_8395,prsc:2,cc1:0,cc2:1,cc3:-1,cc4:-1|IN-5964-RGB;n:type:ShaderForge.SFN_Multiply,id:1528,x:32141,y:32592,varname:node_1528,prsc:2|A-9799-RGB,B-6665-RGB;n:type:ShaderForge.SFN_Color,id:9799,x:31863,y:32444,ptovrint:False,ptlb:node_9799,ptin:_node_9799,varname:node_9799,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,c1:0.01445231,c2:0.4191176,c3:0,c4:1;proporder:5964-6665-358-1813-1690-2016-9799;pass:END;sub:END;*/
+/*SF_DATA;ver:1.38;sub:START;pass:START;ps:flbk:,iptp:0,cusa:False,bamd:0,cgin:,lico:1,lgpr:1,limd:3,spmd:1,trmd:1,grmd:1,uamb:True,mssp:True,bkdf:True,hqlp:False,rprd:True,enco:False,rmgx:True,imps:True,rpth:0,vtps:0,hqsc:True,nrmq:1,nrsp:0,vomd:0,spxs:False,tesm:0,olmd:1,culm:0,bsrc:0,bdst:7,dpts:2,wrdp:False,dith:0,atcv:False,rfrpo:True,rfrpn:Refraction,coma:15,ufog:True,aust:True,igpj:True,qofs:0,qpre:3,rntp:2,fgom:False,fgoc:False,fgod:False,fgor:False,fgmd:0,fgcr:0.5,fgcg:0.5,fgcb:0.5,fgca:1,fgde:0.01,fgrn:0,fgrf:300,stcl:False,atwp:False,stva:128,stmr:255,stmw:255,stcp:6,stps:0,stfa:0,stfz:0,ofsf:0,ofsu:0,f2p0:False,fnsp:False,fnfb:False,fsmp:False;n:type:ShaderForge.SFN_Final,id:2865,x:32719,y:32712,varname:node_2865,prsc:2|diff-1528-OUT,spec-358-OUT,gloss-1813-OUT,alpha-1690-OUT,refract-3933-OUT;n:type:ShaderForge.SFN_Color,id:6665,x:31930,y:32669,ptovrint:False,ptlb:Color,ptin:_Color,varname:_Color,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,c1:0.234086,c2:0.3161765,c3:0.2231834,c4:1;n:type:ShaderForge.SFN_Tex2d,id:5964,x:31991,y:33170,ptovrint:True,ptlb:Normal Map,ptin:_BumpMap,varname:_BumpMap,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,ntxv:3,isnm:True|UVIN-4501-UVOUT;n:type:ShaderForge.SFN_Slider,id:358,x:32250,y:32780,ptovrint:False,ptlb:Metallic,ptin:_Metallic,varname:node_358,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,min:0,cur:0.9614561,max:1;n:type:ShaderForge.SFN_Slider,id:1813,x:32250,y:32882,ptovrint:False,ptlb:Gloss,ptin:_Gloss,varname:_Metallic_copy,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,min:0,cur:0.910174,max:1;n:type:ShaderForge.SFN_Slider,id:1690,x:31811,y:33049,ptovrint:False,ptlb:opacity,ptin:_opacity,varname:node_1690,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,min:-10,cur:-7.628706,max:10;n:type:ShaderForge.SFN_TexCoord,id:4501,x:31764,y:33209,varname:node_4501,prsc:2,uv:0,uaff:False;n:type:ShaderForge.SFN_Multiply,id:3933,x:32440,y:33059,varname:node_3933,prsc:2|A-8395-OUT,B-2016-OUT;n:type:ShaderForge.SFN_Slider,id:2016,x:31764,y:33397,ptovrint:False,ptlb:refraction,ptin:_refraction,varname:node_2016,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,min:0,cur:1,max:1;n:type:ShaderForge.SFN_ComponentMask,id:8395,x:32181,y:33067,varname:node_8395,prsc:2,cc1:0,cc2:1,cc3:-1,cc4:-1|IN-5964-RGB;n:type:ShaderForge.SFN_Multiply,id:1528,x:32141,y:32592,varname:node_1528,prsc:2|A-9799-RGB,B-6665-RGB;n:type:ShaderForge.SFN_Color,id:9799,x:31863,y:32444,ptovrint:False,ptlb:colour,ptin:_colour,varname:node_9799,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,c1:0.01445231,c2:0.4191176,c3:0,c4:1;proporder:5964-6665-358-1813-1690-2016-9799;pass:END;sub:END;*/
 
 Shader "glass" {
     Properties {
@@ -11,7 +11,7 @@ Shader "glass" {
         _Gloss ("Gloss", Range(0, 1)) = 0.910174
         _opacity ("opacity", Range(-10, 10)) = -7.628706
         _refraction ("refraction", Range(0, 1)) = 1
-        _node_9799 ("node_9799", Color) = (0.01445231,0.4191176,0,1)
+        _colour ("colour", Color) = (0.01445231,0.4191176,0,1)
         [HideInInspector]_Cutoff ("Alpha cutoff", Range(0,1)) = 0.5
     }
     SubShader {
@@ -53,7 +53,7 @@ Shader "glass" {
             uniform float _Gloss;
             uniform float _opacity;
             uniform float _refraction;
-            uniform float4 _node_9799;
+            uniform float4 _colour;
             struct VertexInput {
                 float4 vertex : POSITION;
                 float3 normal : NORMAL;
@@ -168,7 +168,7 @@ Shader "glass" {
                 float LdotH = saturate(dot(lightDirection, halfDirection));
                 float3 specularColor = _Metallic;
                 float specularMonochrome;
-                float3 diffuseColor = (_node_9799.rgb*_Color.rgb); // Need this for specular when using metallic
+                float3 diffuseColor = (_colour.rgb*_Color.rgb); // Need this for specular when using metallic
                 diffuseColor = DiffuseAndSpecularFromMetallic( diffuseColor, specularColor, specularColor, specularMonochrome );
                 specularMonochrome = 1.0-specularMonochrome;
                 float NdotV = abs(dot( normalDirection, viewDirection ));
@@ -247,7 +247,7 @@ Shader "glass" {
             uniform float _Gloss;
             uniform float _opacity;
             uniform float _refraction;
-            uniform float4 _node_9799;
+            uniform float4 _colour;
             struct VertexInput {
                 float4 vertex : POSITION;
                 float3 normal : NORMAL;
@@ -312,7 +312,7 @@ Shader "glass" {
                 float LdotH = saturate(dot(lightDirection, halfDirection));
                 float3 specularColor = _Metallic;
                 float specularMonochrome;
-                float3 diffuseColor = (_node_9799.rgb*_Color.rgb); // Need this for specular when using metallic
+                float3 diffuseColor = (_colour.rgb*_Color.rgb); // Need this for specular when using metallic
                 diffuseColor = DiffuseAndSpecularFromMetallic( diffuseColor, specularColor, specularColor, specularMonochrome );
                 specularMonochrome = 1.0-specularMonochrome;
                 float NdotV = abs(dot( normalDirection, viewDirection ));
@@ -375,7 +375,7 @@ Shader "glass" {
             uniform float4 _Color;
             uniform float _Metallic;
             uniform float _Gloss;
-            uniform float4 _node_9799;
+            uniform float4 _colour;
             struct VertexInput {
                 float4 vertex : POSITION;
                 float2 texcoord1 : TEXCOORD1;
@@ -402,7 +402,7 @@ Shader "glass" {
                 
                 o.Emission = 0;
                 
-                float3 diffColor = (_node_9799.rgb*_Color.rgb);
+                float3 diffColor = (_colour.rgb*_Color.rgb);
                 float specularMonochrome;
                 float3 specColor;
                 diffColor = DiffuseAndSpecularFromMetallic( diffColor, _Metallic, specColor, specularMonochrome );
