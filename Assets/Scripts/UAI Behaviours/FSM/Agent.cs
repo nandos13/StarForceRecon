@@ -14,7 +14,7 @@ public class Agent : MonoBehaviour
 
     void Start()
     {
-        //// find all enemies on the map, and create an AttackAction for each one
+        // find all enemies on the map, and create an AttackAction for each one
         //Agent[] allAgents = FindObjectsOfType<Agent>();
         //for (int i = 0; i < allAgents.Length; i++)
         //{

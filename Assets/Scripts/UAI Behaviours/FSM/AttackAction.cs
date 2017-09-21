@@ -9,18 +9,18 @@ public class AttackAction : ActionAI
     public float RayCastRange = 12.0f;
     public override float Evaluate(Agent a)
     {
-        // if target is dead, evaluate to zero
-        HitBox hb = m_target.GetComponent<HitBox>();
-        if (hb != null && hb.currentHealth <= 35f)
-        {
-            return 0.0f;
-        }
+        //// if target is dead, evaluate to zero
+        //Health hb = m_target.GetComponent<Health>();
+        //if (hb != null && hb.healthPercent <= 35f)
+        //{
+        //    return 0.0f;
+        //}
 
-        float distance = (m_target.transform.position - a.transform.position).magnitude;
-        if (distance < 8)  // agents range of weapon fire
-            return 2.0f - hb.GetPercentHealth(); // we prefer attacking enemies closer to death
-        else
-            return 0.0f;
+        //float distance = (m_target.transform.position - a.transform.position).magnitude;
+        //if (distance < 8)  // agents range of weapon fire
+        //    return 2.0f - hb.GetPercentHealth(); // we prefer attacking enemies closer to death
+        //else
+        return 0.0f;
     }
    
     public override void UpdateAction(Agent agent)

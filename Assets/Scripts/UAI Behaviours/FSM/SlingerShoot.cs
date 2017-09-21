@@ -30,14 +30,15 @@ public class SlingerShoot : ActionAI
 
     public override float Evaluate(Agent a)
     {
-        // TODO evaluate
+        SquaddieController target = lowestHealth();
+
         return 1;
     }
 
     public override void Enter(Agent agent) { }
     public override void Exit(Agent agent) { }
 
-void Start()
+    void Start()
     {
         lineRender = GetComponent<LineRenderer>();
         _Rigidbody = GetComponent<Rigidbody>();
@@ -86,11 +87,11 @@ void Start()
         if (Physics.Raycast(slingerRangeEnd.position, slingerRangeEnd.forward, out hit, slingRange))
         {
             lineRender.SetPosition(1, hit.point);
-            HitBox health = hit.collider.GetComponent<HitBox>();
+            Health health = hit.collider.GetComponent<Health>();
 
             if (health != null)
             {
-                health.Damage(slingerDmg);
+                //health.ApplyDamage(slingerDmg); needs work
             }
 
             if (hit.rigidbody != null)

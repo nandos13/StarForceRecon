@@ -76,6 +76,9 @@ public class Health : MonoBehaviour, IDamageable
         }
     }
 
+    public float healthPercent
+        { get { return (_currentHealth >= 0) ? _currentHealth / _maxHealth : 0; } }
+
     #endregion
 
     void Awake()
