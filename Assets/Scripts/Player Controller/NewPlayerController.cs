@@ -65,8 +65,8 @@ namespace StarForceRecon
         private static readonly Vector2 CENTER_VIEWPORT = new Vector2(0.5f, 0.5f);
         private static readonly Vector3 HORIZON_SCALE_VECTOR = new Vector3(1, 0, 1);
 
-        private bool aiming = false;
-        private Vector3 aimPoint = default(Vector3);
+        public bool aiming { get; private set; }
+        public Vector3 aimPoint { get; private set; }
         private bool meleeLocked = false;
 
         private bool secondaryIsEquipped = false;
@@ -96,7 +96,7 @@ namespace StarForceRecon
             if (_aimHandler == null)
                 throw new System.MissingFieldException("No Aim Handler component found.");
             if (_equipment == null)
-                throw new System.MissingFieldException("No Equipment Holder component found.");
+                throw new System.MissingFieldException("No Equipment component found.");
         }
 
         private void Update()
@@ -138,7 +138,7 @@ namespace StarForceRecon
         /// <param name="viewportCursorPosition">Cursor position in Viewport [0-1][0-1].</param>
         /// <param name="intersect">Out: Resulting intersection point.</param>
         /// <returns>True if the character's horizon plane is under the cursor.</returns>
-        private bool CharacterHorizonIntersect(Vector2 viewportCursorPosition, out Vector3 intersect)
+        public bool CharacterHorizonIntersect(Vector2 viewportCursorPosition, out Vector3 intersect)
         {
             Plane characterHorizon = new Plane(Vector3.up, transform.position);
             Ray cursorRay = Camera.main.ViewportPointToRay(viewportCursorPosition);
@@ -343,6 +343,9 @@ namespace StarForceRecon
         {
             Invoke("SelectCharacter", selectionDelay);
         }
+
+        Transform SquadManager.IControllable.transform
+        { get { return transform; } }
 
         #endregion
 

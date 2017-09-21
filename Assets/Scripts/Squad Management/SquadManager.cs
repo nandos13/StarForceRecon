@@ -12,6 +12,8 @@ namespace StarForceRecon
         {
             void OnSwitchTo();
             void OnSwitchAway();
+
+            UnityEngine.Transform transform { get; }
         }
 
         public delegate void SquadMemberSwitchEvent();
@@ -28,7 +30,7 @@ namespace StarForceRecon
             set { _canSwitchSquadMembers = value; }
         }
 
-        private static List<IControllable> _squadMembers;
+        private static List<IControllable> _squadMembers = new List<IControllable>();
         private static int _selectedIndex = -1;
         private static IControllable _selected = null;
 

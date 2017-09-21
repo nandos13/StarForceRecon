@@ -23,39 +23,53 @@ public class Equipment : MonoBehaviour
     }
 
     #endregion
-
-    public IEquipment Primary       { get; set; }
-    public IEquipment Secondary     { get; set; }
-    public IEquipment Melee         { get; set; }
-    public IEquipment Equipment1    { get; set; }
-    public IEquipment Equipment2    { get; set; }
-    public IEquipment Action1       { get; set; }
-    public IEquipment Action2       { get; set; }
+    
+    [SerializeField]
+    private IEquipment primary = null;
+    [SerializeField]
+    private IEquipment secondary = null;
+    [SerializeField]
+    private IEquipment melee = null;
+    [SerializeField]
+    private IEquipment equipment1 = null;
+    [SerializeField]
+    private IEquipment equipment2 = null;
+    [SerializeField]
+    private IEquipment action1 = null;
+    [SerializeField]
+    private IEquipment action2 = null;
 
     public void Use(Slot slot)
     {
         switch (slot)
         {
             case Slot.Primary:
-                Primary.Use(); break;
+                if (primary != null)
+                    primary.Use(); break;
 
             case Slot.Secondary:
-                Secondary.Use(); break;
+                if (secondary != null)
+                    secondary.Use(); break;
 
             case Slot.Melee:
-                Melee.Use(); break;
+                if (melee != null)
+                    melee.Use(); break;
 
             case Slot.Equipment1:
-                Equipment1.Use(); break;
+                if (equipment1 != null)
+                    equipment1.Use(); break;
 
             case Slot.Equipment2:
-                Equipment2.Use(); break;
+                if (equipment2 != null)
+                    equipment2.Use(); break;
 
             case Slot.Action1:
-                Action1.Use(); break;
+                if (action1 != null)
+                    action1.Use(); break;
 
             case Slot.Action2:
-                Action2.Use(); break;
+                if (action2 != null)
+                    action2.Use(); break;
 
             default:
                 Debug.LogError("Unexpected Equipment Slot value used as Use parameter", this);
@@ -66,11 +80,11 @@ public class Equipment : MonoBehaviour
     /// <summary>Switches primary equipment with secondary equipment.</summary>
     public void PrimarySecondarySwap()
     {
-        if (Secondary != null)
+        if (secondary != null)
         {
-            IEquipment temporary = Primary;
-            Primary = Secondary;
-            Secondary = temporary;
+            IEquipment temporary = primary;
+            primary = secondary;
+            secondary = temporary;
         }
     }
 }
