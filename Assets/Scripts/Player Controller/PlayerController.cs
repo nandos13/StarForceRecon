@@ -8,7 +8,7 @@ namespace StarForceRecon
         RequireComponent(typeof(AimHandler)),
         RequireComponent(typeof(Equipment)),
         DisallowMultipleComponent]
-    public class NewPlayerController : MonoBehaviour, GameController.ITarget, SquadManager.IControllable
+    public class PlayerController : MonoBehaviour, GameController.ITarget, SquadManager.IControllable
     {
         #region Variables
 

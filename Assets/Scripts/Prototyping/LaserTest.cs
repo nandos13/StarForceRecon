@@ -8,12 +8,12 @@ public class LaserTest : MonoBehaviour
 {
 
     public Transform _origin;
-    private NewPlayerController _aimScript;
+    private PlayerController _aimScript;
     public LineRenderer _line;
     
 	void Start ()
     {
-        _aimScript = GetComponent<NewPlayerController>();
+        _aimScript = GetComponent<PlayerController>();
 
         if (!_line)
             _line = GetComponent<LineRenderer>();

@@ -280,7 +280,7 @@ public class CameraController : MonoBehaviour
             SquadManager.IControllable currentSquaddie = SquadManager.GetCurrentSquaddie;
             if (currentSquaddie != null)
             {
-                NewPlayerController aimScript = currentSquaddie as NewPlayerController;
+                PlayerController aimScript = currentSquaddie as PlayerController;
                 if (aimScript)
                 {
                     // Get aim point

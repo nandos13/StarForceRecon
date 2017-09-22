@@ -6,12 +6,12 @@ using StarForceRecon;
 public class AimGunAtPointer : MonoBehaviour
 {
   
-    private NewPlayerController _aim = null;
+    private PlayerController _aim = null;
 
 	void Start ()
     {
 
-        _aim = GetComponentInParent<NewPlayerController>();
+        _aim = GetComponentInParent<PlayerController>();
         if (!_aim)
             throw new System.MissingFieldException("No controller :(");
 	}
