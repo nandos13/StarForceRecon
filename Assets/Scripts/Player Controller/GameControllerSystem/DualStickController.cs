@@ -4,7 +4,17 @@ namespace JakePerry
 {
     public class DualStickController : GameController
     {
+        public DualStickController() : base()
+        {
+            Initialize();
+        }
+
         public DualStickController(ITarget target) : base(target)
+        {
+            Initialize();
+        }
+
+        private void Initialize()
         {
             type = ControlType.Gamepad;
 

@@ -946,6 +946,16 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114614757814029284, guid: d7be461396499454291d5b878aa9b468,
+        type: 2}
+      propertyPath: _moveSpeedMultiplier
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114663841151401494, guid: d7be461396499454291d5b878aa9b468,
+        type: 2}
+      propertyPath: turningSpeed
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 95879011643412874, guid: d7be461396499454291d5b878aa9b468, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: d7be461396499454291d5b878aa9b468, type: 2}

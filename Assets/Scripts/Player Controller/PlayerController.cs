@@ -91,8 +91,9 @@ namespace StarForceRecon
                 cursorCanvas = CreateCursor(out cursorSprite);
 
             // Initialize Input
-            _keyboardController = new KeyboardMouseController(this);
-            _gamepadController = new DualStickController(this);
+            string controllerID = "PlayerController";
+            _keyboardController = ControllerManager<KeyboardMouseController>.GetController(controllerID, this);
+            _gamepadController = ControllerManager<DualStickController>.GetController(controllerID, this);
 
             // Get component references
             _tpc = GetComponent<ThirdPersonController>();
@@ -117,6 +118,8 @@ namespace StarForceRecon
         {
             GameObject canvasObject = new GameObject("Aiming Cursor");
             canvasObject.hideFlags = HideFlags.HideAndDontSave;
+            canvasObject.AddComponent<PlayerController.CursorDestroyBehaviour>();
+
             GameObject cursorObject = new GameObject("Cursor sprite");
             cursorObject.transform.parent = canvasObject.transform;
 
@@ -143,7 +146,7 @@ namespace StarForceRecon
             aiming = (horizontalDistance >= closeAimRadius);
 
             // Rotate towards aim
-            if (aiming)
+            if (aiming && !_tpc.isRolling)
                 RotateToFaceAimCheck(StarForceRecon.Cursor.position, maxHipSwivel);
 
             UpdateOnScreenCursor();
@@ -415,6 +418,27 @@ namespace StarForceRecon
         private void OnDisable()
         {
             _tpc.StopMovement();
+        }
+
+        #endregion
+
+        #region Cursor Destroy Behaviour
+
+        /// <summary>Private behaviour added to the cursor canvas to handle destroy without errors throwing.</summary>
+        private class CursorDestroyBehaviour : MonoBehaviour
+        {
+            private void OnApplicationQuit()
+            {
+                if (PlayerController.cursorSprite != null)
+                {
+                    GameObject imageObject = PlayerController.cursorSprite.gameObject;
+                    DestroyImmediate(PlayerController.cursorSprite);
+                    Destroy(imageObject);
+                }
+
+                PlayerController.cursorSprite = null;
+                PlayerController.cursorCanvas = null;
+            }
         }
 
         #endregion

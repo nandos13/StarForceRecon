@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using InControl;
 
 namespace JakePerry
@@ -138,20 +139,26 @@ namespace JakePerry
         #region Private references
 
         private GameControllerBehaviour behaviour = null;
-        private ITarget target = null;
+        private List<ITarget> targets = new List<ITarget>();
 
         protected GameControlActionSet actionSet = null;
         protected ControlType type = ControlType.None;
 
         #endregion
 
+        public GameController()
+        {
+            // Create action set
+            actionSet = new GameControlActionSet();
+
+            // Create behaviour script
+            behaviour = GameControllerBehaviour.Create(this);
+        }
+
         public GameController(ITarget target)
         {
-            if (target == null)
-                throw new System.Exception("GameController cannot be created with a null reference target.");
-
             // Store target reference
-            this.target = target;
+            targets.Add(target);
 
             // Create action set
             actionSet = new GameControlActionSet();
@@ -170,16 +177,31 @@ namespace JakePerry
             }
         }
 
+        /// <summary>Adds a new target to the controller.</summary>
+        public void AddTarget(ITarget target)
+        {
+            if (target != null)
+            {
+                if (!targets.Contains(target))
+                    targets.Add(target);
+            }
+        }
+
         /// <summary>Override to provide additional functionality to the end of Update call.</summary>
         protected virtual void OnUpdate()
         { }
 
         private void Update()
         {
-            // Send updated controller info to target
-            target.ReceiveMoveInput(new Vector2(actionSet.Horizontal.Value, actionSet.Vertical.Value));
-            target.ReceiveAimInput(new Vector2(actionSet.LookHorizontal.Value, actionSet.LookVertical.Value), type);
-            target.ReceiveActionInput(GenerateActionState());
+            foreach (ITarget target in targets)
+            {
+                if (target == null) continue;
+
+                // Send updated controller info to target
+                target.ReceiveMoveInput(new Vector2(actionSet.Horizontal.Value, actionSet.Vertical.Value));
+                target.ReceiveAimInput(new Vector2(actionSet.LookHorizontal.Value, actionSet.LookVertical.Value), type);
+                target.ReceiveActionInput(GenerateActionState());
+            }
 
             OnUpdate();
         }

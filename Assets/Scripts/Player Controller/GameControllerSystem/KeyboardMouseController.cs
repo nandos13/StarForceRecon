@@ -4,7 +4,17 @@ namespace JakePerry
 {
     public class KeyboardMouseController : GameController
     {
+        public KeyboardMouseController() : base()
+        {
+            Initialize();
+        }
+
         public KeyboardMouseController(ITarget target) : base(target)
+        {
+            Initialize();
+        }
+
+        private void Initialize()
         {
             type = ControlType.KeyboardAndMouse;
 

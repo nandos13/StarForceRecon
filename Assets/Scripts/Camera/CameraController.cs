@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using StarForceRecon;
+using JakePerry;
 
 /* This script should be placed on the Main Camera object in the scene.
  * Controls the camera by smoothly lerping between it's current position and a destination position. */
 [DisallowMultipleComponent()]
-public class CameraController : MonoBehaviour
+public class CameraController : MonoBehaviour, JakePerry.GameController.ITarget
 {
     #region Member Variables
 
@@ -107,6 +108,8 @@ public class CameraController : MonoBehaviour
             Debug.LogWarning("Warning: An instance of the CameraController script already exists. Instance will be deleted on object: " + gameObject.name);
             DestroyImmediate(this); // Instance already exists
         }
+
+        GameController gameController = ControllerManager<DualStickController>.GetController("Camera Rotation", this);
     }
 
     void Start ()
@@ -141,11 +144,10 @@ public class CameraController : MonoBehaviour
             LookAtPosition(currentSquaddie.transform.position, _switchCharacterTime);
     }
 
-    void Update ()
+    private void Update()
     {
         if (!_cam) _cam = Camera.main;
-
-        HandleRotation();
+        
         HandlePointSwitching();
 
         // If the camera is lerping, no offsets should apply
@@ -205,36 +207,7 @@ public class CameraController : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Modifies rotation angle via player input
-    /// </summary>
-    private void HandleRotation()
-    {
-        if (Input.GetButton("CameraRotation"))
-        {
-            // Add or subtract rotation based on input
-            if (Input.GetAxisRaw("CameraRotation") > 0)
-                _rotation += Time.deltaTime * _rotationSpeed;
-            else
-                _rotation -= Time.deltaTime * _rotationSpeed;
-
-            // Keep rotation value mapped in the range 0-360
-            if (_rotation < 0.0f || _rotation >= 360.0f)
-            {
-                int rotInt = (int)_rotation;
-                float rotDec = _rotation - (float)rotInt;
-
-                rotInt = rotInt % 360;
-                _rotation = (float)rotInt + rotDec;
-                if (_rotation < 0)
-                    _rotation += 360;
-            }
-        }
-    }
-
-    /// <summary>
-    /// Moves the camera towards it's destination at a constant speed when a switch action is active
-    /// </summary>
+    /// <summary>Moves the camera towards it's destination at a constant speed when a switch action is active.</summary>
     private void HandlePointSwitching()
     {
         if (_isSwitchingToNewPoint)
@@ -357,6 +330,26 @@ public class CameraController : MonoBehaviour
             Gizmos.DrawWireSphere(_startLookPosition, 0.2f);
         }
     }
+
+    #region GameController.ITarget Implementation
+
+    void GameController.ITarget.ReceiveMoveInput(Vector2 moveInput)
+    { }
+
+    void GameController.ITarget.ReceiveAimInput(Vector2 aimInput, GameController.ControlType controllerType)
+    { }
+
+    void GameController.ITarget.ReceiveActionInput(GameController.ActionState actionState)
+    {
+        if (actionState.LeftBumper.IsPressed)
+            _rotation -= Time.deltaTime * _rotationSpeed;
+        if (actionState.RightBumper.IsPressed)
+            _rotation += Time.deltaTime * _rotationSpeed;
+
+        _rotation = Mathf.Repeat(_rotation, 360);
+    }
+
+    #endregion
 
     #endregion
 }
