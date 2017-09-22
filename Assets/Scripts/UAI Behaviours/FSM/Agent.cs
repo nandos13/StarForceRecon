@@ -5,27 +5,12 @@ using UnityEngine.AI;
 
 public class Agent : MonoBehaviour
 {
-    
     ActionAI[] actions;     
-
     public ActionAI currentAction;
-
     public NavMeshAgent nv;
 
     void Start()
     {
-        // find all enemies on the map, and create an AttackAction for each one
-        //Agent[] allAgents = FindObjectsOfType<Agent>();
-        //for (int i = 0; i < allAgents.Length; i++)
-        //{
-
-        //}
-
-
-
-
-
-        //// get all the action-derived classes that are siblings of us
         actions = GetComponents<ActionAI>();
     }
     

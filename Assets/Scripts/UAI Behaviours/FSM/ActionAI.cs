@@ -8,82 +8,77 @@ public abstract class ActionAI : MonoBehaviour
     public abstract void UpdateAction(Agent agent);
     public abstract void Enter(Agent agent);
     public abstract void Exit(Agent agent);
+    [SerializeField]
+    protected float evaluation;
 
-    //public SquaddieController greatestThreat() {}  // Brute. approaches greatest threat, does Ground Pound, that does Area Effect Swipe
-  
-
-    public SquaddieController highestHealth()  // Approaches Highest health member
+    /// <summary>
+    /// Enemy Behaviours
+    /// </summary>
+    public SquaddieController greatestThreat()  // Brute. approaches greatest threat, does Ground Pound, that does Area Effect Swipe
     {
-        // Tracker variables to remember which one has the highest health
         SquaddieController best = null;
-        float highHealth = 0;
-
-        // Loop through all squad members
-        foreach (SquaddieController s in SquadManager.GetSquadMembers)
-        {
-            // Get current squad member's health
-            Health _health = s.GetComponent<Health>();
-            if (_health == null) continue;
-
-            // Check if this squad member has a higher health than any previous members
-            if (_health.healthPercent >= highHealth)
-            {
-                highHealth = _health.healthPercent;
-                best = s;
-            }
-        }
-
-        // Return the lowest health member that we found
         return best;
     }
 
-    //public SquaddieController controlled(){}     // Approuches the players controller member
+    public SquaddieController highestHealth()   // Approaches Highest health member
+    {
+        SquaddieController best = null; // Tracker variables to remember which one has the highest health
+        float highHealth = 0;
+        foreach (SquaddieController s in SquadManager.GetSquadMembers)  // Loop through all squad members
+        {
+            Health _health = s.GetComponent<Health>();  // Get current squad member's health
+            if (_health == null) continue;
+            if (_health.healthPercent >= highHealth)    // Check if this squad member has a higher health than any previous members
+            {
+                highHealth = _health.healthPercent;
+                best = s;
+                evaluation = highHealth;
+            }
+        }
+        return best;
+    }
 
+    public SquaddieController controlled()      // Approuches the players controller member
+    {
+        SquaddieController best = null;
+        return best;
+    }     
 
     public SquaddieController closest()         // Approaches the closest member
     {
-        // Tracker variables to remember which one is the closest
-        SquaddieController best = null;
-        float bestDist = 0;
+        const float closestDist = 3;
+        const float farthestDist = 5;
 
+        SquaddieController best = null; // Tracker variables to remember which one is the closest
+        float bestDist = 0;
         foreach (SquaddieController s in SquadManager.GetSquadMembers)
         {
             float dist = Vector3.Distance(s.transform.position, transform.position);
-            // check if the squad member is the closest
-            if (best == null || dist < bestDist)
+            if (best == null || dist < bestDist)    // check if the squad member is the closest
             {
                 best = s;
                 bestDist = dist;
+                evaluation = Mathf.Clamp01(1.0f - (dist-closestDist)/(farthestDist-closestDist));
             }
         }
-
-        // returns the closest member that we found
         return best;
     }
 
     public SquaddieController lowestHealth()   // slinger
     {
-        // Tracker variables to remember which one has the lowest health
-        SquaddieController best = null;
+        SquaddieController best = null; // Tracker variables to remember which one has the lowest health
         float lowHealth = float.MaxValue;
-
-        // Loop through all squad members
-        foreach (SquaddieController s in SquadManager.GetSquadMembers)
+        foreach (SquaddieController s in SquadManager.GetSquadMembers)  // Loop through all squad members
         {
-            // Get current squad member's health
-            Health _health = s.GetComponent<Health>();
+            Health _health = s.GetComponent<Health>(); // Get current squad member's health
             if (_health == null) continue;
-            
-            // Check if this squad member has a lower health than any previous members
-            if (_health.healthPercent <= lowHealth)
+            if (_health.healthPercent <= lowHealth) // Check if this squad member has a lower health than any previous members
             {
                 lowHealth = _health.healthPercent;
                 best = s;
+                evaluation = 1.0f - lowHealth;
             }
         }
-
-        // Return the lowest health member that we found
         return best;
     }
-
 }

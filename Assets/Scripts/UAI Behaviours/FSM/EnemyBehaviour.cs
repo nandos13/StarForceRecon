@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SlingerShoot : ActionAI
+public class EnemyBehaviour : ActionAI
 {
 
     // behavior
-    
+
     public float targetDistance;
     public float enemyLookDistance; // not really needed. just for testing
     public float attackDistance;
@@ -17,7 +17,16 @@ public class SlingerShoot : ActionAI
     public float enemyMoveSpeed;
     public Transform Target;
     Rigidbody _Rigidbody;
-    
+
+    public enum TargetType
+    {
+        Closest,
+        LowHealth,
+        HighHealth,
+        BiggestThreat,
+        Controlled
+    };
+
     // attack
     public int slingerDmg = 1;
     public float slingRate = 1f;
@@ -25,14 +34,25 @@ public class SlingerShoot : ActionAI
     public float slingRangeForce = 100f;
     private float nextFire;
     public Transform slingerRangeEnd;
+    public TargetType targetType;
     private WaitForSeconds slingerDuration = new WaitForSeconds(0.1f);
     private LineRenderer lineRender;
 
     public override float Evaluate(Agent a)
     {
-        SquaddieController target = lowestHealth();
+        SquaddieController target = null;
+        switch (targetType)
+        {
+            case TargetType.Closest: target = closest(); break;
+            case TargetType.LowHealth: target = lowestHealth(); break;
+            case TargetType.HighHealth: target = highestHealth(); break;
+            case TargetType.BiggestThreat: target = greatestThreat(); break;
+            case TargetType.Controlled: target = controlled(); break;
+        }
 
-        return 1;
+        if (Target != null)
+            Target = target.transform;
+        return evaluation;
     }
 
     public override void Enter(Agent agent) { }
