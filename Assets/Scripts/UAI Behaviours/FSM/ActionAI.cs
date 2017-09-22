@@ -42,7 +42,7 @@ public abstract class ActionAI : MonoBehaviour
     {
         SquaddieController best = null;
         return best;
-    }     
+    }
 
     public SquaddieController closest()         // Approaches the closest member
     {

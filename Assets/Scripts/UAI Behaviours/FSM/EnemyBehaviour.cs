@@ -50,7 +50,7 @@ public class EnemyBehaviour : ActionAI
             case TargetType.Controlled: target = controlled(); break;
         }
 
-        if (Target != null)
+        if (target != null)
             Target = target.transform;
         return evaluation;
     }
