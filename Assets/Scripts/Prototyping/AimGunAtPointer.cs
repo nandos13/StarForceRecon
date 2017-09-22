@@ -1,25 +1,28 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using StarForceRecon;
 
 public class AimGunAtPointer : MonoBehaviour
 {
   
-    private PlayerAim _aim = null;
+    private PlayerController _aim = null;
 
 	void Start ()
     {
 
-        _aim = GetComponentInParent<PlayerAim>();
+        _aim = GetComponentInParent<PlayerController>();
+        if (!_aim)
+            throw new System.MissingFieldException("No controller :(");
 	}
 	
 	void Update ()
     {
         if (_aim)
         {
-            if (_aim.IsAiming)
+            if (_aim.aiming)
             {
-                Vector3 point = _aim.GetAimPoint;
+                Vector3 point = _aim.aimPoint;
                 transform.LookAt(point, Vector3.up);
             }
         }

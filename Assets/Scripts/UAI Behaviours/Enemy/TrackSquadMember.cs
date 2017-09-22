@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using JakePerry;
+using StarForceRecon;
 
 public class TrackSquadMember : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class TrackSquadMember : MonoBehaviour
     uaiAgent _aiAgent = null;
 
     [Range(2, 5), SerializeField]   private float _meleeRange = 2;
-    private SquaddieController closest = null;
+    private SquadManager.IControllable closest = null;
 
 	void Start ()
     {
@@ -24,7 +25,7 @@ public class TrackSquadMember : MonoBehaviour
         // Find closest squaddie
 
         // Get all squad members
-        List<SquaddieController> squadMembers = SquadManager.GetSquadMembers;
+        List<SquadManager.IControllable> squadMembers = SquadManager.GetSquadMembers;
 
         // Find closest squad member
         float minDistance = float.MaxValue;

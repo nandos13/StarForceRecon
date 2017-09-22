@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using JakePerry;
+using StarForceRecon;
 
-public class Gun : MonoBehaviour
+public class Gun : MonoBehaviour, Equipment.IEquipment
 {
     #region Delegates & Events
 
@@ -363,5 +364,10 @@ public class Gun : MonoBehaviour
             // Raise event for reload failure
             RaiseEvent(OnReloadFailed);
         }
+    }
+
+    void Equipment.IEquipment.Use()
+    {
+        Fire(true);
     }
 }

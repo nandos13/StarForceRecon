@@ -1,18 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using StarForceRecon;
 
 [RequireComponent(typeof(LineRenderer))]
 public class LaserTest : MonoBehaviour
 {
 
     public Transform _origin;
-    private PlayerAim _aimScript;
+    private PlayerController _aimScript;
     public LineRenderer _line;
     
 	void Start ()
     {
-        _aimScript = GetComponent<PlayerAim>();
+        _aimScript = GetComponent<PlayerController>();
 
         if (!_line)
             _line = GetComponent<LineRenderer>();
@@ -24,12 +25,12 @@ public class LaserTest : MonoBehaviour
     {
         if (_aimScript && _line && _origin)
         {
-            Vector3 endPoint = _aimScript.GetAimPoint;
+            Vector3 endPoint = _aimScript.aimPoint;
             Vector3[] positions = { _origin.position, endPoint};
             _line.SetPositions(positions);
 
 
-            if (_aimScript.IsAiming)
+            if (_aimScript.aiming)
                 _line.enabled = true;
             else
                 _line.enabled = false;

@@ -12,7 +12,6 @@ public class ThirdPersonController : MonoBehaviour
     private Rigidbody _rb = null;
     private Animator _animator = null;
     private CapsuleCollider _col = null;
-    private PlayerAim _aim = null;
 
     #endregion
 
@@ -56,11 +55,10 @@ public class ThirdPersonController : MonoBehaviour
 
     private float _forward = 0.0f;
     private float _right = 0.0f;
-    private float _rollForward = 0.0f;
-    private float _rollRight = 0.0f;
 
     #endregion
 
+    public bool isRolling { get { return _rolling; } }
 
     private void Awake()
     {
@@ -68,7 +66,6 @@ public class ThirdPersonController : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
         _animator = GetComponent<Animator>();
         _col = GetComponent<CapsuleCollider>();
-        _aim = GetComponent<PlayerAim>();
 
         // Store default values
         _colHeight = _col.height;
@@ -101,20 +98,6 @@ public class ThirdPersonController : MonoBehaviour
 
             if (_rollTimeElapsed >= _rollTime)
                 EndRoll();
-        }
-        else
-        {
-            // Face towards the aim direction
-            // TODO: This should be moved to a separate script, only used by squad members.
-            if (_aim)
-            {
-                // TODO: Change to common Aim script rather than PlayerAim to also work with AI
-
-                Vector3 aimPoint = _aim.GetAimPoint - transform.position;
-                aimPoint.y = 0;
-                Quaternion rotation = Quaternion.LookRotation(aimPoint);
-                transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 20f);
-            }
         }
     }
 
@@ -154,9 +137,6 @@ public class ThirdPersonController : MonoBehaviour
                     _rollTimeElapsed = 0.0f;
                     _rolling = true;
                     _rollDir = transform.TransformDirection(direction);
-
-                    _rollForward = direction.z;
-                    _rollRight = direction.x;
                 }
             }
             else

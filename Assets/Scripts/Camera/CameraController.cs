@@ -1,8 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-using JakePerry;
+using StarForceRecon;
 
 /* This script should be placed on the Main Camera object in the scene.
  * Controls the camera by smoothly lerping between it's current position and a destination position. */
@@ -125,8 +124,8 @@ public class CameraController : MonoBehaviour
         }
 
         // Set follow points to current squad members location
-        SquaddieController currentSquaddie = SquadManager.GetCurrentSquaddie;
-        if (currentSquaddie)
+        SquadManager.IControllable currentSquaddie = SquadManager.GetCurrentSquaddie;
+        if (currentSquaddie != null)
             LookAtPosition(currentSquaddie.transform.position, _switchCharacterTime);
 
         // Add an event handler for squad member switching
@@ -139,8 +138,8 @@ public class CameraController : MonoBehaviour
     private void StSquadManager_OnSwitchSquaddie()
     {
         // Set the camera to switch to the new squaddie's position over _switchCharacterTime seconds.
-        SquaddieController currentSquaddie = SquadManager.GetCurrentSquaddie;
-        if (currentSquaddie)
+        SquadManager.IControllable currentSquaddie = SquadManager.GetCurrentSquaddie;
+        if (currentSquaddie != null)
             LookAtPosition(currentSquaddie.transform.position, _switchCharacterTime);
     }
 
@@ -165,8 +164,8 @@ public class CameraController : MonoBehaviour
         else
         {
             // The camera is not lerping. Get a look destination that is offset from the current character's position
-            SquaddieController currentSquaddie = SquadManager.GetCurrentSquaddie;
-            if (currentSquaddie)
+            SquadManager.IControllable currentSquaddie = SquadManager.GetCurrentSquaddie;
+            if (currentSquaddie != null)
             {
                 Vector3 characterPos = currentSquaddie.transform.position;
                 Vector3 aimPointOffset = GetAimOffset();
@@ -261,9 +260,7 @@ public class CameraController : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Returns a normalized Vector3 for the camera offset based on rotation & pitch
-    /// </summary>
+    /// <summary>Returns a normalized Vector3 for the camera offset based on rotation & pitch</summary>
     private Vector3 GetRotationalOffset()
     {
         Vector3 offset = new Vector3(   Mathf.Sin((_rotation - 90) * Mathf.Deg2Rad),
@@ -274,34 +271,35 @@ public class CameraController : MonoBehaviour
         return offset;
     }
 
-    /// <summary>
-    /// Returns a Vector3 for the camera offset based on where the currently controlled squad member is aiming.
-    /// </summary>
+    /// <summary>Returns a Vector3 for the camera offset based on where the currently controlled squad member is aiming.</summary>
     private Vector3 GetAimOffset()
     {
         if (_aimOffset > 0)
         {
             // Get a reference to the current squaddie's aim script
-            SquaddieController currentSquaddie = SquadManager.GetCurrentSquaddie;
-            if (currentSquaddie)
+            SquadManager.IControllable currentSquaddie = SquadManager.GetCurrentSquaddie;
+            if (currentSquaddie != null)
             {
-                PlayerAim aimScript = currentSquaddie.gameObject.GetComponent<PlayerAim>();
+                PlayerController aimScript = currentSquaddie as PlayerController;
                 if (aimScript)
                 {
                     // Get aim point
-                    if (aimScript.IsAiming)
+                    if (aimScript.aiming)
                     {
-                        Vector3 aimPoint = aimScript.GetAimMousePoint;
-                        Vector3 offsetPoint = aimPoint - currentSquaddie.transform.position;
+                        Vector3 aimPoint;
+                        if (aimScript.CharacterHorizonIntersect(StarForceRecon.Cursor.position, out aimPoint))
+                        {
+                            Vector3 offsetPoint = aimPoint - currentSquaddie.transform.position;
                         
-                        // Get offset & track for next frame
-                        Vector3 offset = offsetPoint * Mathf.Clamp01(_aimOffset);
-                        if (offset.magnitude > _aimOffsetMaxDistance)
-                            offset = offset.normalized * _aimOffsetMaxDistance;
+                            // Get offset & track for next frame
+                            Vector3 offset = offsetPoint * Mathf.Clamp01(_aimOffset);
+                            if (offset.magnitude > _aimOffsetMaxDistance)
+                                offset = offset.normalized * _aimOffsetMaxDistance;
 
-                        _previousAimOffset = offset;
+                            _previousAimOffset = offset;
 
-                        return offset;
+                            return offset;
+                        }
                     }
                     else
                         return _previousAimOffset;
@@ -311,9 +309,7 @@ public class CameraController : MonoBehaviour
         return Vector3.zero;
     }
 
-    /// <summary>
-    /// Sets the destination look point to the specified point & transitions the camera over time
-    /// </summary>
+    /// <summary>Sets the destination look point to the specified point & transitions the camera over time.</summary>
     private void FocusOnPoint(Vector3 point)
     {
         _destinationLookPoint = point;
