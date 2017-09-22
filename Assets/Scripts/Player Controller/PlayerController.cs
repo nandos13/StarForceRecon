@@ -358,8 +358,8 @@ namespace StarForceRecon
             else
             {
                 // Take the largest of movement values
-                float total = moveInput.x + moveInput.y;
-                float currentTotal = _moveDirection.x + _moveDirection.y;
+                float total = Mathf.Abs(moveInput.x) + Mathf.Abs(moveInput.y);
+                float currentTotal = Mathf.Abs(_moveDirection.x) + Mathf.Abs(_moveDirection.y);
 
                 if (total > currentTotal)
                 {
