@@ -303,13 +303,13 @@ namespace StarForceRecon
         {
             if (isActiveAndEnabled)
             {
-                if (actionState.LeftBumper.WasPressed)
+                if (actionState.DPadLeft.WasPressed)
                 {
                     SquadManager.Switch(true);
                     return;
                 }
 
-                if (actionState.RightBumper.WasPressed)
+                if (actionState.DPadRight.WasPressed)
                 {
                     SquadManager.Switch(false);
                     return;
@@ -341,7 +341,7 @@ namespace StarForceRecon
         {
             if (isActiveAndEnabled)
             {
-                UnityEngine.Cursor.lockState = CursorLockMode.Confined;
+                UnityEngine.Cursor.lockState = CursorLockMode.Locked;
                 UnityEngine.Cursor.visible = false;
                 AimPlayerCharacter(aimInput, type);
             }
@@ -361,10 +361,7 @@ namespace StarForceRecon
             else
             {
                 // Take the largest of movement values
-                float total = Mathf.Abs(moveInput.x) + Mathf.Abs(moveInput.y);
-                float currentTotal = Mathf.Abs(_moveDirection.x) + Mathf.Abs(_moveDirection.y);
-
-                if (total > currentTotal)
+                if (moveInput.magnitude > _moveDirection.magnitude)
                 {
                     _moveDirection.x += moveInput.x;
                     _moveDirection.y += moveInput.y;

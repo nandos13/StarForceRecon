@@ -22,5 +22,11 @@ namespace JakePerry
             controllers.Add(id, newController);
             return newController;
         }
+
+        /// <summary>Does a controller exist with specified id?</summary>
+        public static bool HasController(string id)
+        {
+            return controllers.ContainsKey(id);
+        }
     }
 }

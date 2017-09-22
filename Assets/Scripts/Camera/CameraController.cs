@@ -109,7 +109,8 @@ public class CameraController : MonoBehaviour, JakePerry.GameController.ITarget
             DestroyImmediate(this); // Instance already exists
         }
 
-        GameController gameController = ControllerManager<DualStickController>.GetController("Camera Rotation", this);
+        GameController gamepad = ControllerManager<DualStickController>.GetController("Camera Rotation", this);
+        GameController kbmController = ControllerManager<KeyboardMouseController>.GetController("Camera Rotation", this);
     }
 
     void Start ()
