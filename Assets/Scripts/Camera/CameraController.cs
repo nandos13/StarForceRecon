@@ -260,9 +260,7 @@ public class CameraController : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Returns a normalized Vector3 for the camera offset based on rotation & pitch
-    /// </summary>
+    /// <summary>Returns a normalized Vector3 for the camera offset based on rotation & pitch</summary>
     private Vector3 GetRotationalOffset()
     {
         Vector3 offset = new Vector3(   Mathf.Sin((_rotation - 90) * Mathf.Deg2Rad),
@@ -273,9 +271,7 @@ public class CameraController : MonoBehaviour
         return offset;
     }
 
-    /// <summary>
-    /// Returns a Vector3 for the camera offset based on where the currently controlled squad member is aiming.
-    /// </summary>
+    /// <summary>Returns a Vector3 for the camera offset based on where the currently controlled squad member is aiming.</summary>
     private Vector3 GetAimOffset()
     {
         if (_aimOffset > 0)
@@ -313,9 +309,7 @@ public class CameraController : MonoBehaviour
         return Vector3.zero;
     }
 
-    /// <summary>
-    /// Sets the destination look point to the specified point & transitions the camera over time
-    /// </summary>
+    /// <summary>Sets the destination look point to the specified point & transitions the camera over time.</summary>
     private void FocusOnPoint(Vector3 point)
     {
         _destinationLookPoint = point;

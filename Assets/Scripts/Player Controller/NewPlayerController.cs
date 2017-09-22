@@ -38,8 +38,12 @@ namespace StarForceRecon
         private float turningSpeed = 1.0f;
 
         [Tooltip("When aiming at a point within this radius from the character, the character will be locked to melee attacking only.")]
-        [SerializeField, Range(2.0f, 5.0f)]
-        private float closeAimRadius = 3.0f;
+        [SerializeField, Range(1.0f, 3.0f)]
+        private float closeAimRadius = 0.5f;
+
+        [Tooltip("Time in seconds for cursor to fade out when the character is not aiming.")]
+        [SerializeField, Range(0.2f, 2.0f)]
+        private float cursorFadeTime = 1.0f;
 
         [Header("Character Switching")]
 
@@ -71,6 +75,9 @@ namespace StarForceRecon
 
         private bool secondaryIsEquipped = false;
 
+        private static Canvas cursorCanvas = null;
+        private static UnityEngine.UI.Image cursorSprite = null;
+
         #endregion
 
         #endregion
@@ -81,6 +88,10 @@ namespace StarForceRecon
         {
             // Register to the Squad Manager
             SquadManager.AddSquadMember(this);
+
+            // Initialize aimer canvas
+            if (cursorCanvas == null)
+                cursorCanvas = CreateCursor(out cursorSprite);
 
             // Initialize Input
             _keyboardController = new KeyboardMouseController(this);
@@ -99,19 +110,65 @@ namespace StarForceRecon
                 throw new System.MissingFieldException("No Equipment component found.");
         }
 
+        private Canvas CreateCursor(out UnityEngine.UI.Image cursorSprite)
+        {
+            GameObject canvasObject = new GameObject("Aiming Cursor");
+            canvasObject.hideFlags = HideFlags.HideAndDontSave;
+            GameObject cursorObject = new GameObject("Cursor sprite");
+            cursorObject.transform.parent = canvasObject.transform;
+
+            Canvas canvas = canvasObject.AddComponent<Canvas>();
+            canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+
+            UnityEngine.UI.CanvasScaler scaler = canvasObject.AddComponent<UnityEngine.UI.CanvasScaler>();
+            scaler.uiScaleMode = UnityEngine.UI.CanvasScaler.ScaleMode.ScaleWithScreenSize;
+            scaler.referenceResolution = new Vector2(1920, 1080);
+            scaler.matchWidthOrHeight = 1f;
+
+            UnityEngine.UI.Image image = cursorObject.AddComponent<UnityEngine.UI.Image>();
+            image.sprite = Resources.Load<Sprite>("Sprites/AimCursor");
+
+            cursorSprite = image;
+            return canvas;
+        }
+
         private void Update()
         {
-            RotateToFaceAimCheck(StarForceRecon.Cursor.position, maxHipSwivel);
-
             // Find aim point, limited to minimum radius
             aimPoint = _aimHandler.HandlePlayerAiming(StarForceRecon.Cursor.position);
             float horizontalDistance = Vector3.Distance(transform.position, new Vector3(aimPoint.x, 0, aimPoint.z));
             aiming = (horizontalDistance >= closeAimRadius);
+
+            // Rotate towards aim
+            if (aiming)
+                RotateToFaceAimCheck(StarForceRecon.Cursor.position, maxHipSwivel);
+
+            UpdateOnScreenCursor();
         }
 
         private void FixedUpdate()
         {
             MovePlayerCharacter();
+        }
+
+        /// <summary>Updates position, rotation & alpha of on screen cursor.</summary>
+        private void UpdateOnScreenCursor()
+        {
+            // Match cursor sprite to cursor position
+            cursorSprite.rectTransform.position =
+                StarForceRecon.Cursor.ToScreenSpace(cursorCanvas.pixelRect.width, cursorCanvas.pixelRect.height);
+            if (aiming)
+                cursorSprite.rectTransform.rotation =
+                    Quaternion.Euler(0, 0, Vector2.SignedAngle(Vector3.up, StarForceRecon.Cursor.position - CENTER_VIEWPORT));
+
+            // Set cursor alpha
+            Color color = cursorSprite.color;
+
+            if (!aiming) color.a -= Time.deltaTime / cursorFadeTime;
+            else color.a = 1;
+
+            color.a = Mathf.Clamp01(color.a);
+            cursorSprite.color = color;
         }
 
         /// <summary>Moves the cursor on the screen based on given input.</summary>
@@ -323,6 +380,9 @@ namespace StarForceRecon
 
             // Enable this script
             this.enabled = true;
+
+            // Change cursor colour to this character's colour
+            cursorSprite.color = Color.red;
         }
 
         void SquadManager.IControllable.OnSwitchAway()
@@ -353,28 +413,6 @@ namespace StarForceRecon
         {
             _tpc.StopMovement();
         }
-
-        /* ***************     TESTING, DELETE SOON     *************** */
-        private static GameObject cursorObjectTESTING = null;
-        private void OnDrawGizmosSelected()
-        {
-            if (Application.isPlaying)
-            {
-                if (cursorObjectTESTING == null)
-                {
-                    Debug.Log("Creating test cursor object");
-                    cursorObjectTESTING = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                    cursorObjectTESTING.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-                    cursorObjectTESTING.layer = Physics.IgnoreRaycastLayer;
-                }
-
-                // Draw cursor
-                Ray ray = Camera.main.ViewportPointToRay(StarForceRecon.Cursor.position);
-                Vector3 cursorPosition = ray.GetPoint(3.0f);
-                cursorObjectTESTING.transform.position = cursorPosition;
-            }
-        }
-        /* ***************     END TESTING     *************** */
 
         #endregion
     }
@@ -431,7 +469,13 @@ namespace StarForceRecon
             pos.y += movement.y / screenDimensions.y;
             ClampPosition();
         }
-        
+
+        /// <summary>Converts viewport position to screenspace with specified width and height.</summary>
+        public static Vector2 ToScreenSpace(float screenWidth, float screenHeight)
+        {
+            return new Vector2(screenWidth * pos.x, screenHeight * pos.y);
+        }
+
         /// <returns>The cursor position, mapped -1 to 1.</returns>
         public static Vector2 ToNegativeOneToOne()
         {
