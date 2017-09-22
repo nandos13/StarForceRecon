@@ -132,9 +132,7 @@ public class CameraController : MonoBehaviour
         SquadManager.OnSwitchSquaddie += StSquadManager_OnSwitchSquaddie;
     }
     
-    /// <summary>
-    /// Event Handler for squad member switching. Handles cam lerping to new location
-    /// </summary>
+    /// <summary>Event Handler for squad member switching. Handles cam lerping to new location</summary>
     private void StSquadManager_OnSwitchSquaddie()
     {
         // Set the camera to switch to the new squaddie's position over _switchCharacterTime seconds.

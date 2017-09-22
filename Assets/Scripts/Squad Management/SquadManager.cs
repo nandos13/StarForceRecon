@@ -40,31 +40,10 @@ namespace StarForceRecon
 
         #endregion
 
-        /// <summary>Internal use only. Checks for registered listeners before raising the switch event.</summary>
         private static void RaiseSwitchEvent()
         {
-            SquadMemberSwitchEvent switchEvent = OnSwitchSquaddie;
-            if (switchEvent != null)    // Check there are registered listeners before firing event
-                switchEvent();
-        }
-
-        /// <summary>Sets the list of controllable squad members</summary>
-        public static void SetSquadList(List<IControllable> members)
-        {
-            // Call switch event with null selection
-            _selected = null;
-            _selectedIndex = 0;
-            RaiseSwitchEvent();
-
-            // Set list
-            _squadMembers = members;
-
-            // Select first member
-            if (_squadMembers.Count > 0)
-            {
-                _selected = _squadMembers[0];
-                RaiseSwitchEvent();
-            }
+            if (OnSwitchSquaddie != null)    // Check there are registered listeners before firing event 
+                OnSwitchSquaddie();
         }
 
         /// <summary>Adds the specified member to the squad.</summary>
@@ -76,11 +55,13 @@ namespace StarForceRecon
                 _squadMembers.Add(member);
 
                 // If no characters are selected
-                if (_selectedIndex < 0)
+                if (_selected == null)
                 {
-                    _selectedIndex = 0;
+                    _selectedIndex = _squadMembers.Count - 1;
                     _selected = member;
+
                     member.OnSwitchTo();
+                    RaiseSwitchEvent();
                 }
                 else
                     member.OnSwitchAway();
@@ -103,9 +84,11 @@ namespace StarForceRecon
                 // Only one squad member available
                 _selected = _squadMembers[0];
                 _selectedIndex = 0;
+                return;
             }
 
             // Get index of the next squad member
+            int previousSelected = _selectedIndex;
             int finalIndex = _squadMembers.Count - 1;
             int next = _selectedIndex;
 
@@ -129,6 +112,8 @@ namespace StarForceRecon
             _selected = _squadMembers[_selectedIndex];
 
             // Trigger switch event
+            _squadMembers[previousSelected].OnSwitchAway();
+            _selected.OnSwitchTo();
             RaiseSwitchEvent();
         }
 
@@ -143,10 +128,12 @@ namespace StarForceRecon
             {
                 if (index != _selectedIndex)
                 {
+                    _selected.OnSwitchAway();
+
                     _selectedIndex = index;
                     _selected = _squadMembers[index];
 
-                    // Trigger switch event
+                    _selected.OnSwitchTo();
                     RaiseSwitchEvent();
 
                     return true;
