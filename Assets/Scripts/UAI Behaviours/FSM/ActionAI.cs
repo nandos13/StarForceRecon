@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using StarForceRecon;
 
 public abstract class ActionAI : MonoBehaviour
 {
@@ -14,19 +15,22 @@ public abstract class ActionAI : MonoBehaviour
     /// <summary>
     /// Enemy Behaviours
     /// </summary>
-    public SquaddieController greatestThreat()  // Brute. approaches greatest threat, does Ground Pound, that does Area Effect Swipe
+    public SquadManager.IControllable greatestThreat()  // Brute. approaches greatest threat, does Ground Pound, that does Area Effect Swipe
     {
-        SquaddieController best = null;
+        SquadManager.IControllable best = null;
         return best;
     }
 
-    public SquaddieController highestHealth()   // Approaches Highest health member
+    public SquadManager.IControllable highestHealth()   // Approaches Highest health member
     {
-        SquaddieController best = null; // Tracker variables to remember which one has the highest health
+        SquadManager.IControllable best = null; // Tracker variables to remember which one has the highest health
         float highHealth = 0;
-        foreach (SquaddieController s in SquadManager.GetSquadMembers)  // Loop through all squad members
+        foreach (SquadManager.IControllable s in SquadManager.GetSquadMembers)  // Loop through all squad members
         {
-            Health _health = s.GetComponent<Health>();  // Get current squad member's health
+            MonoBehaviour behaviour = s as MonoBehaviour;
+            if (behaviour == null) continue;
+
+            Health _health = behaviour.GetComponent<Health>();  // Get current squad member's health
             if (_health == null) continue;
             if (_health.healthPercent >= highHealth)    // Check if this squad member has a higher health than any previous members
             {
@@ -38,20 +42,20 @@ public abstract class ActionAI : MonoBehaviour
         return best;
     }
 
-    public SquaddieController controlled()      // Approuches the players controller member
+    public SquadManager.IControllable controlled()      // Approuches the players controller member
     {
-        SquaddieController best = null;
+        SquadManager.IControllable best = null;
         return best;
     }
 
-    public SquaddieController closest()         // Approaches the closest member
+    public SquadManager.IControllable closest()         // Approaches the closest member
     {
         const float closestDist = 3;
         const float farthestDist = 5;
 
-        SquaddieController best = null; // Tracker variables to remember which one is the closest
+        SquadManager.IControllable best = null; // Tracker variables to remember which one is the closest
         float bestDist = 0;
-        foreach (SquaddieController s in SquadManager.GetSquadMembers)
+        foreach (SquadManager.IControllable s in SquadManager.GetSquadMembers)
         {
             float dist = Vector3.Distance(s.transform.position, transform.position);
             if (best == null || dist < bestDist)    // check if the squad member is the closest
@@ -64,13 +68,16 @@ public abstract class ActionAI : MonoBehaviour
         return best;
     }
 
-    public SquaddieController lowestHealth()   // slinger
+    public SquadManager.IControllable lowestHealth()   // slinger
     {
-        SquaddieController best = null; // Tracker variables to remember which one has the lowest health
+        SquadManager.IControllable best = null; // Tracker variables to remember which one has the lowest health
         float lowHealth = float.MaxValue;
-        foreach (SquaddieController s in SquadManager.GetSquadMembers)  // Loop through all squad members
+        foreach (SquadManager.IControllable s in SquadManager.GetSquadMembers)  // Loop through all squad members
         {
-            Health _health = s.GetComponent<Health>(); // Get current squad member's health
+            MonoBehaviour behaviour = s as MonoBehaviour;
+            if (behaviour == null) continue;
+
+            Health _health = behaviour.GetComponent<Health>(); // Get current squad member's health
             if (_health == null) continue;
             if (_health.healthPercent <= lowHealth) // Check if this squad member has a lower health than any previous members
             {

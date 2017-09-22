@@ -4,7 +4,6 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(CapsuleCollider))]
-[RequireComponent(typeof(Animator))]
 public class ThirdPersonController : MonoBehaviour
 {
     #region References
@@ -64,8 +63,11 @@ public class ThirdPersonController : MonoBehaviour
     {
         // Get references
         _rb = GetComponent<Rigidbody>();
-        _animator = GetComponent<Animator>();
+        _animator = GetComponentInChildren<Animator>();
         _col = GetComponent<CapsuleCollider>();
+
+        if (_animator == null)
+            throw new System.MissingFieldException("Third Person Controller requires an Animator component on a descendant.");
 
         // Store default values
         _colHeight = _col.height;

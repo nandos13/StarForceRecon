@@ -86,9 +86,6 @@ namespace StarForceRecon
 
         private void Awake()
         {
-            // Register to the Squad Manager
-            SquadManager.AddSquadMember(this);
-
             // Initialize aimer canvas
             if (cursorCanvas == null)
                 cursorCanvas = CreateCursor(out cursorSprite);
@@ -108,6 +105,12 @@ namespace StarForceRecon
                 throw new System.MissingFieldException("No Aim Handler component found.");
             if (_equipment == null)
                 throw new System.MissingFieldException("No Equipment component found.");
+        }
+
+        private void Start()
+        {
+            // Register to the Squad Manager
+            SquadManager.AddSquadMember(this);
         }
 
         private Canvas CreateCursor(out UnityEngine.UI.Image cursorSprite)

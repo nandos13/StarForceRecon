@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using StarForceRecon;
 
 public class EnemyBehaviour : ActionAI
 {
@@ -40,7 +41,7 @@ public class EnemyBehaviour : ActionAI
 
     public override float Evaluate(Agent a)
     {
-        SquaddieController target = null;
+        SquadManager.IControllable target = null;
         switch (targetType)
         {
             case TargetType.Closest: target = closest(); break;
