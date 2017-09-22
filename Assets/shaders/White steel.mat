@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Shader Forge_white_steel
+  m_Name: White steel
   m_Shader: {fileID: 4800000, guid: f687e0ce925cbc94ebb3ec24235da0a2, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
