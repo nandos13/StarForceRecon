@@ -37,10 +37,10 @@ namespace JakePerry
             actionSet.DPadRight.AddDefaultBinding(Key.Key4);
 
             // Set bindings for Triggers & Bumpers
-            actionSet.Trigger1.AddDefaultBinding(InputControlType.LeftTrigger);
-            actionSet.Trigger1.AddDefaultBinding(InputControlType.RightTrigger);
-            actionSet.LeftBumper.AddDefaultBinding(InputControlType.LeftBumper);
-            actionSet.RightBumper.AddDefaultBinding();
+            actionSet.Trigger1.AddDefaultBinding(Mouse.LeftButton);
+            actionSet.Trigger2.AddDefaultBinding(Mouse.RightButton);
+            actionSet.LeftBumper.AddDefaultBinding(Key.Q);
+            actionSet.RightBumper.AddDefaultBinding(Key.E);
 
             // Set bindings for Actions
             actionSet.Action1.AddDefaultBinding(Key.Space);

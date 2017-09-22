@@ -37,8 +37,8 @@ namespace JakePerry
             actionSet.DPadRight.AddDefaultBinding(InputControlType.DPadRight);
 
             // Set bindings for Triggers & Bumpers
-            actionSet.Trigger1.AddDefaultBinding(InputControlType.LeftTrigger);
             actionSet.Trigger1.AddDefaultBinding(InputControlType.RightTrigger);
+            actionSet.Trigger2.AddDefaultBinding(InputControlType.LeftTrigger);
             actionSet.LeftBumper.AddDefaultBinding(InputControlType.LeftBumper);
             actionSet.RightBumper.AddDefaultBinding(InputControlType.RightBumper);
 
