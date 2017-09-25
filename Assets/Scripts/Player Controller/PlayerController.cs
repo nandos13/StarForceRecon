@@ -8,14 +8,14 @@ namespace StarForceRecon
         RequireComponent(typeof(AimHandler)),
         RequireComponent(typeof(Equipment)),
         DisallowMultipleComponent]
-    public class PlayerController : MonoBehaviour, GameController.ITarget, SquadManager.IControllable
+    public class PlayerController : MonoBehaviour, GameController<SFRInputSet>.ITarget, SquadManager.IControllable
     {
         #region Variables
 
         #region Input Controls
 
-        private GameController _keyboardController = null;
-        private GameController _gamepadController = null;
+        private GameController<SFRInputSet> _keyboardController = null;
+        private GameController<SFRInputSet> _gamepadController = null;
         private int _lastAimMouseTime = -1;
         private int _lastAimJoystickTime = -1;
         private int _validInputReceiveTime = -1;
@@ -84,6 +84,8 @@ namespace StarForceRecon
 
         #region Functionality
 
+        #region Unity Lifetime Functions
+
         private void Awake()
         {
             // Initialize aimer canvas
@@ -92,8 +94,8 @@ namespace StarForceRecon
 
             // Initialize Input
             string controllerID = "PlayerController";
-            _keyboardController = ControllerManager<KeyboardMouseController>.GetController(controllerID, this);
-            _gamepadController = ControllerManager<DualStickController>.GetController(controllerID, this);
+            _keyboardController = ControllerManager<KeyboardMouseController<SFRInputSet>, SFRInputSet>.GetController(controllerID, this);
+            _gamepadController = ControllerManager<DualStickController<SFRInputSet>, SFRInputSet>.GetController(controllerID, this);
 
             // Get component references
             _tpc = GetComponent<ThirdPersonController>();
@@ -113,6 +115,34 @@ namespace StarForceRecon
             // Register to the Squad Manager
             SquadManager.AddSquadMember(this);
         }
+
+        private void Update()
+        {
+            // Find aim point, limited to minimum radius
+            aimPoint = _aimHandler.HandlePlayerAiming(StarForceRecon.Cursor.position);
+            float horizontalDistance = Vector3.Distance(transform.position, new Vector3(aimPoint.x, 0, aimPoint.z));
+            aiming = (horizontalDistance >= closeAimRadius);
+
+            // Rotate towards aim
+            if (aiming && !_tpc.isRolling)
+                RotateToFaceAimCheck(StarForceRecon.Cursor.position, maxHipSwivel);
+
+            UpdateOnScreenCursor();
+        }
+
+        private void FixedUpdate()
+        {
+            MovePlayerCharacter();
+        }
+
+        private void OnDisable()
+        {
+            _tpc.StopMovement();
+        }
+
+        #endregion
+
+        #region Visual Cursor
 
         private Canvas CreateCursor(out UnityEngine.UI.Image cursorSprite)
         {
@@ -137,26 +167,7 @@ namespace StarForceRecon
             cursorSprite = image;
             return canvas;
         }
-
-        private void Update()
-        {
-            // Find aim point, limited to minimum radius
-            aimPoint = _aimHandler.HandlePlayerAiming(StarForceRecon.Cursor.position);
-            float horizontalDistance = Vector3.Distance(transform.position, new Vector3(aimPoint.x, 0, aimPoint.z));
-            aiming = (horizontalDistance >= closeAimRadius);
-
-            // Rotate towards aim
-            if (aiming && !_tpc.isRolling)
-                RotateToFaceAimCheck(StarForceRecon.Cursor.position, maxHipSwivel);
-
-            UpdateOnScreenCursor();
-        }
-
-        private void FixedUpdate()
-        {
-            MovePlayerCharacter();
-        }
-
+        
         /// <summary>Updates position, rotation & alpha of on screen cursor.</summary>
         private void UpdateOnScreenCursor()
         {
@@ -196,6 +207,8 @@ namespace StarForceRecon
             else
                 StarForceRecon.Cursor.FixedMove(aimInput * MOUSE_SPEED, new Vector2(Screen.width, Screen.height));
         }
+
+        #endregion
 
         /// <summary>Finds where the cursor is hovering over the character's horizontal plane.</summary>
         /// <param name="viewportCursorPosition">Cursor position in Viewport [0-1][0-1].</param>
@@ -240,11 +253,11 @@ namespace StarForceRecon
         }
         
         /// <summary>Makes the character aim at a certain point based on input.</summary>
-        private void AimPlayerCharacter(Vector2 aimInput, GameController.ControlType type)
+        private void AimPlayerCharacter(Vector2 aimInput, GameController<SFRInputSet>.ControlType type)
         {
             bool useJoystickAim = false;
 
-            if (type == GameController.ControlType.Gamepad)
+            if (type == GameController<SFRInputSet>.ControlType.Gamepad)
             {
                 // Use joystick aiming if controller has been used more recently than mouse
                 useJoystickAim = (_lastAimMouseTime + 1) < _lastAimJoystickTime;
@@ -255,6 +268,42 @@ namespace StarForceRecon
                 if (aimInput.x != 0 || aimInput.y != 0) _lastAimMouseTime = Time.frameCount;
             
             ModifyCursorPosition(aimInput, useJoystickAim);
+        }
+
+        private void HandleActionInput(SFRInputSet inputSet)
+        {
+            if (inputSet.GetActionByName("switchForward").WasPressed)
+            {
+                SquadManager.Switch(true);
+                return;
+            }
+
+            if (inputSet.GetActionByName("switchBack").WasPressed)
+            {
+                SquadManager.Switch(false);
+                return;
+            }
+
+            Debug.Log(inputSet.GetActionByName("roll").WasPressed);
+            if (inputSet.GetActionByName("roll").WasPressed)
+                _rollKeyPressed = true;
+            if (_rollKeyPressed || _tpc.isRolling) return; // Prevent other actions if rolling
+
+            if (!meleeLocked && inputSet.GetActionByName("melee").WasPressed)
+                StartMeleeAttack();
+            if (meleeLocked) return; // Prevent other actions if doing a melee attack
+
+            if (inputSet.GetActionByName("switchWeapon").WasPressed)
+            {
+                _equipment.PrimarySecondarySwap();
+                // TODO: Disable firing until swap animation is done
+                return;
+            }
+
+            if (inputSet.GetActionByName("fire").IsPressed)
+                _equipment.Use(Equipment.Slot.Primary);
+
+            // TODO: Other equipment
         }
 
         /// <summary>Moves the character based on input since last move.</summary>
@@ -278,6 +327,28 @@ namespace StarForceRecon
             _rollKeyPressed = false;
         }
 
+        /// <summary>Records input to be applied on the next FixedUpdate call.
+        /// Once input has been received, input is locked until the next FixedUpdate.</summary>
+        private void HandleMovementInput(Vector2 moveInput)
+        {
+            if (_validInputReceiveTime < 0)
+            {
+                _moveDirection.x = moveInput.x;
+                _moveDirection.y = moveInput.y;
+
+                _validInputReceiveTime = Time.frameCount;
+            }
+            else
+            {
+                // Take the largest of movement values
+                if (moveInput.magnitude > _moveDirection.magnitude)
+                {
+                    _moveDirection.x += moveInput.x;
+                    _moveDirection.y += moveInput.y;
+                }
+            }
+        }
+
         private void InterruptMeleeAttack()
         {
             if (meleeLocked)
@@ -299,76 +370,22 @@ namespace StarForceRecon
 
         #region GameController ITarget Methods
 
-        void GameController.ITarget.ReceiveActionInput(GameController.ActionState actionState)
-        {
-            if (isActiveAndEnabled)
-            {
-                if (actionState.DPadLeft.WasPressed)
-                {
-                    SquadManager.Switch(true);
-                    return;
-                }
-
-                if (actionState.DPadRight.WasPressed)
-                {
-                    SquadManager.Switch(false);
-                    return;
-                }
-
-                if (actionState.Action1.WasPressed) // If ROLL key was pressed this frame
-                    _rollKeyPressed = true;
-                if (_rollKeyPressed || _tpc.isRolling) return; // Prevent other actions if rolling
-
-                if (!meleeLocked && actionState.Action2.WasPressed) // If MELEE key was pressed this frame
-                    StartMeleeAttack();
-                if (meleeLocked) return; // Prevent other actions if doing a melee attack
-
-                if (actionState.Action4.WasPressed) // If WEAPON_SWITCH key was pressed this frame
-                {
-                    _equipment.PrimarySecondarySwap();
-                    // TODO: Disable firing until swap animation is done
-                    return;
-                }
-
-                if (actionState.Trigger1.IsPressed)
-                    _equipment.Use(Equipment.Slot.Primary);
-
-                // TODO: Other equipment
-            }
-        }
-
-        void GameController.ITarget.ReceiveAimInput(Vector2 aimInput, GameController.ControlType type)
+        void GameController<SFRInputSet>.ITarget.ReceiveControllerInput(SFRInputSet inputSet, 
+            GameController<SFRInputSet>.ControlType controllerType)
         {
             if (isActiveAndEnabled)
             {
                 UnityEngine.Cursor.lockState = CursorLockMode.Locked;
                 UnityEngine.Cursor.visible = false;
-                AimPlayerCharacter(aimInput, type);
+
+                HandleMovementInput(inputSet.GetDualAxisByName("movement").Value);
+                
+                AimPlayerCharacter(inputSet.GetDualAxisByName("looking"), controllerType);
+
+                HandleActionInput(inputSet);
             }
         }
-
-        void GameController.ITarget.ReceiveMoveInput(Vector2 moveInput)
-        {
-            // Record input to be applied on next FixedUpdate call.
-            // Once input has been received, input is locked until the next FixedUpdate.
-            if (_validInputReceiveTime < 0)
-            {
-                _moveDirection.x = moveInput.x;
-                _moveDirection.y = moveInput.y;
-
-                _validInputReceiveTime = Time.frameCount;
-            }
-            else
-            {
-                // Take the largest of movement values
-                if (moveInput.magnitude > _moveDirection.magnitude)
-                {
-                    _moveDirection.x += moveInput.x;
-                    _moveDirection.y += moveInput.y;
-                }
-            }
-        }
-
+        
         #endregion
 
         #region SquadManager IControllable Methods
@@ -411,12 +428,7 @@ namespace StarForceRecon
         { get { return transform; } }
 
         #endregion
-
-        private void OnDisable()
-        {
-            _tpc.StopMovement();
-        }
-
+        
         #endregion
 
         #region Cursor Destroy Behaviour

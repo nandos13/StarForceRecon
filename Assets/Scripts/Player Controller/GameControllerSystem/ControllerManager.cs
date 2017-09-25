@@ -3,12 +3,13 @@ using UnityEngine;
 
 namespace JakePerry
 {
-    public static class ControllerManager<T> where T : GameController, new()
+    public static class ControllerManager<T, U> where T : GameController<U>, new() 
+                                                where U : GameSpecificInputSet, new()
     {
         private static Dictionary<string, T> controllers = new Dictionary<string, T>();
 
         /// <summary>Gets controller with ID id. Adds target to the controller. If controller does not exist, creates a new one.</summary>
-        public static T GetController(string id, GameController.ITarget target)
+        public static T GetController(string id, GameController<U>.ITarget target)
         {
             if (controllers.ContainsKey(id))
             {

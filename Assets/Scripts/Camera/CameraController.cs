@@ -7,7 +7,7 @@ using JakePerry;
 /* This script should be placed on the Main Camera object in the scene.
  * Controls the camera by smoothly lerping between it's current position and a destination position. */
 [DisallowMultipleComponent()]
-public class CameraController : MonoBehaviour, JakePerry.GameController.ITarget
+public class CameraController : MonoBehaviour, JakePerry.GameController<SFRInputSet>.ITarget
 {
     #region Member Variables
 
@@ -109,8 +109,11 @@ public class CameraController : MonoBehaviour, JakePerry.GameController.ITarget
             DestroyImmediate(this); // Instance already exists
         }
 
-        GameController gamepad = ControllerManager<DualStickController>.GetController("Camera Rotation", this);
-        GameController kbmController = ControllerManager<KeyboardMouseController>.GetController("Camera Rotation", this);
+        GameController<SFRInputSet> gamepad = 
+            ControllerManager<DualStickController<SFRInputSet>, SFRInputSet>.GetController("Camera Rotation", this);
+
+        GameController<SFRInputSet> kbmController = 
+            ControllerManager<KeyboardMouseController<SFRInputSet>, SFRInputSet>.GetController("Camera Rotation", this);
     }
 
     void Start ()
@@ -334,17 +337,12 @@ public class CameraController : MonoBehaviour, JakePerry.GameController.ITarget
 
     #region GameController.ITarget Implementation
 
-    void GameController.ITarget.ReceiveMoveInput(Vector2 moveInput)
-    { }
-
-    void GameController.ITarget.ReceiveAimInput(Vector2 aimInput, GameController.ControlType controllerType)
-    { }
-
-    void GameController.ITarget.ReceiveActionInput(GameController.ActionState actionState)
+    void GameController<SFRInputSet>.ITarget.ReceiveControllerInput(SFRInputSet inputSet,
+        GameController<SFRInputSet>.ControlType controllerType)
     {
-        if (actionState.LeftBumper.IsPressed)
+        if (inputSet.GetActionByName("rotateCameraRight").IsPressed)
             _rotation -= Time.deltaTime * _rotationSpeed;
-        if (actionState.RightBumper.IsPressed)
+        if (inputSet.GetActionByName("rotateCameraLeft").IsPressed)
             _rotation += Time.deltaTime * _rotationSpeed;
 
         _rotation = Mathf.Repeat(_rotation, 360);
