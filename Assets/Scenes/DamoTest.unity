@@ -784,7 +784,7 @@ MonoBehaviour:
   slingRange: 30
   slingRangeForce: 100
   slingerRangeEnd: {fileID: 1079289593}
-  targetType: 0
+  targetType: 2
 --- !u!114 &1324188701
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -972,19 +972,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   evaluation: 1
-  targetDistance: 10
+  targetDistance: 25
   enemyLookDistance: 40
-  attackDistance: 10
-  minDistance: 3
+  attackDistance: 20
+  minDistance: 11
   damping: 10
   enemyMoveSpeed: 0.5
   Target: {fileID: 0}
   slingerDmg: 1
-  slingRate: 1
-  slingRange: 10
+  slingRate: 3
+  slingRange: 30
   slingRangeForce: 100
   slingerRangeEnd: {fileID: 1079289593}
-  targetType: 2
+  targetType: 1
 --- !u!54 &1324188708
 Rigidbody:
   m_ObjectHideFlags: 0

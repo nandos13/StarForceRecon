@@ -40,7 +40,7 @@ public abstract class ActionAI : MonoBehaviour
             {
                 highHealth = _health.healthPercent;
                 best = s;
-                evaluation = highHealth;
+                evaluation = highHealth * GetRelevance(_health);
             }
         }
         return best;
@@ -87,15 +87,18 @@ public abstract class ActionAI : MonoBehaviour
             {
                 lowHealth = _health.healthPercent;
                 best = s;
-                evaluation = 1.0f - lowHealth;
+                evaluation = (1.0f - lowHealth) * GetRelevance(_health);
             }
         }
         return best;
     }
 
-    public SquadManager.IControllable idle()    // TODO - this will be default, if no target within range to evaluate.
+    float GetRelevance(Health _health)      // calculates the distance of a squad member and divides it with health.
     {
-        SquadManager.IControllable best = null;
-        return best;
+        float dist = Vector3.Distance(_health.transform.position, transform.position);
+
+        return 100.0f/ (1.0f + dist);
     }
+
+  
 }

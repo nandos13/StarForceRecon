@@ -30,6 +30,8 @@ public class Agent : MonoBehaviour
         // update the current action
         if (currentAction)
             currentAction.UpdateAction(this);
+        else
+            Debug.Log("No action available!");
     }
 
     // checks all our available actions and evaluates each one, getting the best
