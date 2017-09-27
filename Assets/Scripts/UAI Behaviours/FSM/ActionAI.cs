@@ -17,6 +17,10 @@ public abstract class ActionAI : MonoBehaviour
     /// </summary>
     public SquadManager.IControllable greatestThreat()  // Brute. approaches greatest threat, does Ground Pound, that does Area Effect Swipe
     {
+
+
+
+
         SquadManager.IControllable best = null;
         return best;
     }
@@ -51,7 +55,7 @@ public abstract class ActionAI : MonoBehaviour
     public SquadManager.IControllable closest()         // Approaches the closest member
     {
         const float closestDist = 3;
-        const float farthestDist = 5;
+        const float farthestDist = 6;
 
         SquadManager.IControllable best = null; // Tracker variables to remember which one is the closest
         float bestDist = 0;
@@ -86,6 +90,12 @@ public abstract class ActionAI : MonoBehaviour
                 evaluation = 1.0f - lowHealth;
             }
         }
+        return best;
+    }
+
+    public SquadManager.IControllable idle()    // TODO - this will be default, if no target within range to evaluate.
+    {
+        SquadManager.IControllable best = null;
         return best;
     }
 }

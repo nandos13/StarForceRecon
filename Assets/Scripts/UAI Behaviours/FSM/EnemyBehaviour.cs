@@ -25,7 +25,8 @@ public class EnemyBehaviour : ActionAI
         LowHealth,
         HighHealth,
         BiggestThreat,
-        Controlled
+        Controlled,
+        Idle
     };
 
     // attack
@@ -49,6 +50,7 @@ public class EnemyBehaviour : ActionAI
             case TargetType.HighHealth: target = highestHealth(); break;
             case TargetType.BiggestThreat: target = greatestThreat(); break;
             case TargetType.Controlled: target = controlled(); break;
+            case TargetType.Idle: target = idle(); break;
         }
 
         if (target != null)
