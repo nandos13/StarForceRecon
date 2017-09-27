@@ -27,7 +27,7 @@ public class Menu_Test : MonoBehaviour {
         if(Input.GetButtonDown("Fire1"))
         {
             _animator.SetBool("AnyKey", true);
-            Destroy(_anyCanvas, 0.5f);
+            Destroy(_anyCanvas, 0.6f);
         }
     }
 
@@ -39,7 +39,7 @@ public class Menu_Test : MonoBehaviour {
             {
                 pressed = true;
                 _animator.SetBool("Settings", true);
-                Invoke("Reset", 1.0f);
+                Invoke("Reset", 2.0f);
                 _settings = true;
                 _startCanvas.SetActive(false);
                 _menuCanvas.SetActive(true);
@@ -49,7 +49,7 @@ public class Menu_Test : MonoBehaviour {
             {
                 pressed = true;
                 _animator.SetBool("Settings", false);
-                Invoke("Reset", 1.0f);
+                Invoke("Reset", 2.0f);
                 _settings = false;
                 _startCanvas.SetActive(true);
                 _menuCanvas.SetActive(false);
@@ -65,7 +65,7 @@ public class Menu_Test : MonoBehaviour {
             {
                 pressed = true;
                 _animator.SetBool("Exit", true);
-                Invoke("Reset", 1.0f);
+                Invoke("Reset", 2.0f);
                 _exit = true;
                 _startCanvas.SetActive(false);
             }
@@ -74,7 +74,7 @@ public class Menu_Test : MonoBehaviour {
             {
                 pressed = true;
                 _animator.SetBool("Exit", false);
-                Invoke("Reset", 1.0f);
+                Invoke("Reset", 2.0f);
                 _exit = false;
                 _startCanvas.SetActive(true);
             }

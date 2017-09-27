@@ -24,10 +24,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _Cutoff: 0.5
-    - _Gloss: 0.910174
-    - _Metallic: 0.9614561
-    - _opacity: -7.628706
-    - _refraction: 1
+    - _Gloss: 0.345
+    - _Metallic: 0.75
+    - _opacity: 0.87
+    - _refraction: 0.08
     m_Colors:
-    - _Color: {r: 0.23408598, g: 0.31617647, b: 0.22318336, a: 1}
-    - _colour: {r: 0.014452311, g: 0.41911757, b: 0, a: 1}
+    - _Color: {r: 0.25583464, g: 0.2794118, b: 0.2527033, a: 1}
+    - _colour: {r: 0, g: 0.45745456, b: 0.6838235, a: 1}
