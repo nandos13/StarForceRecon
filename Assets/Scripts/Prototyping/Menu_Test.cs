@@ -8,10 +8,11 @@ public class Menu_Test : MonoBehaviour {
     Animator _animator;
     bool _settings = false;
     bool _exit = false;
+    bool _start = false;
     bool pressed = false;
     GameObject _anyCanvas, _startCanvas, _menuCanvas;
 
-    public GameObject _door;
+    public float _reset;
 
     void Awake()
     {
@@ -20,17 +21,23 @@ public class Menu_Test : MonoBehaviour {
         _startCanvas = GameObject.Find("StartCanvas");
         _menuCanvas = GameObject.Find("MenuCanvas");
         _menuCanvas.SetActive(false);
+        _startCanvas.SetActive(false);
     }
 
-    void Update()
+    //There is a button on the "AnyKey Canvas", once pressed this is called.
+    public void AnyKey()
     {
-        if(Input.GetButtonDown("Fire1"))
-        {
-            _animator.SetBool("AnyKey", true);
-            Destroy(_anyCanvas, 0.6f);
-        }
+        _animator.SetBool("AnyKey", true);
+        Destroy(_anyCanvas, 0.6f);
+        Invoke("CanvasLoad", 2.3f);
     }
 
+    void CanvasLoad()
+    {
+        _startCanvas.SetActive(true);
+    }
+
+    //When you press setting at the main menu, and then when you press back.
     public void Settings()
     {
         if (pressed == false)
@@ -39,7 +46,7 @@ public class Menu_Test : MonoBehaviour {
             {
                 pressed = true;
                 _animator.SetBool("Settings", true);
-                Invoke("Reset", 2.0f);
+                Invoke("Reset", _reset);
                 _settings = true;
                 _startCanvas.SetActive(false);
                 _menuCanvas.SetActive(true);
@@ -49,7 +56,7 @@ public class Menu_Test : MonoBehaviour {
             {
                 pressed = true;
                 _animator.SetBool("Settings", false);
-                Invoke("Reset", 2.0f);
+                Invoke("Reset", _reset);
                 _settings = false;
                 _startCanvas.SetActive(true);
                 _menuCanvas.SetActive(false);
@@ -57,6 +64,7 @@ public class Menu_Test : MonoBehaviour {
         }
     }
 
+    //when you want to exit the game.
     public void Exit()
     {
         if (pressed == false)
@@ -65,7 +73,7 @@ public class Menu_Test : MonoBehaviour {
             {
                 pressed = true;
                 _animator.SetBool("Exit", true);
-                Invoke("Reset", 2.0f);
+                Invoke("Reset", _reset);
                 _exit = true;
                 _startCanvas.SetActive(false);
             }
@@ -74,29 +82,36 @@ public class Menu_Test : MonoBehaviour {
             {
                 pressed = true;
                 _animator.SetBool("Exit", false);
-                Invoke("Reset", 2.0f);
+                Invoke("Reset", _reset);
                 _exit = false;
                 _startCanvas.SetActive(true);
             }
         }
     }
 
-    public void GameStart()
+    //when you're ready to play/not ready.
+    public void MenuStart()
     {
         if (pressed == false)
         {
-            pressed = true;
-            _animator.SetBool("Start", true);
-            _startCanvas.SetActive(false);
+            if (_start == false)
+            {
+                pressed = true;
+                _animator.SetBool("Start", true);
+                Invoke("Reset", _reset);
+                _startCanvas.SetActive(false);
+            } 
+            else if (_start == true)
+            {
+                pressed = true;
+                _animator.SetBool("Start", false);
+                Invoke("Reset", _reset);
+                _startCanvas.SetActive(true);
+            }
         }
     }
 
-
-    void DoorActivate()
-    {
-        _door.GetComponent<BoxCollider>().enabled = true;
-    }
-
+    //so that animations dont play right after called.
     void Reset()
     {
         pressed = false;
