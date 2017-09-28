@@ -48,8 +48,7 @@ public abstract class ActionAI : MonoBehaviour
 
     public SquadManager.IControllable controlled()      // Approuches the players controller member
     {
-        SquadManager.IControllable best = null;
-        return best;
+        return SquadManager.GetCurrentSquaddie;
     }
 
     public SquadManager.IControllable closest()         // Approaches the closest member

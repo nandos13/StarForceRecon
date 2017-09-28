@@ -86,9 +86,9 @@ namespace StarForceRecon
             AddDefaultBinding("lookRight", Mouse.PositiveX);
 
             // Set bindings for Number Keys
-            AddDefaultBinding("", Key.Key1);
-            AddDefaultBinding("", Key.Key3);
+            AddDefaultBinding("switchWeapon", Key.Key1);
             AddDefaultBinding("", Key.Key2);
+            AddDefaultBinding("", Key.Key3);
             AddDefaultBinding("", Key.Key4);
             
             // Set bindings for Actions
@@ -102,10 +102,10 @@ namespace StarForceRecon
             AddDefaultBinding("roll", Key.Space);
             AddDefaultBinding("melee", Key.F);
             AddDefaultBinding("reload", Key.R);
-            AddDefaultBinding("switchWeapon", Key.Tab);
+            AddDefaultBinding("switchForward", Key.Tab);
 
             AddDefaultBinding("", Key.Escape);
-            AddDefaultBinding("", Key.LeftShift);
+            AddDefaultBinding("switchBack", Key.LeftShift);
         }
     }
 }
