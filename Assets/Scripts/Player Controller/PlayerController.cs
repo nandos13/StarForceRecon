@@ -283,8 +283,7 @@ namespace StarForceRecon
                 SquadManager.Switch(false);
                 return;
             }
-
-            Debug.Log(inputSet.GetActionByName("roll").WasPressed);
+            
             if (inputSet.GetActionByName("roll").WasPressed)
                 _rollKeyPressed = true;
             if (_rollKeyPressed || _tpc.isRolling) return; // Prevent other actions if rolling

@@ -58,9 +58,7 @@ namespace JakePerry
             // Initialize InControl
             if (GameObject.FindObjectOfType<InControlManager>() == null)
             {
-                GameObject InControlManagerObject = new GameObject("InControlManager");
-                InControlManagerObject.hideFlags = HideFlags.DontSave;
-                InControlManagerObject.AddComponent<InControlManager>();
+                InControlManager manager = InControlManager.Instance;
             }
         }
 
