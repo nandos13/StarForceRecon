@@ -7,10 +7,7 @@ public class EnemyBehaviour : ActionAI
 {
 
     // behavior
-
-    public float targetDistance;
-    public float enemyLookDistance; // not really needed. just for testing
-    public float attackDistance;
+    [Header("Behaviour")]
     [Tooltip("enemies minimum distance to stop movement")]
     public float minDistance;
     [Tooltip("enemies speed of rotation")]
@@ -30,16 +27,18 @@ public class EnemyBehaviour : ActionAI
     };
 
     // attack
+    [Header("Attacking")]
     public int slingerDmg = 1;
     public float slingRate = 1f;
     public float slingRange = 50f;
     public float slingRangeForce = 100f;
     private float nextFire;
     public Transform slingerRangeEnd;
+    [Header("AI Type")]
     public TargetType targetType;
     private WaitForSeconds slingerDuration = new WaitForSeconds(0.1f);
     private LineRenderer lineRender;
-
+   
     public override float Evaluate(Agent a)
     {
         SquadManager.IControllable target = null;
@@ -48,7 +47,7 @@ public class EnemyBehaviour : ActionAI
             case TargetType.Closest: target = closest(); break;
             case TargetType.LowHealth: target = lowestHealth(); break;
             case TargetType.HighHealth: target = highestHealth(); break;
-            case TargetType.BiggestThreat: target = greatestThreat(); break;
+            case TargetType.BiggestThreat: target = greatestThreat(a); break;
             case TargetType.Controlled: target = controlled(); break;
         }
 
@@ -68,13 +67,13 @@ public class EnemyBehaviour : ActionAI
     
     public override void UpdateAction(Agent agent)
     {
-        targetDistance = Vector3.Distance(Target.position, transform.position);
-        if (targetDistance < enemyLookDistance)
+        float targetDistance = Vector3.Distance(Target.position, transform.position);
+        if (targetDistance < agent.enemyLookDistance)
         {
             lookAtPlayer();
             print("look at player");
         }
-        if (targetDistance < attackDistance)
+        if (targetDistance < agent.attackDistance)
         {
             attackAtPlayer();
             Throw();

@@ -15,13 +15,21 @@ public abstract class ActionAI : MonoBehaviour
     /// <summary>
     /// Enemy Behaviours
     /// </summary>
-    public SquadManager.IControllable greatestThreat()  // Brute. approaches greatest threat, does Ground Pound, that does Area Effect Swipe
+    public SquadManager.IControllable greatestThreat(Agent a)  // Brute. approaches greatest threat, does Ground Pound, that does Area Effect Swipe
     {
-
-
-
-
         SquadManager.IControllable best = null;
+        float mostAggro = 0;
+
+        foreach (SquadManager.IControllable s in SquadManager.GetSquadMembers)  // Loop through all squad members
+        {
+            float aggro  = a.GetAggro(s);
+            if (aggro > mostAggro)
+            {
+                mostAggro = aggro;
+                best = s;
+            }
+        }
+
         return best;
     }
 
@@ -46,7 +54,7 @@ public abstract class ActionAI : MonoBehaviour
         return best;
     }
 
-    public SquadManager.IControllable controlled()      // Approuches the players controller member
+    public SquadManager.IControllable controlled()      // Approuches the player controlled member
     {
         return SquadManager.GetCurrentSquaddie;
     }
@@ -65,7 +73,7 @@ public abstract class ActionAI : MonoBehaviour
             {
                 best = s;
                 bestDist = dist;
-                evaluation = Mathf.Clamp01(1.0f - (dist-closestDist)/(farthestDist-closestDist));
+                evaluation = 50.0f * Mathf.Clamp01(1.0f - (dist-closestDist)/(farthestDist-closestDist));
             }
         }
         return best;
@@ -95,7 +103,6 @@ public abstract class ActionAI : MonoBehaviour
     float GetRelevance(Health _health)      // calculates the distance of a squad member and divides it with health.
     {
         float dist = Vector3.Distance(_health.transform.position, transform.position);
-
         return 100.0f/ (1.0f + dist);
     }
 
