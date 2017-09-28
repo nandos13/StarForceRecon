@@ -5,7 +5,7 @@ using UnityEditor;
 
 namespace JakePerry
 {
-    [CustomEditor(typeof(DamageLayerUtils.DamageLayerNameFile))]
+    [CustomEditor(typeof(DamageLayerUtils.Definition))]
     public class DamageLayerNameFileEditor : Editor
     {
         public override void OnInspectorGUI()
