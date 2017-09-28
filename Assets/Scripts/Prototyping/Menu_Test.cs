@@ -10,7 +10,9 @@ public class Menu_Test : MonoBehaviour {
     bool _exit = false;
     bool _start = false;
     bool pressed = false;
-    GameObject _anyCanvas, _startCanvas, _menuCanvas;
+    GameObject _anyCanvas, _startCanvas, _menuCanvas, _exitCanvas;
+
+    public GameObject sound1, sound2;
 
     public float _reset;
 
@@ -20,8 +22,16 @@ public class Menu_Test : MonoBehaviour {
         _anyCanvas = GameObject.Find("Anykey");
         _startCanvas = GameObject.Find("StartCanvas");
         _menuCanvas = GameObject.Find("MenuCanvas");
+        _exitCanvas = GameObject.Find("ExitCanvas");
         _menuCanvas.SetActive(false);
         _startCanvas.SetActive(false);
+        _exitCanvas.SetActive(false);
+    }
+
+    public void Secret()
+    {
+        sound1.GetComponent<AudioSource>().enabled = false;
+        sound2.GetComponent<AudioSource>().enabled = true;
     }
 
     //There is a button on the "AnyKey Canvas", once pressed this is called.
@@ -75,6 +85,7 @@ public class Menu_Test : MonoBehaviour {
                 _animator.SetBool("Exit", true);
                 Invoke("Reset", _reset);
                 _exit = true;
+                _exitCanvas.SetActive(true);
                 _startCanvas.SetActive(false);
             }
 
@@ -84,6 +95,7 @@ public class Menu_Test : MonoBehaviour {
                 _animator.SetBool("Exit", false);
                 Invoke("Reset", _reset);
                 _exit = false;
+                _exitCanvas.SetActive(false);
                 _startCanvas.SetActive(true);
             }
         }
