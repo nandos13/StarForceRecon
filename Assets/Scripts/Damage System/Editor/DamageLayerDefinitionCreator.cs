@@ -2,7 +2,7 @@
 using UnityEditor;
 using JakePerry;
 
-public class DamageLayerFileCreator
+public class DamageLayerDefinitionCreator
 {
     const string FOLDERPATH = "Assets/Resources";
     const string RESOURCESPATH = "DamageSystem/LayerDefinition";
@@ -10,7 +10,9 @@ public class DamageLayerFileCreator
     [InitializeOnLoadMethod]
     private static void InitializeLayerFile()
     {
-        DamageLayerUtils.Definition file = Resources.Load<DamageLayerUtils.Definition>(RESOURCESPATH);
+        DamageLayerUtils.Definition file =  
+            AssetDatabase.LoadAssetAtPath<DamageLayerUtils.Definition>(string.Concat(FOLDERPATH, "/", RESOURCESPATH, ".asset"));
+        
         if (file == null)
         {
             Debug.Log("No Damage-Layer definition file was found. Creating one now.");
@@ -30,6 +32,6 @@ public class DamageLayerFileCreator
             ScriptableObject.CreateInstance<DamageLayerUtils.Definition>(),
             string.Concat(FOLDERPATH, "/", RESOURCESPATH, ".asset") );
 
-        return Resources.Load<DamageLayerUtils.Definition>(RESOURCESPATH);
+        return AssetDatabase.LoadAssetAtPath<DamageLayerUtils.Definition>(string.Concat(FOLDERPATH, "/", RESOURCESPATH, ".asset"));
     }
 }
