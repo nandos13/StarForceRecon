@@ -27,39 +27,72 @@ public abstract class ActionAI : MonoBehaviour
             {
                 mostAggro = aggro;
                 best = s;
+                evaluation = aggro;
             }
+        }
+
+        if (best == null)
+        {
+            best = closest(a);
         }
 
         return best;
     }
 
-    public SquadManager.IControllable highestHealth()   // Approaches Highest health member
+    public SquadManager.IControllable highestHealth(Agent a)   // Approaches Highest health member
     {
         SquadManager.IControllable best = null; // Tracker variables to remember which one has the highest health
         float highHealth = 0;
         foreach (SquadManager.IControllable s in SquadManager.GetSquadMembers)  // Loop through all squad members
         {
-            MonoBehaviour behaviour = s as MonoBehaviour;
-            if (behaviour == null) continue;
-
-            Health _health = behaviour.GetComponent<Health>();  // Get current squad member's health
-            if (_health == null) continue;
-            if (_health.healthPercent >= highHealth)    // Check if this squad member has a higher health than any previous members
+            float dist = Vector3.Distance(s.transform.position, transform.position);
+            if (dist < a.aggroRange)
             {
-                highHealth = _health.healthPercent;
-                best = s;
-                evaluation = highHealth * GetRelevance(_health);
+                MonoBehaviour behaviour = s as MonoBehaviour;
+                if (behaviour == null) continue;
+
+                Health _health = behaviour.GetComponent<Health>();  // Get current squad member's health
+                if (_health == null) continue;
+                if (_health.healthPercent >= highHealth)    // Check if this squad member has a higher health than any previous members
+                {
+                    highHealth = _health.healthPercent;
+                    best = s;
+                    evaluation = highHealth * GetRelevance(_health);
+                }
             }
         }
         return best;
     }
 
-    public SquadManager.IControllable controlled()      // Approuches the player controlled member
+    public SquadManager.IControllable controlled(Agent a)      // Approuches the player controlled member
     {
-        return SquadManager.GetCurrentSquaddie;
+        SquadManager.IControllable target = null;
+        evaluation = 0;
+        float bestDist = a.aggroRange;
+        foreach (SquadManager.IControllable s in SquadManager.GetSquadMembers)  // Loop through all squad members
+        {
+
+            float dist = Vector3.Distance(s.transform.position, transform.position);
+            if (dist < a.aggroRange)
+            {
+                if (s == SquadManager.GetCurrentSquaddie)
+                {
+                    evaluation = 50;
+                    return SquadManager.GetCurrentSquaddie;
+                }
+                else if (bestDist < dist)
+                {
+                    // return closest non-controlled player
+                    target = s;
+                    bestDist = dist;
+                    evaluation = 10;
+                }
+            }
+        }
+        return target;
     }
 
-    public SquadManager.IControllable closest()         // Approaches the closest member
+    public SquadManager.IControllable closest(Agent a)         // Approaches the closest member
     {
         const float closestDist = 3;
         const float farthestDist = 6;
@@ -79,22 +112,26 @@ public abstract class ActionAI : MonoBehaviour
         return best;
     }
 
-    public SquadManager.IControllable lowestHealth()   // slinger
+    public SquadManager.IControllable lowestHealth(Agent a)   // slinger
     {
         SquadManager.IControllable best = null; // Tracker variables to remember which one has the lowest health
         float lowHealth = float.MaxValue;
         foreach (SquadManager.IControllable s in SquadManager.GetSquadMembers)  // Loop through all squad members
         {
-            MonoBehaviour behaviour = s as MonoBehaviour;
-            if (behaviour == null) continue;
-
-            Health _health = behaviour.GetComponent<Health>(); // Get current squad member's health
-            if (_health == null) continue;
-            if (_health.healthPercent <= lowHealth) // Check if this squad member has a lower health than any previous members
+            float dist = Vector3.Distance(s.transform.position, transform.position);
+            if (dist < a.aggroRange)
             {
-                lowHealth = _health.healthPercent;
-                best = s;
-                evaluation = (1.0f - lowHealth) * GetRelevance(_health);
+                MonoBehaviour behaviour = s as MonoBehaviour;
+                if (behaviour == null) continue;
+
+                Health _health = behaviour.GetComponent<Health>(); // Get current squad member's health
+                if (_health == null) continue;
+                if (_health.healthPercent <= lowHealth) // Check if this squad member has a lower health than any previous members
+                {
+                    lowHealth = _health.healthPercent;
+                    best = s;
+                    evaluation = (1.0f - lowHealth) * GetRelevance(_health);
+                }
             }
         }
         return best;

@@ -28,15 +28,20 @@ public class EnemyBehaviour : ActionAI
 
     // attack
     [Header("Attacking")]
-    public int slingerDmg = 1;
-    public float slingRate = 1f;
-    public float slingRange = 50f;
-    public float slingRangeForce = 100f;
+    [Tooltip("the amount of damage per hit")]
+    public int damage = 1;
+    [Tooltip("the rate of fire between attacks")]
+    public float attackRate = 1f;
+    [Tooltip("the distance of range attacks")]
+    public float attackRange = 50f;
+    [Tooltip("the amount of knock back range force")]
+    public float attackRangeForce = 100f;
     private float nextFire;
-    public Transform slingerRangeEnd;
+    [Tooltip("starting location for attacks")]
+    public Transform AttackRangeEnd;
     [Header("AI Type")]
     public TargetType targetType;
-    private WaitForSeconds slingerDuration = new WaitForSeconds(0.1f);
+    private WaitForSeconds attackDuration = new WaitForSeconds(0.1f);
     private LineRenderer lineRender;
    
     public override float Evaluate(Agent a)
@@ -44,11 +49,11 @@ public class EnemyBehaviour : ActionAI
         SquadManager.IControllable target = null;
         switch (targetType)
         {
-            case TargetType.Closest: target = closest(); break;
-            case TargetType.LowHealth: target = lowestHealth(); break;
-            case TargetType.HighHealth: target = highestHealth(); break;
+            case TargetType.Closest: target = closest(a); break;
+            case TargetType.LowHealth: target = lowestHealth(a); break;
+            case TargetType.HighHealth: target = highestHealth(a); break;
             case TargetType.BiggestThreat: target = greatestThreat(a); break;
-            case TargetType.Controlled: target = controlled(); break;
+            case TargetType.Controlled: target = controlled(a); break;
         }
 
         if (target != null)
@@ -67,13 +72,19 @@ public class EnemyBehaviour : ActionAI
     
     public override void UpdateAction(Agent agent)
     {
+        if (Target == null)
+        {
+            Debug.Log("no Target!");
+            return;
+        }
+             
         float targetDistance = Vector3.Distance(Target.position, transform.position);
         if (targetDistance < agent.enemyLookDistance)
         {
             lookAtPlayer();
             print("look at player");
         }
-        if (targetDistance < agent.attackDistance)
+        if (targetDistance < agent.aggroRange)
         {
             attackAtPlayer();
             Throw();
@@ -101,35 +112,35 @@ public class EnemyBehaviour : ActionAI
         if (Time.time < nextFire)
             return;
 
-        nextFire = Time.time + slingRate;  // set next shot time
+        nextFire = Time.time + attackRate;  // set next shot time
         StartCoroutine(slingerEffect());
         RaycastHit hit;
-        lineRender.SetPosition(0, slingerRangeEnd.position);
-        if (Physics.Raycast(slingerRangeEnd.position, slingerRangeEnd.forward, out hit, slingRange))
+        lineRender.SetPosition(0, AttackRangeEnd.position);
+        if (Physics.Raycast(AttackRangeEnd.position, AttackRangeEnd.forward, out hit, attackRange))
         {
             lineRender.SetPosition(1, hit.point);
             Health health = hit.collider.GetComponent<Health>();
 
             if (health != null)
             {
-                //health.ApplyDamage(slingerDmg); needs work
+                //health.ApplyDamage(damage); needs work
             }
 
             if (hit.rigidbody != null)
             {
-                hit.rigidbody.AddForce(-hit.normal * slingRangeForce);
+                hit.rigidbody.AddForce(-hit.normal * attackRangeForce);
             }
         }
         else
         {
-            lineRender.SetPosition(1, slingerRangeEnd.position + (slingerRangeEnd.forward * slingRange));
+            lineRender.SetPosition(1, AttackRangeEnd.position + (AttackRangeEnd.forward * attackRange));
         }
     }
 
     public IEnumerator slingerEffect()
     {
         lineRender.enabled = true;
-        yield return slingerDuration;
+        yield return attackDuration;
         lineRender.enabled = false;
     }
 }

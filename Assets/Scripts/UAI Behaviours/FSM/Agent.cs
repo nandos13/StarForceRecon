@@ -11,10 +11,10 @@ public class Agent : MonoBehaviour
     public NavMeshAgent nv;
 
     public float enemyLookDistance = 40; // not really needed. just for testing
-    public float attackDistance = 20;
+    public float aggroRange = 20;
 
     // how much aggro does each squaddie have
-    Dictionary<SquadManager.IControllable, float> aggro;
+    Dictionary<SquadManager.IControllable, float> aggro = new Dictionary<SquadManager.IControllable, float>();
 
     Health health;
 
@@ -23,7 +23,8 @@ public class Agent : MonoBehaviour
         actions = GetComponents<ActionAI>();
         health = GetComponent<Health>();
 
-        health.OnDamage += Health_OnDamage;
+        if (health)
+            health.OnDamage += Health_OnDamage;         // GETTING ERRORS
     }
 
     private void Health_OnDamage(Health sender, float damageValue)
@@ -50,8 +51,20 @@ public class Agent : MonoBehaviour
         else
             Debug.Log("No action available!");
 
-        // TODO - delete later
-        AggroTest();
+        // TODO lose aggro over time
+        foreach (SquadManager.IControllable s in SquadManager.GetSquadMembers)  // Loop through all squad members
+        {
+            if (aggro.ContainsKey(s))       // GETTING ERRORS
+            {
+                aggro[s] -= Time.deltaTime;
+                if (aggro[s] < 0)
+                    aggro[s] = 0;
+            }
+
+        }
+        Debug.Log("AGGRO");
+            // TODO - delete later
+            AggroTest();
     }
 
     // checks all our available actions and evaluates each one, getting the best
@@ -73,7 +86,7 @@ public class Agent : MonoBehaviour
 
     public float GetAggro(SquadManager.IControllable squaddie)
     {
-        if (aggro.ContainsKey(squaddie))
+        if (aggro.ContainsKey(squaddie))    // errors
             return aggro[squaddie];
 
         return 0;
@@ -81,16 +94,20 @@ public class Agent : MonoBehaviour
 
     void AggroTest()
     {
-        int index = 0;
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            print("L was pressed");
-            foreach (SquadManager.IControllable s in SquadManager.GetSquadMembers)  // Loop through all squad members
-            {
+        KeyCode kc = KeyCode.L;
 
-                index++;
+        // prerss L, and N to add aggro to each squaddie
+        foreach (SquadManager.IControllable s in SquadManager.GetSquadMembers)  // Loop through all squad members
+        {
+            if (Input.GetKeyDown(kc))
+            {
+                aggro[s] = GetAggro(s) + 10;
             }
+            kc++;
+
         }
+       
+    
     }
 }
 
