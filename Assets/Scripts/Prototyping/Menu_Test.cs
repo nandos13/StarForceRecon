@@ -10,7 +10,7 @@ public class Menu_Test : MonoBehaviour {
     bool _exit = false;
     bool _start = false;
     bool pressed = false;
-    GameObject _anyCanvas, _startCanvas, _menuCanvas, _exitCanvas;
+    GameObject _anyCanvas, _menuCanvas, _settingsCanvas, _exitCanvas, _startCanvas;
 
     public GameObject sound1, sound2;
 
@@ -20,11 +20,13 @@ public class Menu_Test : MonoBehaviour {
     {
         _animator = GetComponent<Animator>();
         _anyCanvas = GameObject.Find("Anykey");
-        _startCanvas = GameObject.Find("StartCanvas");
         _menuCanvas = GameObject.Find("MenuCanvas");
+        _settingsCanvas = GameObject.Find("SettingsCanvas");
         _exitCanvas = GameObject.Find("ExitCanvas");
-        _menuCanvas.SetActive(false);
+        _startCanvas = GameObject.Find("StartCanvas");
+        _settingsCanvas.SetActive(false);
         _startCanvas.SetActive(false);
+        _menuCanvas.SetActive(false);
         _exitCanvas.SetActive(false);
     }
 
@@ -39,12 +41,12 @@ public class Menu_Test : MonoBehaviour {
     {
         _animator.SetBool("AnyKey", true);
         Destroy(_anyCanvas, 0.6f);
-        Invoke("CanvasLoad", 2.3f);
+        Invoke("CanvasLoad", 2.5f);
     }
 
     void CanvasLoad()
     {
-        _startCanvas.SetActive(true);
+        _menuCanvas.SetActive(true);
     }
 
     //When you press setting at the main menu, and then when you press back.
@@ -58,8 +60,8 @@ public class Menu_Test : MonoBehaviour {
                 _animator.SetBool("Settings", true);
                 Invoke("Reset", _reset);
                 _settings = true;
-                _startCanvas.SetActive(false);
-                _menuCanvas.SetActive(true);
+                _menuCanvas.SetActive(false);
+                _settingsCanvas.SetActive(true);
             }
 
             else if (_settings == true)
@@ -68,8 +70,8 @@ public class Menu_Test : MonoBehaviour {
                 _animator.SetBool("Settings", false);
                 Invoke("Reset", _reset);
                 _settings = false;
-                _startCanvas.SetActive(true);
-                _menuCanvas.SetActive(false);
+                _menuCanvas.SetActive(true);
+                _settingsCanvas.SetActive(false);
             }
         }
     }
@@ -86,7 +88,7 @@ public class Menu_Test : MonoBehaviour {
                 Invoke("Reset", _reset);
                 _exit = true;
                 _exitCanvas.SetActive(true);
-                _startCanvas.SetActive(false);
+                _menuCanvas.SetActive(false);
             }
 
             else if (_exit == true)
@@ -96,7 +98,7 @@ public class Menu_Test : MonoBehaviour {
                 Invoke("Reset", _reset);
                 _exit = false;
                 _exitCanvas.SetActive(false);
-                _startCanvas.SetActive(true);
+                _menuCanvas.SetActive(true);
             }
         }
     }
@@ -110,15 +112,19 @@ public class Menu_Test : MonoBehaviour {
             {
                 pressed = true;
                 _animator.SetBool("Start", true);
+                _start = true;
                 Invoke("Reset", _reset);
-                _startCanvas.SetActive(false);
+                _startCanvas.SetActive(true);
+                _menuCanvas.SetActive(false);
             } 
             else if (_start == true)
             {
                 pressed = true;
                 _animator.SetBool("Start", false);
                 Invoke("Reset", _reset);
-                _startCanvas.SetActive(true);
+                _start = false;
+                _startCanvas.SetActive(false);
+                _menuCanvas.SetActive(true);
             }
         }
     }
