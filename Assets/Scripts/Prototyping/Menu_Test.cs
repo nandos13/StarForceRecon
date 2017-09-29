@@ -12,7 +12,11 @@ public class Menu_Test : MonoBehaviour {
     bool pressed = false;
     GameObject _anyCanvas, _menuCanvas, _settingsCanvas, _exitCanvas, _startCanvas;
 
+    GameObject _hologram;
+
     public GameObject sound1, sound2;
+
+    public Animator _holo;
 
     public float _reset;
 
@@ -24,6 +28,8 @@ public class Menu_Test : MonoBehaviour {
         _settingsCanvas = GameObject.Find("SettingsCanvas");
         _exitCanvas = GameObject.Find("ExitCanvas");
         _startCanvas = GameObject.Find("StartCanvas");
+        _hologram = GameObject.Find("Hologram");
+        _hologram.SetActive(false);
         _settingsCanvas.SetActive(false);
         _startCanvas.SetActive(false);
         _menuCanvas.SetActive(false);
@@ -87,6 +93,8 @@ public class Menu_Test : MonoBehaviour {
                 _animator.SetBool("Exit", true);
                 Invoke("Reset", _reset);
                 _exit = true;
+                _hologram.SetActive(true);
+                _holo.SetBool("Active", true);
                 _exitCanvas.SetActive(true);
                 _menuCanvas.SetActive(false);
             }
@@ -96,11 +104,18 @@ public class Menu_Test : MonoBehaviour {
                 pressed = true;
                 _animator.SetBool("Exit", false);
                 Invoke("Reset", _reset);
+                _holo.SetBool("Active", false);
+                Invoke("HoloTest", 0.5f);
                 _exit = false;
                 _exitCanvas.SetActive(false);
                 _menuCanvas.SetActive(true);
             }
         }
+    }
+
+    void HoloTest()
+    {
+        _hologram.SetActive(false);
     }
 
     //when you're ready to play/not ready.
