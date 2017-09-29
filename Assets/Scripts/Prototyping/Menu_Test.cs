@@ -18,6 +18,10 @@ public class Menu_Test : MonoBehaviour {
 
     public Animator _holo;
 
+    public Material _light;
+    public Material _lightOff;
+    public GameObject _table;
+
     public float _reset;
 
     void Awake()
@@ -47,7 +51,7 @@ public class Menu_Test : MonoBehaviour {
     {
         _animator.SetBool("AnyKey", true);
         Destroy(_anyCanvas, 0.6f);
-        Invoke("CanvasLoad", 2.5f);
+        Invoke("CanvasLoad", 2.8f);
     }
 
     void CanvasLoad()
@@ -92,6 +96,7 @@ public class Menu_Test : MonoBehaviour {
                 pressed = true;
                 _animator.SetBool("Exit", true);
                 Invoke("Reset", _reset);
+                _table.GetComponent<MeshRenderer>().material = _light;
                 _exit = true;
                 _hologram.SetActive(true);
                 _holo.SetBool("Active", true);
@@ -115,6 +120,7 @@ public class Menu_Test : MonoBehaviour {
 
     void HoloTest()
     {
+        _table.GetComponent<MeshRenderer>().material = _lightOff; _table.GetComponent<MeshRenderer>().material = _lightOff;
         _hologram.SetActive(false);
     }
 
