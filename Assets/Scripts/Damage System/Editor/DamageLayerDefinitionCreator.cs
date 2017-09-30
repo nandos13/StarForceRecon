@@ -10,8 +10,10 @@ public class DamageLayerDefinitionCreator
     [InitializeOnLoadMethod]
     private static void InitializeLayerFile()
     {
-        DamageLayerUtils.Definition file =  
-            AssetDatabase.LoadAssetAtPath<DamageLayerUtils.Definition>(string.Concat(FOLDERPATH, "/", RESOURCESPATH, ".asset"));
+        AssetDatabase.Refresh(ImportAssetOptions.Default);
+
+        DamageLayerDefinition file =  
+            AssetDatabase.LoadAssetAtPath<DamageLayerDefinition>(string.Concat(FOLDERPATH, "/", RESOURCESPATH, ".asset"));
         
         if (file == null)
         {
@@ -20,7 +22,7 @@ public class DamageLayerDefinitionCreator
         }
     }
 
-    private static DamageLayerUtils.Definition CreateFile()
+    private static DamageLayerDefinition CreateFile()
     {
         if (!AssetDatabase.IsValidFolder(FOLDERPATH))
             AssetDatabase.CreateFolder("Assets", "Resources");
@@ -29,9 +31,9 @@ public class DamageLayerDefinitionCreator
             AssetDatabase.CreateFolder(FOLDERPATH, "DamageSystem");
         
         AssetDatabase.CreateAsset(
-            ScriptableObject.CreateInstance<DamageLayerUtils.Definition>(),
+            ScriptableObject.CreateInstance<DamageLayerDefinition>(),
             string.Concat(FOLDERPATH, "/", RESOURCESPATH, ".asset") );
 
-        return AssetDatabase.LoadAssetAtPath<DamageLayerUtils.Definition>(string.Concat(FOLDERPATH, "/", RESOURCESPATH, ".asset"));
+        return AssetDatabase.LoadAssetAtPath<DamageLayerDefinition>(string.Concat(FOLDERPATH, "/", RESOURCESPATH, ".asset"));
     }
 }

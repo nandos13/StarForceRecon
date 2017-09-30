@@ -66,17 +66,6 @@ namespace JakePerry
     {
         #region Layers
 
-        public class Definition : ScriptableObject
-        {
-            [SerializeField]    private string[] _strings = new string[32];
-
-            public string[] strings
-            {
-                get { return _strings; }
-                set { _strings = value; }
-            }
-        }
-
         private static string[] _layerNames = new string[32];
 
         #endregion
@@ -89,15 +78,15 @@ namespace JakePerry
             LoadLayers();
         }
 
-        private static Definition GetLayerFile()
+        private static DamageLayerDefinition GetLayerFile()
         {
             const string PATH = "DamageSystem/LayerDefinition";
-            Definition file = Resources.Load<Definition>(PATH);
+            DamageLayerDefinition file = Resources.Load<DamageLayerDefinition>(PATH);
 
             if (file == null)
             {
-                Definition newFile =
-                                (Definition)ScriptableObject.CreateInstance(typeof(Definition));
+                DamageLayerDefinition newFile =
+                                (DamageLayerDefinition)ScriptableObject.CreateInstance(typeof(DamageLayerDefinition));
                 AssetDatabase.CreateAsset(newFile,
                                 "Assets/Resources/" + PATH + ".asset");
 
@@ -109,7 +98,7 @@ namespace JakePerry
 
         private static void SaveLayers()
         {
-            Definition namesFile = GetLayerFile();
+            DamageLayerDefinition namesFile = GetLayerFile();
 
             if (namesFile != null)
                 namesFile.strings = _layerNames;
@@ -117,7 +106,7 @@ namespace JakePerry
 
         private static void LoadLayers()
         {
-            Definition namesFile = GetLayerFile();
+            DamageLayerDefinition namesFile = GetLayerFile();
 
             if (namesFile != null)
                 namesFile.strings.CopyTo(_layerNames, 0);
