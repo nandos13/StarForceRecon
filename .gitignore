@@ -34,3 +34,5 @@ sysinfo.txt
 *.unitypackage
 
 Assets/Models/Materials/
+
+Assets/Resources/DamageSystem/LayerDefinition\.asset\.meta
