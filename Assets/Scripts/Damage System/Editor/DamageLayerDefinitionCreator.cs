@@ -1,11 +1,12 @@
-﻿using UnityEngine;
+﻿#if UNITY_EDITOR
+using UnityEngine;
 using UnityEditor;
 using JakePerry;
 
 public class DamageLayerDefinitionCreator
 {
-    const string FOLDERPATH = "Assets/Resources";
-    const string RESOURCESPATH = "DamageSystem/LayerDefinition";
+    const string ASSETPATH = "Assets/Resources/DamageSystem/";
+    const string ASSETNAME = "LayerDefinition.asset";
 
     [InitializeOnLoadMethod]
     private static void InitializeLayerFile()
@@ -13,27 +14,15 @@ public class DamageLayerDefinitionCreator
         AssetDatabase.Refresh(ImportAssetOptions.Default);
 
         DamageLayerDefinition file =  
-            AssetDatabase.LoadAssetAtPath<DamageLayerDefinition>(string.Concat(FOLDERPATH, "/", RESOURCESPATH, ".asset"));
+            AssetDatabase.LoadAssetAtPath<DamageLayerDefinition>(string.Concat(ASSETPATH, ASSETNAME));
         
         if (file == null)
         {
-            Debug.Log("No Damage-Layer definition file was found. Creating one now.");
-            file = CreateFile();
+            Debug.Log("No Definition file for damage layers was found. Creating one now.");
+            AssetUtilities.CreateAsset(
+                ScriptableObject.CreateInstance<DamageLayerDefinition>(),
+                ASSETPATH, ASSETNAME, true);
         }
     }
-
-    private static DamageLayerDefinition CreateFile()
-    {
-        if (!AssetDatabase.IsValidFolder(FOLDERPATH))
-            AssetDatabase.CreateFolder("Assets", "Resources");
-
-        if (!AssetDatabase.IsValidFolder(string.Concat(FOLDERPATH, "/DamageSystem")))
-            AssetDatabase.CreateFolder(FOLDERPATH, "DamageSystem");
-        
-        AssetDatabase.CreateAsset(
-            ScriptableObject.CreateInstance<DamageLayerDefinition>(),
-            string.Concat(FOLDERPATH, "/", RESOURCESPATH, ".asset") );
-
-        return AssetDatabase.LoadAssetAtPath<DamageLayerDefinition>(string.Concat(FOLDERPATH, "/", RESOURCESPATH, ".asset"));
-    }
 }
+#endif
