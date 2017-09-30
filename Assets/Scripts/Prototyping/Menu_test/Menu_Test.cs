@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-[RequireComponent(typeof(MiddlePanel))]
+[RequireComponent(typeof(Panels))]
 public class Menu_Test : MonoBehaviour {
 
     #region Inspector_Information
@@ -14,7 +14,7 @@ public class Menu_Test : MonoBehaviour {
     bool _exit = false;
     bool _start = false;
     bool pressed = false;
-    GameObject _manager;
+    public Panels _middleScript;
 
     [Header("Canvas")]
     public GameObject _anyCanvas;
@@ -24,12 +24,6 @@ public class Menu_Test : MonoBehaviour {
     public GameObject _startCanvas;
 
     [Header("Table")]
-    public GameObject _left;
-    public GameObject _right;
-
-    public Material _panOn;
-    public Material _panOff;
-
     public Material _light;
     public Material _lightOff;
     public GameObject _table;
@@ -46,8 +40,6 @@ public class Menu_Test : MonoBehaviour {
 
     #endregion
 
-    private MiddlePanel _middleScript;
-
     void Awake()
     {
         _animator = _camera.GetComponent<Animator>();
@@ -56,8 +48,7 @@ public class Menu_Test : MonoBehaviour {
         _startCanvas.SetActive(false);
         _menuCanvas.SetActive(false);
         _exitCanvas.SetActive(false);
-        _manager = GameObject.Find("_GAMEMANAGER");
-        MiddlePanel _middleScript = _manager.GetComponent<MiddlePanel>();
+        Panels _middleScript = GetComponent<Panels>();
     }
 
     //Updating for the hologram
@@ -87,7 +78,7 @@ public class Menu_Test : MonoBehaviour {
     public void AnyKey()
     {
         _animator.SetBool("AnyKey", true);
-        Destroy(_anyCanvas, 0.6f);
+        Destroy(_anyCanvas);
         Invoke("CanvasLoad", 2.8f);
     }
 
@@ -106,10 +97,9 @@ public class Menu_Test : MonoBehaviour {
                 pressed = true;
                 _animator.SetBool("Settings", true);
                 Invoke("Reset", _reset);
-                _left.GetComponent<MeshRenderer>().material = _panOn;
-                _settings = true;
                 _middleScript.MiddleActive();
-                _settingsCanvas.SetActive(true);
+                _middleScript.LeftActive();
+                _settings = true;
             }
 
             else if (_settings == true)
@@ -117,10 +107,9 @@ public class Menu_Test : MonoBehaviour {
                 pressed = true;
                 _animator.SetBool("Settings", false);
                 Invoke("Reset", _reset);
-                _left.GetComponent<MeshRenderer>().material = _panOff;
-                _settings = false;
                 _middleScript.MiddleActive();
-                _settingsCanvas.SetActive(false);
+                _middleScript.LeftActive();
+                _settings = false;
             }
         }
     }
@@ -136,11 +125,11 @@ public class Menu_Test : MonoBehaviour {
                 _animator.SetBool("Exit", true);
                 Invoke("Reset", _reset);
                 _table.GetComponent<MeshRenderer>().material = _light;
-                _exit = true;
                 _hologram.SetActive(true);
                 _holo.SetBool("Active", true);
                 _exitCanvas.SetActive(true);
                 _middleScript.MiddleActive();
+                _exit = true;
             }
 
             else if (_exit == true)
@@ -150,9 +139,9 @@ public class Menu_Test : MonoBehaviour {
                 Invoke("Reset", _reset);
                 _holo.SetBool("Active", false);
                 Invoke("HoloTest", 0.5f);
-                _exit = false;
                 _exitCanvas.SetActive(false);
                 _middleScript.MiddleActive();
+                _exit = false;
             }
         }
     }
@@ -172,21 +161,19 @@ public class Menu_Test : MonoBehaviour {
             {
                 pressed = true;
                 _animator.SetBool("Start", true);
-                _start = true;
-                _right.GetComponent<MeshRenderer>().material = _panOn;
                 Invoke("Reset", _reset);
-                _startCanvas.SetActive(true);
-                _menuCanvas.SetActive(false);
+                _middleScript.RightActive();
+                _middleScript.MiddleActive();
+                _start = true;
             } 
             else if (_start == true)
             {
                 pressed = true;
                 _animator.SetBool("Start", false);
                 Invoke("Reset", _reset);
-                _right.GetComponent<MeshRenderer>().material = _panOff;
+                _middleScript.RightActive();
+                _middleScript.MiddleActive();
                 _start = false;
-                _startCanvas.SetActive(false);
-                _menuCanvas.SetActive(true);
             }
         }
     }

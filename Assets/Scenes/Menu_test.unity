@@ -2852,15 +2852,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _camera: {fileID: 1043348833}
+  _middleScript: {fileID: 513469627}
   _anyCanvas: {fileID: 1703884725}
   _menuCanvas: {fileID: 2034701830}
   _settingsCanvas: {fileID: 1909664417}
   _exitCanvas: {fileID: 1819730893}
   _startCanvas: {fileID: 897010790}
-  _left: {fileID: 696803255}
-  _right: {fileID: 570494567}
-  _panOn: {fileID: 2100000, guid: 63195b1229a4af24cbcfefe95b0ed087, type: 2}
-  _panOff: {fileID: 2100000, guid: 4231cc3f8f24a8d44bf61b38da5c3e4c, type: 2}
   _light: {fileID: 2100000, guid: 27db7549b22ed7e43a799e61201e8591, type: 2}
   _lightOff: {fileID: 2100000, guid: 131ee32852d53f24e9c8871469127380, type: 2}
   _table: {fileID: 1030258580}
@@ -2894,10 +2891,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 513469624}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e2f012d602657945a578bdeb072782c, type: 3}
+  m_Script: {fileID: 11500000, guid: df18cb6c791a73145a6d615bdfb50eb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speedOn: 0.3
+  _speedOff: 0.22
+  _menuScript: {fileID: 513469625}
+  _panOn: {fileID: 2100000, guid: 63195b1229a4af24cbcfefe95b0ed087, type: 2}
+  _panOff: {fileID: 2100000, guid: 4231cc3f8f24a8d44bf61b38da5c3e4c, type: 2}
+  _lTab: {fileID: 696803255}
+  _rTab: {fileID: 570494567}
   _midPan: {fileID: 968524215}
 --- !u!4 &518196762 stripped
 Transform:
