@@ -45,7 +45,19 @@ public static class AssetUtilities
     /// <param name="path">Path for the new asset, relative to the Assets folder.</param>
     /// <param name="fileName">File name, including extension.</param>
     /// <param name="overwrite">Should asset be overwritten if found in the same location?</param>
-    public static void CreateAsset(Object asset, string path, string fileName, bool overwrite = true)
+    /// /// <returns>The created asset.</returns>
+    public static Object CreateAsset(Object asset, string path, string fileName, bool overwrite = true)
+    {
+        return CreateAsset<Object>(asset, path, fileName, overwrite);
+    }
+
+    /// <summary>Ensures the path exists, then creates the asset.</summary>
+    /// <param name="asset">Object to use in creating the asset.</param>
+    /// <param name="path">Path for the new asset, relative to the Assets folder.</param>
+    /// <param name="fileName">File name, including extension.</param>
+    /// <param name="overwrite">Should asset be overwritten if found in the same location?</param>
+    /// <returns>The created asset of type T.</returns>
+    public static T CreateAsset<T>(T asset, string path, string fileName, bool overwrite = true) where T : Object
     {
         if (!fileName.Contains("."))
             throw new System.Exception("Parameter fileName must contain a file extension.");
@@ -61,6 +73,21 @@ public static class AssetUtilities
 
         if (overwrite || !AssetsFileExists(path, fileName))
             AssetDatabase.CreateAsset(asset, string.Concat("Assets/", assetPath));
+
+        return GetAsset<T>(string.Concat("Assets/", assetPath));
+    }
+    
+    /// <returns>Asset at path, if it exists.</returns>
+    public static Object GetAsset(string path)
+    {
+        return GetAsset<Object>(path);
+    }
+
+    /// <returns>Asset of type T at path, if it exists.</returns>
+    public static T GetAsset<T>(string path) where T : Object
+    {
+        path = CleanAssetsPath(path);
+        return AssetDatabase.LoadAssetAtPath<T>(string.Concat("Assets/", path));
     }
 
     /// <param name="path">Filesystem path (relative to Assets folder) containing the file.</param>

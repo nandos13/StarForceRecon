@@ -22,13 +22,13 @@ public class GunEditor : Editor
             if (layerMaskProperty != null)
                 EditorGUILayout.PropertyField(layerMaskProperty);
 
+            SerializedProperty damageMaskProperty = serializedObject.FindProperty("_damageMask");
+            if (damageMaskProperty != null)
+                EditorGUILayout.PropertyField(damageMaskProperty);
+
             SerializedProperty gunDataProperty = serializedObject.FindProperty("_gunData");
             if (gunDataProperty != null)
                 EditorGUILayout.PropertyField(gunDataProperty);
-
-            SerializedProperty damageDataProperty = serializedObject.FindProperty("_damageData");
-            if (damageDataProperty != null)
-                EditorGUILayout.PropertyField(damageDataProperty);
 
             EditorGUI.indentLevel = indent;
         }

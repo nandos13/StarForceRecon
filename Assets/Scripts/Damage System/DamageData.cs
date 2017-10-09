@@ -4,39 +4,44 @@ using UnityEngine;
 
 namespace JakePerry
 {
+    public interface IDamageable
+    {
+        void ApplyDamage(DamageData data);
+    }
+
     /* TODO: Implement some kind of elemental damage/ resistances system? */
     [System.Serializable]
-    public class DamageData
+    public struct DamageData
     {
-        #region Variables
-
-        [SerializeField, HideInInspector]
-        private float _damageValue;
-        [Range(0.0f, 100.0f), SerializeField]
-        private float _defaultDamage = 1.0f;
+        private object sender;
+        public object Sender { get { return sender; } }
 
         [SerializeField]
-        private DamageLayer.Mask _mask;
+        private float damageValue;
+        public float DamageValue { get { return damageValue; } set { damageValue = value; } }
 
-        #endregion
-
-        #region Properties
+        [SerializeField]
+        private DamageLayer.Mask mask;
+        /// <summary>A Mask defining which damage layers are affected by this damage.</summary>
+        public DamageLayer.Mask DamageMask
+        {
+            get { return mask; }
+            set
+            {
+                if (value <= 31 && value >= 0)
+                    mask = value;
+            }
+        }
         
-        /// <summary>Default damage value, set once at startup. Actual damage dealt will be the value of damageValue.</summary>
-        public float defaultDamage { get { return _defaultDamage; } }
-        public float damageValue
-        {
-            get { return _damageValue; }
-            set { _damageValue = value; }
-        }
+        #region Functionality
 
-        public DamageLayer.Mask damageMask { get { return _mask; } }
+        public DamageData(object sender, float damageValue, DamageLayer.Mask mask)
+        {
+            this.sender = sender;
+            this.damageValue = damageValue;
+            this.mask = mask;
+        }
 
         #endregion
-
-        private void OnEnable()
-        {
-            _damageValue = _defaultDamage;
-        }
     }
 }

@@ -8,7 +8,7 @@ namespace JakePerry
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            string[] names = DamageLayerUtils.GetLayerNames();
+            string[] names = DamageLayer.Utils.GetLayerNames();
             var maskValue = property.FindPropertyRelative("_mask");
 
             int currentIndex = maskValue.intValue;

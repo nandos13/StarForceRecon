@@ -29,10 +29,10 @@ namespace JakePerry
             // Draw properties
             Rect propPos = new Rect(position.x, position.y, position.width, EditorGUIUtility.singleLineHeight);
             propPos.y += EditorGUIUtility.singleLineHeight;
-            EditorGUI.PropertyField(propPos, property.FindPropertyRelative("_defaultDamage"));
+            EditorGUI.PropertyField(propPos, property.FindPropertyRelative("damageValue"));
 
             propPos.y += EditorGUIUtility.singleLineHeight;
-            EditorGUI.PropertyField(propPos, property.FindPropertyRelative("_mask"));
+            EditorGUI.PropertyField(propPos, property.FindPropertyRelative("mask"));
         }
     }
 }

@@ -10,6 +10,7 @@ namespace JakePerry
     {
         public override void OnInspectorGUI()
         {
+            // TODO: CUSTOM INTERFACE FOR ADDING AND REMOVING LAYERS
             base.OnInspectorGUI();
         }
     }

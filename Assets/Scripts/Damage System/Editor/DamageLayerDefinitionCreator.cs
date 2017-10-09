@@ -1,7 +1,6 @@
 ﻿#if UNITY_EDITOR
 using UnityEngine;
 using UnityEditor;
-using JakePerry;
 
 public class DamageLayerDefinitionCreator
 {
@@ -13,13 +12,13 @@ public class DamageLayerDefinitionCreator
     {
         AssetDatabase.Refresh(ImportAssetOptions.Default);
 
-        DamageLayerDefinition file =  
-            AssetDatabase.LoadAssetAtPath<DamageLayerDefinition>(string.Concat(ASSETPATH, ASSETNAME));
-        
+        DamageLayerDefinition file =
+            AssetUtilities.GetAsset<DamageLayerDefinition>(string.Concat(ASSETPATH, ASSETNAME));
+
         if (file == null)
         {
             Debug.Log("No Definition file for damage layers was found. Creating one now.");
-            AssetUtilities.CreateAsset(
+            AssetUtilities.CreateAsset<DamageLayerDefinition>(
                 ScriptableObject.CreateInstance<DamageLayerDefinition>(),
                 ASSETPATH, ASSETNAME, true);
         }

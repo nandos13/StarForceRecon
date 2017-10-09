@@ -236,7 +236,6 @@ GameObject:
   - component: {fileID: 82174400476804418}
   - component: {fileID: 114525012447196350}
   - component: {fileID: 114947820507155634}
-  - component: {fileID: 114484451664491256}
   - component: {fileID: 114721328798780646}
   m_Layer: 0
   m_Name: Gun
@@ -2105,20 +2104,6 @@ MonoBehaviour:
   - Untagged
   - Enemy
   gunOrigin: {fileID: 4227532048568354}
---- !u!114 &114484451664491256
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1177320916437494}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85bc015e898cfa549a92e6fc39d6d2e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _gun: {fileID: 114996294455872598}
-  _ps: {fileID: 198229613263124202}
-  _count: 1
 --- !u!114 &114525012447196350
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2285,12 +2270,9 @@ MonoBehaviour:
   _layerMask:
     serializedVersion: 2
     m_Bits: 1
+  _damageMask:
+    _mask: -2
   _gunData: {fileID: 11400000, guid: c23dc916ea2d8044a832c880b248f46d, type: 2}
-  _damageData:
-    _damageValue: 0
-    _defaultDamage: 1
-    _mask:
-      _mask: -2
   _startAmmo: 100
   _currentHeat: 0
 --- !u!120 &120072264692358198
