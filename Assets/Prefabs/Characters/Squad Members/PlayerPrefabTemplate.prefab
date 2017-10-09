@@ -237,6 +237,7 @@ GameObject:
   - component: {fileID: 114525012447196350}
   - component: {fileID: 114947820507155634}
   - component: {fileID: 114484451664491256}
+  - component: {fileID: 114721328798780646}
   m_Layer: 0
   m_Name: Gun
   m_TagString: Player
@@ -408,6 +409,7 @@ GameObject:
   - component: {fileID: 54994795347830908}
   - component: {fileID: 114614757814029284}
   - component: {fileID: 114663841151401494}
+  - component: {fileID: 114717335111441648}
   m_Layer: 0
   m_Name: PlayerPrefabTemplate
   m_TagString: Player
@@ -515,7 +517,7 @@ GameObject:
   - component: {fileID: 4429799632246394}
   - component: {fileID: 198229613263124202}
   - component: {fileID: 199265789832690146}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Gunshot Template
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -620,7 +622,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4652491751605062}
-  - component: {fileID: 95636485713436952}
+  - component: {fileID: 95574802589817140}
   m_Layer: 0
   m_Name: Mesh
   m_TagString: Player
@@ -1207,7 +1209,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1177320916437494}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1.195, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4429799632246394}
@@ -2065,7 +2067,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!95 &95636485713436952
+--- !u!95 &95574802589817140
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 1
@@ -2148,7 +2150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _groundCheckDist: 0.1
   _gravityMultiplier: 2
-  _moveSpeedMultiplier: 1
+  _moveSpeedMultiplier: 5
   _animSpeedMultiplier: 1
   _canRoll: 1
   _rollSpeed:
@@ -2195,12 +2197,47 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHipSwivel: 20
-  turningSpeed: 1
-  closeAimRadius: 0.5
+  turningSpeed: 2
+  closeAimRadius: 1.16
   cursorFadeTime: 1
   aiScripts: []
   playerScripts: []
   selectionDelay: 0.2
+--- !u!114 &114717335111441648
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1420867811208812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e1dcfc05207d9b468295298e111bbcb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damageLayer:
+    _layer: 0
+  _maxHealth: 100
+  _currentHealth: 0
+  _isAlive: 1
+  _startingHealth: 100
+  _startRandom: 0
+  _startMinimum: 60
+  _startMaximum: 100
+  _rechargeWhenLow: 0
+  _lowThresholdRecharge: 15
+  _delayAfterDamage: 2
+  _gainPerSecond: 5
+--- !u!114 &114721328798780646
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1177320916437494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a015145059d6fc040b6d7b3644da8826, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114776304855939038
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2249,7 +2286,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   _gunData: {fileID: 11400000, guid: c23dc916ea2d8044a832c880b248f46d, type: 2}
-  _damageData: {fileID: 0}
+  _damageData:
+    _damageValue: 0
+    _defaultDamage: 1
+    _mask:
+      _mask: -2
   _startAmmo: 100
   _currentHeat: 0
 --- !u!120 &120072264692358198
@@ -2513,7 +2554,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1235480118
+  randomSeed: 297502039
   InitialModule:
     serializedVersion: 3
     enabled: 1

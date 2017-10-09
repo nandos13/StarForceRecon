@@ -23,7 +23,8 @@ public class AimGunAtPointer : MonoBehaviour
             if (_aim.aiming)
             {
                 Vector3 point = _aim.aimPoint;
-                transform.LookAt(point, Vector3.up);
+                if (point != transform.position)
+                    transform.LookAt(point, Vector3.up);
             }
         }
 	}

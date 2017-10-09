@@ -104,15 +104,6 @@ public class Gun : MonoBehaviour, Equipment.IEquipment
             throw new System.MissingFieldException("No GunData specified.");
         }
 
-        // Create clone of the specified damage data object
-        if (_damageData != null)
-        {
-            DamageData cloneData = Instantiate<DamageData>(_damageData);
-            _damageData = cloneData;
-        }
-        else
-            _damageData = DamageData.defaultValue;
-
         // Initialize ammo
         _currentClip = (_gunData.clipSize < _startAmmo) ? _gunData.clipSize : _startAmmo;
         _currentAmmo = _startAmmo - _gunData.clipSize;

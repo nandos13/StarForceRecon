@@ -11,6 +11,10 @@ public class HealthEditor : Editor
 
     private void DrawHealthInspector()
     {
+        SerializedProperty layer = serializedObject.FindProperty("_damageLayer");
+        if (layer != null)
+            EditorGUILayout.PropertyField(layer);
+
         SerializedProperty maxHealth = serializedObject.FindProperty("_maxHealth");
         if (maxHealth != null)
         {
