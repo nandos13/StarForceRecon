@@ -37,6 +37,8 @@ public class Gun : MonoBehaviour, Equipment.IEquipment
     [Tooltip("A Mask defining which damage layers are affected by this gun.")]
     [SerializeField]
     private DamageLayer.Mask _damageMask = 0;
+    [SerializeField]
+    private DamageLayer.Modifier _damageModifier;
 
     [SerializeField]
     private GunData _gunData = null;
@@ -293,7 +295,7 @@ public class Gun : MonoBehaviour, Equipment.IEquipment
             Debug.DrawLine(_gunOrigin.position, _nonAllocHit.point, Color.blue, 0.5f);
 
             // Deal damage to the object hit
-            DamageData damageData = new DamageData(this, damage, _damageMask);
+            DamageData damageData = new DamageData(this, damage, _damageMask, _damageModifier);
             hitTransform = _nonAllocHit.transform;
             IDamageable d = _nonAllocHit.transform.GetComponentInParent<IDamageable>();
             if (d != null)

@@ -206,12 +206,9 @@ MonoBehaviour:
   _layerMask:
     serializedVersion: 2
     m_Bits: 1
+  _damageMask:
+    _mask: 0
   _gunData: {fileID: 11400000, guid: c23dc916ea2d8044a832c880b248f46d, type: 2}
-  _damageData:
-    _damageValue: 0
-    _defaultDamage: 1
-    _mask:
-      _mask: 0
   _startAmmo: 100
   _currentHeat: 0
 --- !u!1 &58967924
@@ -946,8 +943,7 @@ Prefab:
       propertyPath: m_RootOrder
       value: 7
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 114484451664491256, guid: d7be461396499454291d5b878aa9b468, type: 2}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d7be461396499454291d5b878aa9b468, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &563980939
@@ -1878,7 +1874,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damageLayer:
-    _layer: 0
+    _layer: 1
   _maxHealth: 1
   _currentHealth: 0
   _isAlive: 1

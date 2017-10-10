@@ -144,7 +144,7 @@ public class Health : MonoBehaviour, IDamageable
 
         if (_isAlive)
         {
-            float value = damage.DamageValue;
+            float value = damage.DamageValue(_damageLayer);
             if (value == 0) return;
 
             if (value < 0)
@@ -161,7 +161,7 @@ public class Health : MonoBehaviour, IDamageable
             {
                 // Damage
 
-                _currentHealth -= damage.DamageValue;
+                _currentHealth -= damage.DamageValue(_damageLayer);
                 _timeSinceDamage = 0.0f;
 
                 RaiseEvent(OnHealthChanged, -value);

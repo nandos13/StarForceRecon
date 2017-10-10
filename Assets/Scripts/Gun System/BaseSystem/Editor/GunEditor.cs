@@ -26,6 +26,10 @@ public class GunEditor : Editor
             if (damageMaskProperty != null)
                 EditorGUILayout.PropertyField(damageMaskProperty);
 
+            SerializedProperty damageModifierProperty = serializedObject.FindProperty("_damageModifier");
+            if (damageModifierProperty != null)
+                EditorGUILayout.PropertyField(damageModifierProperty);
+
             SerializedProperty gunDataProperty = serializedObject.FindProperty("_gunData");
             if (gunDataProperty != null)
                 EditorGUILayout.PropertyField(gunDataProperty);

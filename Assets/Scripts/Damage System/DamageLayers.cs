@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Linq;
+using System.Collections.Generic;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -24,6 +25,10 @@ namespace JakePerry
             static Utils()
             {
                 definition = GetDefinition();
+
+                if (definition == null)
+                    throw new System.Exception(
+                        "DamageLayer Definition file does not exist! All subsequent calls to DamageLayer methods will fail.");
             }
 
             /// <returns>The layer definition file.</returns>
@@ -36,10 +41,7 @@ namespace JakePerry
                 if (file == null)
                     file = GetDefinitionFile();
 #endif
-
-                if (file == null)
-                    throw new System.Exception("DamageLayer Definition file does not exist!");
-
+                
                 return file;
             }
 
@@ -67,7 +69,8 @@ namespace JakePerry
             }
 
 #endif
-
+            
+            /// <returns>An array of all layer names defined in the definition file.</returns>
             public static string[] GetLayerNames()
             {
                 return definition.strings.Where(x => !string.IsNullOrEmpty(x)).ToArray<string>();
@@ -182,9 +185,154 @@ namespace JakePerry
             }
         }
 
+        /// <summary>Describes damage modifiers for each layer.</summary>
+        [System.Serializable]
+        public struct Modifier
+        {
+            public Dictionary<DamageLayer, float> modifiers;
+
+#if UNITY_EDITOR
+            /// <summary>EDITOR USE ONLY. A list of keys used in the modifiers dictionary, for serialization.</summary>
+            [SerializeField]
+            private DamageLayer[] modifierKeys;
+            [SerializeField]
+            private float[] modifierValues;
+#endif
+
+            #region Constructors
+
+            public Modifier(params KeyValuePair<int, float>[] modifiers)
+            {
+                this.modifiers = new Dictionary<DamageLayer, float>();
+#if UNITY_EDITOR
+                modifierKeys = new DamageLayer[1];
+                modifierValues = new float[1];
+#endif
+
+                foreach (var mod in modifiers)
+                {
+                    SetModifier(mod);
+                }
+            }
+
+            public Modifier(params KeyValuePair<DamageLayer, float>[] modifiers)
+            {
+                this.modifiers = new Dictionary<DamageLayer, float>();
+#if UNITY_EDITOR
+                modifierKeys = new DamageLayer[1];
+                modifierValues = new float[1];
+#endif
+
+                foreach (var mod in modifiers)
+                {
+                    SetModifier(mod);
+                }
+            }
+
+            #endregion
+
+            #region public void SetModifier variants
+
+            /// <summary>Set the modifier value for a layer.</summary>
+            /// <param name="modifier">TKey: int. Layer value [0-31].
+            /// <para>TValue: float. Modifier value for the layer.
+            /// </para></param>
+            public void SetModifier(KeyValuePair<int, float> modifier)
+            {
+                SetModifier(modifier.Key, modifier.Value);
+            }
+
+            /// <summary>Set the modifier value for a layer.</summary>
+            public void SetModifier(KeyValuePair<DamageLayer, float> modifier)
+            {
+                SetModifier(modifier.Key, modifier.Value);
+            }
+
+            /// <summary>Set the modifier value for a layer.</summary>
+            /// <param name="layer">Layer value [0-31].</param>
+            public void SetModifier(int layer, float modifier)
+            {
+                SetModifier(new DamageLayer(layer), modifier);
+            }
+            
+            /// <summary>Set the modifier value for a layer.</summary>
+            public void SetModifier(DamageLayer layer, float modifier)
+            {
+                if (modifiers == null) modifiers = new Dictionary<DamageLayer, float>();
+#if UNITY_EDITOR
+                if (modifierKeys == null) modifierKeys = new DamageLayer[1];
+                if (modifierValues == null) modifierValues = new float[1];
+
+                if (!modifierKeys.Contains(layer))
+                {
+                    List<DamageLayer> keyList = modifierKeys.ToList();
+                    keyList.Add(layer);
+                    modifierKeys = keyList.ToArray();
+
+                    List<float> valueList = modifierValues.ToList();
+                    valueList.Add(modifier);
+                    modifierValues = valueList.ToArray();
+                }
+#endif
+                modifiers[layer] = modifier;
+            }
+
+            #endregion
+
+            /// <returns>The modifier associated with the layer.</returns>
+            public float GetModifier(DamageLayer layer)
+            {
+                if (modifiers == null) modifiers = new Dictionary<DamageLayer, float>();
+
+                if (!modifiers.ContainsKey(layer))
+                    return 1.0f;
+
+                return modifiers[layer];
+            }
+        }
+
         [SerializeField]
         private int _layer;
         public int value { get { return _layer; } }
+
+        #region Implicit operators & equality
+
+        public static implicit operator int(DamageLayer layer)
+        {
+            return layer.value;
+        }
+
+        public static implicit operator DamageLayer(int value)
+        {
+            return new DamageLayer(value);
+        }
+
+        public static bool operator ==(DamageLayer lhs, DamageLayer rhs)
+        {
+            return lhs._layer == rhs._layer;
+        }
+
+        public static bool operator !=(DamageLayer lhs, DamageLayer rhs)
+        {
+            return lhs._layer != rhs._layer;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (!(obj is DamageLayer)) return false;
+
+            DamageLayer other = (DamageLayer)obj;
+            return this._layer == other._layer;
+        }
+
+        public override int GetHashCode()
+        {
+            int hash = 13;
+            hash = (hash * 7) + this._layer.GetHashCode();
+            return hash;
+        }
+
+        #endregion
 
         public DamageLayer(int layerIndex)
         {

@@ -18,7 +18,11 @@ namespace JakePerry
 
         [SerializeField]
         private float damageValue;
-        public float DamageValue { get { return damageValue; } set { damageValue = value; } }
+        public float RawDamageValue
+        {
+            get { return damageValue; }
+            set { damageValue = value; }
+        }
 
         [SerializeField]
         private DamageLayer.Mask mask;
@@ -32,14 +36,28 @@ namespace JakePerry
                     mask = value;
             }
         }
+
+        public DamageLayer.Modifier modifier;
+        /// <summary>Damage modifiers for layers.</summary>
+        public DamageLayer.Modifier DamageModifier
+        {
+            get { return modifier; }
+            set { modifier = value; }
+        }
         
         #region Functionality
 
-        public DamageData(object sender, float damageValue, DamageLayer.Mask mask)
+        public DamageData(object sender, float damageValue, DamageLayer.Mask mask, DamageLayer.Modifier modifier)
         {
             this.sender = sender;
             this.damageValue = damageValue;
             this.mask = mask;
+            this.modifier = modifier;
+        }
+
+        public float DamageValue(DamageLayer layer)
+        {
+            return damageValue * modifier.GetModifier(layer);
         }
 
         #endregion
