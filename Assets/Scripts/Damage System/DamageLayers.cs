@@ -13,11 +13,7 @@ namespace JakePerry
         /// <summary>A collection of utilities functions for Damage Layers.</summary>
         public static class Utils
         {
-            #region Definition
-
             private static readonly DamageLayerDefinition definition;
-
-            #endregion
 
             #region Functionality
 
@@ -150,7 +146,7 @@ namespace JakePerry
                 // No layer found, is this a readable name?
                 if (name.StartsWith("Layer "))
                 {
-                    name.Remove(0, 6);
+                    name = name.Remove(0, 6);
                     if (name.Length > 2) return -1;
 
                     // Parse name as int value
@@ -159,7 +155,7 @@ namespace JakePerry
                     if (System.Int32.TryParse(name, out layerValue))
                         return layerValue;
                 }
-
+                
                 return -1;
             }
 
@@ -347,8 +343,8 @@ namespace JakePerry
 
         public override int GetHashCode()
         {
-            int hash = 13;
-            hash = (hash * 7) + this._layer.GetHashCode();
+            int hash = 97;
+            hash = (hash * 13) + this._layer.GetHashCode();
             return hash;
         }
 

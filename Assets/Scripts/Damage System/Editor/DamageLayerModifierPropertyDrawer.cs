@@ -130,7 +130,7 @@ namespace JakePerry
             }
             else
                 EditorGUI.LabelField(new Rect(position.x, position.y, position.width, EditorGUIUtility.singleLineHeight),
-                    "Already contains all valid layers", EditorStyles.miniLabel);
+                    "Modifier contains all values.", EditorStyles.miniLabel);
 
             #endregion
 
