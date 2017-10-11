@@ -71,9 +71,27 @@ namespace JakePerry
 #endif
             
             /// <returns>An array of all layer names defined in the definition file.</returns>
-            public static string[] GetLayerNames()
+            /// <param name="discardBlankNames">
+            /// If true, blank named layers will be excluded. Otherwise, a readable name will be included.</param>
+            public static string[] GetLayerNames(bool discardBlankNames = true)
             {
-                return definition.strings.Where(x => !string.IsNullOrEmpty(x)).ToArray<string>();
+                string[] nonBlankNames = definition.strings.Where(x => !string.IsNullOrEmpty(x)).ToArray();
+                if (discardBlankNames)
+                    return nonBlankNames;
+
+                // Turn blank strings into nicely formatted ones
+                List<string> readableNames = new List<string>();
+                for (int i = 0; i < definition.strings.Length; i++)
+                {
+                    if (string.IsNullOrEmpty(definition.strings[i]))
+                    {
+                        readableNames.Add(string.Format("Layer {0}", i.ToString()));
+                    }
+                    else
+                        readableNames.Add(definition.strings[i]);
+                }
+
+                return readableNames.ToArray();
             }
 
             /// <param name="names">Names of layers to include in the mask.</param>
@@ -122,20 +140,41 @@ namespace JakePerry
             /// <returns>Index of layer if found. If layer does not exist, returns -1.</returns>
             public static int NameToLayer(string name)
             {
+                // Find layer by name
                 for (int i = 0; i < definition.strings.Length; i++)
                 {
                     if (definition.strings[i] == name)
                         return i;
                 }
 
+                // No layer found, is this a readable name?
+                if (name.StartsWith("Layer "))
+                {
+                    name.Remove(0, 6);
+                    if (name.Length > 2) return -1;
+
+                    // Parse name as int value
+                    name.TrimEnd();
+                    int layerValue = -1;
+                    if (System.Int32.TryParse(name, out layerValue))
+                        return layerValue;
+                }
+
                 return -1;
             }
 
             /// <summary>Returns the name of the layer with index i [0-31].</summary>
-            public static string GetLayerName(int i)
+            /// <param name="readableIfBlank">Should a readable name be returned if layer with value i has no name?</param>
+            public static string GetLayerName(int i, bool readableIfBlank = false)
             {
-                if (i < 0 || i > 31) return null;
-                return definition.strings[i];
+                if (i < 0 || i > 31) return readableIfBlank ? "Invalid Layer-Value" : null;
+                string readable = string.Format("Layer {0}", i.ToString());
+                string name = definition.strings[i];
+
+                if (readableIfBlank && string.IsNullOrEmpty(name))
+                    return readable;
+
+                return name;
             }
 
             #endregion
@@ -189,26 +228,14 @@ namespace JakePerry
         [System.Serializable]
         public struct Modifier
         {
-            public Dictionary<DamageLayer, float> modifiers;
-
-#if UNITY_EDITOR
-            /// <summary>EDITOR USE ONLY. A list of keys used in the modifiers dictionary, for serialization.</summary>
             [SerializeField]
-            private DamageLayer[] modifierKeys;
-            [SerializeField]
-            private float[] modifierValues;
-#endif
+            public Dict<DamageLayer, float> modifiers;
 
             #region Constructors
 
             public Modifier(params KeyValuePair<int, float>[] modifiers)
             {
-                this.modifiers = new Dictionary<DamageLayer, float>();
-#if UNITY_EDITOR
-                modifierKeys = new DamageLayer[1];
-                modifierValues = new float[1];
-#endif
-
+                this.modifiers = new Dict<DamageLayer, float>();
                 foreach (var mod in modifiers)
                 {
                     SetModifier(mod);
@@ -217,16 +244,17 @@ namespace JakePerry
 
             public Modifier(params KeyValuePair<DamageLayer, float>[] modifiers)
             {
-                this.modifiers = new Dictionary<DamageLayer, float>();
-#if UNITY_EDITOR
-                modifierKeys = new DamageLayer[1];
-                modifierValues = new float[1];
-#endif
-
+                this.modifiers = new Dict<DamageLayer, float>();
                 foreach (var mod in modifiers)
                 {
                     SetModifier(mod);
                 }
+            }
+
+            /// <summary>Ensures the internal dictionary is initialized.</summary>
+            public void InitializeDict()
+            {
+                if (modifiers == null) modifiers = new Dict<DamageLayer, float>();
             }
 
             #endregion
@@ -258,22 +286,7 @@ namespace JakePerry
             /// <summary>Set the modifier value for a layer.</summary>
             public void SetModifier(DamageLayer layer, float modifier)
             {
-                if (modifiers == null) modifiers = new Dictionary<DamageLayer, float>();
-#if UNITY_EDITOR
-                if (modifierKeys == null) modifierKeys = new DamageLayer[1];
-                if (modifierValues == null) modifierValues = new float[1];
-
-                if (!modifierKeys.Contains(layer))
-                {
-                    List<DamageLayer> keyList = modifierKeys.ToList();
-                    keyList.Add(layer);
-                    modifierKeys = keyList.ToArray();
-
-                    List<float> valueList = modifierValues.ToList();
-                    valueList.Add(modifier);
-                    modifierValues = valueList.ToArray();
-                }
-#endif
+                InitializeDict();
                 modifiers[layer] = modifier;
             }
 
@@ -282,12 +295,19 @@ namespace JakePerry
             /// <returns>The modifier associated with the layer.</returns>
             public float GetModifier(DamageLayer layer)
             {
-                if (modifiers == null) modifiers = new Dictionary<DamageLayer, float>();
+                InitializeDict();
 
                 if (!modifiers.ContainsKey(layer))
                     return 1.0f;
 
                 return modifiers[layer];
+            }
+
+            /// <summary>Removes the modifier for the specified layer.</summary>
+            public void RemoveModifier(DamageLayer layer)
+            {
+                if (modifiers.ContainsKey(layer))
+                    modifiers.Remove(layer);
             }
         }
 
