@@ -27,6 +27,6 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _node_7610: 0.11
-    - _node_762: 0.16
+    - _node_7610: 0.121
+    - _node_762: 0.144
     m_Colors: []
