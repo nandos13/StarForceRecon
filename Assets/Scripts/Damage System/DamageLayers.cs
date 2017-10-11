@@ -224,14 +224,16 @@ namespace JakePerry
         [System.Serializable]
         public struct Modifier
         {
+            [System.Serializable]
+            public class LayerModDict : Dict<DamageLayer, float>{ }
             [SerializeField]
-            public Dict<DamageLayer, float> modifiers;
+            public LayerModDict modifiers;
 
             #region Constructors
 
             public Modifier(params KeyValuePair<int, float>[] modifiers)
             {
-                this.modifiers = new Dict<DamageLayer, float>();
+                this.modifiers = new LayerModDict();
                 foreach (var mod in modifiers)
                 {
                     SetModifier(mod);
@@ -240,7 +242,7 @@ namespace JakePerry
 
             public Modifier(params KeyValuePair<DamageLayer, float>[] modifiers)
             {
-                this.modifiers = new Dict<DamageLayer, float>();
+                this.modifiers = new LayerModDict();
                 foreach (var mod in modifiers)
                 {
                     SetModifier(mod);
@@ -250,7 +252,7 @@ namespace JakePerry
             /// <summary>Ensures the internal dictionary is initialized.</summary>
             public void InitializeDict()
             {
-                if (modifiers == null) modifiers = new Dict<DamageLayer, float>();
+                if (modifiers == null) modifiers = new LayerModDict();
             }
 
             #endregion

@@ -126,7 +126,8 @@ namespace JakePerry
 
 namespace JakePerry
 {
-    /// <summary>A serializable Dictionary.</summary>
+    /// <summary>A serializable Dictionary. 
+    /// You must derive from this class and tag as System.Serializable for this to serialize properly.</summary>
     [System.Serializable]
     public class Dict<TKey, TValue> : Dictionary<TKey, TValue>, ISerializationCallbackReceiver
     {
@@ -137,7 +138,6 @@ namespace JakePerry
         
         void ISerializationCallbackReceiver.OnAfterDeserialize()
         {
-            Debug.Log(string.Format("DeSerializing Dict. Length: {0}", keys.Count));
             this.Clear();
             if (keys.Count != values.Count)
                 throw new System.Exception(string.Format("Key & Value quantity mismatch. Ensure both Key type {0} and Value type {1} are serializable.",
@@ -149,7 +149,6 @@ namespace JakePerry
 
         void ISerializationCallbackReceiver.OnBeforeSerialize()
         {
-            Debug.Log("Beginning serialization for Dict");
             keys.Clear();
             values.Clear();
             foreach (KeyValuePair<TKey, TValue> pair in this)
