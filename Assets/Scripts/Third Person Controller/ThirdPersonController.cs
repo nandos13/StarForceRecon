@@ -103,7 +103,7 @@ public class ThirdPersonController : MonoBehaviour
         }
     }
 
-    public void Move(Vector3 direction, bool roll = false, bool crouch = false)
+    public void Move(Vector3 direction, bool roll = false, bool crouch = false, bool applyMoveVelocity = false)
     {
         if (direction.magnitude <= 0)
         {
@@ -145,7 +145,7 @@ public class ThirdPersonController : MonoBehaviour
                 _rolling = false;
 
             // Do state-specific movement
-            if (!_rolling)
+            if (!_rolling && !applyMoveVelocity)
             {
                 // Do standard grounded movement
 
