@@ -11,7 +11,7 @@ namespace JakePerry
     {
         private bool foldoutOpen = false;
         private int newLayerSelectionIndex = 0;
-        private float newLayerValue = 0.0f;
+        private float newLayerValue = 1.0f;
 
         const float BUTTON_PADDING = 10.0f;
         private const float MIDDLE_PADDING = 14.0f;
@@ -21,7 +21,7 @@ namespace JakePerry
             object modObj = fieldInfo.GetValue(property.serializedObject.targetObject);
             DamageLayer.Modifier mod = (DamageLayer.Modifier)modObj;
             var modifiers = mod.modifiers;
-            int count = (modifiers == null) ? 0 : modifiers.Count;
+            int count = (modifiers == null) ? 0 : modifiers.Dictionary.Count;
 
             float baseHeight = EditorGUIUtility.singleLineHeight;
             float contentHeight = foldoutOpen ? EditorGUIUtility.singleLineHeight * count : 0;
@@ -44,46 +44,49 @@ namespace JakePerry
 
         private void Draw(Rect position, SerializedProperty property, GUIContent label)
         {
+            bool applyChanges = false;
+
             object modObj = fieldInfo.GetValue(property.serializedObject.targetObject);
-            DamageLayer.Modifier mod = (DamageLayer.Modifier)modObj;
-            mod.InitializeDict();
-            var modifiers = mod.modifiers;
+            DamageLayer.Modifier? mod = (DamageLayer.Modifier)modObj;
+            mod.Value.InitializeDict();
 
             #region Draw Contained Layers
 
             // Draw each contained layer & modifier value
             bool removeKey = false;
             DamageLayer keyToRemove = 0;
-            foreach (KeyValuePair<DamageLayer, float> pair in modifiers)
+            foreach (var pair in mod.Value.modifiers.Dictionary.Keys)
             {
                 // Draw layer name label
                 EditorGUI.LabelField(new Rect(position.x, position.y,
                                         position.width / 2, EditorGUIUtility.singleLineHeight),
-                                        DamageLayer.Utils.GetLayerName(pair.Key, true), EditorStyles.miniBoldLabel);
+                                        DamageLayer.Utils.GetLayerName(pair.value, true), EditorStyles.miniBoldLabel);
 
                 // Draw modifier value
-                float value = pair.Value;
-                value = EditorGUI.FloatField(new Rect(position.x + position.width / 2, position.y,
-                                            position.width / 4, EditorGUIUtility.singleLineHeight),
-                                            value);
+                float value = pair.value;
+                value = EditorGUI.DelayedFloatField(new Rect(position.x + position.width / 2, position.y,
+                                                    position.width / 4, EditorGUIUtility.singleLineHeight),
+                                                    value);
 
                 // Set value if changed
-                if (value != pair.Value)
-                    modifiers[pair.Key] = value;
+                if (value != pair.value)
+                    mod.Value.modifiers.Dictionary[pair] = value;
 
                 // Draw remove button
                 if (GUI.Button(new Rect(position.x + ((position.width / 4) * 3) + BUTTON_PADDING, position.y,
                     (position.width / 4) - 2 * BUTTON_PADDING, EditorGUIUtility.singleLineHeight), "-"))
                 {
                     removeKey = true;
-                    keyToRemove = pair.Key;
+                    keyToRemove = pair;
+
+                    applyChanges = true;
                 }
                 
                 position.y += EditorGUIUtility.singleLineHeight;
             }
 
             if (removeKey)
-                mod.RemoveModifier(keyToRemove);
+                mod.Value.RemoveModifier(keyToRemove);
 
             #endregion
 
@@ -99,7 +102,7 @@ namespace JakePerry
 
             // Get a list of layer names which do not already have a modifier
             string[] namesNotContained = DamageLayer.Utils.GetLayerNames(false).Where(
-                name => !modifiers.ContainsKey(DamageLayer.Utils.NameToLayer(name))
+                name => !mod.Value.modifiers.Dictionary.ContainsKey(DamageLayer.Utils.NameToLayer(name))
                 ).ToArray();
 
             // Draw fields for adding a new layer modifier
@@ -123,9 +126,12 @@ namespace JakePerry
                     (position.width / 4) - 2 * BUTTON_PADDING, EditorGUIUtility.singleLineHeight), "+"))
                 {
                     string nameToAdd = namesNotContained[newLayerSelectionIndex];
-                    mod.SetModifier(DamageLayer.Utils.NameToLayer(nameToAdd), newLayerValue);
+                    mod.Value.SetModifier(DamageLayer.Utils.NameToLayer(nameToAdd), newLayerValue);
 
                     newLayerSelectionIndex = 0;
+                    newLayerValue = 1.0f;
+
+                    applyChanges = true;
                 }
             }
             else
@@ -134,9 +140,12 @@ namespace JakePerry
 
             #endregion
 
-            // Apply any changes
-            modObj = mod as object;
-            fieldInfo.SetValue(property.serializedObject.targetObject, modObj);
+            if (applyChanges)
+            {
+                // Apply any changes
+                //modObj = mod as object;
+                //fieldInfo.SetValue(property.serializedObject.targetObject, mod);
+            }
         }
     }
 }

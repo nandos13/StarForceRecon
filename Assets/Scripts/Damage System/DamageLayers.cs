@@ -225,7 +225,7 @@ namespace JakePerry
         public struct Modifier
         {
             [System.Serializable]
-            public class LayerModDict : Dict<DamageLayer, float>{ }
+            public class LayerModDict : Dict<DamageLayer, float> { }
             [SerializeField]
             public LayerModDict modifiers;
 
@@ -239,7 +239,7 @@ namespace JakePerry
                     SetModifier(mod);
                 }
             }
-
+            
             public Modifier(params KeyValuePair<DamageLayer, float>[] modifiers)
             {
                 this.modifiers = new LayerModDict();
@@ -285,7 +285,7 @@ namespace JakePerry
             public void SetModifier(DamageLayer layer, float modifier)
             {
                 InitializeDict();
-                modifiers[layer] = modifier;
+                modifiers.Dictionary[layer] = modifier;
             }
 
             #endregion
@@ -295,17 +295,17 @@ namespace JakePerry
             {
                 InitializeDict();
 
-                if (!modifiers.ContainsKey(layer))
+                if (!modifiers.Dictionary.ContainsKey(layer))
                     return 1.0f;
 
-                return modifiers[layer];
+                return modifiers.Dictionary[layer];
             }
 
             /// <summary>Removes the modifier for the specified layer.</summary>
             public void RemoveModifier(DamageLayer layer)
             {
-                if (modifiers.ContainsKey(layer))
-                    modifiers.Remove(layer);
+                if (modifiers.Dictionary.ContainsKey(layer))
+                    modifiers.Dictionary.Remove(layer);
             }
         }
 

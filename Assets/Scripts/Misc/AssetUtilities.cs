@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System;
+using System.Linq;
 #if UNITY_EDITOR
 using UnityEngine;
 using UnityEditor;
@@ -129,33 +130,53 @@ namespace JakePerry
     /// <summary>A serializable Dictionary. 
     /// You must derive from this class and tag as System.Serializable for this to serialize properly.</summary>
     [System.Serializable]
-    public class Dict<TKey, TValue> : Dictionary<TKey, TValue>, ISerializationCallbackReceiver
+    public class Dict<TKey, TValue> : ISerializationCallbackReceiver
     {
+        private Dictionary<TKey, TValue> dict;
         [SerializeField]
-        private List<TKey> keys = new List<TKey>();
+        private TKey[] keys;
         [SerializeField]
-        private List<TValue> values = new List<TValue>();
-        
+        private TValue[] values;
+
+        public Dictionary<TKey, TValue> Dictionary { get { return dict; } }
+
+        #region Constructors
+
+        public Dict()
+        { dict = new Dictionary<TKey, TValue>(); }
+        public Dict(IDictionary<TKey, TValue> dictionary)
+        { dict = new Dictionary<TKey, TValue>(dictionary); }
+        public Dict(IDictionary<TKey, TValue> dictionary, IEqualityComparer<TKey> comparer)
+        { dict = new Dictionary<TKey, TValue>(dictionary, comparer); }
+        public Dict(IEqualityComparer<TKey> comparer)
+        { dict = new Dictionary<TKey, TValue>(comparer); }
+        public Dict(Int32 capacity)
+        { dict = new Dictionary<TKey, TValue>(capacity); }
+        public Dict(Int32 capacity, IEqualityComparer<TKey> comparer)
+        { dict = new Dictionary<TKey, TValue>(capacity, comparer); }
+
+        #endregion
+
+        #region Interface Implementation
+
         void ISerializationCallbackReceiver.OnAfterDeserialize()
         {
-            this.Clear();
-            if (keys.Count != values.Count)
-                throw new System.Exception(string.Format("Key & Value quantity mismatch. Ensure both Key type {0} and Value type {1} are serializable.",
+            dict.Clear();
+            if (keys.Length != values.Length)
+                throw new System.Exception(string.Format(
+                    "Key & Value quantity mismatch. Ensure both Key type {0} and Value type {1} are serializable.",
                     typeof(TKey).Name, typeof(TValue).Name));
 
-            for (int i = 0; i < keys.Count; i++)
-                this.Add(keys[i], values[i]);
+            for (int i = 0; i < keys.Length; i++)
+                dict.Add(keys[i], values[i]);
         }
 
         void ISerializationCallbackReceiver.OnBeforeSerialize()
         {
-            keys.Clear();
-            values.Clear();
-            foreach (KeyValuePair<TKey, TValue> pair in this)
-            {
-                keys.Add(pair.Key);
-                values.Add(pair.Value);
-            }
+            keys = dict.Keys.ToArray();
+            values = dict.Values.ToArray();
         }
+
+        #endregion
     }
 }
