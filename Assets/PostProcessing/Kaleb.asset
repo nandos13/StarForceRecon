@@ -36,19 +36,19 @@ MonoBehaviour:
         preset: 4
       taaSettings:
         jitterSpread: 0.75
-        sharpen: 0.3
-        stationaryBlending: 0.95
-        motionBlending: 0.85
+        sharpen: 0
+        stationaryBlending: 0.55
+        motionBlending: 0.95
   ambientOcclusion:
     m_Enabled: 1
     m_Settings:
-      intensity: 1
+      intensity: 1.5
       radius: 0.3
-      sampleCount: 10
+      sampleCount: 16
       downsampling: 1
-      forceForwardCompatibility: 0
+      forceForwardCompatibility: 1
       ambientOnly: 0
-      highPrecision: 0
+      highPrecision: 1
   screenSpaceReflection:
     m_Enabled: 0
     m_Settings:
@@ -85,14 +85,14 @@ MonoBehaviour:
   eyeAdaptation:
     m_Enabled: 1
     m_Settings:
-      lowPercent: 45
-      highPercent: 95
-      minLuminance: -5
-      maxLuminance: 1
+      lowPercent: 49
+      highPercent: 99
+      minLuminance: -7
+      maxLuminance: 3
       keyValue: 0.25
       dynamicKeyValue: 1
       adaptationType: 0
-      speedUp: 2
+      speedUp: 3
       speedDown: 1
       logMin: -8
       logMax: 4
@@ -100,14 +100,14 @@ MonoBehaviour:
     m_Enabled: 1
     m_Settings:
       bloom:
-        intensity: 0.49
+        intensity: 0.4
         threshold: 1.1
-        softKnee: 0.5
-        radius: 4
-        antiFlicker: 0
+        softKnee: 1
+        radius: 5
+        antiFlicker: 1
       lensDirt:
         texture: {fileID: 0}
-        intensity: 3
+        intensity: 1
   colorGrading:
     m_Enabled: 1
     m_Settings:
@@ -134,13 +134,13 @@ MonoBehaviour:
       colorWheels:
         mode: 1
         log:
-          slope: {r: 1, g: 1, b: 1, a: 0}
-          power: {r: 1, g: 1, b: 1, a: 0}
-          offset: {r: 1, g: 1, b: 1, a: 0}
+          slope: {r: 1, g: 1, b: 1, a: -0.11059908}
+          power: {r: 0.87640905, g: 0.96202666, b: 1, a: 0.07373273}
+          offset: {r: 1, g: 1, b: 1, a: -0.036866352}
         linear:
-          lift: {r: 0, g: 0, b: 0, a: 0}
-          gamma: {r: 0, g: 0, b: 0, a: 0}
-          gain: {r: 0, g: 0, b: 0, a: 0}
+          lift: {r: 1, g: 1, b: 1, a: 0}
+          gamma: {r: 1, g: 1, b: 1, a: -0.03686636}
+          gain: {r: 1, g: 1, b: 1, a: 0.05904059}
       curves:
         master:
           curve:
