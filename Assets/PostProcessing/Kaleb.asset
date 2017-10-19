@@ -36,19 +36,19 @@ MonoBehaviour:
         preset: 4
       taaSettings:
         jitterSpread: 0.75
-        sharpen: 0.3
-        stationaryBlending: 0.95
-        motionBlending: 0.85
+        sharpen: 0
+        stationaryBlending: 0.55
+        motionBlending: 0.95
   ambientOcclusion:
     m_Enabled: 1
     m_Settings:
-      intensity: 1
+      intensity: 1.5
       radius: 0.3
-      sampleCount: 10
+      sampleCount: 16
       downsampling: 1
-      forceForwardCompatibility: 0
+      forceForwardCompatibility: 1
       ambientOnly: 0
-      highPrecision: 0
+      highPrecision: 1
   screenSpaceReflection:
     m_Enabled: 0
     m_Settings:
@@ -85,39 +85,39 @@ MonoBehaviour:
   eyeAdaptation:
     m_Enabled: 1
     m_Settings:
-      lowPercent: 1
-      highPercent: 50.99998
-      minLuminance: -5
-      maxLuminance: 1
+      lowPercent: 49
+      highPercent: 99
+      minLuminance: -7
+      maxLuminance: 3
       keyValue: 0.25
       dynamicKeyValue: 1
       adaptationType: 0
-      speedUp: 2
+      speedUp: 3
       speedDown: 1
-      logMin: -14
-      logMax: 1
+      logMin: -8
+      logMax: 4
   bloom:
     m_Enabled: 1
     m_Settings:
       bloom:
-        intensity: 0.23
-        threshold: 1
-        softKnee: 0.5
+        intensity: 0.4
+        threshold: 1.1
+        softKnee: 1
         radius: 5
-        antiFlicker: 0
+        antiFlicker: 1
       lensDirt:
         texture: {fileID: 0}
-        intensity: 3
+        intensity: 1
   colorGrading:
     m_Enabled: 1
     m_Settings:
       tonemapping:
         tonemapper: 2
         neutralBlackIn: 0.02
-        neutralWhiteIn: 14
+        neutralWhiteIn: 10
         neutralBlackOut: 0
-        neutralWhiteOut: 12
-        neutralWhiteLevel: 20
+        neutralWhiteOut: 10
+        neutralWhiteLevel: 5.3
         neutralWhiteClip: 10
       basic:
         postExposure: 0
@@ -132,15 +132,15 @@ MonoBehaviour:
         blue: {x: 0, y: 0, z: 1}
         currentEditingChannel: 0
       colorWheels:
-        mode: 0
+        mode: 1
         log:
-          slope: {r: 1, g: 1, b: 1, a: 0.10445465}
-          power: {r: 1, g: 1, b: 1, a: 0.03686636}
-          offset: {r: 1, g: 1, b: 1, a: -0.03686636}
+          slope: {r: 1, g: 1, b: 1, a: -0.11059908}
+          power: {r: 0.87640905, g: 0.96202666, b: 1, a: 0.07373273}
+          offset: {r: 1, g: 1, b: 1, a: -0.036866352}
         linear:
           lift: {r: 1, g: 1, b: 1, a: 0}
-          gamma: {r: 1, g: 1, b: 1, a: -6.8668946e-11}
-          gain: {r: 1, g: 1, b: 1, a: 0.14746544}
+          gamma: {r: 1, g: 1, b: 1, a: -0.03686636}
+          gain: {r: 1, g: 1, b: 1, a: 0.05904059}
       curves:
         master:
           curve:
