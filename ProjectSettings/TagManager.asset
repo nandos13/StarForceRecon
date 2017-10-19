@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Menu
+  - Bomb
+  - AI
   layers:
   - Default
   - TransparentFX
