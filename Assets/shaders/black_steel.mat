@@ -6,8 +6,8 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Shader Forge_Hologram
-  m_Shader: {fileID: 4800000, guid: fdf17b803f08455419252dcf4a374c01, type: 3}
+  m_Name: black_steel
+  m_Shader: {fileID: 4800000, guid: f687e0ce925cbc94ebb3ec24235da0a2, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -18,15 +18,16 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 2800000, guid: a0f3999c51d44f842885b492098c0a86, type: 3}
+    - _BumpMap:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _node_461:
-        m_Texture: {fileID: 2800000, guid: a0f3999c51d44f842885b492098c0a86, type: 3}
+    - _MainTex:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _node_7610: 0.121
-    - _node_762: 0.144
-    m_Colors: []
+    - _Gloss: 1
+    - _Metallic: 0
+    m_Colors:
+    - _Color: {r: 0.25735295, g: 0.25735295, b: 0.25735295, a: 1}
