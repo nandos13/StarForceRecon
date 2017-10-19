@@ -54,20 +54,20 @@ public class ExplosionScript : Bang {
                 SoundSource.Play();
                 particles.Play();
                 Vector3 explosionPos = blast.transform.position; // position of gameObject
-                Collider[] colliders = Physics.OverlapSphere(explosionPos, explosion.radius); // Overlap takes all colliders that are within the Sphere's radius of the gameObject and puts them into an Array[colliders]
-                foreach (Collider hit in colliders) // access each collider thats within our Spheres radius
-                {
-                    Rigidbody rb = hit.GetComponent<Rigidbody>();   // when hit a collider, get the component called rigidbody
-                    Ragdoll ragdoll = hit.gameObject.GetComponentInParent<Ragdoll>();
-                    if (rb != null)
-                    {
-                        rb.AddExplosionForce(explosion.power, explosionPos, explosion.radius, explosion.explosiveLift, ForceMode.Impulse);    // if rb has been hit, explosion on force on all rigidbodies
-                        if (ragdoll != null)
-                            ragdoll.RagdollOn = true;
-                    }
-                }
+                //Collider[] colliders = Physics.OverlapSphere(explosionPos, explosion.radius); // Overlap takes all colliders that are within the Sphere's radius of the gameObject and puts them into an Array[colliders]
+                //foreach (Collider hit in colliders) // access each collider thats within our Spheres radius
+                //{
+                //    Rigidbody rb = hit.GetComponent<Rigidbody>();   // when hit a collider, get the component called rigidbody
+                //    Ragdoll ragdoll = hit.gameObject.GetComponentInParent<Ragdoll>();
+                //    if (rb != null)
+                //    {
+                //        rb.AddExplosionForce(explosion.power, explosionPos, explosion.radius, explosion.explosiveLift, ForceMode.Impulse);    // if rb has been hit, explosion on force on all rigidbodies
+                //        if (ragdoll != null)
+                //            ragdoll.RagdollOn = true;
+                //    }
+                //}
                 GameObject bombModel;
-                bombModel = transform.FindChild("BombSphereModel").gameObject;
+                bombModel = transform.Find("BombSphereModel").gameObject;
                 bombModel.SetActive(false);
                 exploded = true;
             }
