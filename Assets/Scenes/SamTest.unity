@@ -18794,7 +18794,7 @@ Prefab:
     - target: {fileID: 23909724840038652, guid: 6dff7feb46c4d324bb5bec8e5af3002c,
         type: 2}
       propertyPath: m_CastShadows
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 23909724840038652, guid: 6dff7feb46c4d324bb5bec8e5af3002c,
         type: 2}
