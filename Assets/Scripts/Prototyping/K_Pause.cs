@@ -22,7 +22,7 @@ public class K_Pause : MonoBehaviour {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 _hudCanvas.SetActive(false);
-                Time.timeScale = 0.001f;
+                Time.timeScale = 0.0f;
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
                 _pauseCanvas.SetActive(true);
