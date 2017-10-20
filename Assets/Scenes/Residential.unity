@@ -3154,19 +3154,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4996199748314228, guid: 48a3eec5f161f6e4e91d078cbe3acc03, type: 2}
       propertyPath: m_LocalRotation.x
-      value: -0.029932765
+      value: -0.029932767
       objectReference: {fileID: 0}
     - target: {fileID: 4996199748314228, guid: 48a3eec5f161f6e4e91d078cbe3acc03, type: 2}
       propertyPath: m_LocalRotation.y
-      value: 0.9040317
+      value: 0.90403175
       objectReference: {fileID: 0}
     - target: {fileID: 4996199748314228, guid: 48a3eec5f161f6e4e91d078cbe3acc03, type: 2}
       propertyPath: m_LocalRotation.z
-      value: -0.42155686
+      value: -0.4215569
       objectReference: {fileID: 0}
     - target: {fileID: 4996199748314228, guid: 48a3eec5f161f6e4e91d078cbe3acc03, type: 2}
       propertyPath: m_LocalRotation.w
-      value: -0.06419103
+      value: -0.064191036
       objectReference: {fileID: 0}
     - target: {fileID: 4996199748314228, guid: 48a3eec5f161f6e4e91d078cbe3acc03, type: 2}
       propertyPath: m_RootOrder
@@ -34972,6 +34972,11 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.y
       value: -90
       objectReference: {fileID: 0}
+    - target: {fileID: 23475368830550478, guid: 2dc98679a03d8f646afbd9a2f479c94a,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e4db54a7c8d2d5749ad645416a7685cd, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2dc98679a03d8f646afbd9a2f479c94a, type: 2}
   m_IsPrefabParent: 0
@@ -70560,6 +70565,11 @@ Prefab:
       propertyPath: m_Name
       value: Vending_Machine (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 23475368830550478, guid: 2dc98679a03d8f646afbd9a2f479c94a,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e4db54a7c8d2d5749ad645416a7685cd, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2dc98679a03d8f646afbd9a2f479c94a, type: 2}
   m_IsPrefabParent: 0
