@@ -17,42 +17,39 @@ public class K_Pause : MonoBehaviour {
 
     void Update()
     {
-        if (_paused == false)
+        if (!_paused)
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                _hudCanvas.SetActive(false);
-                Time.timeScale = 0.0f;
-                Cursor.visible = true;
-                Cursor.lockState = CursorLockMode.None;
-                _pauseCanvas.SetActive(true);
-                _paused = true;
+                SetPauseState(true);
             }
         }
 
-        else if (_paused == true)
+        else if (_paused)
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                _pauseCanvas.SetActive(false);
-                Time.timeScale = 1.0f;
-                Cursor.visible = false;
-                Cursor.lockState = CursorLockMode.Locked;
-                _hudCanvas.SetActive(true);
-                _paused = false;
+                SetPauseState(false);
             }
         }
     }
 
+    private void SetPauseState(bool state)
+    {
+        _hudCanvas.SetActive(!state);
+        Time.timeScale = state ? 0.0f : 1.0f;
+        Cursor.visible = state;
+        if (state)
+            Cursor.lockState = CursorLockMode.None;
+        _pauseCanvas.SetActive(state);
+        _paused = state;
+    }
+
     public void Continue()
     {
-        if (_paused == true) {
-            _pauseCanvas.SetActive(false);
-            Time.timeScale = 1.0f;
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
-            _hudCanvas.SetActive(true);
-            _paused = false;
+        if (_paused)
+        {
+            SetPauseState(false);
         }
     }
 }

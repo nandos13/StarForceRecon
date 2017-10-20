@@ -372,7 +372,7 @@ namespace StarForceRecon
         void GameController<SFRInputSet>.ITarget.ReceiveControllerInput(SFRInputSet inputSet, 
             GameController<SFRInputSet>.ControlType controllerType)
         {
-            if (isActiveAndEnabled)
+            if (isActiveAndEnabled && Time.timeScale > 0)
             {
                 UnityEngine.Cursor.lockState = CursorLockMode.Locked;
                 UnityEngine.Cursor.visible = false;
