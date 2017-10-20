@@ -62,8 +62,9 @@ public class Agent : MonoBehaviour
             }
 
         }
-        
-           
+        Debug.Log("AGGRO");
+            // TODO - delete later
+            AggroTest();
     }
 
     // checks all our available actions and evaluates each one, getting the best
@@ -91,7 +92,23 @@ public class Agent : MonoBehaviour
         return 0;
     }
 
+    void AggroTest()
+    {
+        KeyCode kc = KeyCode.L;
+
+        // prerss L, and N to add aggro to each squaddie
+        foreach (SquadManager.IControllable s in SquadManager.GetSquadMembers)  // Loop through all squad members
+        {
+            if (Input.GetKeyDown(kc))
+            {
+                aggro[s] = GetAggro(s) + 10;
+            }
+            kc++;
+
+        }
+       
     
+    }
 }
 
 

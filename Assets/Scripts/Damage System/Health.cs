@@ -141,7 +141,7 @@ public class Health : MonoBehaviour, IDamageable
     public void ApplyDamage(DamageData damage)
     {
         if (damage == null) return;
-        //if (!damage.damageMask.ContainsLayer(_damageLayer.value)) return;
+        if (!damage.damageMask.ContainsLayer(_damageLayer.value)) return;
 
         if (_isAlive)
         {

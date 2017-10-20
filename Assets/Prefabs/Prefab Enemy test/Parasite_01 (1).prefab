@@ -27,8 +27,6 @@ GameObject:
   - component: {fileID: 114616580922801176}
   - component: {fileID: 195904041117070020}
   - component: {fileID: 114733935626824998}
-  - component: {fileID: 114884348162983778}
-  - component: {fileID: 114815803758873534}
   m_Layer: 0
   m_Name: Parasite_01 (1)
   m_TagString: AI
@@ -43,7 +41,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1027901333939610}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -12.106391, y: 0, z: -147.31381}
+  m_LocalPosition: {x: 16.25, y: 0.004, z: -131.07}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -113,8 +111,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.4, y: 0.18219653, z: 0.4}
-  m_Center: {x: 0.0034880638, y: 0.15723759, z: 0.03339517}
+  m_Size: {x: 0.27953815, y: 0.12194857, z: 0.50760007}
+  m_Center: {x: 0.0034880638, y: 0.14113933, z: 0.03339517}
 --- !u!95 &95512299501046714
 Animator:
   serializedVersion: 3
@@ -145,8 +143,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   evaluation: 0
   minDistance: 0.4
-  damping: 3
-  enemyMoveSpeed: 1.5
+  damping: 5
+  enemyMoveSpeed: 2
   Target: {fileID: 0}
   damage: 1
   attackRate: 1
@@ -169,39 +167,6 @@ MonoBehaviour:
   nv: {fileID: 0}
   enemyLookDistance: 40
   aggroRange: 20
---- !u!114 &114815803758873534
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1027901333939610}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9ade34523d6ffe4aaddf3fc2635a7b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114884348162983778
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1027901333939610}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e1dcfc05207d9b468295298e111bbcb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _maxHealth: 1
-  _currentHealth: 0
-  _isAlive: 1
-  _startingHealth: 1
-  _startRandom: 0
-  _startMinimum: 60
-  _startMaximum: 100
-  _rechargeWhenLow: 0
-  _lowThresholdRecharge: 15
-  _delayAfterDamage: 2
-  _gainPerSecond: 5
 --- !u!195 &195904041117070020
 NavMeshAgent:
   m_ObjectHideFlags: 1
@@ -210,9 +175,9 @@ NavMeshAgent:
   m_GameObject: {fileID: 1027901333939610}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.25
+  m_Radius: 0.15
   m_Speed: 3.5
-  m_Acceleration: 4
+  m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0.5

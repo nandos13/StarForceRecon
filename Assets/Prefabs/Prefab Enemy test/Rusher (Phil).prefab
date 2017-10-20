@@ -26,7 +26,6 @@ GameObject:
   - component: {fileID: 195186314389650590}
   - component: {fileID: 114108554823784852}
   - component: {fileID: 114023984571759626}
-  - component: {fileID: 114413621873882638}
   m_Layer: 0
   m_Name: Rusher (Phil)
   m_TagString: AI
@@ -138,28 +137,6 @@ MonoBehaviour:
   nv: {fileID: 0}
   enemyLookDistance: 40
   aggroRange: 20
---- !u!114 &114413621873882638
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1583650111431112}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e1dcfc05207d9b468295298e111bbcb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _maxHealth: 100
-  _currentHealth: 0
-  _isAlive: 1
-  _startingHealth: 100
-  _startRandom: 0
-  _startMinimum: 60
-  _startMaximum: 100
-  _rechargeWhenLow: 0
-  _lowThresholdRecharge: 15
-  _delayAfterDamage: 2
-  _gainPerSecond: 5
 --- !u!136 &136233567257823422
 CapsuleCollider:
   m_ObjectHideFlags: 1
