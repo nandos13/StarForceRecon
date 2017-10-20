@@ -92,9 +92,22 @@ public class Health : MonoBehaviour, IDamageable
         if (_currentHealth > _maxHealth)
             _currentHealth = _maxHealth;
     }
-    
+
+    void Start()
+    {
+        
+    }
+
+    bool hasHealthBar = false;
+
     void Update()
     {
+        if (health < maxHealth && hasHealthBar == false && HealthBarManager.instance)
+        {
+            HealthBarManager.instance.AddHealthBar(this);
+            hasHealthBar = true;
+        }
+        
         _timeSinceDamage += Time.deltaTime;
         if (_rechargeWhenLow)
             Recharge();
@@ -141,7 +154,7 @@ public class Health : MonoBehaviour, IDamageable
     public void ApplyDamage(DamageData damage)
     {
         if (damage == null) return;
-        if (!damage.damageMask.ContainsLayer(_damageLayer.value)) return;
+        //if (!damage.damageMask.ContainsLayer(_damageLayer.value)) return;
 
         if (_isAlive)
         {

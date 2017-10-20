@@ -29,7 +29,7 @@ GameObject:
   - component: {fileID: 114117845377400870}
   m_Layer: 0
   m_Name: Brute_01
-  m_TagString: AI
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -3,37 +3,35 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HealthBar : MonoBehaviour
-{
-    Health health;
-    RectTransform rect;
-    OverheadHUD hud = null;
-    float maxWidth = 0;
+public class HealthBar : MonoBehaviour {
 
-    private void Health_OnDamage(Health sender, float damageValue)
-    {
-        rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, (sender.health / sender.maxHealth) * maxWidth);
-    }
+    public Health health;
+    public Image image;
 
-    private void Health_OnDeath(Health sender, float damageValue)
-    {
-        gameObject.SetActive(false);
-        if (hud)
-            hud.gameObject.SetActive(false);
-    }
+    public float screenZ;
 
+    Rect initialRect;
+    // Use this for initialization
     void Start ()
     {
-        rect = GetComponent<RectTransform>();
-        maxWidth = rect.sizeDelta.x;
-        hud = transform.parent.GetComponent<OverheadHUD>();
-
-        health = hud.target.GetComponent<Health>();
-        if (health)
+        if (image)
         {
-            health.OnDamage += Health_OnDamage;
-            health.OnDeath += Health_OnDeath;
+            image.type = Image.Type.Filled;
+            image.fillMethod = Image.FillMethod.Horizontal;
         }
     }
-    
+	
+	// Update is called once per frame
+	void Update ()
+    {
+        transform.position = health.transform.position + Vector3.up * 2;
+        transform.forward = Camera.main.transform.forward;
+
+        // scale the meter
+        float pct = Mathf.Clamp01(health.health / health.maxHealth);
+        image.fillAmount = pct;
+
+        if (pct <= 0)
+            Destroy(gameObject);
+    }
 }

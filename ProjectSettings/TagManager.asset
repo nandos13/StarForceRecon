@@ -5,8 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Menu
-  - Bomb
-  - AI
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -16,7 +15,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Player
   - 
   - 
   - 

@@ -29,7 +29,7 @@ GameObject:
   - component: {fileID: 114785641899849360}
   m_Layer: 0
   m_Name: Slinger (1)
-  m_TagString: AI
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
