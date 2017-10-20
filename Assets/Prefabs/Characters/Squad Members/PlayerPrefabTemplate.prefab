@@ -27,6 +27,7 @@ GameObject:
   - component: {fileID: 114947820507155634}
   - component: {fileID: 114484451664491256}
   - component: {fileID: 114469990275783136}
+  - component: {fileID: 114633572314087028}
   m_Layer: 0
   m_Name: Gun
   m_TagString: Player
@@ -50,6 +51,7 @@ GameObject:
   - component: {fileID: 114663841151401494}
   - component: {fileID: 114809223676562748}
   - component: {fileID: 195616414328680494}
+  - component: {fileID: 114100610223605602}
   m_Layer: 0
   m_Name: PlayerPrefabTemplate
   m_TagString: Player
@@ -83,6 +85,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4652491751605062}
   - component: {fileID: 114298271148681836}
+  - component: {fileID: 95092886413324774}
   m_Layer: 0
   m_Name: Mesh
   m_TagString: Player
@@ -240,6 +243,35 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &95092886413324774
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1598689343879436}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: e3b5e08fde7e39a499f3124012b4d422, type: 3}
+  m_Controller: {fileID: 9100000, guid: 21a17ed2c334d5f45b15e222eff5be8d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114100610223605602
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1420867811208812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 304777d7efa7361488ba12a435c943cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aggroRange: 10
 --- !u!114 &114237065103439524
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -365,6 +397,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gun: {fileID: 114996294455872598}
+--- !u!114 &114633572314087028
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1177320916437494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a015145059d6fc040b6d7b3644da8826, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114663841151401494
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -383,6 +426,7 @@ MonoBehaviour:
   aiScripts:
   - {fileID: 114809223676562748}
   - {fileID: 195616414328680494}
+  - {fileID: 114100610223605602}
   playerScripts: []
   selectionDelay: 0.2
 --- !u!114 &114776304855939038
