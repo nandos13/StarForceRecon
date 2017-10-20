@@ -85,7 +85,7 @@ MonoBehaviour:
   eyeAdaptation:
     m_Enabled: 1
     m_Settings:
-      lowPercent: 49
+      lowPercent: 26.384615
       highPercent: 99
       minLuminance: -7
       maxLuminance: 3
