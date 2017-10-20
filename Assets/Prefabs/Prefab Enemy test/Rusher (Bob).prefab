@@ -26,6 +26,7 @@ GameObject:
   - component: {fileID: 114262443637937408}
   - component: {fileID: 114545850503355098}
   - component: {fileID: 195439681314993086}
+  - component: {fileID: 114674544319911952}
   m_Layer: 0
   m_Name: Rusher (Bob)
   m_TagString: AI
@@ -137,6 +138,28 @@ MonoBehaviour:
   nv: {fileID: 0}
   enemyLookDistance: 40
   aggroRange: 20
+--- !u!114 &114674544319911952
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1560136443777894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e1dcfc05207d9b468295298e111bbcb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHealth: 100
+  _currentHealth: 0
+  _isAlive: 1
+  _startingHealth: 100
+  _startRandom: 0
+  _startMinimum: 60
+  _startMaximum: 100
+  _rechargeWhenLow: 0
+  _lowThresholdRecharge: 15
+  _delayAfterDamage: 2
+  _gainPerSecond: 5
 --- !u!136 &136066253288796298
 CapsuleCollider:
   m_ObjectHideFlags: 1

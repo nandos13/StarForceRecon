@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using StarForceRecon;
 
 public class EnemyBehaviour : ActionAI
@@ -15,6 +16,7 @@ public class EnemyBehaviour : ActionAI
     public float enemyMoveSpeed;
     public Transform Target;
     Rigidbody _Rigidbody;
+    NavMeshAgent agent;
 
     public enum TargetType
     {
@@ -42,7 +44,7 @@ public class EnemyBehaviour : ActionAI
     [Header("AI Type")]
     public TargetType targetType;
     private WaitForSeconds attackDuration = new WaitForSeconds(0.1f);
-    private LineRenderer lineRender;
+    //private LineRenderer lineRender;
    
     public override float Evaluate(Agent a)
     {
@@ -66,15 +68,16 @@ public class EnemyBehaviour : ActionAI
 
     void Start()
     {
-        lineRender = GetComponent<LineRenderer>();
+        //lineRender = GetComponent<LineRenderer>();
         _Rigidbody = GetComponent<Rigidbody>();
+        agent = GetComponent<NavMeshAgent>();
     }
     
     public override void UpdateAction(Agent agent)
     {
         if (Target == null)
         {
-            Debug.Log("no Target!");
+           
             return;
         }
              
@@ -82,13 +85,13 @@ public class EnemyBehaviour : ActionAI
         if (targetDistance < agent.enemyLookDistance)
         {
             lookAtPlayer();
-            print("look at player");
+            //print("look at player");
         }
         if (targetDistance < agent.aggroRange)
         {
             attackAtPlayer();
             Throw();
-            print("attack!");
+            //print("attack!");
         }
     }
 
@@ -100,11 +103,13 @@ public class EnemyBehaviour : ActionAI
 
     void attackAtPlayer()
     {
-        _Rigidbody.velocity = (transform.forward * enemyMoveSpeed);
-        if (Vector3.Distance(transform.position, Target.position) < minDistance)
-        {
-            _Rigidbody.velocity = Vector3.zero;
-        }
+        if (agent)
+            agent.SetDestination(Target.position);
+        //_Rigidbody.velocity = (transform.forward * enemyMoveSpeed);
+        //if (Vector3.Distance(transform.position, Target.position) < minDistance)
+        //{
+        //    _Rigidbody.velocity = Vector3.zero;
+        //}
     }
 
     public void Throw()
@@ -115,10 +120,10 @@ public class EnemyBehaviour : ActionAI
         nextFire = Time.time + attackRate;  // set next shot time
         StartCoroutine(slingerEffect());
         RaycastHit hit;
-        lineRender.SetPosition(0, AttackRangeEnd.position);
+        //lineRender.SetPosition(0, AttackRangeEnd.position);
         if (Physics.Raycast(AttackRangeEnd.position, AttackRangeEnd.forward, out hit, attackRange))
         {
-            lineRender.SetPosition(1, hit.point);
+            //lineRender.SetPosition(1, hit.point);
             Health health = hit.collider.GetComponent<Health>();
 
             if (health != null)
@@ -131,16 +136,16 @@ public class EnemyBehaviour : ActionAI
                 hit.rigidbody.AddForce(-hit.normal * attackRangeForce);
             }
         }
-        else
-        {
-            lineRender.SetPosition(1, AttackRangeEnd.position + (AttackRangeEnd.forward * attackRange));
-        }
+        //else
+        //{
+        //    lineRender.SetPosition(1, AttackRangeEnd.position + (AttackRangeEnd.forward * attackRange));
+        //}
     }
 
     public IEnumerator slingerEffect()
     {
-        lineRender.enabled = true;
+        //lineRender.enabled = true;
         yield return attackDuration;
-        lineRender.enabled = false;
+        //lineRender.enabled = false;
     }
 }
