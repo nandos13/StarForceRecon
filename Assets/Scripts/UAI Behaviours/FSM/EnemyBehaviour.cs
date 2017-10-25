@@ -44,7 +44,7 @@ public class EnemyBehaviour : ActionAI
     [Header("AI Type")]
     public TargetType targetType;
     private WaitForSeconds attackDuration = new WaitForSeconds(0.1f);
-    private LineRenderer lineRender;
+    
    
     public override float Evaluate(Agent a)
     {
@@ -73,7 +73,6 @@ public class EnemyBehaviour : ActionAI
 
     void Start()
     {
-        lineRender = GetComponent<LineRenderer>();
         _Rigidbody = GetComponent<Rigidbody>();
     }
     
@@ -113,12 +112,12 @@ public class EnemyBehaviour : ActionAI
             return;
 
         nextFire = Time.time + attackRate;  // set next shot time
-        StartCoroutine(slingerEffect());
+       
         RaycastHit hit;
-        lineRender.SetPosition(0, AttackRangeEnd.position);
+        
         if (Physics.Raycast(AttackRangeEnd.position, AttackRangeEnd.forward, out hit, attackRange))
         {
-            lineRender.SetPosition(1, hit.point);
+           
             Health health = hit.collider.GetComponent<Health>();
 
             if (health != null)
@@ -131,16 +130,6 @@ public class EnemyBehaviour : ActionAI
                 hit.rigidbody.AddForce(-hit.normal * attackRangeForce);
             }
         }
-        else
-        {
-            lineRender.SetPosition(1, AttackRangeEnd.position + (AttackRangeEnd.forward * attackRange));
-        }
-    }
-
-    public IEnumerator slingerEffect()
-    {
-        lineRender.enabled = true;
-        yield return attackDuration;
-        lineRender.enabled = false;
+       
     }
 }
