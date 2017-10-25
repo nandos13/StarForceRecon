@@ -40,6 +40,6 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _Gloss: 0.8
-    - _emissive_brightness: 0
+    - _emissive_brightness: 1
     m_Colors:
     - _colour: {r: 0.5, g: 0.5, b: 0.5, a: 1}
