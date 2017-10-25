@@ -18,7 +18,7 @@ public class DoorOpenAnimator : MonoBehaviour {
     
     void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.tag == "Player" || col.gameObject.tag == "AI")
+        if (col.gameObject.tag == "Player" || col.gameObject.tag == "Enemy")
             {
             bool isOpen = _animator.GetBool("DoorOpen");
             if (!isOpen)
@@ -29,7 +29,7 @@ public class DoorOpenAnimator : MonoBehaviour {
 
     void OnTriggerExit(Collider col)
     {
-        if (col.gameObject.tag == "Player" || col.gameObject.tag == "AI")
+        if (col.gameObject.tag == "Player" || col.gameObject.tag == "Enemy")
         
         {
             // do we have any players left inside?
@@ -37,7 +37,7 @@ public class DoorOpenAnimator : MonoBehaviour {
             Collider[] cols = Physics.OverlapBox(_box.bounds.center, _box.size/2, _box.transform.rotation);
             foreach (Collider c in cols)
             {
-                if (c.tag == "Player" || c.tag == "AI")
+                if (c.tag == "Player" || c.tag == "Enemy")
                 {
                     playersInside = true;
                     break;

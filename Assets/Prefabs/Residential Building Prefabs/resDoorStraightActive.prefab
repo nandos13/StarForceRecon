@@ -154,6 +154,7 @@ GameObject:
   - component: {fileID: 4369091043564512}
   - component: {fileID: 33619599258506288}
   - component: {fileID: 23284014664126258}
+  - component: {fileID: 65689015377568884}
   m_Layer: 0
   m_Name: resWallDoorSlide2
   m_TagString: Untagged
@@ -279,8 +280,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1912367979013190}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: -29}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4763092509822370}
@@ -775,6 +776,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 8, y: 0.5, z: 4}
   m_Center: {x: 0, y: -0.25, z: 0}
+--- !u!65 &65689015377568884
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1410393613004322}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.25, y: 2.2, z: 1.0246729}
+  m_Center: {x: 0, y: 1.1, z: -0.4876636}
 --- !u!65 &65773462368405440
 BoxCollider:
   m_ObjectHideFlags: 1

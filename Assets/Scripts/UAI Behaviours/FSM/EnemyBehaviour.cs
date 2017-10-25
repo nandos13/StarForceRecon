@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using StarForceRecon;
 
 public class EnemyBehaviour : ActionAI
@@ -15,6 +16,7 @@ public class EnemyBehaviour : ActionAI
     public float enemyMoveSpeed;
     public Transform Target;
     Rigidbody _Rigidbody;
+    NavMeshAgent agent;
 
     public enum TargetType
     {
@@ -64,6 +66,11 @@ public class EnemyBehaviour : ActionAI
     public override void Enter(Agent agent) { }
     public override void Exit(Agent agent) { }
 
+    private void Awake()
+    {
+        agent = GetComponent<NavMeshAgent>();
+    }
+
     void Start()
     {
         lineRender = GetComponent<LineRenderer>();
@@ -74,7 +81,6 @@ public class EnemyBehaviour : ActionAI
     {
         if (Target == null)
         {
-            Debug.Log("no Target!");
             return;
         }
              
@@ -82,13 +88,11 @@ public class EnemyBehaviour : ActionAI
         if (targetDistance < agent.enemyLookDistance)
         {
             lookAtPlayer();
-            print("look at player");
         }
         if (targetDistance < agent.aggroRange)
         {
-            attackAtPlayer();
+            moveToPlayer();
             Throw();
-            print("attack!");
         }
     }
 
@@ -98,13 +102,9 @@ public class EnemyBehaviour : ActionAI
         transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * damping);
     }
 
-    void attackAtPlayer()
+    void moveToPlayer()
     {
-        _Rigidbody.velocity = (transform.forward * enemyMoveSpeed);
-        if (Vector3.Distance(transform.position, Target.position) < minDistance)
-        {
-            _Rigidbody.velocity = Vector3.zero;
-        }
+        agent.SetDestination(Target.position);
     }
 
     public void Throw()
