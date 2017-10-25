@@ -5,26 +5,18 @@ using StarForceRecon;
 
 public class AimGunAtPointer : MonoBehaviour
 {
-  
-    private PlayerController _aim = null;
+    private AimHandler aimer = null;
 
 	void Start ()
     {
 
-        _aim = GetComponentInParent<PlayerController>();
-        if (!_aim)
-            throw new System.MissingFieldException("No controller :(");
+        aimer = GetComponentInParent<AimHandler>();
+        if (!aimer)
+            throw new System.MissingFieldException("No aimHandler script :(");
 	}
 	
 	void Update ()
     {
-        if (_aim)
-        {
-            if (_aim.aiming)
-            {
-                Vector3 point = _aim.aimPoint;
-                transform.LookAt(point, Vector3.up);
-            }
-        }
+        transform.LookAt(aimer.aimPoint, Vector3.up);
 	}
 }

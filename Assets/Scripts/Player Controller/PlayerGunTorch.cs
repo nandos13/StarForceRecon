@@ -12,8 +12,8 @@ namespace StarForceRecon
 
         private void Awake()
         {
-            GameController<SFRInputSet> kbm = new KeyboardMouseController<SFRInputSet>(this);
-            GameController<SFRInputSet> controller = new DualStickController<SFRInputSet>(this);
+            ControllerManager<KeyboardMouseController<SFRInputSet>, SFRInputSet>.GetController("PlayerController", this);
+            ControllerManager<DualStickController<SFRInputSet>, SFRInputSet>.GetController("PlayerController", this);
         }
 
         void GameController<SFRInputSet>.ITarget.ReceiveControllerInput(SFRInputSet inputSet, GameController<SFRInputSet>.ControlType controllerType)

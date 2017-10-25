@@ -11,6 +11,13 @@ namespace StarForceRecon
         [SerializeField, Range(2.0f, 15.0f)]
         private float aggroRange = 10.0f;
 
+        [SerializeField, Range(0.0f, 10.0f)]
+        private float accurateAngle = 5.0f;
+
+        [SerializeField, Range(0.0f, 1.0f)]
+        private float targetEvaluationTime = 0.3f;
+        private float timeSinceLastEvaluation = 0.0f;
+
         private AimHandler aim = null;
         private Gun gun = null;
 
@@ -26,18 +33,27 @@ namespace StarForceRecon
 
         private void Update()
         {
-            if (target == null)
+            if (target == null && timeSinceLastEvaluation >= targetEvaluationTime)
                 target = GetTarget();
+            else
+                timeSinceLastEvaluation += Time.deltaTime;
 
             if (target)
             {
-                aim.AimAtPoint(target.transform.position);
-                gun.Fire(false);
+                Vector3 gunForward = gun.GunForward;
+                if (gunForward.magnitude > 0)
+                {
+                    aim.AimAtPoint(target.transform.position);
+                    float dot = Vector3.Dot(gunForward, (target.transform.position - gun.transform.position).normalized);
+                    if (dot >= Mathf.Cos(accurateAngle * Mathf.Deg2Rad))
+                        gun.Fire(false);
+                }
             }
         }
 
         private Agent GetTarget()
         {
+            Debug.Log("Evaluating target");
             Agent[] agents = FindObjectsOfType<Agent>().Where(a => (Vector3.Distance(a.transform.position, transform.position) <= aggroRange)).ToArray();
 
             // Get closest
@@ -53,6 +69,7 @@ namespace StarForceRecon
                 }
             }
 
+            timeSinceLastEvaluation = 0.0f;
             return closest;
         }
     }

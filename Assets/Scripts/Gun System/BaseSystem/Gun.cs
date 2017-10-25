@@ -28,6 +28,15 @@ public class Gun : MonoBehaviour, Equipment.IEquipment
     #region General
 
     [SerializeField]    private Transform _gunOrigin = null;
+    public Vector3 GunForward
+    {
+        get
+        {
+            if (_gunOrigin != null)
+                return _gunOrigin.forward;
+            return Vector3.zero;
+        }
+    }
 
     [Tooltip("Which layers will be hit/ignored by the gun's shots?")]
     [SerializeField]    private LayerMask _layerMask = (LayerMask)1;
