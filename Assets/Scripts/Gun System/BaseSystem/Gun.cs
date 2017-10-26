@@ -27,8 +27,16 @@ public class Gun : MonoBehaviour, Equipment.IEquipment
 
     #region General
 
-    [SerializeField]
-    private Transform _gunOrigin = null;
+    [SerializeField]    private Transform _gunOrigin = null;
+    public Vector3 GunForward
+    {
+        get
+        {
+            if (_gunOrigin != null)
+                return _gunOrigin.forward;
+            return Vector3.zero;
+        }
+    }
 
     [Tooltip("All excluded layers will be completely ignored, having no effect on the bullet.")]
     [SerializeField]

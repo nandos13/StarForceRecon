@@ -24,10 +24,19 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _Cutoff: 0.5
-    - _Gloss: 0.345
+    - _Gloss: 0.628
     - _Metallic: 0.75
+    - _Opacity: 0.8
+    - _fresnel: 1.5
+    - _node_3942: 0.8
+    - _node_7396: 0
+    - _node_8351: 0.7082478
+    - _node_9402: 1.5
     - _opacity: 0.87
-    - _refraction: 0.08
+    - _refraction: 0
+    - _roughness: 0.198
+    - _value: 5
     m_Colors:
     - _Color: {r: 0.25583464, g: 0.2794118, b: 0.2527033, a: 1}
-    - _colour: {r: 0, g: 0.45745456, b: 0.6838235, a: 1}
+    - _colour: {r: 0.0012435132, g: 0.16911763, b: 0.0024012562, a: 1}
+    - _node_6955: {r: 0.020686667, g: 0.1397059, b: 0.016435986, a: 1}

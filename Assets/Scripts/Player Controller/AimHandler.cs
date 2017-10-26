@@ -96,6 +96,7 @@ namespace StarForceRecon
                     targetPoint = desiredTarget;
             }
 
+            _lastAimPoint = targetPoint;
             return targetPoint;
         }
 

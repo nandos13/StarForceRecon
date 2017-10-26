@@ -49,10 +49,10 @@ namespace StarForceRecon
 
         [Tooltip("A list of AI scripts which will be enabled when the character is not being controlled by the player")]
         [SerializeField]
-        private List<MonoBehaviour> aiScripts;
+        private List<Behaviour> aiScripts;
         [Tooltip("A list of Player scripts which will be enabled when the character is being controlled by the player")]
         [SerializeField]
-        private List<MonoBehaviour> playerScripts;
+        private List<Behaviour> playerScripts;
 
         [Tooltip("Delay in seconds before re-enabling Controller scripts.")]
         [SerializeField, Range(0.2f, 1.0f)]
@@ -372,7 +372,7 @@ namespace StarForceRecon
         void GameController<SFRInputSet>.ITarget.ReceiveControllerInput(SFRInputSet inputSet, 
             GameController<SFRInputSet>.ControlType controllerType)
         {
-            if (isActiveAndEnabled)
+            if (isActiveAndEnabled && Time.timeScale > 0)
             {
                 UnityEngine.Cursor.lockState = CursorLockMode.Locked;
                 UnityEngine.Cursor.visible = false;
@@ -391,10 +391,10 @@ namespace StarForceRecon
 
         private void SelectCharacter()
         {
-            foreach (MonoBehaviour behaviour in aiScripts)
+            foreach (Behaviour behaviour in aiScripts)
                 behaviour.enabled = false;
 
-            foreach (MonoBehaviour behaviour in playerScripts)
+            foreach (Behaviour behaviour in playerScripts)
                 behaviour.enabled = true;
 
             // Enable this script
@@ -408,10 +408,10 @@ namespace StarForceRecon
         {
             CancelInvoke("SelectCharacter");
 
-            foreach (MonoBehaviour behaviour in aiScripts)
+            foreach (Behaviour behaviour in aiScripts)
                 behaviour.enabled = true;
 
-            foreach (MonoBehaviour behaviour in playerScripts)
+            foreach (Behaviour behaviour in playerScripts)
                 behaviour.enabled = false;
 
             // Disable this script

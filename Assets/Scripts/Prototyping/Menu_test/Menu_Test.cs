@@ -28,9 +28,6 @@ public class Menu_Test : MonoBehaviour {
     public Material _lightOff;
     public GameObject _table;
 
-    public GameObject sound1;
-    public GameObject sound2;
-
     [Header("Hologram")]
     public GameObject _one;
     public GameObject _two;
@@ -66,12 +63,6 @@ public class Menu_Test : MonoBehaviour {
             _one.SetActive(true);
             _two.SetActive(false);
         }
-    }
-
-    public void Secret()
-    {
-        sound1.GetComponent<AudioSource>().enabled = false;
-        sound2.GetComponent<AudioSource>().enabled = true;
     }
 
     //There is a button on the "AnyKey Canvas", once pressed this is called.

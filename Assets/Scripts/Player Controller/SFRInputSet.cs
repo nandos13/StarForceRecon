@@ -11,7 +11,7 @@ namespace StarForceRecon
             string[] newInputs = { "moveForward", "moveBack", "moveLeft", "moveRight",
                                     "lookUp", "lookDown", "lookLeft", "lookRight",
                                     "rotateCameraLeft", "rotateCameraRight",
-                                    "fire", "reload", "switchForward", "switchBack",
+                                    "fire", "reload", "flashlight", "switchForward", "switchBack",
                                     "roll", "melee", "crouch", "switchWeapon",
                                     "equipment1", "equipment2", "action1", "action2", };
             AddInputs(newInputs);
@@ -47,7 +47,7 @@ namespace StarForceRecon
             AddDefaultBinding("lookRight", InputControlType.RightStickRight);
 
             // Set bindings for D-Pad
-            AddDefaultBinding("", InputControlType.DPadUp);
+            AddDefaultBinding("flashlight", InputControlType.DPadUp);
             AddDefaultBinding("", InputControlType.DPadDown);
             AddDefaultBinding("", InputControlType.DPadLeft);
             AddDefaultBinding("", InputControlType.DPadRight);
@@ -96,7 +96,7 @@ namespace StarForceRecon
             AddDefaultBinding("", Mouse.RightButton);
             AddDefaultBinding("rotateCameraLeft", Key.Q);
             AddDefaultBinding("rotateCameraRight", Key.E);
-            AddDefaultBinding("", Key.Z);
+            AddDefaultBinding("flashlight", Key.T);
             AddDefaultBinding("crouch", Key.C);
 
             AddDefaultBinding("roll", Key.Space);

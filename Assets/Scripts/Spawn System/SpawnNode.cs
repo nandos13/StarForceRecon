@@ -30,7 +30,7 @@ public class SpawnNode : MonoBehaviour
     [SerializeField, HideInInspector]    private List<SpawnNodeEnemy> _spawnables;
 
     private GameObject _enemyEmptyParent = null;
-    [SerializeField, HideInInspector]   private Transform _spawnLocation = null;
+    [SerializeField]   private Transform _spawnLocation = null;
 
     #endregion
 

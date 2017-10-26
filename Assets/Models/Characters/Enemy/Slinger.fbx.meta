@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 73984632280d0a14cbf1824c85549b8b
-timeCreated: 1506046209
+guid: 85426cf979ba32b4d8da8296d80744f8
+timeCreated: 1508382297
 licenseType: Free
 ModelImporter:
   serializedVersion: 21
@@ -9,9 +9,9 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Slinger
+    4300000: slinger_final:polySurface1
   materials:
-    importMaterials: 1
+    importMaterials: 0
     materialName: 0
     materialSearch: 1
   animations:
@@ -45,7 +45,7 @@ ModelImporter:
     importCameras: 1
     importLights: 1
     swapUVChannels: 0
-    generateSecondaryUV: 0
+    generateSecondaryUV: 1
     useFileUnits: 1
     optimizeMeshForGPU: 1
     keepQuads: 0
