@@ -6,8 +6,8 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: HH_scanner
-  m_Shader: {fileID: 4800000, guid: 85c9d55ac8ba2bb4ea840cecc0895c56, type: 3}
+  m_Name: keypad_changeable_colour
+  m_Shader: {fileID: 4800000, guid: 1bf90927ee65b8147a5e6821b142c730, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -19,26 +19,23 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: 196a4cf20e780894e85a9ce53d629504, type: 3}
+        m_Texture: {fileID: 2800000, guid: 44dd8b4355bfcfb46a47487fc19bd365, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 420b0b0cf39ea7d4db86e5968ba08402, type: 3}
+        m_Texture: {fileID: 2800000, guid: 8e25d4135ec06a9429965067192431a3, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _emissive:
-        m_Texture: {fileID: 2800000, guid: 5d3030f66c7de174eaeec1671c27f466, type: 3}
+        m_Texture: {fileID: 2800000, guid: 07bcd7e5ffc438c43a7063727797467d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _metallic:
-        m_Texture: {fileID: 2800000, guid: 39a9aec3dcc21d14f880f4339db0e268, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _occlusion:
-        m_Texture: {fileID: 2800000, guid: 979ba0a22aa8d424fb3da77d78914a7c, type: 3}
+        m_Texture: {fileID: 2800000, guid: 0cc0d8b9c619e7342bde16be1cb4c52c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _Gloss: 0.8
-    - _emissivebrightness: 3.993681
-    m_Colors: []
+    - _brightness: 55.99084
+    m_Colors:
+    - _colour: {r: 1, g: 0, b: 0, a: 1}
