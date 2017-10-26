@@ -1,12 +1,12 @@
 fileFormatVersion: 2
-guid: d3f41e1d24e8baa4387be9e75fd5831a
-timeCreated: 1505370042
+guid: 65eb51fb36a19d34187f0aec8f42241e
+timeCreated: 1508987130
 licenseType: Free
 ModelImporter:
   serializedVersion: 21
   fileIDToRecycleName:
-    100000: //RootNode
-    100002: Engineer_BaseMesh
+    100000: Engineer_BaseMesh
+    100002: //RootNode
     100004: L_Skel_ankle_jnt
     100006: L_Skel_ball_jnt
     100008: L_Skel_clavicle_jnt
@@ -34,41 +34,42 @@ ModelImporter:
     100052: L_Skel_toe_jnt
     100054: L_Skel_wrist_jnt
     100056: MASTER_CTRL
-    100058: R_Skel_ankle_jnt
-    100060: R_Skel_ball_jnt
-    100062: R_Skel_clavicle_jnt
-    100064: R_Skel_elbow_jnt
-    100066: R_Skel_forearm_jnt
-    100068: R_Skel_index01
-    100070: R_Skel_index02
-    100072: R_Skel_index03
-    100074: R_Skel_knee_jnt
-    100076: R_Skel_middle01
-    100078: R_Skel_middle02
-    100080: R_Skel_middle03
-    100082: R_Skel_palm_jnt
-    100084: R_Skel_pinky01
-    100086: R_Skel_pinky02
-    100088: R_Skel_pinky03
-    100090: R_Skel_ring01
-    100092: R_Skel_ring02
-    100094: R_Skel_ring03
-    100096: R_Skel_shoulder_jnt
-    100098: R_Skel_thigh_jnt
-    100100: R_Skel_thumb01
-    100102: R_Skel_thumb02
-    100104: R_Skel_thumb03
-    100106: R_Skel_toe_jnt
-    100108: R_Skel_wrist_jnt
-    100110: Skel_chest_jnt
-    100112: Skel_head_jnt
-    100114: Skel_hip_jnt
-    100116: Skel_neck_jnt
-    100118: Skel_root_jnt
-    100120: Skel_spine01_jnt
-    100122: Skel_spine02_jnt
-    400000: //RootNode
-    400002: Engineer_BaseMesh
+    100058: playerPivot_CTRL
+    100060: R_Skel_ankle_jnt
+    100062: R_Skel_ball_jnt
+    100064: R_Skel_clavicle_jnt
+    100066: R_Skel_elbow_jnt
+    100068: R_Skel_forearm_jnt
+    100070: R_Skel_index01
+    100072: R_Skel_index02
+    100074: R_Skel_index03
+    100076: R_Skel_knee_jnt
+    100078: R_Skel_middle01
+    100080: R_Skel_middle02
+    100082: R_Skel_middle03
+    100084: R_Skel_palm_jnt
+    100086: R_Skel_pinky01
+    100088: R_Skel_pinky02
+    100090: R_Skel_pinky03
+    100092: R_Skel_ring01
+    100094: R_Skel_ring02
+    100096: R_Skel_ring03
+    100098: R_Skel_shoulder_jnt
+    100100: R_Skel_thigh_jnt
+    100102: R_Skel_thumb01
+    100104: R_Skel_thumb02
+    100106: R_Skel_thumb03
+    100108: R_Skel_toe_jnt
+    100110: R_Skel_wrist_jnt
+    100112: Skel_chest_jnt
+    100114: Skel_head_jnt
+    100116: Skel_hip_jnt
+    100118: Skel_neck_jnt
+    100120: Skel_root_jnt
+    100122: Skel_spine01_jnt
+    100124: Skel_spine02_jnt
+    400000: Engineer_BaseMesh
+    400002: //RootNode
     400004: L_Skel_ankle_jnt
     400006: L_Skel_ball_jnt
     400008: L_Skel_clavicle_jnt
@@ -96,41 +97,42 @@ ModelImporter:
     400052: L_Skel_toe_jnt
     400054: L_Skel_wrist_jnt
     400056: MASTER_CTRL
-    400058: R_Skel_ankle_jnt
-    400060: R_Skel_ball_jnt
-    400062: R_Skel_clavicle_jnt
-    400064: R_Skel_elbow_jnt
-    400066: R_Skel_forearm_jnt
-    400068: R_Skel_index01
-    400070: R_Skel_index02
-    400072: R_Skel_index03
-    400074: R_Skel_knee_jnt
-    400076: R_Skel_middle01
-    400078: R_Skel_middle02
-    400080: R_Skel_middle03
-    400082: R_Skel_palm_jnt
-    400084: R_Skel_pinky01
-    400086: R_Skel_pinky02
-    400088: R_Skel_pinky03
-    400090: R_Skel_ring01
-    400092: R_Skel_ring02
-    400094: R_Skel_ring03
-    400096: R_Skel_shoulder_jnt
-    400098: R_Skel_thigh_jnt
-    400100: R_Skel_thumb01
-    400102: R_Skel_thumb02
-    400104: R_Skel_thumb03
-    400106: R_Skel_toe_jnt
-    400108: R_Skel_wrist_jnt
-    400110: Skel_chest_jnt
-    400112: Skel_head_jnt
-    400114: Skel_hip_jnt
-    400116: Skel_neck_jnt
-    400118: Skel_root_jnt
-    400120: Skel_spine01_jnt
-    400122: Skel_spine02_jnt
+    400058: playerPivot_CTRL
+    400060: R_Skel_ankle_jnt
+    400062: R_Skel_ball_jnt
+    400064: R_Skel_clavicle_jnt
+    400066: R_Skel_elbow_jnt
+    400068: R_Skel_forearm_jnt
+    400070: R_Skel_index01
+    400072: R_Skel_index02
+    400074: R_Skel_index03
+    400076: R_Skel_knee_jnt
+    400078: R_Skel_middle01
+    400080: R_Skel_middle02
+    400082: R_Skel_middle03
+    400084: R_Skel_palm_jnt
+    400086: R_Skel_pinky01
+    400088: R_Skel_pinky02
+    400090: R_Skel_pinky03
+    400092: R_Skel_ring01
+    400094: R_Skel_ring02
+    400096: R_Skel_ring03
+    400098: R_Skel_shoulder_jnt
+    400100: R_Skel_thigh_jnt
+    400102: R_Skel_thumb01
+    400104: R_Skel_thumb02
+    400106: R_Skel_thumb03
+    400108: R_Skel_toe_jnt
+    400110: R_Skel_wrist_jnt
+    400112: Skel_chest_jnt
+    400114: Skel_head_jnt
+    400116: Skel_hip_jnt
+    400118: Skel_neck_jnt
+    400120: Skel_root_jnt
+    400122: Skel_spine01_jnt
+    400124: Skel_spine02_jnt
     4300000: Engineer_BaseMesh
-    7400000: step_right
+    7400000: Take 001
     9500000: //RootNode
     13700000: Engineer_BaseMesh
   materials:
@@ -156,35 +158,7 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations:
-    - serializedVersion: 16
-      name: step_right
-      takeName: Take 001
-      firstFrame: 1
-      lastFrame: 24
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+    clipAnimations: []
     isReadable: 1
   meshes:
     lODScreenPercentages: []
