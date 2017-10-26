@@ -14,6 +14,8 @@ namespace StarForceRecon
 
         #region Input Controls
 
+        private const string controllerID = "PlayerController";
+
         private GameController<SFRInputSet> _keyboardController = null;
         private GameController<SFRInputSet> _gamepadController = null;
         private int _lastAimMouseTime = -1;
@@ -93,7 +95,6 @@ namespace StarForceRecon
                 cursorCanvas = CreateCursor(out cursorSprite);
 
             // Initialize Input
-            string controllerID = "PlayerController";
             _keyboardController = ControllerManager<KeyboardMouseController<SFRInputSet>, SFRInputSet>.GetController(controllerID, this);
             _gamepadController = ControllerManager<DualStickController<SFRInputSet>, SFRInputSet>.GetController(controllerID, this);
 
@@ -138,6 +139,12 @@ namespace StarForceRecon
         private void OnDisable()
         {
             _tpc.StopMovement();
+        }
+
+        private void OnDestroy()
+        {
+            ControllerManager<KeyboardMouseController<SFRInputSet>, SFRInputSet>.RemoveTarget(controllerID, this);
+            ControllerManager<DualStickController<SFRInputSet>, SFRInputSet>.RemoveTarget(controllerID, this);
         }
 
         #endregion

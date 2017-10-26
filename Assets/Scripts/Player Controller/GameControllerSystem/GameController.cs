@@ -72,6 +72,16 @@ namespace JakePerry
             }
         }
 
+        /// <summary>Removes target from this controller.</summary>
+        public void RemoveTarget(ITarget target)
+        {
+            if (target != null)
+            {
+                if (targets.Contains(target))
+                    targets.Remove(target);
+            }
+        }
+
         /// <summary>Override to provide additional functionality to the end of Update call.</summary>
         protected virtual void OnUpdate()
         { }

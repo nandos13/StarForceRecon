@@ -29,5 +29,12 @@ namespace JakePerry
         {
             return controllers.ContainsKey(id);
         }
+
+        /// <summary>Removes target from controller with ID id</summary>
+        public static void RemoveTarget(string id, GameController<U>.ITarget target)
+        {
+            if (controllers.ContainsKey(id))
+                controllers[id].RemoveTarget(target);
+        }
     }
 }
