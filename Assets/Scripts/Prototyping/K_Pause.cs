@@ -8,6 +8,8 @@ public class K_Pause : MonoBehaviour {
     public GameObject _hudCanvas;
     public GameObject _pauseCanvas;
 
+    public string _menu;
+
     bool _paused;
 
     void Start()
@@ -51,5 +53,15 @@ public class K_Pause : MonoBehaviour {
         {
             SetPauseState(false);
         }
+    }
+
+    public void Menu()
+    {
+        SceneManager.LoadScene(_menu);
+    }
+
+    public void Exit()
+    {
+        Application.Quit();
     }
 }

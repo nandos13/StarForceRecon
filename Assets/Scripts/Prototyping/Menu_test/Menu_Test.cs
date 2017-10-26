@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 
 [RequireComponent(typeof(Panels))]
@@ -15,6 +16,7 @@ public class Menu_Test : MonoBehaviour {
     bool _start = false;
     bool pressed = false;
     public Panels _middleScript;
+    public string _levelNumber;
 
     [Header("Canvas")]
     public GameObject _anyCanvas;
@@ -105,7 +107,7 @@ public class Menu_Test : MonoBehaviour {
         }
     }
 
-    //when you want to exit the game.
+    //when you want to exit the game "animation".
     public void Exit()
     {
         if (pressed == false)
@@ -135,6 +137,11 @@ public class Menu_Test : MonoBehaviour {
                 _exit = false;
             }
         }
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
     }
 
     void HoloTest()
@@ -167,6 +174,11 @@ public class Menu_Test : MonoBehaviour {
                 _start = false;
             }
         }
+    }
+
+    public void GameStart()
+    {
+        SceneManager.LoadScene(_levelNumber);
     }
 
     //so that animations dont play right after called.
