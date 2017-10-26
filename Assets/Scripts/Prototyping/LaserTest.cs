@@ -8,44 +8,40 @@ public class LaserTest : MonoBehaviour
 {
 
     public Transform _origin;
-    private PlayerController _aimScript;
-    public LineRenderer _line;
+    private AimHandler aim;
+    private PlayerController player;
+    private LineRenderer line;
     
 	void Start ()
     {
-        _aimScript = GetComponent<PlayerController>();
+        aim = GetComponent<AimHandler>();
+        player = GetComponent<PlayerController>();
+        line = GetComponent<LineRenderer>();
 
-        if (!_line)
-            _line = GetComponent<LineRenderer>();
-
-        _line.textureMode = LineTextureMode.Tile;
+        line.textureMode = LineTextureMode.Tile;
     }
 	
 	void Update ()
     {
-        if (_aimScript && _line && _origin)
+        if (aim && line && _origin)
         {
-            Vector3 endPoint = _aimScript.aimPoint;
+            Vector3 endPoint = aim.AimPoint;
             Vector3[] positions = { _origin.position, endPoint};
-            _line.SetPositions(positions);
+            line.SetPositions(positions);
 
-
-            if (_aimScript.aiming)
-                _line.enabled = true;
-            else
-                _line.enabled = false;
+            line.enabled = player.aiming;
         }
 
-        if (_line)
+        if (line)
         {
-            Vector2 laserOffset = _line.material.mainTextureOffset;
+            Vector2 laserOffset = line.material.mainTextureOffset;
             laserOffset.x += Time.deltaTime * 0.1f;
-            _line.material.mainTextureOffset = laserOffset;
+            line.material.mainTextureOffset = laserOffset;
         }
 	}
 
     void OnDisable()
     {
-        _line.enabled = false;
+        line.enabled = false;
     }
 }

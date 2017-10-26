@@ -26,7 +26,6 @@ GameObject:
   - component: {fileID: 114525012447196350}
   - component: {fileID: 114947820507155634}
   - component: {fileID: 114484451664491256}
-  - component: {fileID: 114469990275783136}
   m_Layer: 0
   m_Name: Gun
   m_TagString: Player
@@ -357,6 +356,8 @@ MonoBehaviour:
   - Untagged
   - Enemy
   gunOrigin: {fileID: 4227532048568354}
+  maxHipSwivel: 50
+  turningSpeed: 1
 --- !u!114 &114298271148681836
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -370,17 +371,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resourcePath: Prefabs/EngineerMesh
   animController: {fileID: 9100000, guid: 21a17ed2c334d5f45b15e222eff5be8d, type: 2}
---- !u!114 &114469990275783136
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1177320916437494}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a015145059d6fc040b6d7b3644da8826, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114484451664491256
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -472,8 +462,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c95fdbeb4793614f9d28ba21859fcfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHipSwivel: 20
-  turningSpeed: 2
   closeAimRadius: 1.16
   cursorFadeTime: 1
   aiScripts:
@@ -554,6 +542,10 @@ MonoBehaviour:
     m_Bits: 1
   _damageMask:
     _mask: -2
+  _damageModifier:
+    modifiers:
+      keys: []
+      values: []
   _gunData: {fileID: 11400000, guid: c23dc916ea2d8044a832c880b248f46d, type: 2}
   _startAmmo: 100
   _currentHeat: 0
