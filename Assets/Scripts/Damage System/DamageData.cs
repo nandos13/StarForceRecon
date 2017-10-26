@@ -4,38 +4,62 @@ using UnityEngine;
 
 namespace JakePerry
 {
-    /* TODO: Implement some kind of elemental damage/ resistances system? */
-    public class DamageData : ScriptableObject
+    public interface IDamageable
     {
-        #region Variables
+        void ApplyDamage(DamageData data);
+    }
 
-        [SerializeField, HideInInspector]           private float _damageValue;
-        [Range(0.0f, 100.0f), SerializeField]       private float _defaultDamage = 1.0f;
+    /* TODO: Implement some kind of elemental damage/ resistances system? */
+    [System.Serializable]
+    public struct DamageData
+    {
+        private object sender;
+        public object Sender { get { return sender; } }
 
-        [SerializeField]                            private DamageLayerMask _mask;
+        [SerializeField]
+        private float damageValue;
+        public float RawDamageValue
+        {
+            get { return damageValue; }
+            set { damageValue = value; }
+        }
 
-        #endregion
+        [SerializeField]
+        private DamageLayer.Mask mask;
+        /// <summary>A Mask defining which damage layers are affected by this damage.</summary>
+        public DamageLayer.Mask DamageMask
+        {
+            get { return mask; }
+            set
+            {
+                if (value <= 31 && value >= 0)
+                    mask = value;
+            }
+        }
 
-        #region Properties
+        public DamageLayer.Modifier modifier;
+        /// <summary>Damage modifiers for layers.</summary>
+        public DamageLayer.Modifier DamageModifier
+        {
+            get { return modifier; }
+            set { modifier = value; }
+        }
         
-        /// <summary>Default damage value, set once at startup. Actual damage dealt will be the value of damageValue.</summary>
-        public float defaultDamage { get { return _defaultDamage; } }
-        public float damageValue
+        #region Functionality
+
+        public DamageData(object sender, float damageValue, DamageLayer.Mask mask, DamageLayer.Modifier modifier)
         {
-            get { return _damageValue; }
-            set { _damageValue = value; }
+            this.sender = sender;
+            this.damageValue = damageValue;
+            this.mask = mask;
+            this.modifier = modifier;
         }
 
-        public DamageLayerMask damageMask { get { return _mask; } }
-
-        /// <summary>Clone of the default DamageValues scriptable object (Read Only).</summary>
-        public static DamageData defaultValue { get { return DamageData.CreateInstance<DamageData>(); } }
+        public float DamageValue(DamageLayer layer)
+        {
+            return damageValue * modifier.GetModifier(layer);
+        }
 
         #endregion
-
-        private void OnEnable()
-        {
-            _damageValue = _defaultDamage;
-        }
     }
 }

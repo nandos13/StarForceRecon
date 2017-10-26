@@ -68,7 +68,7 @@ GameObject:
   - component: {fileID: 4429799632246394}
   - component: {fileID: 198229613263124202}
   - component: {fileID: 199265789832690146}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Gunshot Template
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -552,8 +552,9 @@ MonoBehaviour:
   _layerMask:
     serializedVersion: 2
     m_Bits: 1
+  _damageMask:
+    _mask: -2
   _gunData: {fileID: 11400000, guid: c23dc916ea2d8044a832c880b248f46d, type: 2}
-  _damageData: {fileID: 0}
   _startAmmo: 100
   _currentHeat: 0
 --- !u!120 &120072264692358198

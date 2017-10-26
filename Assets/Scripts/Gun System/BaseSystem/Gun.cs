@@ -38,11 +38,18 @@ public class Gun : MonoBehaviour, Equipment.IEquipment
         }
     }
 
-    [Tooltip("Which layers will be hit/ignored by the gun's shots?")]
-    [SerializeField]    private LayerMask _layerMask = (LayerMask)1;
+    [Tooltip("All excluded layers will be completely ignored, having no effect on the bullet.")]
+    [SerializeField]
+    private LayerMask _layerMask = (LayerMask)1;
 
-    [SerializeField]    private GunData _gunData = null;
-    [SerializeField]    private DamageData _damageData = null;
+    [Tooltip("A Mask defining which damage layers are affected by this gun.")]
+    [SerializeField]
+    private DamageLayer.Mask _damageMask = 0;
+    [SerializeField]
+    private DamageLayer.Modifier _damageModifier;
+
+    [SerializeField]
+    private GunData _gunData = null;
 
     #endregion
 
@@ -112,15 +119,6 @@ public class Gun : MonoBehaviour, Equipment.IEquipment
             Destroy(this);
             throw new System.MissingFieldException("No GunData specified.");
         }
-
-        // Create clone of the specified damage data object
-        if (_damageData != null)
-        {
-            DamageData cloneData = Instantiate<DamageData>(_damageData);
-            _damageData = cloneData;
-        }
-        else
-            _damageData = DamageData.defaultValue;
 
         // Initialize ammo
         _currentClip = (_gunData.clipSize < _startAmmo) ? _gunData.clipSize : _startAmmo;
@@ -242,7 +240,7 @@ public class Gun : MonoBehaviour, Equipment.IEquipment
                 RaiseEvent(OnGunFired);
                 for (int i = 0; i < ammoThisShot; i++)
                 {
-                    FireShot();
+                    FireShot(_gunData.damage / _gunData.ammoPerShot);
                 }
             }
         }
@@ -266,7 +264,7 @@ public class Gun : MonoBehaviour, Equipment.IEquipment
     }
 
     /// <summary>Used internally to fire a single shot using a raycast.</summary>
-    private void FireShot()
+    private void FireShot(float damage)
     {
         Vector3 spreadDirection = GetSpreadDirection();
 
@@ -305,12 +303,11 @@ public class Gun : MonoBehaviour, Equipment.IEquipment
             Debug.DrawLine(_gunOrigin.position, _nonAllocHit.point, Color.blue, 0.5f);
 
             // Deal damage to the object hit
-            float damage = (_gunData.damageModifier * _damageData.defaultDamage) / _gunData.ammoPerShot;
-            _damageData.damageValue = damage;
+            DamageData damageData = new DamageData(this, damage, _damageMask, _damageModifier);
             hitTransform = _nonAllocHit.transform;
             IDamageable d = _nonAllocHit.transform.GetComponentInParent<IDamageable>();
             if (d != null)
-                d.ApplyDamage(_damageData);
+                d.ApplyDamage(damageData);
 
         }
         else

@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Name: LayerDefinition
   m_EditorClassIdentifier: 
   _strings:
-  - 
-  - 
-  - 
-  - 
+  - Playable
+  - Test2
+  - Test3
+  - Test4
   - 
   - 
   - 
