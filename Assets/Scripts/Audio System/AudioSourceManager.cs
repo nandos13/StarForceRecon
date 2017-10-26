@@ -66,12 +66,22 @@ public class AudioSourceManager : MonoBehaviour
 
     private void Update()
     {
-        foreach (AudioPlayer p in _audioPlayers)
+        int i = 0;
+        while (i < _audioPlayers.Count)
         {
+            AudioPlayer p = _audioPlayers[i];
+            if (p == null)
+            {
+                _audioPlayers.RemoveAt(i);
+                continue;
+            }
+
             if (p.timeScaleInfluencesPlayback)
                 p.source.pitch = Time.timeScale * p.pitch;
             else
                 p.source.pitch = p.pitch;
+
+            i++;
         }
     }
 

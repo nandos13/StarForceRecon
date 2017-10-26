@@ -126,6 +126,12 @@ namespace JakePerry
 
         private void Update()
         {
+            if (controller == null)
+            {
+                Destroy(this.gameObject);
+                return;
+            }
+
             controller.UpdateController();
         }
     }
