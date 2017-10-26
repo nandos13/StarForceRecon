@@ -57,6 +57,7 @@ public class K_Pause : MonoBehaviour {
 
     public void Menu()
     {
+        Time.timeScale = 1.0f;
         SceneManager.LoadScene(_menu);
     }
 
