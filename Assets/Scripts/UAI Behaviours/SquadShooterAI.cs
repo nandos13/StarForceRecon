@@ -53,7 +53,6 @@ namespace StarForceRecon
 
         private Agent GetTarget()
         {
-            Debug.Log("Evaluating target");
             Agent[] agents = FindObjectsOfType<Agent>().Where(a => (Vector3.Distance(a.transform.position, transform.position) <= aggroRange)).ToArray();
 
             // Get closest
