@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 
 public static class RaycastingHelper
 {
@@ -28,5 +29,28 @@ public static class RaycastingHelper
             else
                 i++;
         }
+    }
+    
+    /// <returns>True if a valid hit is found, in which case validHit will be set.</returns>
+    public static bool GetFirstValidHitNonAlloc(out RaycastHit validHit, ref RaycastHit[] hits, Ray ray, float maxDistance, 
+        LayerMask layermask, string[] validTags)
+    {
+        int hitCount = Physics.RaycastNonAlloc(ray, hits, maxDistance, layermask);
+        if (hitCount > 0)
+        {
+            SortByDistanceNonAlloc(ref hits, ray.origin, hitCount);
+
+            foreach (var hit in hits)
+            {
+                if (validTags.Contains(hit.transform.tag))
+                {
+                    validHit = hit;
+                    return true;
+                }
+            }
+        }
+
+        validHit = default(RaycastHit);
+        return false;
     }
 }

@@ -6,37 +6,40 @@ using StarForceRecon;
 [RequireComponent(typeof(LineRenderer))]
 public class LaserTest : MonoBehaviour
 {
-
-    public Transform _origin;
+    [SerializeField]
+    private Transform origin;
     private AimHandler aim;
     private PlayerController player;
     private LineRenderer line;
+
+    private RaycastHit[] hitCache = new RaycastHit[16];
     
 	void Start ()
     {
-        aim = GetComponent<AimHandler>();
-        player = GetComponent<PlayerController>();
-        line = GetComponent<LineRenderer>();
+        if (origin == null)
+            throw new System.MissingFieldException("Origin cannot be null");
 
-        line.textureMode = LineTextureMode.Tile;
+        aim = GetComponentInParent<AimHandler>();
+        player = GetComponentInParent<PlayerController>();
+        line = GetComponent<LineRenderer>();
     }
 	
 	void Update ()
     {
-        if (aim && line && _origin)
+        if (line && origin)
         {
-            Vector3 endPoint = aim.AimPoint;
-            Vector3[] positions = { _origin.position, endPoint};
+            RaycastHit endHit;
+            Vector3 endPoint;
+            Ray ray = new Ray(origin.position, origin.forward);
+            if (RaycastingHelper.GetFirstValidHitNonAlloc(out endHit, ref hitCache, ray, 100.0f, aim.AimLayers, aim.AimTags))
+                endPoint = endHit.point;
+            else
+                endPoint = ray.GetPoint(100.0f);
+
+            Vector3[] positions = { origin.position, endPoint };
             line.SetPositions(positions);
 
             line.enabled = player.aiming;
-        }
-
-        if (line)
-        {
-            Vector2 laserOffset = line.material.mainTextureOffset;
-            laserOffset.x += Time.deltaTime * 0.1f;
-            line.material.mainTextureOffset = laserOffset;
         }
 	}
 

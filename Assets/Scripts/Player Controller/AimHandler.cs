@@ -26,14 +26,10 @@ namespace StarForceRecon
         [SerializeField]
         private string[] aimTags = new string[] { "Untagged", "Enemy" };
 
+        public LayerMask AimLayers { get { return aimableLayers; } }
+        public string[] AimTags { get { return aimTags; } }
+
         #endregion
-
-        [Tooltip("Where the character's gun fires from. This should be an empty gameobject at the end of the gun barrel.")]
-        [SerializeField]
-        private Transform gunOrigin = null;
-
-        private AimIK aimIK = null;
-        private Transform aimIKTarget = null;
 
         #region Aim Rotation
 
@@ -54,10 +50,16 @@ namespace StarForceRecon
 
         private bool isSwiveling = false;
 
-        private Vector3 lastAimDirection;
-        public Vector3 AimPoint { get; private set; }
-
         #endregion
+
+        [Tooltip("Where the character's gun fires from. This should be an empty gameobject at the end of the gun barrel.")]
+        [SerializeField]
+        private Transform gunOrigin = null;
+
+        private AimIK aimIK = null;
+        private Transform aimIKTarget = null;
+        
+        public Vector3 AimPoint { get { return aimIKTarget.position; } }
 
         RaycastHit[] rayHitsNonAlloc = new RaycastHit[16];
 
@@ -85,7 +87,7 @@ namespace StarForceRecon
 
         /// <summary>Handles aiming based on a viewport cursor position for player's character.</summary>
         /// /// <returns>The final aim point.</returns>
-        public Vector3 HandlePlayerAiming(Vector2 viewportCoordinates)
+        public void HandlePlayerAiming(Vector2 viewportCoordinates)
         {
             // Find the desired target point under the cursor (at viewportCoordinates)
             Vector3 desiredTarget;
@@ -99,9 +101,7 @@ namespace StarForceRecon
 
             // Attempt to aim at the desired target point
             if (cursorIsOverObject || targetFoundAtCharacterHeight)
-                return AimAtPoint(desiredTarget, colliderUnderCursor);
-
-            return transform.position;
+                AimAtPoint(desiredTarget, colliderUnderCursor);
         }
 
         /// <summary>Attempts to aim at a target point in world space.</summary>
@@ -109,7 +109,7 @@ namespace StarForceRecon
         /// <param name="targetCollider">Optional. 
         /// <para>If specified, Smart Aiming functionality will be used to attempt to find an optimal aim point on the collider.</para></param>
         /// <returns>The final aim point.</returns>
-        public Vector3 AimAtPoint(Vector3 desiredTarget, Collider targetCollider = null)
+        public void AimAtPoint(Vector3 desiredTarget, Collider targetCollider = null)
         {
             Vector3 targetPoint = desiredTarget;
             if (targetCollider != null)
@@ -123,10 +123,6 @@ namespace StarForceRecon
             
             aimIKTarget.position = targetPoint;
             DoSwivel(gunOrigin.forward);
-
-            Vector3 gunForwardPoint;
-            // TODO: Dont return vector3.zero on false!
-            return SingleLineCheck(out gunForwardPoint, gunOrigin.position, gunOrigin.forward) ? gunForwardPoint : Vector3.zero;
         }
 
         /// <summary>Swivels character to face aim direction.</summary>
@@ -145,26 +141,6 @@ namespace StarForceRecon
                 float swivelStopAngle = isSwiveling ? maxHipSwivel / 2 : maxHipSwivel;
                 isSwiveling = Vector3.Angle(transform.forward, yLevelOffset) > swivelStopAngle;
             }
-        }
-
-        private bool SingleLineCheck(out Vector3 point, Vector3 origin, Vector3 direction)
-        {
-            Ray ray = new Ray(origin, direction);
-            int hits = Physics.RaycastNonAlloc(ray, rayHitsNonAlloc, 1000.0f, aimableLayers.value, QueryTriggerInteraction.Collide);
-            if (hits > 0)
-            {
-                // Sort hits by distance
-                RaycastingHelper.SortByDistanceNonAlloc(ref rayHitsNonAlloc, origin, hits);
-                RaycastHit hit;
-                if (FirstMatchingTag(out hit, rayHitsNonAlloc, aimTags, hits))
-                {
-                    point = hit.point;
-                    return true;
-                }
-            }
-
-            point = Vector3.zero;
-            return false;
         }
         
         /// <returns>Ascends collider's heirarchy to find top parent collider with same tag.

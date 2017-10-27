@@ -113,8 +113,9 @@ namespace StarForceRecon
             if (!_tpc.isRolling)
             {
                 // Find aim point, limited to minimum radius
-                Vector3 aimPoint = _aimHandler.HandlePlayerAiming(StarForceRecon.Cursor.position);
-                float horizontalDistance = Vector3.Distance(transform.position, new Vector3(aimPoint.x, 0, aimPoint.z));
+                _aimHandler.HandlePlayerAiming(StarForceRecon.Cursor.position);
+                float horizontalDistance = Vector3.Distance(transform.position, 
+                    new Vector3(_aimHandler.AimPoint.x, 0, _aimHandler.AimPoint.z));
                 aiming = (horizontalDistance >= closeAimRadius);
             }
 
