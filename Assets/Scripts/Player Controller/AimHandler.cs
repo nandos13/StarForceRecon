@@ -1,9 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using RootMotion.FinalIK;
 
 namespace StarForceRecon
 {
     [DisallowMultipleComponent]
+    [RequireComponent(typeof(AimIK))]
     public class AimHandler : MonoBehaviour
     {
         #region Variables
@@ -28,6 +31,9 @@ namespace StarForceRecon
         [Tooltip("Where the character's gun fires from. This should be an empty gameobject at the end of the gun barrel.")]
         [SerializeField]
         private Transform gunOrigin = null;
+
+        private AimIK aimIK = null;
+        private Transform aimIKTarget = null;
 
         #region Aim Rotation
 
@@ -63,6 +69,18 @@ namespace StarForceRecon
         {
             if (gunOrigin == null)
                 throw new System.MissingFieldException("AimHandler requires a gun origin.");
+            
+            InitializeIKSystem();
+        }
+
+        private void InitializeIKSystem()
+        {
+            aimIK = GetComponent<AimIK>();
+            GameObject obj = new GameObject(string.Format("AimIK Target {0}", aimIK.GetInstanceID()));
+            obj.hideFlags = HideFlags.HideAndDontSave;
+            aimIKTarget = obj.transform;
+            aimIK.solver.target = aimIKTarget;
+            aimIK.solver.transform = gunOrigin;
         }
 
         /// <summary>Handles aiming based on a viewport cursor position for player's character.</summary>
@@ -102,8 +120,9 @@ namespace StarForceRecon
                                 ancestorCollider, true, (uint)smartAimIterations, aimTags, aimableLayers, smartAimIgnoreTags, 0.0f))
                     targetPoint = hit.point;
             }
-
-            // TODO: DO IK STUFF HERE, try to aim at targetPoint
+            
+            aimIKTarget.position = targetPoint;
+            DoSwivel(gunOrigin.forward);
 
             Vector3 gunForwardPoint;
             // TODO: Dont return vector3.zero on false!
@@ -115,14 +134,14 @@ namespace StarForceRecon
         {
             Vector3 yLevelOffset = new Vector3(direction.x, transform.position.y, direction.z);
             float aimTheta = Vector3.Angle(transform.forward, yLevelOffset);
-
+            
             if (isSwiveling || aimTheta > maxHipSwivel)
             {
                 // Rotate to face aim point
                 float turnSpeed = (turningSpeed * 360.0f) / aimTheta;
                 Quaternion rotation = Quaternion.LookRotation(yLevelOffset);
                 transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime * turnSpeed);
-
+            
                 float swivelStopAngle = isSwiveling ? maxHipSwivel / 2 : maxHipSwivel;
                 isSwiveling = Vector3.Angle(transform.forward, yLevelOffset) > swivelStopAngle;
             }
@@ -235,13 +254,10 @@ namespace StarForceRecon
         {
             for (uint i = 0; i < hits; i++)
             {
-                for (uint j = 0; j < aimTags.Length; j++)
+                if (tags.Contains(hitArray[i].transform.tag))
                 {
-                    if (hitArray[i].transform.tag == aimTags[j])
-                    {
-                        match = hitArray[i];
-                        return true;
-                    }
+                    match = hitArray[i];
+                    return true;
                 }
             }
             match = default(RaycastHit);
