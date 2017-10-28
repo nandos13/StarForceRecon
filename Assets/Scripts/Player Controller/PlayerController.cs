@@ -100,6 +100,19 @@ namespace StarForceRecon
                 throw new System.MissingFieldException("No Aim Handler component found.");
             if (_equipment == null)
                 throw new System.MissingFieldException("No Equipment component found.");
+
+            _tpc.OnRollStart += _tpc_OnRollStart;
+            _tpc.OnRollEnd += _tpc_OnRollEnd;
+        }
+
+        private void _tpc_OnRollEnd()
+        {
+            _aimHandler.IKState = true;
+        }
+
+        private void _tpc_OnRollStart()
+        {
+            _aimHandler.IKState = false;
         }
 
         private void Start()

@@ -57,6 +57,10 @@ public class ThirdPersonController : MonoBehaviour
 
     #endregion
 
+    public delegate void RollingEvent();
+    public event RollingEvent OnRollStart;
+    public event RollingEvent OnRollEnd;
+
     public bool isRolling { get { return _rolling; } }
 
     private void Awake()
@@ -134,12 +138,7 @@ public class ThirdPersonController : MonoBehaviour
             {
                 // Should a new roll be started?
                 if (!_rolling && roll)
-                {
-                    // Start a new roll
-                    _rollTimeElapsed = 0.0f;
-                    _rolling = true;
-                    _rollDir = transform.TransformDirection(direction);
-                }
+                    StartRoll(direction);
             }
             else
                 _rolling = false;
@@ -163,6 +162,18 @@ public class ThirdPersonController : MonoBehaviour
         UpdateAnimator(direction);
     }
 
+    private void StartRoll(Vector3 direction)
+    {
+        _rollTimeElapsed = 0.0f;
+        _rolling = true;
+        _rollDir = transform.TransformDirection(direction);
+
+        // Hardcoded bullshit to disable gun-aim override for player characters
+        _animator.SetLayerWeight(1, 0.0f);
+        if (OnRollStart != null)
+            OnRollStart.Invoke();
+    }
+
     private void EndRoll()
     {
         // End roll
@@ -173,6 +184,10 @@ public class ThirdPersonController : MonoBehaviour
         Vector3 v = Vector3.zero;
         v.y = _rb.velocity.y;
         _rb.velocity = v;
+
+        _animator.SetLayerWeight(1, 1.0f);
+        if (OnRollEnd != null)
+            OnRollEnd.Invoke();
     }
 
     private void ScaleCapsuleForCrouching(bool crouch)

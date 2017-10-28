@@ -75,6 +75,12 @@ namespace StarForceRecon
             InitializeIKSystem();
         }
 
+        public bool IKState
+        {
+            get { return aimIK.enabled; }
+            set { aimIK.enabled = value; }
+        }
+
         private void InitializeIKSystem()
         {
             aimIK = GetComponent<AimIK>();
