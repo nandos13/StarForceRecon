@@ -36,13 +36,12 @@ GameObject:
   - component: {fileID: 4104503508563952}
   - component: {fileID: 33410778364467230}
   - component: {fileID: 23530041054765172}
-  - component: {fileID: 95007177755970272}
   m_Layer: 0
   m_Name: resWallCurveOutLrg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 8
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!1 &1710151125000438
 GameObject:
@@ -175,7 +174,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1710151125000438}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4175152460663426}
@@ -189,8 +188,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1320916740965028}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: -8.8817837e-17, z: 0.00000061035155}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4050031635083874}
@@ -319,7 +318,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1320916740965028}
-  m_Mesh: {fileID: 4300002, guid: aa20d1325c2b7be4e83f43fce9bcfc1d, type: 3}
+  m_Mesh: {fileID: 4300000, guid: 257eee06b557e1245be0340f0d3f43bb, type: 3}
 --- !u!65 &65052399548674998
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -392,20 +391,3 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.551752, y: 3, z: 0.2889121}
   m_Center: {x: -2.384921, y: 1.5, z: 0.5941815}
---- !u!95 &95007177755970272
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1320916740965028}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: aa20d1325c2b7be4e83f43fce9bcfc1d, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1

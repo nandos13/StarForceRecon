@@ -21,14 +21,13 @@ GameObject:
   - component: {fileID: 4773531046934990}
   - component: {fileID: 33681988976838464}
   - component: {fileID: 23817625354900690}
-  - component: {fileID: 95226541454339918}
   - component: {fileID: 65813248195718676}
   m_Layer: 0
   m_Name: resFloor4x4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 8
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &4773531046934990
 Transform:
@@ -36,8 +35,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1572736650782346}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -81,7 +80,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1572736650782346}
-  m_Mesh: {fileID: 4300002, guid: 8ba08eebd08285545ae6e60b74d7917c, type: 3}
+  m_Mesh: {fileID: 4300000, guid: 7fa2689a06ac200459c99f7695625a75, type: 3}
 --- !u!65 &65813248195718676
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -94,20 +93,3 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 4, y: 0.5, z: 4}
   m_Center: {x: 0, y: -0.25, z: 0}
---- !u!95 &95226541454339918
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1572736650782346}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 8ba08eebd08285545ae6e60b74d7917c, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1

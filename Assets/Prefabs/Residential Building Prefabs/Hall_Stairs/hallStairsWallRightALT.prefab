@@ -37,7 +37,6 @@ GameObject:
   - component: {fileID: 4970283328937748}
   - component: {fileID: 33130286299713734}
   - component: {fileID: 23418555039463570}
-  - component: {fileID: 95092371802377310}
   m_Layer: 0
   m_Name: hallStairsWallRightALT
   m_TagString: Untagged
@@ -212,8 +211,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1195415688762774}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4067620962396248}
@@ -233,7 +232,8 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 7c8f80202287f6e408c7ea728b6b828c, type: 2}
+  - {fileID: 2100000, guid: 08fdded4ed28a1542b9af3d72b49c205, type: 2}
+  - {fileID: 2100000, guid: 78dcce36289925a4f88d265dbf3498a8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -258,7 +258,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1195415688762774}
-  m_Mesh: {fileID: 4300000, guid: 19cb638f5196e1d45b38f71540290b9f, type: 3}
+  m_Mesh: {fileID: 4300000, guid: 4d06daa246bdc2b4e93fc59389e8812a, type: 3}
 --- !u!65 &65270921281991834
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -307,20 +307,3 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 5.6477714, y: 0.4552635, z: 2}
   m_Center: {x: 0.8238844, y: 0.97762865, z: 0}
---- !u!95 &95092371802377310
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1195415688762774}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 19cb638f5196e1d45b38f71540290b9f, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1

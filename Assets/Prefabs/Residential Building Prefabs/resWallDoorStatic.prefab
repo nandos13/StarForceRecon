@@ -21,13 +21,12 @@ GameObject:
   - component: {fileID: 4221844438787764}
   - component: {fileID: 33682454559979232}
   - component: {fileID: 23540217514212650}
-  - component: {fileID: 95478781181083908}
   m_Layer: 0
   m_Name: resWallDoorStatic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 8
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!1 &1544140873603648
 GameObject:
@@ -95,8 +94,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1170135124895764}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4789535120888174}
@@ -171,7 +170,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1170135124895764}
-  m_Mesh: {fileID: 4300002, guid: e530e65091dc5ca4f8a16126a578586a, type: 3}
+  m_Mesh: {fileID: 4300000, guid: 3efb1c71f38d70b418bb93d221d04c9d, type: 3}
 --- !u!65 &65364346964081376
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -196,20 +195,3 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 4, y: 0.5, z: 4}
   m_Center: {x: 0, y: -0.25, z: 0}
---- !u!95 &95478781181083908
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1170135124895764}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: e530e65091dc5ca4f8a16126a578586a, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1

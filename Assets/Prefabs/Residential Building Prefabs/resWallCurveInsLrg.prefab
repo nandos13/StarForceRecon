@@ -84,13 +84,12 @@ GameObject:
   - component: {fileID: 4143563492389478}
   - component: {fileID: 33726686287581822}
   - component: {fileID: 23193145145542456}
-  - component: {fileID: 95012055512871168}
   m_Layer: 0
   m_Name: resWallCurveInsLrg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 8
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!1 &1556854772985914
 GameObject:
@@ -187,9 +186,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1445956590750656}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.0000005, y: 1, z: 1.0000005}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4189744176008612}
   m_Father: {fileID: 0}
@@ -319,7 +318,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1445956590750656}
-  m_Mesh: {fileID: 4300002, guid: ef3bb5d7881158b42bcfe01822c959cc, type: 3}
+  m_Mesh: {fileID: 4300000, guid: 3cc4c454eb8bda447a19419cdeb1843d, type: 3}
 --- !u!65 &65072376003286540
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -392,20 +391,3 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.2536357, y: 3, z: 1.480204}
   m_Center: {x: 1.537509, y: 1.5, z: 1.572155}
---- !u!95 &95012055512871168
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1445956590750656}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: ef3bb5d7881158b42bcfe01822c959cc, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1

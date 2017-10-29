@@ -52,7 +52,6 @@ GameObject:
   - component: {fileID: 4229239027905226}
   - component: {fileID: 33666019666299414}
   - component: {fileID: 23333741331739626}
-  - component: {fileID: 95302940459910506}
   m_Layer: 0
   m_Name: resWallHalfStraightSml
   m_TagString: Untagged
@@ -82,14 +81,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1647676837875760}
-  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0.0000029504295}
-  m_LocalPosition: {x: -33, y: 3, z: -1}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4784266066418446}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 180.00002, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4478391063704410
 Transform:
   m_ObjectHideFlags: 1
@@ -109,7 +108,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1251173234028816}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -144,7 +143,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 0f57662f5d33e104c80cea7e4cecbfec, type: 2}
+  - {fileID: 2100000, guid: 08fdded4ed28a1542b9af3d72b49c205, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -169,7 +168,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1647676837875760}
-  m_Mesh: {fileID: 4300000, guid: 53b20fbdee61cf64f83a00e8123e5f9e, type: 3}
+  m_Mesh: {fileID: 4300000, guid: fc6e72f468173794691fac466cba1e2f, type: 3}
 --- !u!65 &65233916021190512
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -194,20 +193,3 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2, y: 0.5, z: 2}
   m_Center: {x: 0, y: -0.25, z: 0}
---- !u!95 &95302940459910506
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1647676837875760}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 53b20fbdee61cf64f83a00e8123e5f9e, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
