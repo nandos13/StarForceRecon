@@ -10,11 +10,14 @@ ModelImporter:
     400000: loungeEndLeft
     400002: //RootNode
     2300000: loungeEndLeft
+    2300002: //RootNode
     3300000: loungeEndLeft
+    3300002: //RootNode
     4300000: loungeEndLeft
+    4300002: loungeEndLeft_low
     9500000: //RootNode
   materials:
-    importMaterials: 1
+    importMaterials: 0
     materialName: 0
     materialSearch: 1
   animations:
@@ -48,7 +51,7 @@ ModelImporter:
     importCameras: 1
     importLights: 1
     swapUVChannels: 0
-    generateSecondaryUV: 0
+    generateSecondaryUV: 1
     useFileUnits: 1
     optimizeMeshForGPU: 1
     keepQuads: 0

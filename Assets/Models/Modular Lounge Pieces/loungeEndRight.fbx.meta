@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 55f209624aba16c4195797aba8fd3429
-timeCreated: 1509067111
+timeCreated: 1509419652
 licenseType: Free
 ModelImporter:
   serializedVersion: 21
@@ -12,7 +12,7 @@ ModelImporter:
     4300000: loungeEndRight
     9500000: //RootNode
   materials:
-    importMaterials: 1
+    importMaterials: 0
     materialName: 0
     materialSearch: 1
   animations:
@@ -46,7 +46,7 @@ ModelImporter:
     importCameras: 1
     importLights: 1
     swapUVChannels: 0
-    generateSecondaryUV: 0
+    generateSecondaryUV: 1
     useFileUnits: 1
     optimizeMeshForGPU: 1
     keepQuads: 0
