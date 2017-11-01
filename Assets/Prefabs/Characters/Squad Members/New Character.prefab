@@ -2243,6 +2243,7 @@ MonoBehaviour:
   aiScripts:
   - {fileID: 114697566921355044}
   - {fileID: 114448971930580292}
+  - {fileID: 195972950818222762}
   playerScripts:
   - {fileID: 114819577255626082}
   selectionDelay: 0.2
@@ -2587,7 +2588,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 5
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
