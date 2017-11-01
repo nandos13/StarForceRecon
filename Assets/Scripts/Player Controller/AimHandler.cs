@@ -134,7 +134,8 @@ namespace StarForceRecon
         /// <summary>Swivels character to face aim direction.</summary>
         private void DoSwivel(Vector3 direction)
         {
-            Vector3 yLevelOffset = new Vector3(direction.x, transform.position.y, direction.z);
+            Vector3 yLevelOffset = new Vector3(direction.x, 0, direction.z).normalized;
+            
             float aimTheta = Vector3.Angle(transform.forward, yLevelOffset);
             
             if (isSwiveling || aimTheta > maxHipSwivel)
