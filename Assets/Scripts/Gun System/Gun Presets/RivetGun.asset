@@ -11,13 +11,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0c9488838872b74482a224992457739, type: 3}
   m_Name: RivetGun
   m_EditorClassIdentifier: 
-  _damageModifier: 10
-  _spread: 0.43
+  _damage: 1
+  _spread: 0.15
   _semiAuto: 0
-  _fireRateRPM: 900
+  _fireRateRPM: 655
   _bottomlessClip: 1
   _infiniteAmmo: 1
-  _ammoPerShot: 5
+  _ammoPerShot: 1
   _clipSize: 10
   _reloadTime: 0
   _useHeat: 0
