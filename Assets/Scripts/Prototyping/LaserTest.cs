@@ -6,46 +6,45 @@ using StarForceRecon;
 [RequireComponent(typeof(LineRenderer))]
 public class LaserTest : MonoBehaviour
 {
+    [SerializeField]
+    private Transform origin;
+    private AimHandler aim;
+    private PlayerController player;
+    private LineRenderer line;
 
-    public Transform _origin;
-    private PlayerController _aimScript;
-    public LineRenderer _line;
+    private RaycastHit[] hitCache = new RaycastHit[16];
     
 	void Start ()
     {
-        _aimScript = GetComponent<PlayerController>();
+        if (origin == null)
+            throw new System.MissingFieldException("Origin cannot be null");
 
-        if (!_line)
-            _line = GetComponent<LineRenderer>();
-
-        _line.textureMode = LineTextureMode.Tile;
+        aim = GetComponentInParent<AimHandler>();
+        player = GetComponentInParent<PlayerController>();
+        line = GetComponent<LineRenderer>();
     }
 	
 	void Update ()
     {
-        if (_aimScript && _line && _origin)
+        if (line && origin)
         {
-            Vector3 endPoint = _aimScript.aimPoint;
-            Vector3[] positions = { _origin.position, endPoint};
-            _line.SetPositions(positions);
-
-
-            if (_aimScript.aiming)
-                _line.enabled = true;
+            RaycastHit endHit;
+            Vector3 endPoint;
+            Ray ray = new Ray(origin.position, origin.forward);
+            if (RaycastingHelper.GetFirstValidHitNonAlloc(out endHit, ref hitCache, ray, 100.0f, aim.AimLayers, aim.AimTags))
+                endPoint = endHit.point;
             else
-                _line.enabled = false;
-        }
+                endPoint = ray.GetPoint(100.0f);
 
-        if (_line)
-        {
-            Vector2 laserOffset = _line.material.mainTextureOffset;
-            laserOffset.x += Time.deltaTime * 0.1f;
-            _line.material.mainTextureOffset = laserOffset;
+            Vector3[] positions = { origin.position, endPoint };
+            line.SetPositions(positions);
+
+            line.enabled = player.aiming;
         }
 	}
 
     void OnDisable()
     {
-        _line.enabled = false;
+        line.enabled = false;
     }
 }

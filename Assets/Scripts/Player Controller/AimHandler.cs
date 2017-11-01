@@ -1,9 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using RootMotion.FinalIK;
 
 namespace StarForceRecon
 {
     [DisallowMultipleComponent]
+    [RequireComponent(typeof(AimIK))]
     public class AimHandler : MonoBehaviour
     {
         #region Variables
@@ -23,18 +26,40 @@ namespace StarForceRecon
         [SerializeField]
         private string[] aimTags = new string[] { "Untagged", "Enemy" };
 
+        public LayerMask AimLayers { get { return aimableLayers; } }
+        public string[] AimTags { get { return aimTags; } }
+
+        #endregion
+
+        #region Aim Rotation
+
+        [Tooltip("When aiming, the character will turn towards aimer when the angle from forward exceeds this value.")]
+        [SerializeField, Range(20.0f, 80.0f)]
+        private float maxHipSwivel = 50.0f;
+
+        [Tooltip("Character's turning speed in rotations/second.")]
+        [SerializeField, Range(1.0f, 2.0f)]
+        private float turningSpeed = 1.0f;
+
+        private float closeAimRadius = 0.5f;
+        public float CloseAimRadius
+        {
+            get { return closeAimRadius; }
+            set { closeAimRadius = value; }
+        }
+
+        private bool isSwiveling = false;
+
         #endregion
 
         [Tooltip("Where the character's gun fires from. This should be an empty gameobject at the end of the gun barrel.")]
         [SerializeField]
         private Transform gunOrigin = null;
 
-        #region Data Tracking
-
-        Vector3 _lastAimPoint = Vector3.zero;
-        public Vector3 aimPoint { get { return _lastAimPoint; } }
-
-        #endregion
+        private AimIK aimIK = null;
+        private Transform aimIKTarget = null;
+        
+        public Vector3 AimPoint { get { return aimIKTarget.position; } }
 
         RaycastHit[] rayHitsNonAlloc = new RaycastHit[16];
 
@@ -46,11 +71,29 @@ namespace StarForceRecon
         {
             if (gunOrigin == null)
                 throw new System.MissingFieldException("AimHandler requires a gun origin.");
+            
+            InitializeIKSystem();
+        }
+
+        public bool IKState
+        {
+            get { return aimIK.enabled; }
+            set { aimIK.enabled = value; }
+        }
+
+        private void InitializeIKSystem()
+        {
+            aimIK = GetComponent<AimIK>();
+            GameObject obj = new GameObject(string.Format("AimIK Target {0}", aimIK.GetInstanceID()));
+            obj.hideFlags = HideFlags.HideAndDontSave;
+            aimIKTarget = obj.transform;
+            aimIK.solver.target = aimIKTarget;
+            aimIK.solver.transform = gunOrigin;
         }
 
         /// <summary>Handles aiming based on a viewport cursor position for player's character.</summary>
         /// /// <returns>The final aim point.</returns>
-        public Vector3 HandlePlayerAiming(Vector2 viewportCoordinates)
+        public void HandlePlayerAiming(Vector2 viewportCoordinates)
         {
             // Find the desired target point under the cursor (at viewportCoordinates)
             Vector3 desiredTarget;
@@ -64,9 +107,7 @@ namespace StarForceRecon
 
             // Attempt to aim at the desired target point
             if (cursorIsOverObject || targetFoundAtCharacterHeight)
-                return AimAtPoint(desiredTarget, colliderUnderCursor);
-
-            return transform.position;
+                AimAtPoint(desiredTarget, colliderUnderCursor);
         }
 
         /// <summary>Attempts to aim at a target point in world space.</summary>
@@ -74,50 +115,39 @@ namespace StarForceRecon
         /// <param name="targetCollider">Optional. 
         /// <para>If specified, Smart Aiming functionality will be used to attempt to find an optimal aim point on the collider.</para></param>
         /// <returns>The final aim point.</returns>
-        public Vector3 AimAtPoint(Vector3 desiredTarget, Collider targetCollider = null)
+        public void AimAtPoint(Vector3 desiredTarget, Collider targetCollider = null)
         {
-            Vector3 targetPoint;
-            if (targetCollider != null) // Use Smart Aiming to find an optimal point
+            Vector3 targetPoint = desiredTarget;
+            if (targetCollider != null)
             {
                 Collider ancestorCollider = GetAncestorWithSameTag(targetCollider);
                 RaycastHit hit;
                 if (JakePerry.SightLineOptimizer.FindOptimalViewablePoint(out hit, gunOrigin.position, desiredTarget,
                                 ancestorCollider, true, (uint)smartAimIterations, aimTags, aimableLayers, smartAimIgnoreTags, 0.0f))
                     targetPoint = hit.point;
-                else
-                    targetPoint = desiredTarget;
             }
-            else
-            {
-                Vector3 hit;
-                if (SingleLineCheck(out hit, gunOrigin.position, desiredTarget - gunOrigin.position))
-                    targetPoint = hit;
-                else
-                    targetPoint = desiredTarget;
-            }
-
-            _lastAimPoint = targetPoint;
-            return targetPoint;
+            
+            aimIKTarget.position = targetPoint;
+            DoSwivel(gunOrigin.forward);
         }
 
-        private bool SingleLineCheck(out Vector3 point, Vector3 origin, Vector3 direction)
+        /// <summary>Swivels character to face aim direction.</summary>
+        private void DoSwivel(Vector3 direction)
         {
-            Ray ray = new Ray(origin, direction);
-            int hits = Physics.RaycastNonAlloc(ray, rayHitsNonAlloc, 1000.0f, aimableLayers.value, QueryTriggerInteraction.Collide);
-            if (hits > 0)
+            Vector3 yLevelOffset = new Vector3(direction.x, 0, direction.z).normalized;
+            
+            float aimTheta = Vector3.Angle(transform.forward, yLevelOffset);
+            
+            if (isSwiveling || aimTheta > maxHipSwivel)
             {
-                // Sort hits by distance
-                RaycastingHelper.SortByDistanceNonAlloc(ref rayHitsNonAlloc, origin, hits);
-                RaycastHit hit;
-                if (FirstMatchingTag(out hit, rayHitsNonAlloc, aimTags, hits))
-                {
-                    point = hit.point;
-                    return true;
-                }
+                // Rotate to face aim point
+                float turnSpeed = (turningSpeed * 360.0f) / aimTheta;
+                Quaternion rotation = Quaternion.LookRotation(yLevelOffset);
+                transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime * turnSpeed);
+            
+                float swivelStopAngle = isSwiveling ? maxHipSwivel / 2 : maxHipSwivel;
+                isSwiveling = Vector3.Angle(transform.forward, yLevelOffset) > swivelStopAngle;
             }
-
-            point = Vector3.zero;
-            return false;
         }
         
         /// <returns>Ascends collider's heirarchy to find top parent collider with same tag.
@@ -207,13 +237,10 @@ namespace StarForceRecon
         {
             for (uint i = 0; i < hits; i++)
             {
-                for (uint j = 0; j < aimTags.Length; j++)
+                if (tags.Contains(hitArray[i].transform.tag))
                 {
-                    if (hitArray[i].transform.tag == aimTags[j])
-                    {
-                        match = hitArray[i];
-                        return true;
-                    }
+                    match = hitArray[i];
+                    return true;
                 }
             }
             match = default(RaycastHit);

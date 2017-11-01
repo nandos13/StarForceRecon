@@ -31,14 +31,6 @@ namespace StarForceRecon
 
         [Header("Aiming")]
 
-        [Tooltip("When aiming, the character will turn towards aimer when the angle from forward exceeds this value.")]
-        [SerializeField, Range(20.0f, 80.0f)]
-        private float maxHipSwivel = 50.0f;
-
-        [Tooltip("Character's turning speed in rotations/second.")]
-        [SerializeField, Range(1.0f, 2.0f)]
-        private float turningSpeed = 1.0f;
-
         [Tooltip("When aiming at a point within this radius from the character, the character will be locked to melee attacking only.")]
         [SerializeField, Range(1.0f, 3.0f)]
         private float closeAimRadius = 0.5f;
@@ -72,7 +64,6 @@ namespace StarForceRecon
         private static readonly Vector3 HORIZON_SCALE_VECTOR = new Vector3(1, 0, 1);
 
         public bool aiming { get; private set; }
-        public Vector3 aimPoint { get; private set; }
         private bool meleeLocked = false;
 
         private bool secondaryIsEquipped = false;
@@ -109,6 +100,19 @@ namespace StarForceRecon
                 throw new System.MissingFieldException("No Aim Handler component found.");
             if (_equipment == null)
                 throw new System.MissingFieldException("No Equipment component found.");
+
+            _tpc.OnRollStart += _tpc_OnRollStart;
+            _tpc.OnRollEnd += _tpc_OnRollEnd;
+        }
+
+        private void _tpc_OnRollEnd()
+        {
+            _aimHandler.IKState = true;
+        }
+
+        private void _tpc_OnRollStart()
+        {
+            _aimHandler.IKState = false;
         }
 
         private void Start()
@@ -119,14 +123,14 @@ namespace StarForceRecon
 
         private void Update()
         {
-            // Find aim point, limited to minimum radius
-            aimPoint = _aimHandler.HandlePlayerAiming(StarForceRecon.Cursor.position);
-            float horizontalDistance = Vector3.Distance(transform.position, new Vector3(aimPoint.x, 0, aimPoint.z));
-            aiming = (horizontalDistance >= closeAimRadius);
-
-            // Rotate towards aim
-            if (aiming && !_tpc.isRolling)
-                RotateToFaceAimCheck(StarForceRecon.Cursor.position, maxHipSwivel);
+            if (!_tpc.isRolling)
+            {
+                // Find aim point, limited to minimum radius
+                _aimHandler.HandlePlayerAiming(StarForceRecon.Cursor.position);
+                float horizontalDistance = Vector3.Distance(transform.position, 
+                    new Vector3(_aimHandler.AimPoint.x, 0, _aimHandler.AimPoint.z));
+                aiming = (horizontalDistance >= closeAimRadius);
+            }
 
             UpdateOnScreenCursor();
         }
@@ -235,28 +239,6 @@ namespace StarForceRecon
 
             intersect = Vector3.zero;
             return false;
-        }
-
-        /// <summary>Ensures the character is always facing the aim cursor.</summary>
-        /// <param name="viewportCursorPosition">Cursor position in Viewport [0-1][0-1].</param>
-        /// <param name="maxAngleDifference">The maximum angle allowed between character forward and cursor point.</param>
-        private void RotateToFaceAimCheck(Vector2 viewportCursorPosition, float maxAngleDifference)
-        {
-            // Find where the cursor hovers over the character's horizontal plane
-            Vector3 cursorIntersectsPlane;
-            if (CharacterHorizonIntersect(viewportCursorPosition, out cursorIntersectsPlane))
-            {
-                Vector3 cursorIntersectLocal = cursorIntersectsPlane - transform.position;
-                // Is aim angle from character forward too large?
-                float aimTheta = Vector3.Angle(transform.forward, cursorIntersectLocal);
-                if (aimTheta > maxAngleDifference)
-                {
-                    // Rotate to face cursor
-                    float turnSpeed = (turningSpeed * 360.0f) / aimTheta;
-                    Quaternion rotation = Quaternion.LookRotation(cursorIntersectLocal);
-                    transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime * turnSpeed);
-                }
-            }
         }
         
         /// <summary>Makes the character aim at a certain point based on input.</summary>
