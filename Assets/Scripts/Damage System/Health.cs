@@ -7,7 +7,8 @@ using JakePerry;
  * Handles health, damage, healing, etc. */
 public class Health : MonoBehaviour, IDamageable
 {
-    public HealthBar healthBar;
+    [SerializeField]
+    private HealthBar healthBar;
 
     #region Delegates & Events
 
