@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: debris
+  m_Name: debris 1
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: _METALLICGLOSSMAP _NORMALMAP
   m_LightmapFlags: 4
@@ -19,7 +19,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: 15644e9e18e4e804f8284492272ab1f8, type: 3}
+        m_Texture: {fileID: 2800000, guid: 1503a0178293cb340b1f30bff72770a2, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -39,15 +39,15 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: b85b1ecc07a859645b7fedc540849ea3, type: 3}
+        m_Texture: {fileID: 2800000, guid: 0302988ccd296e34bbf8a86d566d12fb, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
-        m_Texture: {fileID: 2800000, guid: 3f93742e1bff9e74e9632f5d680ee387, type: 3}
+        m_Texture: {fileID: 2800000, guid: 03ccbc5aab645cd4f9f09fe618be8b2c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
-        m_Texture: {fileID: 2800000, guid: 490736a759d9fb148bfd2a9d7f2e2d94, type: 3}
+        m_Texture: {fileID: 2800000, guid: 1ce1222d98cb4174296aa48ef9e24250, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
