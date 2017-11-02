@@ -191,10 +191,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e1dcfc05207d9b468295298e111bbcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 16
+  _damageLayer:
+    _layer: 0
+  _maxHealth: 2
   _currentHealth: 0
   _isAlive: 1
-  _startingHealth: 16
+  _startingHealth: 2
   _startRandom: 0
   _startMinimum: 24
   _startMaximum: 24
