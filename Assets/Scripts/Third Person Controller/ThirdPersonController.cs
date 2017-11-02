@@ -26,7 +26,7 @@ public class ThirdPersonController : MonoBehaviour
 
     [Range(0.05f, 1.5f), SerializeField]    private float _groundCheckDist = 0.1f;
     [Range(1.0f, 5.0f), SerializeField]     private float _gravityMultiplier = 2.0f;
-    [Range(0.5f, 3.0f), SerializeField]     private float _moveSpeedMultiplier = 1.0f;
+    [Range(0.5f, 5.0f), SerializeField]     private float _moveSpeedMultiplier = 1.0f;
     [Range(0.5f, 3.0f), SerializeField]     private float _animSpeedMultiplier = 1.0f;
 
     // Rolling

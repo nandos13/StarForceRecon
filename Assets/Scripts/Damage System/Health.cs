@@ -7,6 +7,8 @@ using JakePerry;
  * Handles health, damage, healing, etc. */
 public class Health : MonoBehaviour, IDamageable
 {
+    public HealthBar healthBar;
+
     #region Delegates & Events
 
     public delegate void DamageEventDelegate(Health sender, float damageValue);
@@ -81,6 +83,8 @@ public class Health : MonoBehaviour, IDamageable
 
     #endregion
 
+    
+
     void Awake()
     {
         // Initialize health
@@ -102,10 +106,20 @@ public class Health : MonoBehaviour, IDamageable
 
     void Update()
     {
-        if (health < maxHealth && hasHealthBar == false && HealthBarManager.instance)
+
+        health -= Time.deltaTime;
+
+        if (healthBar != null)
         {
-            HealthBarManager.instance.AddHealthBar(this);
-            hasHealthBar = true;
+            healthBar.health = this;
+        }
+        else
+        {
+            if (health < maxHealth && hasHealthBar == false && HealthBarManager.instance)
+            {
+                HealthBarManager.instance.AddHealthBar(this);
+                hasHealthBar = true;
+            }
         }
         
         _timeSinceDamage += Time.deltaTime;

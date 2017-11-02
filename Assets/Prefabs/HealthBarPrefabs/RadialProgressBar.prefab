@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 224404870571027804}
   - component: {fileID: 222610265360506460}
   - component: {fileID: 114304042726833084}
+  - component: {fileID: 114789688666868536}
   m_Layer: 5
   m_Name: RadialProgressBar
   m_TagString: Untagged
@@ -143,6 +144,21 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114789688666868536
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1079569443911070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bbca07b44c636b469101b52c2c74ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: {fileID: 0}
+  image: {fileID: 114168329148917506}
+  screenZ: 0
+  inWorld: 0
 --- !u!222 &222610265360506460
 CanvasRenderer:
   m_ObjectHideFlags: 1

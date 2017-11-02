@@ -114,6 +114,9 @@ public class HealthEditor : Editor
                 }
             }
         }
+        SerializedProperty hb  = serializedObject.FindProperty("healthBar");
+        if (hb != null)
+            EditorGUILayout.PropertyField(hb);
     }
 
     public override void OnInspectorGUI()
