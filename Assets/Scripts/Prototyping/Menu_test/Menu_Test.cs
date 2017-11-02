@@ -16,7 +16,7 @@ public class Menu_Test : MonoBehaviour {
     bool _start = false;
     bool pressed = false;
     public Panels _middleScript;
-    public string _levelNumber;
+    public string _levelName;
 
     [Header("Canvas")]
     public GameObject _anyCanvas;
@@ -41,6 +41,8 @@ public class Menu_Test : MonoBehaviour {
 
     void Awake()
     {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         _animator = _camera.GetComponent<Animator>();
         _hologram.SetActive(false);
         _settingsCanvas.SetActive(false);
@@ -178,7 +180,7 @@ public class Menu_Test : MonoBehaviour {
 
     public void GameStart()
     {
-        SceneManager.LoadScene(_levelNumber);
+        SceneManager.LoadScene(_levelName);
     }
 
     //so that animations dont play right after called.
