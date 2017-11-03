@@ -12,7 +12,7 @@ namespace StarForceRecon
                                     "lookUp", "lookDown", "lookLeft", "lookRight",
                                     "rotateCameraLeft", "rotateCameraRight",
                                     "fire", "reload", "flashlight", "switchForward", "switchBack",
-                                    "roll", "melee", "crouch", "switchWeapon",
+                                    "roll", "melee", "crouch", "switchWeapon", "interact",
                                     "equipment1", "equipment2", "action1", "action2", };
             AddInputs(newInputs);
 
@@ -93,7 +93,7 @@ namespace StarForceRecon
             
             // Set bindings for Actions
             AddDefaultBinding("fire", Mouse.LeftButton);
-            AddDefaultBinding("", Mouse.RightButton);
+            AddDefaultBinding("interact", Mouse.RightButton);
             AddDefaultBinding("rotateCameraLeft", Key.Q);
             AddDefaultBinding("rotateCameraRight", Key.E);
             AddDefaultBinding("flashlight", Key.T);

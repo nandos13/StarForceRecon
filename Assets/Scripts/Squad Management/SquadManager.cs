@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+using System.Linq;
 
 namespace StarForceRecon
 {
@@ -12,6 +12,9 @@ namespace StarForceRecon
         {
             void OnSwitchTo();
             void OnSwitchAway();
+
+            /// <summary>Is the character currently selectable?</summary>
+            bool Controllable { get; }
 
             UnityEngine.Transform transform { get; }
         }
@@ -31,12 +34,11 @@ namespace StarForceRecon
         }
 
         private static List<IControllable> _squadMembers = new List<IControllable>();
-        private static int _selectedIndex = -1;
-        private static IControllable _selected = null;
+        private static IControllable selected = null;
 
         public static List<IControllable> GetSquadMembers { get { return _squadMembers; } }
 
-        public static IControllable GetCurrentSquaddie { get { return _selected; } }
+        public static IControllable GetCurrentSquaddie { get { return selected; } }
 
         #endregion
 
@@ -55,10 +57,9 @@ namespace StarForceRecon
                 _squadMembers.Add(member);
 
                 // If no characters are selected
-                if (_selected == null)
+                if (selected == null)
                 {
-                    _selectedIndex = _squadMembers.Count - 1;
-                    _selected = member;
+                    selected = member;
 
                     member.OnSwitchTo();
                     RaiseSwitchEvent();
@@ -68,74 +69,58 @@ namespace StarForceRecon
             }
         }
 
+        private static void DoSwitch(IControllable to)
+        {
+            selected.OnSwitchAway();
+            selected = to;
+            selected.OnSwitchTo();
+            RaiseSwitchEvent();
+        }
+        
         /// <summary>Switches to the next available character. Will iterate backwards if reverse is true.</summary>
         public static void Switch(bool reverse = false)
         {
             if (!_canSwitchSquadMembers) return;
+            if (_squadMembers.Count == 0) throw new System.Exception("No existing squad members. Cannot switch.");
 
-            if (_squadMembers.Count == 0)
+            // Get a list of the currently selectable members
+            List<IControllable> selectable = _squadMembers.Where(character => character.Controllable).ToList();
+            if (selectable.Count == 0) return;
+            
+            if (selectable.Count == 1 && selected != selectable[0])
             {
-                Debug.LogWarning("Warning: No current squad members. Cannot switch.");
-                return;
+                selected.OnSwitchAway();
+                selected = selectable[0];
+                selected.OnSwitchTo();
             }
+            
+            IControllable next = null;
+            int nextIndex;
 
-            if (_squadMembers.Count == 1)
+            if (selectable.Contains(selected))
             {
-                // Only one squad member available
-                _selected = _squadMembers[0];
-                _selectedIndex = 0;
-                return;
-            }
-
-            // Get index of the next squad member
-            int previousSelected = _selectedIndex;
-            int finalIndex = _squadMembers.Count - 1;
-            int next = _selectedIndex;
-
-            if (!reverse)
-            {
-                if (next >= finalIndex)
-                    next = 0;
-                else
-                    next++;
+                nextIndex = (selectable.IndexOf(selected) + (reverse ? -1 : 1)) % selectable.Count;
+                if (nextIndex < 0) nextIndex = selectable.Count - 1;
+                next = selectable[nextIndex];
             }
             else
-            {
-                if (next == 0)
-                    next = finalIndex;
-                else
-                    next--;
-            }
+                next = selectable[0];
 
-            // Select new squad member
-            _selectedIndex = next;
-            _selected = _squadMembers[_selectedIndex];
-
-            // Trigger switch event
-            _squadMembers[previousSelected].OnSwitchAway();
-            _selected.OnSwitchTo();
-            RaiseSwitchEvent();
+            DoSwitch(next);
         }
 
         /// <summary>Switches to a character at the specified zero-based index. Returns true if 
         /// the switch was successful, otherwise returns false.</summary>
         public static bool SwitchTo(int index)
         {
-            if (!_canSwitchSquadMembers)
-                return false;
+            if (!_canSwitchSquadMembers) return false;
 
             if (index >= 0 && index < _squadMembers.Count)
             {
-                if (index != _selectedIndex)
+                IControllable next = _squadMembers[index];
+                if (next != selected && next.Controllable)
                 {
-                    _selected.OnSwitchAway();
-
-                    _selectedIndex = index;
-                    _selected = _squadMembers[index];
-
-                    _selected.OnSwitchTo();
-                    RaiseSwitchEvent();
-
+                    DoSwitch(next);
                     return true;
                 }
             }

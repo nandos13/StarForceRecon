@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using JakePerry;
 
@@ -8,7 +9,10 @@ namespace StarForceRecon
         RequireComponent(typeof(AimHandler)),
         RequireComponent(typeof(Equipment)),
         DisallowMultipleComponent]
-    public class PlayerController : MonoBehaviour, GameController<SFRInputSet>.ITarget, SquadManager.IControllable
+    public class PlayerController : MonoBehaviour, 
+                                    GameController<SFRInputSet>.ITarget, 
+                                    SquadManager.IControllable,
+                                    Interaction.IInteractor
     {
         #region Variables
 
@@ -71,6 +75,8 @@ namespace StarForceRecon
         private static Canvas cursorCanvas = null;
         private static UnityEngine.UI.Image cursorSprite = null;
 
+        private Interaction.IInteractable closestInteractable = null;
+
         #endregion
 
         #endregion
@@ -123,16 +129,17 @@ namespace StarForceRecon
 
         private void Update()
         {
-            if (!_tpc.isRolling)
-            {
-                // Find aim point, limited to minimum radius
-                _aimHandler.HandlePlayerAiming(StarForceRecon.Cursor.position);
-                float horizontalDistance = Vector3.Distance(transform.position, 
-                    new Vector3(_aimHandler.AimPoint.x, 0, _aimHandler.AimPoint.z));
-                aiming = (horizontalDistance >= closeAimRadius);
-            }
-
             UpdateOnScreenCursor();
+            if (_tpc.isRolling) return;
+
+            // Find aim point, limited to minimum radius
+            _aimHandler.HandlePlayerAiming(StarForceRecon.Cursor.position);
+            float horizontalDistance = Vector3.Distance(transform.position,
+                new Vector3(_aimHandler.AimPoint.x, 0, _aimHandler.AimPoint.z));
+            aiming = (horizontalDistance >= closeAimRadius);
+
+            // Check for interactables around the character
+            CheckClosestInteractable();
         }
 
         private void FixedUpdate()
@@ -281,6 +288,15 @@ namespace StarForceRecon
                 StartMeleeAttack();
             if (meleeLocked) return; // Prevent other actions if doing a melee attack
 
+            if (inputSet.GetActionByName("interact").WasPressed)
+            {
+                if (closestInteractable != null)
+                {
+                    Interaction.StartInteraction(this, closestInteractable);
+                    return;
+                }
+            }
+
             if (inputSet.GetActionByName("switchWeapon").WasPressed)
             {
                 _equipment.PrimarySecondarySwap();
@@ -356,6 +372,68 @@ namespace StarForceRecon
             }
         }
 
+        #region Interaction IInteractor Methods
+
+        private void CheckClosestInteractable()
+        {
+            const float interactableRadius = 10.0f;
+
+            Collider[] colliders = Physics.OverlapSphere(transform.position, interactableRadius);
+            KeyValuePair<Transform, Interaction.IInteractable>[] interactables = colliders
+                .Select(col => new KeyValuePair<Transform, Interaction.IInteractable>(col.transform, 
+                                col.transform.GetComponentInParent<Interaction.IInteractable>()))
+                .Where(i => i.Value != null)
+                .Distinct()
+                .ToArray();
+            
+            float minDistance = float.MaxValue;
+            Interaction.IInteractable best = null;
+            foreach (var pair in interactables)
+            {
+                float distance = Vector3.Distance(new Vector3(pair.Key.position.x, transform.position.y, pair.Key.position.z), transform.position);
+                if (distance < minDistance)
+                {
+                    best = pair.Value;
+                    minDistance = distance;
+                }
+            }
+
+            closestInteractable = best;
+        }
+
+        private bool lockedViaInteraction = false;
+        void Interaction.IInteractor.OnStartInteraction(Interaction.InteractionInfo info)
+        {
+            if (info.Target.ForceCharacterSwap)
+            {
+                lockedViaInteraction = true;
+                squadControllable = false;
+                SquadManager.Switch();
+
+                CancelInvoke("SelectCharacter");
+
+                foreach (Behaviour behaviour in aiScripts)
+                    behaviour.enabled = false;
+
+                foreach (Behaviour behaviour in playerScripts)
+                    behaviour.enabled = false;
+            }
+        }
+
+        void Interaction.IInteractor.OnCompleteInteraction()
+        {
+            if (lockedViaInteraction)
+            {
+                lockedViaInteraction = false;
+                squadControllable = true;
+
+                foreach (Behaviour behaviour in aiScripts)
+                    behaviour.enabled = true;
+            }
+        }
+
+        #endregion
+
         #region GameController ITarget Methods
 
         void GameController<SFRInputSet>.ITarget.ReceiveControllerInput(SFRInputSet inputSet, 
@@ -373,9 +451,10 @@ namespace StarForceRecon
                 HandleActionInput(inputSet);
             }
         }
-        
+
         #endregion
 
+        private bool squadControllable = true;
         #region SquadManager IControllable Methods
 
         private void SelectCharacter()
@@ -411,6 +490,9 @@ namespace StarForceRecon
         {
             Invoke("SelectCharacter", selectionDelay);
         }
+        
+        bool SquadManager.IControllable.Controllable
+        { get { return squadControllable; } }
 
         Transform SquadManager.IControllable.transform
         { get { return transform; } }
