@@ -27,6 +27,11 @@ public class HealthBarManager : MonoBehaviour {
         hbs.Add(hb);
     }
 
+    public void RemoveHealthBar(HealthBar hb)
+    {
+        hbs.Remove(hb);
+    }
+
     public void Update()
     {
         // calculate the health bar z of every child

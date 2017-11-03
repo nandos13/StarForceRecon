@@ -22,9 +22,9 @@ public class HealthBar : MonoBehaviour {
             image.fillMethod = Image.FillMethod.Horizontal;
         }
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    void Update ()
     {
         if (health == null)
             return;
@@ -39,7 +39,10 @@ public class HealthBar : MonoBehaviour {
             transform.forward = Camera.main.transform.forward;
 
             if (pct <= 0)
+            {
+                HealthBarManager.instance.RemoveHealthBar(this);
                 Destroy(gameObject);
+            }
         }
         else
         {

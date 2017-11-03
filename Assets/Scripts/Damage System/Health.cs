@@ -203,7 +203,10 @@ public class Health : MonoBehaviour, IDamageable
 
     void OnDestroy()
     {
-        // Call death of script, raising OnDeath event
-        Death(_currentHealth);
+        if (alive)
+        {
+            // Call death of script, raising OnDeath event
+            Death(_currentHealth);
+        }
     }
 }

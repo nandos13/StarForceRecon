@@ -29,6 +29,7 @@ GameObject:
   - component: {fileID: 114733935626824998}
   - component: {fileID: 114794472517276324}
   - component: {fileID: 114268289767131014}
+  - component: {fileID: 114152726631976990}
   m_Layer: 0
   m_Name: Parasite_01 (1)
   m_TagString: Enemy
@@ -43,7 +44,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1027901333939610}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 17.881462, y: 0, z: -142.38846}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -132,6 +133,18 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114152726631976990
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1027901333939610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbfe3811304e84c4d809cf84d9189e4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blood: {fileID: 198000011254678926, guid: abb9f519b142e304d9c45b56afa768bc, type: 2}
 --- !u!114 &114268289767131014
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -159,9 +172,9 @@ MonoBehaviour:
   damping: 0
   enemyMoveSpeed: 0
   Target: {fileID: 0}
-  damage: 5
-  attackRate: 2
-  attackRange: 5
+  damage: 30
+  attackRate: 1
+  attackRange: 10
   attackRangeForce: 100
   AttackRangeEnd: {fileID: 4362240334879160}
   targetType: 0
@@ -191,6 +204,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e1dcfc05207d9b468295298e111bbcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthBar: {fileID: 0}
   _damageLayer:
     _layer: 0
   _maxHealth: 2
