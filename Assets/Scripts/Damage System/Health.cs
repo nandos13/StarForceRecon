@@ -108,7 +108,7 @@ public class Health : MonoBehaviour, IDamageable
     void Update()
     {
 
-        health -= Time.deltaTime;
+       // health -= Time.deltaTime;  // Bleed health test!
 
         if (healthBar != null)
         {

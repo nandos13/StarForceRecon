@@ -31,7 +31,7 @@ public class HealthBar : MonoBehaviour {
 
         // scale the meter
         float pct = Mathf.Clamp01(health.health / health.maxHealth);
-        image.fillAmount = pct;
+        image.fillAmount = pct * 0.75f;
 
         if (inWorld)
         {

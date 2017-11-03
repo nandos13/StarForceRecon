@@ -114,6 +114,7 @@ MonoBehaviour:
   health: {fileID: 0}
   image: {fileID: 114126992049421898}
   screenZ: 0
+  inWorld: 1
 --- !u!222 &222314291533190260
 CanvasRenderer:
   m_ObjectHideFlags: 1
