@@ -8,7 +8,8 @@ public class HealthBar : MonoBehaviour {
 
     public Health health;
     public Image image;
-
+    [SerializeField, Range(0.5f, 2f)]
+    private float IconScale = 1.5f;
     public float screenZ;
     public bool inWorld = true;
 
@@ -35,7 +36,7 @@ public class HealthBar : MonoBehaviour {
 
         if (inWorld)
         {
-            transform.position = health.transform.position + Vector3.up * 2;
+            transform.position = health.transform.position + Vector3.up * IconScale;
             transform.forward = Camera.main.transform.forward;
 
             if (pct <= 0)
@@ -48,7 +49,7 @@ public class HealthBar : MonoBehaviour {
         {
             if (health == SquadManager.GetCurrentSquaddie.transform.GetComponent<Health>())
             {
-                transform.localScale = Vector3.one * 2.0f;
+                transform.localScale = Vector3.one * IconScale;
                 transform.SetAsLastSibling();
             }
             else
