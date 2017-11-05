@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 02e9fae15b6d8e84c922281ba205abdb
-timeCreated: 1509682304
+guid: 11f5d6d6374d82f4b9402e527505999c
+timeCreated: 1509839826
 licenseType: Free
 ModelImporter:
   serializedVersion: 21
@@ -9,7 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: trolleyFlatBed
+    4300000: wall_shelving
     9500000: //RootNode
   materials:
     importMaterials: 0

@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 02e9fae15b6d8e84c922281ba205abdb
-timeCreated: 1509682304
+guid: 8c197abc7bc7dd740befc4ae6fa7fba7
+timeCreated: 1509839826
 licenseType: Free
 ModelImporter:
   serializedVersion: 21
@@ -9,7 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: trolleyFlatBed
+    4300000: cabinet
     9500000: //RootNode
   materials:
     importMaterials: 0
