@@ -1511,11 +1511,17 @@ MonoBehaviour:
   damping: 0
   enemyMoveSpeed: 0
   Target: {fileID: 0}
-  damage: 30
+  damage: 1
   attackRate: 1
   attackRange: 10
-  attackRangeForce: 100
+  attackRangeForce: 0
   AttackRangeEnd: {fileID: 4898671988175606}
+  damageMask:
+    _mask: 1
+  damageModifier:
+    modifiers:
+      keys: []
+      values: []
   targetType: 0
 --- !u!137 &137923577305450444
 SkinnedMeshRenderer:

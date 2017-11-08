@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using StarForceRecon;
+using JakePerry;
 
 public class EnemyBehaviour : ActionAI
 {
@@ -41,11 +42,17 @@ public class EnemyBehaviour : ActionAI
     private float nextFire;
     [Tooltip("starting location for attacks")]
     public Transform AttackRangeEnd;
+
+    [SerializeField]
+    private DamageLayer.Mask damageMask;
+    [SerializeField]
+    private DamageLayer.Modifier damageModifier;
+
     [Header("AI Type")]
     public TargetType targetType;
     private WaitForSeconds attackDuration = new WaitForSeconds(0.1f);
+
     
-   
     public override float Evaluate(Agent a)
     {
         SquadManager.IControllable target = null;
@@ -122,7 +129,8 @@ public class EnemyBehaviour : ActionAI
 
             if (health != null)
             {
-                //health.ApplyDamage(damage); needs work
+                DamageData damageData = new DamageData(this, damage, damageMask, damageModifier);
+                health.ApplyDamage(damageData);
             }
 
             if (hit.rigidbody != null)
