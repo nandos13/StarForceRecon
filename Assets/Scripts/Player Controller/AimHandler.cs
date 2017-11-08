@@ -56,6 +56,8 @@ namespace StarForceRecon
         [SerializeField]
         private Transform gunOrigin = null;
 
+        public Transform GunOrigin { get { return gunOrigin; } set { gunOrigin = value; } }
+
         private AimIK aimIK = null;
         private Transform aimIKTarget = null;
         

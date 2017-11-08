@@ -43,7 +43,8 @@ public class PlayParticleOnGunFired : MonoBehaviour
 
     private void _gun_OnShotFired(Gun sender, Vector3 origin, Vector3 direction, Transform hitTransform)
     {
-        pendingShotDirections.Add(new ShotInfoWrapper(origin, direction));
+        if (enabled)
+            pendingShotDirections.Add(new ShotInfoWrapper(origin, direction));
     }
 
     private void Emit(Vector3 origin, Vector3 direction)

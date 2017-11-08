@@ -28,6 +28,7 @@ public class Gun : MonoBehaviour, Equipment.IEquipment
     #region General
 
     [SerializeField]    private Transform _gunOrigin = null;
+    public Transform Origin { get { return _gunOrigin; } }
     public Vector3 GunForward
     {
         get

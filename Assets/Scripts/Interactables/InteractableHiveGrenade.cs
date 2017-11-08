@@ -69,24 +69,27 @@ public class InteractableHiveGrenade : MonoBehaviour, Interaction.IInteractable
         if (nodeToDestroy != null)
             Destroy(nodeToDestroy);
 
+        if (disablePiece)
+            disablePiece.SetActive(false);
+
+        if (enablePiece)
+            enablePiece.SetActive(true);
+
         if (explosion != null)
         {
             explosion.gameObject.SetActive(true);
             explosion.Play();
             StartCoroutine(ExplosionLifetime(particleLifeTime));
         }
-
-        if (disablePiece)
-            disablePiece.SetActive(false);
-
-        if (enablePiece)
-            enablePiece.SetActive(true);
+        else
+            Destroy(this);
     }
 
     private IEnumerator ExplosionLifetime(float time)
     {
         yield return new WaitForSeconds(time);
         explosion.gameObject.SetActive(false);
+        Destroy(this);
     }
 
     void Interaction.IInteractable.OnStartInteraction(Interaction.InteractionInfo info)

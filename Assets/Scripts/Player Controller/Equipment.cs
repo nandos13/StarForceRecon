@@ -36,83 +36,7 @@ namespace StarForceRecon
         private IEquipment action1 = null;
         private IEquipment action2 = null;
 
-        #region MonoBehaviour components for slots
-        
-        [SerializeField]
-        private MonoBehaviour primaryBehaviour = null;
-        [SerializeField]
-        private MonoBehaviour secondaryBehaviour = null;
-        [SerializeField]
-        private MonoBehaviour meleeBehaviour = null;
-        [SerializeField]
-        private MonoBehaviour equipment1Behaviour = null;
-        [SerializeField]
-        private MonoBehaviour equipment2Behaviour = null;
-        [SerializeField]
-        private MonoBehaviour action1Behaviour = null;
-        [SerializeField]
-        private MonoBehaviour action2Behaviour = null;
-
         #endregion
-
-        #endregion
-
-        private void Awake()
-        {
-            primary = primaryBehaviour as IEquipment;
-            secondary = secondaryBehaviour as IEquipment;
-            melee = meleeBehaviour as IEquipment;
-            equipment1 = equipment1Behaviour as IEquipment;
-            equipment2 = equipment2Behaviour as IEquipment;
-            action1 = action1Behaviour as IEquipment;
-            action2 = action2Behaviour as IEquipment;
-        }
-
-        private void OnValidate()
-        {
-            if (primaryBehaviour)
-            {
-                IEquipment temp = primaryBehaviour as IEquipment;
-                if (temp != null) primary = temp;
-                else primaryBehaviour = null;
-            }
-            if (secondaryBehaviour)
-            {
-                IEquipment temp = secondaryBehaviour as IEquipment;
-                if (temp != null) secondary = temp;
-                else secondaryBehaviour = null;
-            }
-            if (meleeBehaviour)
-            {
-                IEquipment temp = meleeBehaviour as IEquipment;
-                if (temp != null) melee = temp;
-                else meleeBehaviour = null;
-            }
-            if (equipment1Behaviour)
-            {
-                IEquipment temp = equipment1Behaviour as IEquipment;
-                if (temp != null) equipment1 = temp;
-                else equipment1Behaviour = null;
-            }
-            if (equipment2Behaviour)
-            {
-                IEquipment temp = equipment2Behaviour as IEquipment;
-                if (temp != null) equipment2 = temp;
-                else equipment2Behaviour = null;
-            }
-            if (action1Behaviour)
-            {
-                IEquipment temp = action1Behaviour as IEquipment;
-                if (temp != null) action1 = temp;
-                else action1Behaviour = null;
-            }
-            if (action2Behaviour)
-            {
-                IEquipment temp = action2Behaviour as IEquipment;
-                if (temp != null) action2 = temp;
-                else action2Behaviour = null;
-            }
-        }
 
         public void Use(Slot slot)
         {
@@ -160,6 +84,37 @@ namespace StarForceRecon
                 IEquipment temporary = primary;
                 primary = secondary;
                 secondary = temporary;
+            }
+        }
+        
+        public void SetSlot(Slot slot, IEquipment equipment)
+        {
+            switch (slot)
+            {
+                case Slot.Primary:
+                    primary = equipment;
+                    break;
+                case Slot.Secondary:
+                    secondary = equipment;
+                    break;
+                case Slot.Melee:
+                    melee = equipment;
+                    break;
+                case Slot.Equipment1:
+                    equipment1 = equipment;
+                    break;
+                case Slot.Equipment2:
+                    equipment2 = equipment;
+                    break;
+                case Slot.Action1:
+                    action1 = equipment;
+                    break;
+                case Slot.Action2:
+                    action2 = equipment;
+                    break;
+
+                default:
+                    break;
             }
         }
     }
