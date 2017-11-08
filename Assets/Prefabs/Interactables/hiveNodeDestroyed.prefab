@@ -22,13 +22,14 @@ GameObject:
   - component: {fileID: 33882631532940872}
   - component: {fileID: 23862105208570150}
   - component: {fileID: 95925368184982970}
+  - component: {fileID: 64212605708795170}
   m_Layer: 0
   m_Name: hiveNodeDestroyed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4745584675966974
 Transform:
   m_ObjectHideFlags: 1
@@ -80,6 +81,20 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1481404348865646}
+  m_Mesh: {fileID: 4300000, guid: 067eb786407a4ed41b2fc1ede81f4bb8, type: 3}
+--- !u!64 &64212605708795170
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1481404348865646}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 067eb786407a4ed41b2fc1ede81f4bb8, type: 3}
 --- !u!95 &95925368184982970
 Animator:
