@@ -2094,8 +2094,7 @@ MonoBehaviour:
   - {fileID: 114136359842874134}
   - {fileID: 114374250421427750}
   - {fileID: 195816727216697240}
-  playerScripts:
-  - {fileID: 0}
+  playerScripts: []
   selectionDelay: 0.2
 --- !u!136 &136356960708157512
 CapsuleCollider:

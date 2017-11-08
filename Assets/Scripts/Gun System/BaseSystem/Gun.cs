@@ -272,36 +272,23 @@ public class Gun : MonoBehaviour, Equipment.IEquipment
         // Raycast in this direction
         _nonAllocRay.origin = _gunOrigin.position;
         _nonAllocRay.direction = spreadDirection;
-        int hits = Physics.RaycastNonAlloc(_nonAllocRay, _nonAllocHits, 1000.0f, (int)_layerMask);
+        int hits = Physics.SphereCastNonAlloc(_nonAllocRay, 0.05f, _nonAllocHits, 1000.0f, (int)_layerMask);
 
         Transform hitTransform = null;
         if (hits > 0)
         {
-            // Sort the hits array by distance from the shot origin to find the closest hit
-            if (hits > 1)
-            {
-                for (int i = 0; i < hits - 1; i++)
-                {
-                    if (i == _nonAllocHits.Length) break;
-
-                    // Get this hit & next hit
-                    RaycastHit thisHit = _nonAllocHits[i];
-                    RaycastHit nextHit = _nonAllocHits[i + 1];
-
-                    // Compare hits, order by ascending distance
-                    if (Vector3.Distance(thisHit.point, _gunOrigin.position) > Vector3.Distance(nextHit.point, _gunOrigin.position))
-                    {
-                        _nonAllocHits.SetValue(nextHit, i);
-                        _nonAllocHits.SetValue(thisHit, i + 1);
-
-                        // De-increment iterator
-                        i = (i < 2) ? 0 : i - 2;
-                    }
-                }
-            }
+            RaycastingHelper.SortByDistanceNonAlloc(ref _nonAllocHits, _gunOrigin.position, hits);
 
             _nonAllocHit = _nonAllocHits[0];
-            Debug.DrawLine(_gunOrigin.position, _nonAllocHit.point, Color.blue, 0.5f);
+            #if DEBUG
+            Color blue = new Color(0, 0, 1, 0.4f);
+            Debug.DrawLine(_gunOrigin.position + Vector3.up * 0.05f, _nonAllocHit.point + Vector3.up * 0.05f, blue, 0.2f);
+            Debug.DrawLine(_gunOrigin.position - Vector3.up * 0.05f, _nonAllocHit.point - Vector3.up * 0.05f, blue, 0.2f);
+            Debug.DrawLine(_gunOrigin.position + Vector3.right * 0.05f, _nonAllocHit.point + Vector3.right * 0.05f, blue, 0.2f);
+            Debug.DrawLine(_gunOrigin.position - Vector3.right * 0.05f, _nonAllocHit.point - Vector3.right * 0.05f, blue, 0.2f);
+
+            Debug.DrawRay(_nonAllocHit.point, Vector3.up, Color.red, 0.2f);
+            #endif
 
             // Deal damage to the object hit
             DamageData damageData = new DamageData(this, damage, _damageMask, _damageModifier);

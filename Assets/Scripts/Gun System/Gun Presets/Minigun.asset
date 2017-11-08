@@ -24,7 +24,7 @@ MonoBehaviour:
   _heatLocksReload: 1
   _overheatThreshold: 0.8
   _coolThreshold: 0.5
-  _heatPerShot: 0.022
+  _heatPerShot: 0.01
   _heatLossPerSecond: 0.3
   _coolingPauseTime:
     serializedVersion: 2
