@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: AR
   m_EditorClassIdentifier: 
   _damage: 1
-  _spread: 4.32
+  _spread: 4
   _semiAuto: 0
   _fireRateRPM: 550
   _bottomlessClip: 1

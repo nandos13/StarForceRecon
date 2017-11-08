@@ -32,7 +32,7 @@ public class GunData : ScriptableObject
     [Tooltip("Firing will become available again when heat falls below this amount.")]
     [Range(0.0f, 0.5f), SerializeField]         private float _coolThreshold = 0.5f;
 
-    [Range(0.01f, 0.5f), SerializeField]        private float _heatPerShot = 0.05f;
+    [Range(0.001f, 0.5f), SerializeField]        private float _heatPerShot = 0.05f;
     [Range(0.1f, 1.0f), SerializeField]         private float _heatLossPerSecond = 0.3f;
 
     [Tooltip("The time in seconds the gun will need to be idle for before beginning to cool.")]
