@@ -130,7 +130,11 @@ ModelImporter:
     400120: Skel_spine01_jnt
     400122: Skel_spine02_jnt
     4300000: Engineer_BaseMesh
-    7400000: Take 001
+<<<<<<< refs/remotes/origin/master
+    7400000: Step Right
+=======
+    7400000: SideStep_R
+>>>>>>> Animations
     9500000: //RootNode
     13700000: Engineer_BaseMesh
   materials:
@@ -156,7 +160,39 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+<<<<<<< refs/remotes/origin/master
+      name: Step Right
+=======
+      name: SideStep_R
+>>>>>>> Animations
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 24
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []
@@ -184,7 +220,7 @@ ModelImporter:
     tangentImportMode: 3
     normalCalculationMode: 4
   importAnimation: 1
-  copyAvatar: 0
+  copyAvatar: 1
   humanDescription:
     serializedVersion: 2
     human: []
@@ -201,7 +237,8 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: e3b5e08fde7e39a499f3124012b4d422,
+    type: 3}
   animationType: 2
   humanoidOversampling: 1
   additionalBone: 0

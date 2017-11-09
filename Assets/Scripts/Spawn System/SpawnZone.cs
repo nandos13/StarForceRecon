@@ -93,10 +93,20 @@ public class SpawnZone : MonoBehaviour
             {
                 // Calculate how many enemies to spawn
                 int quantity = 0;
-                if (_spawnToMax)
-                    quantity = Mathf.Min(remainingSpawns, ((int)_maxAliveEnemies - _registeredEnemies));
+                if (remainingSpawns == -1)
+                {
+                    if (_spawnToMax)
+                        quantity = ((int)_maxAliveEnemies - _registeredEnemies);
+                    else
+                        quantity = (int)_waveSize;
+                }
                 else
-                    quantity = Mathf.Min(remainingSpawns, (int)_waveSize);
+                {
+                    if (_spawnToMax)
+                        quantity = Mathf.Min(remainingSpawns, ((int)_maxAliveEnemies - _registeredEnemies));
+                    else
+                        quantity = Mathf.Min(remainingSpawns, (int)_waveSize);
+                }
 
                 if (quantity > 0)
                     SpawnEnemies(quantity);

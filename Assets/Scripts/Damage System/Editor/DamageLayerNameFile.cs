@@ -5,11 +5,12 @@ using UnityEditor;
 
 namespace JakePerry
 {
-    [CustomEditor(typeof(DamageLayerUtils.DamageLayerNameFile))]
+    [CustomEditor(typeof(DamageLayerDefinition))]
     public class DamageLayerNameFileEditor : Editor
     {
         public override void OnInspectorGUI()
         {
+            // TODO: CUSTOM INTERFACE FOR ADDING AND REMOVING LAYERS
             base.OnInspectorGUI();
         }
     }

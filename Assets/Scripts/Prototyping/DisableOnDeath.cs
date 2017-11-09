@@ -18,5 +18,6 @@ public class DisableOnDeath : MonoBehaviour
     private void OnDeath(Health sender, float damageValue)
     {
         sender.gameObject.SetActive(false);
+        
     }
 }

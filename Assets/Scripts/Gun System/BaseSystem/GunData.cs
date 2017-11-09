@@ -8,7 +8,7 @@ public class GunData : ScriptableObject
     #region Variables
 
     [Tooltip("Modifier for amount of damage done per shot. For multi-shot weapons, damage will be divided by the number of projectiles per shot.")]
-    [Range(0.1f, 10.0f), SerializeField]        private float _damageModifier = 1.0f;
+    [Range(0.1f, 10.0f), SerializeField]        private float _damage = 1.0f;
     [Range(0.0f, 10.0f), SerializeField]        private float _spread = 0.0f;
 
     [SerializeField]                            private bool _semiAuto = false;
@@ -32,7 +32,7 @@ public class GunData : ScriptableObject
     [Tooltip("Firing will become available again when heat falls below this amount.")]
     [Range(0.0f, 0.5f), SerializeField]         private float _coolThreshold = 0.5f;
 
-    [Range(0.01f, 0.5f), SerializeField]        private float _heatPerShot = 0.05f;
+    [Range(0.001f, 0.5f), SerializeField]        private float _heatPerShot = 0.05f;
     [Range(0.1f, 1.0f), SerializeField]         private float _heatLossPerSecond = 0.3f;
 
     [Tooltip("The time in seconds the gun will need to be idle for before beginning to cool.")]
@@ -43,7 +43,7 @@ public class GunData : ScriptableObject
     #region Getter properties
 
     /// <summary>Damage per fire event. Value is divided by number of projectiles in a shot.</summary>
-    public float damageModifier { get { return _damageModifier; } }
+    public float damage { get { return _damage; } }
     public float spread { get { return _spread; } }
 
     public bool semiAuto { get { return _semiAuto; } }

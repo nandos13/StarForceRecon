@@ -4,68 +4,53 @@ using UnityEngine;
 
 public class PlayParticleOnGunFired : MonoBehaviour
 {
-    [SerializeField]    private Gun _gun = null;
-    [SerializeField]    private ParticleSystem _ps = null;
+    [SerializeField]    private Gun gun = null;
+    [SerializeField]    private new ParticleSystem particleSystem = null;
     [Range(1, 100), SerializeField] private int _count = 1;
 
-    /// <summary>Wrapper class to store data passed to coroutine.</summary>
-    private struct EmitDelayWrapper
+    private List<ShotInfoWrapper> pendingShotDirections = new List<ShotInfoWrapper>();
+
+    private struct ShotInfoWrapper
     {
         public Vector3 origin;
         public Vector3 direction;
-        public float delay;
 
-        public EmitDelayWrapper(Vector3 orig, Vector3 dir, float t)
+        public ShotInfoWrapper(Vector3 origin, Vector3 direction)
         {
-            origin = orig;
-            direction = dir;
-            delay = t;
+            this.origin = origin;
+            this.direction = direction;
         }
     }
 
     private void Awake()
     {
-        if (!_gun)
-            _gun = GetComponentInParent<Gun>();
+        if (!gun) gun = GetComponentInParent<Gun>();
+        if (gun) gun.OnGunShotFired += _gun_OnShotFired;
 
-        if (_gun)
-            _gun.OnGunShotFired += _gun_OnShotFired;
+        if (!particleSystem) particleSystem = GetComponentInChildren<ParticleSystem>();
+        if (!particleSystem) throw new System.Exception("No Particle System attached.");
+    }
 
-        if (!_ps)
-            _ps = GetComponentInChildren<ParticleSystem>();
-
-        if (!_ps)
-            Debug.LogWarning("Warning: No particle system attached.", this);
+    private void Update()
+    {
+        if (particleSystem && pendingShotDirections.Count > 0)
+        {
+            ShotInfoWrapper shot = pendingShotDirections[0];
+            Emit(shot.origin, shot.direction);
+            pendingShotDirections.RemoveAt(0);
+        }
     }
 
     private void _gun_OnShotFired(Gun sender, Vector3 origin, Vector3 direction, Transform hitTransform)
     {
-        if (_ps)
-        {
-            float delay = Random.Range(0.0f, 0.07f);
-            if (delay < 0.001f)
-                Emit(origin, direction);
-            else
-            {
-                EmitDelayWrapper w = new EmitDelayWrapper(origin, direction, delay);
-                StartCoroutine("EmitAfterDelay", w);
-            }
-        }
-        else
-            Debug.Log("No ParticleSystem");
-    }
-
-    private IEnumerator EmitAfterDelay(EmitDelayWrapper w)
-    {
-        if (w.delay > 0)
-            yield return new WaitForSeconds(w.delay);
-        Emit(w.origin, w.direction);
+        if (enabled)
+            pendingShotDirections.Add(new ShotInfoWrapper(origin, direction));
     }
 
     private void Emit(Vector3 origin, Vector3 direction)
     {
-        ParticleSystem.EmitParams p = new ParticleSystem.EmitParams();
-        p.velocity = direction * _ps.main.startSpeedMultiplier;
-        _ps.Emit(p, _count);
+        ParticleSystem.EmitParams emitParams = new ParticleSystem.EmitParams();
+        emitParams.velocity = direction * particleSystem.main.startSpeedMultiplier;
+        particleSystem.Emit(emitParams, _count);
     }
 }

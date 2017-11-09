@@ -7,6 +7,9 @@ using JakePerry;
  * Handles health, damage, healing, etc. */
 public class Health : MonoBehaviour, IDamageable
 {
+    [SerializeField]
+    private HealthBar healthBar;
+
     #region Delegates & Events
 
     public delegate void DamageEventDelegate(Health sender, float damageValue);
@@ -76,7 +79,12 @@ public class Health : MonoBehaviour, IDamageable
         }
     }
 
+    public float healthPercent
+        { get { return (_currentHealth >= 0) ? _currentHealth / _maxHealth : 0; } }
+
     #endregion
+
+    
 
     void Awake()
     {
@@ -89,9 +97,32 @@ public class Health : MonoBehaviour, IDamageable
         if (_currentHealth > _maxHealth)
             _currentHealth = _maxHealth;
     }
-    
+
+    void Start()
+    {
+        
+    }
+
+    bool hasHealthBar = false;
+
     void Update()
     {
+
+       // health -= Time.deltaTime;  // Bleed health test!
+
+        if (healthBar != null)
+        {
+            healthBar.health = this;
+        }
+        else
+        {
+            if (health < maxHealth && hasHealthBar == false && HealthBarManager.instance)
+            {
+                HealthBarManager.instance.AddHealthBar(this);
+                hasHealthBar = true;
+            }
+        }
+        
         _timeSinceDamage += Time.deltaTime;
         if (_rechargeWhenLow)
             Recharge();
@@ -137,12 +168,12 @@ public class Health : MonoBehaviour, IDamageable
     /// <param name="damage">Damage data to apply.</param>
     public void ApplyDamage(DamageData damage)
     {
-        if (damage == null) return;
-        if (!damage.damageMask.ContainsLayer(_damageLayer.value)) return;
+        if (!damage.DamageMask.ContainsLayer(_damageLayer.value)) return;
 
         if (_isAlive)
         {
-            float value = damage.damageValue;
+            float value = damage.DamageValue(_damageLayer);
+            if (value == 0) return;
 
             if (value < 0)
             {
@@ -158,7 +189,7 @@ public class Health : MonoBehaviour, IDamageable
             {
                 // Damage
 
-                _currentHealth -= damage.damageValue;
+                _currentHealth -= damage.DamageValue(_damageLayer);
                 _timeSinceDamage = 0.0f;
 
                 RaiseEvent(OnHealthChanged, -value);
@@ -172,7 +203,10 @@ public class Health : MonoBehaviour, IDamageable
 
     void OnDestroy()
     {
-        // Call death of script, raising OnDeath event
-        Death(_currentHealth);
+        if (alive)
+        {
+            // Call death of script, raising OnDeath event
+            Death(_currentHealth);
+        }
     }
 }

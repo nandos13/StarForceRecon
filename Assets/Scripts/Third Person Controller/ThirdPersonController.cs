@@ -4,7 +4,6 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(CapsuleCollider))]
-[RequireComponent(typeof(Animator))]
 public class ThirdPersonController : MonoBehaviour
 {
     #region References
@@ -12,7 +11,6 @@ public class ThirdPersonController : MonoBehaviour
     private Rigidbody _rb = null;
     private Animator _animator = null;
     private CapsuleCollider _col = null;
-    private PlayerAim _aim = null;
 
     #endregion
 
@@ -28,7 +26,7 @@ public class ThirdPersonController : MonoBehaviour
 
     [Range(0.05f, 1.5f), SerializeField]    private float _groundCheckDist = 0.1f;
     [Range(1.0f, 5.0f), SerializeField]     private float _gravityMultiplier = 2.0f;
-    [Range(0.5f, 3.0f), SerializeField]     private float _moveSpeedMultiplier = 1.0f;
+    [Range(0.5f, 5.0f), SerializeField]     private float _moveSpeedMultiplier = 1.0f;
     [Range(0.5f, 3.0f), SerializeField]     private float _animSpeedMultiplier = 1.0f;
 
     // Rolling
@@ -56,19 +54,24 @@ public class ThirdPersonController : MonoBehaviour
 
     private float _forward = 0.0f;
     private float _right = 0.0f;
-    private float _rollForward = 0.0f;
-    private float _rollRight = 0.0f;
 
     #endregion
 
+    public delegate void RollingEvent();
+    public event RollingEvent OnRollStart;
+    public event RollingEvent OnRollEnd;
+
+    public bool isRolling { get { return _rolling; } }
 
     private void Awake()
     {
         // Get references
         _rb = GetComponent<Rigidbody>();
-        _animator = GetComponent<Animator>();
+        _animator = GetComponentInChildren<Animator>();
         _col = GetComponent<CapsuleCollider>();
-        _aim = GetComponent<PlayerAim>();
+
+        if (_animator == null)
+            throw new System.MissingFieldException("Third Person Controller requires an Animator component on a descendant.");
 
         // Store default values
         _colHeight = _col.height;
@@ -102,23 +105,9 @@ public class ThirdPersonController : MonoBehaviour
             if (_rollTimeElapsed >= _rollTime)
                 EndRoll();
         }
-        else
-        {
-            // Face towards the aim direction
-            // TODO: This should be moved to a separate script, only used by squad members.
-            if (_aim)
-            {
-                // TODO: Change to common Aim script rather than PlayerAim to also work with AI
-
-                Vector3 aimPoint = _aim.GetAimPoint - transform.position;
-                aimPoint.y = 0;
-                Quaternion rotation = Quaternion.LookRotation(aimPoint);
-                transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 20f);
-            }
-        }
     }
 
-    public void Move(Vector3 direction, bool roll = false, bool crouch = false)
+    public void Move(Vector3 direction, bool roll = false, bool crouch = false, bool applyMoveVelocity = false)
     {
         if (direction.magnitude <= 0)
         {
@@ -149,21 +138,13 @@ public class ThirdPersonController : MonoBehaviour
             {
                 // Should a new roll be started?
                 if (!_rolling && roll)
-                {
-                    // Start a new roll
-                    _rollTimeElapsed = 0.0f;
-                    _rolling = true;
-                    _rollDir = transform.TransformDirection(direction);
-
-                    _rollForward = direction.z;
-                    _rollRight = direction.x;
-                }
+                    StartRoll(direction);
             }
             else
                 _rolling = false;
 
             // Do state-specific movement
-            if (!_rolling)
+            if (!_rolling && !applyMoveVelocity)
             {
                 // Do standard grounded movement
 
@@ -181,6 +162,18 @@ public class ThirdPersonController : MonoBehaviour
         UpdateAnimator(direction);
     }
 
+    private void StartRoll(Vector3 direction)
+    {
+        _rollTimeElapsed = 0.0f;
+        _rolling = true;
+        _rollDir = transform.TransformDirection(direction);
+
+        // Hardcoded bullshit to disable gun-aim override for player characters
+        _animator.SetLayerWeight(1, 0.0f);
+        if (OnRollStart != null)
+            OnRollStart.Invoke();
+    }
+
     private void EndRoll()
     {
         // End roll
@@ -191,6 +184,10 @@ public class ThirdPersonController : MonoBehaviour
         Vector3 v = Vector3.zero;
         v.y = _rb.velocity.y;
         _rb.velocity = v;
+
+        _animator.SetLayerWeight(1, 1.0f);
+        if (OnRollEnd != null)
+            OnRollEnd.Invoke();
     }
 
     private void ScaleCapsuleForCrouching(bool crouch)

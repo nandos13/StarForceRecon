@@ -9,6 +9,7 @@ public class GunEditor : Editor
     {
         EditorGUILayout.LabelField("General", EditorStyles.boldLabel);
 
+        #region General
         {
             int indent = EditorGUI.indentLevel;
             EditorGUI.indentLevel += 1;
@@ -21,15 +22,25 @@ public class GunEditor : Editor
             if (layerMaskProperty != null)
                 EditorGUILayout.PropertyField(layerMaskProperty);
 
+            SerializedProperty damageMaskProperty = serializedObject.FindProperty("_damageMask");
+            if (damageMaskProperty != null)
+                EditorGUILayout.PropertyField(damageMaskProperty);
+
+            SerializedProperty damageModifierProperty = serializedObject.FindProperty("_damageModifier");
+            if (damageModifierProperty != null)
+                EditorGUILayout.PropertyField(damageModifierProperty);
+
             SerializedProperty gunDataProperty = serializedObject.FindProperty("_gunData");
             if (gunDataProperty != null)
                 EditorGUILayout.PropertyField(gunDataProperty);
 
             EditorGUI.indentLevel = indent;
         }
+        #endregion
 
         EditorGUILayout.LabelField("Ammo", EditorStyles.boldLabel);
 
+        #region Ammo
         {
             int indent = EditorGUI.indentLevel;
             EditorGUI.indentLevel += 1;
@@ -40,6 +51,7 @@ public class GunEditor : Editor
 
             EditorGUI.indentLevel = indent;
         }
+        #endregion
 
         SerializedProperty heatProperty = serializedObject.FindProperty("_currentHeat");
         if (heatProperty != null)

@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0c9488838872b74482a224992457739, type: 3}
+  m_Name: Minigun
+  m_EditorClassIdentifier: 
+  _damage: 1
+  _spread: 8
+  _semiAuto: 0
+  _fireRateRPM: 900
+  _bottomlessClip: 1
+  _infiniteAmmo: 1
+  _ammoPerShot: 2
+  _clipSize: 30
+  _reloadTime: 0
+  _useHeat: 1
+  _heatLocksReload: 1
+  _overheatThreshold: 0.8
+  _coolThreshold: 0.5
+  _heatPerShot: 0.002
+  _heatLossPerSecond: 0.45
+  _coolingPauseTime:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0.5
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 2.2
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0

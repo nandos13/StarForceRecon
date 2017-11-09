@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using JakePerry;
+using StarForceRecon;
 
-public class Gun : MonoBehaviour
+public class Gun : MonoBehaviour, Equipment.IEquipment
 {
     #region Delegates & Events
 
@@ -27,12 +28,29 @@ public class Gun : MonoBehaviour
     #region General
 
     [SerializeField]    private Transform _gunOrigin = null;
+    public Transform Origin { get { return _gunOrigin; } }
+    public Vector3 GunForward
+    {
+        get
+        {
+            if (_gunOrigin != null)
+                return _gunOrigin.forward;
+            return Vector3.zero;
+        }
+    }
 
-    [Tooltip("Which layers will be hit/ignored by the gun's shots?")]
-    [SerializeField]    private LayerMask _layerMask = (LayerMask)1;
+    [Tooltip("All excluded layers will be completely ignored, having no effect on the bullet.")]
+    [SerializeField]
+    private LayerMask _layerMask = (LayerMask)1;
 
-    [SerializeField]    private GunData _gunData = null;
-    [SerializeField]    private DamageData _damageData = null;
+    [Tooltip("A Mask defining which damage layers are affected by this gun.")]
+    [SerializeField]
+    private DamageLayer.Mask _damageMask = 0;
+    [SerializeField]
+    private DamageLayer.Modifier _damageModifier;
+
+    [SerializeField]
+    private GunData _gunData = null;
 
     #endregion
 
@@ -102,15 +120,6 @@ public class Gun : MonoBehaviour
             Destroy(this);
             throw new System.MissingFieldException("No GunData specified.");
         }
-
-        // Create clone of the specified damage data object
-        if (_damageData != null)
-        {
-            DamageData cloneData = Instantiate<DamageData>(_damageData);
-            _damageData = cloneData;
-        }
-        else
-            _damageData = DamageData.defaultValue;
 
         // Initialize ammo
         _currentClip = (_gunData.clipSize < _startAmmo) ? _gunData.clipSize : _startAmmo;
@@ -232,7 +241,7 @@ public class Gun : MonoBehaviour
                 RaiseEvent(OnGunFired);
                 for (int i = 0; i < ammoThisShot; i++)
                 {
-                    FireShot();
+                    FireShot(_gunData.damage / _gunData.ammoPerShot);
                 }
             }
         }
@@ -256,51 +265,37 @@ public class Gun : MonoBehaviour
     }
 
     /// <summary>Used internally to fire a single shot using a raycast.</summary>
-    private void FireShot()
+    private void FireShot(float damage)
     {
         Vector3 spreadDirection = GetSpreadDirection();
 
         // Raycast in this direction
         _nonAllocRay.origin = _gunOrigin.position;
         _nonAllocRay.direction = spreadDirection;
-        int hits = Physics.RaycastNonAlloc(_nonAllocRay, _nonAllocHits, 1000.0f, (int)_layerMask);
+        int hits = Physics.SphereCastNonAlloc(_nonAllocRay, 0.05f, _nonAllocHits, 1000.0f, (int)_layerMask);
 
         Transform hitTransform = null;
         if (hits > 0)
         {
-            // Sort the hits array by distance from the shot origin to find the closest hit
-            if (hits > 1)
-            {
-                for (int i = 0; i < hits - 1; i++)
-                {
-                    if (i == _nonAllocHits.Length) break;
-
-                    // Get this hit & next hit
-                    RaycastHit thisHit = _nonAllocHits[i];
-                    RaycastHit nextHit = _nonAllocHits[i + 1];
-
-                    // Compare hits, order by ascending distance
-                    if (Vector3.Distance(thisHit.point, _gunOrigin.position) > Vector3.Distance(nextHit.point, _gunOrigin.position))
-                    {
-                        _nonAllocHits.SetValue(nextHit, i);
-                        _nonAllocHits.SetValue(thisHit, i + 1);
-
-                        // De-increment iterator
-                        i = (i < 2) ? 0 : i - 2;
-                    }
-                }
-            }
+            RaycastingHelper.SortByDistanceNonAlloc(ref _nonAllocHits, _gunOrigin.position, hits);
 
             _nonAllocHit = _nonAllocHits[0];
-            Debug.DrawLine(_gunOrigin.position, _nonAllocHit.point, Color.blue, 0.5f);
+            #if DEBUG
+            Color blue = new Color(0, 0, 1, 0.4f);
+            Debug.DrawLine(_gunOrigin.position + Vector3.up * 0.05f, _nonAllocHit.point + Vector3.up * 0.05f, blue, 0.2f);
+            Debug.DrawLine(_gunOrigin.position - Vector3.up * 0.05f, _nonAllocHit.point - Vector3.up * 0.05f, blue, 0.2f);
+            Debug.DrawLine(_gunOrigin.position + Vector3.right * 0.05f, _nonAllocHit.point + Vector3.right * 0.05f, blue, 0.2f);
+            Debug.DrawLine(_gunOrigin.position - Vector3.right * 0.05f, _nonAllocHit.point - Vector3.right * 0.05f, blue, 0.2f);
+
+            Debug.DrawRay(_nonAllocHit.point, Vector3.up, Color.red, 0.2f);
+            #endif
 
             // Deal damage to the object hit
-            float damage = (_gunData.damageModifier * _damageData.defaultDamage) / _gunData.ammoPerShot;
-            _damageData.damageValue = damage;
+            DamageData damageData = new DamageData(this, damage, _damageMask, _damageModifier);
             hitTransform = _nonAllocHit.transform;
             IDamageable d = _nonAllocHit.transform.GetComponentInParent<IDamageable>();
             if (d != null)
-                d.ApplyDamage(_damageData);
+                d.ApplyDamage(damageData);
 
         }
         else
@@ -363,5 +358,10 @@ public class Gun : MonoBehaviour
             // Raise event for reload failure
             RaiseEvent(OnReloadFailed);
         }
+    }
+
+    void Equipment.IEquipment.Use()
+    {
+        Fire(true);
     }
 }

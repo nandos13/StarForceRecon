@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0c9488838872b74482a224992457739, type: 3}
+  m_Name: Pistol
+  m_EditorClassIdentifier: 
+  _damage: 1
+  _spread: 0.56
+  _semiAuto: 1
+  _fireRateRPM: 140
+  _bottomlessClip: 1
+  _infiniteAmmo: 1
+  _ammoPerShot: 1
+  _clipSize: 30
+  _reloadTime: 2
+  _useHeat: 0
+  _heatLocksReload: 1
+  _overheatThreshold: 0.8
+  _coolThreshold: 0.5
+  _heatPerShot: 0.05
+  _heatLossPerSecond: 0.3
+  _coolingPauseTime:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0.8
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 2.2
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
