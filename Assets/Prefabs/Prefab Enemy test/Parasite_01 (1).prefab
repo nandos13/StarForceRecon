@@ -44,7 +44,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1027901333939610}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.09730792, y: -1.2920708e-16, z: 5.76}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -145,6 +145,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blood: {fileID: 198000011254678926, guid: abb9f519b142e304d9c45b56afa768bc, type: 2}
+  bloodPool: {fileID: 198000014159833656, guid: a3768c8a9d1b90d4bb0eb0e4bdbe730c,
+    type: 2}
+  duration: 0.5
+  durationPool: 2.5
 --- !u!114 &114268289767131014
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -177,6 +181,12 @@ MonoBehaviour:
   attackRange: 10
   attackRangeForce: 100
   AttackRangeEnd: {fileID: 4362240334879160}
+  damageMask:
+    _mask: 0
+  damageModifier:
+    modifiers:
+      keys: []
+      values: []
   targetType: 0
 --- !u!114 &114733935626824998
 MonoBehaviour:

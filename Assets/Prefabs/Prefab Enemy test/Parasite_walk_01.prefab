@@ -1494,7 +1494,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blood: {fileID: 198000011254678926, guid: abb9f519b142e304d9c45b56afa768bc, type: 2}
+  bloodPool: {fileID: 198000014159833656, guid: a3768c8a9d1b90d4bb0eb0e4bdbe730c,
+    type: 2}
   duration: 0.5
+  durationPool: 3.64
 --- !u!114 &114859767851206406
 MonoBehaviour:
   m_ObjectHideFlags: 1
