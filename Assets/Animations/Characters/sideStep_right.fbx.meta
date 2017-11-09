@@ -130,7 +130,11 @@ ModelImporter:
     400120: Skel_spine01_jnt
     400122: Skel_spine02_jnt
     4300000: Engineer_BaseMesh
+<<<<<<< refs/remotes/origin/master
     7400000: Step Right
+=======
+    7400000: SideStep_R
+>>>>>>> Animations
     9500000: //RootNode
     13700000: Engineer_BaseMesh
   materials:
@@ -158,7 +162,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
+<<<<<<< refs/remotes/origin/master
       name: Step Right
+=======
+      name: SideStep_R
+>>>>>>> Animations
       takeName: Take 001
       firstFrame: 1
       lastFrame: 24
