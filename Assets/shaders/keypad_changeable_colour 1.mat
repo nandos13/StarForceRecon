@@ -38,4 +38,4 @@ Material:
     - _Gloss: 0.8
     - _brightness: 2
     m_Colors:
-    - _colour: {r: 0, g: 1, b: 0.99999976, a: 1}
+    - _colour: {r: 0, g: 1, b: 0.048275948, a: 1}
