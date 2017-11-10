@@ -124,11 +124,9 @@ public class Interaction
     {
         yield return null;
 
-        float duration = info.Duration;
-        float elapsed = 0.0f;
-        while (elapsed < duration)
+        while (!info.Complete)
         {
-            elapsed += Time.deltaTime;
+            info.Elapsed = info.Elapsed + Time.deltaTime;
             yield return null;
         }
 
