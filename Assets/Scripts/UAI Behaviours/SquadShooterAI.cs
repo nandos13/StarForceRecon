@@ -48,12 +48,18 @@ namespace StarForceRecon
                     if (dot >= Mathf.Cos(accurateAngle * Mathf.Deg2Rad))
                         gun.Fire(false);
                 }
+
+                // TODO: NEED A BETTER WAY TO DETERMINE WHEN AGENT IS DEAD??
+                if (!target.isActiveAndEnabled)
+                    target = null;
             }
         }
 
         private Agent GetTarget()
         {
-            Agent[] agents = FindObjectsOfType<Agent>().Where(a => (Vector3.Distance(a.transform.position, transform.position) <= aggroRange)).ToArray();
+            Agent[] agents = FindObjectsOfType<Agent>()
+                .Where(a => a.isActiveAndEnabled)
+                .Where(a => (Vector3.Distance(a.transform.position, transform.position) <= aggroRange)).ToArray();
 
             // Get closest
             Agent closest = null;
