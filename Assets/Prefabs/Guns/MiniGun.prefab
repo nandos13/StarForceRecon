@@ -318,7 +318,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gun: {fileID: 114285284768603300}
   particleSystem: {fileID: 198928978696955076}
-  _count: 1
+  _count: 5
 --- !u!114 &114145149513478034
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -368,7 +368,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gun: {fileID: 114285284768603300}
   particleSystem: {fileID: 198262717658795166}
-  _count: 1
+  _count: 3
 --- !u!114 &114711980094963118
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -442,7 +442,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1188534392
+  randomSeed: -1468026508
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -3704,7 +3704,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 824947539
+  randomSeed: -1400359003
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -4148,7 +4148,7 @@ ParticleSystem:
     serializedVersion: 5
     enabled: 1
     type: 4
-    angle: 11.620971
+    angle: 8
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 1
