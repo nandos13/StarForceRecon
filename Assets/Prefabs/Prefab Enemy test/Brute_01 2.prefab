@@ -172,7 +172,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blood: {fileID: 198000011254678926, guid: abb9f519b142e304d9c45b56afa768bc, type: 2}
+  bloodPool: {fileID: 0}
   duration: 0.5
+  durationPool: 2.5
 --- !u!114 &114948776193240044
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -194,6 +196,12 @@ MonoBehaviour:
   attackRange: 50
   attackRangeForce: 100
   AttackRangeEnd: {fileID: 0}
+  damageMask:
+    _mask: 0
+  damageModifier:
+    modifiers:
+      keys: []
+      values: []
   targetType: 0
 --- !u!114 &114973685336703898
 MonoBehaviour:
@@ -217,7 +225,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a8e2c178a1906a4d9c719c809dfc30a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentAction: {fileID: 114948776193240044}
+  currentAction: {fileID: 0}
   nv: {fileID: 0}
   enemyLookDistance: 40
   aggroRange: 20
