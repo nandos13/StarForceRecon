@@ -615,6 +615,7 @@ GameObject:
   - component: {fileID: 114071880163603612}
   - component: {fileID: 195324048320622192}
   - component: {fileID: 114859767851206406}
+  - component: {fileID: 114745334095183792}
   m_Layer: 0
   m_Name: Parasite_walk_01
   m_TagString: Enemy
@@ -1452,7 +1453,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1912137616192324}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a9ade34523d6ffe4aaddf3fc2635a7b6, type: 3}
   m_Name: 
@@ -1496,8 +1497,21 @@ MonoBehaviour:
   blood: {fileID: 198000011254678926, guid: abb9f519b142e304d9c45b56afa768bc, type: 2}
   bloodPool: {fileID: 198000014159833656, guid: a3768c8a9d1b90d4bb0eb0e4bdbe730c,
     type: 2}
+  bloodPoolOffset: {x: 0, y: -0.25, z: 0}
   duration: 0.5
   durationPool: 3.64
+--- !u!114 &114745334095183792
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1912137616192324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a74bd48f7d2a7240b06c54effe9838f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deadBodyDuration: 10
 --- !u!114 &114859767851206406
 MonoBehaviour:
   m_ObjectHideFlags: 1

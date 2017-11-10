@@ -9,6 +9,9 @@ public class BloodOnDeath : MonoBehaviour
     [SerializeField]
     private ParticleSystem bloodPool;
 
+    [SerializeField]
+    private Vector3 bloodPoolOffset;
+
     [SerializeField, Range(0.1f, 5f)]
     private float duration = 0.5f;
 
@@ -39,7 +42,7 @@ public class BloodOnDeath : MonoBehaviour
         {
             ParticleSystem b = Instantiate<ParticleSystem>(blood, transform.position, Quaternion.Euler(-90,0,0));
             coroutiner.StartCoroutine(DestroyParticleAfterSeconds(duration, b));
-            ParticleSystem bp = Instantiate<ParticleSystem>(bloodPool, transform.position, Quaternion.Euler(0, 0, 0));
+            ParticleSystem bp = Instantiate<ParticleSystem>(bloodPool, transform.position + bloodPoolOffset, Quaternion.Euler(0, 0, 0));
             coroutiner.StartCoroutine(DestroyParticleAfterSeconds(durationPool, bp));
 
         }
