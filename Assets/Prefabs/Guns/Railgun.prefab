@@ -322,7 +322,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gun: {fileID: 114468400615976918}
   _audioPlayer: {fileID: 114978523943696826}
-  _clipName: Rail_final
+  _clipName: Railfinal
 --- !u!114 &114978523943696826
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -335,11 +335,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _clips:
-  - _name: Rail_final
-    _clip: {fileID: 8300000, guid: 6525c6c8036039d478f48a9b87356a84, type: 3}
+  - _name: Railfinal
+    _clip: {fileID: 8300000, guid: 38185611f61a05f458ddfe23a396b0ab, type: 3}
   _channel: 1
   _timeScaleInfluencesPlayback: 1
-  _volume: 0.9
+  _volume: 1
   _pitch: 1
 --- !u!198 &198531208930550648
 ParticleSystem:
