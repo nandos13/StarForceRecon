@@ -22,7 +22,7 @@ public class lvl4light : MonoBehaviour {
             _active = false;
         }
     }
-    private IEnumerator WaitAndPrint(float waitTime = 3500f)
+    private IEnumerator WaitAndPrint(float waitTime = 2000f)
     {
         while (true)
         {

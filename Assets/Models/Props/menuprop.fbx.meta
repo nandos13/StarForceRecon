@@ -12,6 +12,8 @@ ModelImporter:
     100008: //RootNode
     100010: pCylinder2
     100012: screens1
+    100014: polySurface1
+    100016: polySurface2
     400000: detail
     400002: holothing
     400004: menu_base1
@@ -19,24 +21,32 @@ ModelImporter:
     400008: //RootNode
     400010: pCylinder2
     400012: screens1
+    400014: polySurface1
+    400016: polySurface2
     2300000: detail
     2300002: holothing
     2300004: menu_base1
     2300006: menu_prop_low1
     2300008: pCylinder2
     2300010: screens1
+    2300012: polySurface1
+    2300014: polySurface2
     3300000: detail
     3300002: holothing
     3300004: menu_base1
     3300006: menu_prop_low1
     3300008: pCylinder2
     3300010: screens1
+    3300012: polySurface1
+    3300014: polySurface2
     4300000: pCylinder2
     4300002: menu_base1
     4300004: menu_prop_low1
     4300006: screens1
     4300008: holothing
     4300010: detail
+    4300012: polySurface1
+    4300014: polySurface2
     9500000: //RootNode
   materials:
     importMaterials: 1

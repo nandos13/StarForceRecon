@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 33913281429578820}
   - component: {fileID: 23019150224099268}
   - component: {fileID: 95285458330048282}
+  - component: {fileID: 65387285577168770}
   m_Layer: 0
   m_Name: loungeSideTable
   m_TagString: Untagged
@@ -36,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1251219135032016}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.151945, y: 4.0570126, z: 26.620348}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -81,6 +82,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1251219135032016}
   m_Mesh: {fileID: 4300002, guid: 5e5e90eccb69a234cabd636a944d4f86, type: 3}
+--- !u!65 &65387285577168770
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1251219135032016}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.87367064, y: 0.59999996, z: 1.0019362}
+  m_Center: {x: 0, y: 0.29999998, z: 0}
 --- !u!95 &95285458330048282
 Animator:
   serializedVersion: 3

@@ -387,11 +387,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _clips:
-  - _name: Ar_final
-    _clip: {fileID: 8300000, guid: 264e2ef7ad3f8ac4eb563832604941c9, type: 3}
+  - _name: ArFinal
+    _clip: {fileID: 8300000, guid: 38b336985f4f3504a8ab0ffc9fb98575, type: 3}
   _channel: 1
   _timeScaleInfluencesPlayback: 1
-  _volume: 0.9
+  _volume: 1
   _pitch: 1
 --- !u!114 &114042381798606792
 MonoBehaviour:
@@ -446,7 +446,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gun: {fileID: 114545713022500236}
   _audioPlayer: {fileID: 114026193765488020}
-  _clipName: Ar_final
+  _clipName: ArFinal
 --- !u!114 &114545713022500236
 MonoBehaviour:
   m_ObjectHideFlags: 1

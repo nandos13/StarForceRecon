@@ -227,7 +227,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 0
   MinDistance: 1
-  MaxDistance: 40
+  MaxDistance: 80
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -256,7 +256,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 2
       time: 0
-      value: 0
+      value: 0.9
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -299,11 +299,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _clips:
-  - _name: Mini_final
-    _clip: {fileID: 8300000, guid: 4e22da33bc0cbd64ea91078e9932469d, type: 3}
+  - _name: MiniFinal
+    _clip: {fileID: 8300000, guid: 6ae503bb270672b49bed23ded0ed2acf, type: 3}
   _channel: 1
   _timeScaleInfluencesPlayback: 1
-  _volume: 0.6
+  _volume: 1
   _pitch: 1
 --- !u!114 &114054793588333926
 MonoBehaviour:
@@ -382,7 +382,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gun: {fileID: 114285284768603300}
   _audioPlayer: {fileID: 114008376967990022}
-  _clipName: Mini_final
+  _clipName: MiniFinal
 --- !u!198 &198262717658795166
 ParticleSystem:
   m_ObjectHideFlags: 1

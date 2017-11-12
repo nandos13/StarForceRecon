@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 114641369770040856}
   - component: {fileID: 95977246927117896}
   - component: {fileID: 114789448293490830}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: resDoorStraightActive
   m_TagString: Untagged
   m_Icon: {fileID: 0}

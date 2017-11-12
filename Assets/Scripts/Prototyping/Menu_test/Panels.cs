@@ -6,8 +6,6 @@ using UnityEngine;
 public class Panels : MonoBehaviour {
 
     public Menu_Test _menuScript;
-    public Animator _table;
-    public GameObject _tbObject;
 
     [Header("IsActive Speeds")]
     public float _speedOn;
@@ -34,7 +32,6 @@ public class Panels : MonoBehaviour {
 
     void Awake()
     {
-        _table = _tbObject.GetComponent<Animator>();
         Menu_Test _menuScript = GetComponent<Menu_Test>();
         _animatorMid = _midPan.GetComponent<Animator>();
         _middle = true;
@@ -79,14 +76,12 @@ public class Panels : MonoBehaviour {
         if (_left == true)
         {
             _lTab.GetComponent<MeshRenderer>().material = _panOn;
-            _table.SetBool("Left", true);
             Invoke("LActive",_speedOn);
             _left = false;
         }
         else if (_left == false)
         {
             _menuScript._settingsCanvas.SetActive(false);
-            _table.SetBool("Left", false);
             Invoke("LActive", _speedOff);
             _left = true;
         }
@@ -112,14 +107,12 @@ public class Panels : MonoBehaviour {
         if (_right == true)
         {
             _rTab.GetComponent<MeshRenderer>().material = _panOn;
-            _table.SetBool("Right", true);
             Invoke("RActive", _speedOn);
             _right = false;
         }
         else if (_right == false)
         {
             _menuScript._startCanvas.SetActive(false);
-            _table.SetBool("Right", false);
             Invoke("RActive", _speedOff);
             _right = true;
         }

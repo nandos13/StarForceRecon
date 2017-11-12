@@ -22,12 +22,13 @@ GameObject:
   - component: {fileID: 33396864284545656}
   - component: {fileID: 23609111577712274}
   - component: {fileID: 95008093265354606}
+  - component: {fileID: 65318983748903578}
   m_Layer: 0
   m_Name: loungeCoffeeTable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4145413751426150
 Transform:
@@ -35,7 +36,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1198421987311396}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -81,6 +82,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1198421987311396}
   m_Mesh: {fileID: 4300000, guid: a28bbd69296f0e343964101622f08754, type: 3}
+--- !u!65 &65318983748903578
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1198421987311396}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.7500006, y: 0.59999996, z: 2.5}
+  m_Center: {x: 0, y: 0.29999998, z: 0}
 --- !u!95 &95008093265354606
 Animator:
   serializedVersion: 3
