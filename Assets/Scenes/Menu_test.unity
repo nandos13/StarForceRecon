@@ -3320,7 +3320,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _camera: {fileID: 1043348833}
   _middleScript: {fileID: 513469627}
-  _levelName: KalebWork
+  _levelName: StarForceRecon-ALPHA
   _anyCanvas: {fileID: 1703884725}
   _menuCanvas: {fileID: 2034701830}
   _settingsCanvas: {fileID: 1909664417}
@@ -3361,8 +3361,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _menuScript: {fileID: 513469625}
-  _table: {fileID: 0}
-  _tbObject: {fileID: 0}
   _speedOn: 0.33
   _speedOff: 0.22
   _panOn: {fileID: 2100000, guid: 63195b1229a4af24cbcfefe95b0ed087, type: 2}
