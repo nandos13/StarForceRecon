@@ -3361,6 +3361,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _menuScript: {fileID: 513469625}
+  _table: {fileID: 0}
+  _tbObject: {fileID: 0}
   _speedOn: 0.33
   _speedOff: 0.22
   _panOn: {fileID: 2100000, guid: 63195b1229a4af24cbcfefe95b0ed087, type: 2}
@@ -3910,6 +3912,14 @@ Prefab:
     - target: {fileID: 100016, guid: 9383780160592b7468813e5c05c242c9, type: 3}
       propertyPath: m_Name
       value: Left
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300012, guid: 9383780160592b7468813e5c05c242c9, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300014, guid: 9383780160592b7468813e5c05c242c9, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9383780160592b7468813e5c05c242c9, type: 3}
