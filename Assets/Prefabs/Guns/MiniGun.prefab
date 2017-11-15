@@ -345,7 +345,7 @@ MonoBehaviour:
   _gunOrigin: {fileID: 4259274303363084}
   _layerMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 513
   _damageMask:
     _mask: -1
   _damageModifier:
