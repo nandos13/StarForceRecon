@@ -121,8 +121,9 @@ public class EnemyBehaviour : ActionAI
         nextFire = Time.time + attackRate;  // set next shot time
        
         RaycastHit hit;
-        
-        if (Physics.Raycast(AttackRangeEnd.position, AttackRangeEnd.forward, out hit, attackRange))
+        int mask = ~(1 << 9);
+
+        if (Physics.Raycast(AttackRangeEnd.position, AttackRangeEnd.forward, out hit, attackRange, mask))
         {
            
             Health health = hit.collider.GetComponent<Health>();

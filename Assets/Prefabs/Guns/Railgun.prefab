@@ -173,7 +173,7 @@ AudioSource:
   rolloffMode: 0
   BypassEffects: 0
   BypassListenerEffects: 0
-  BypassReverbZones: 0
+  BypassReverbZones: 1
   rolloffCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -308,7 +308,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gun: {fileID: 114468400615976918}
   particleSystem: {fileID: 198531208930550648}
-  _count: 1
+  _count: 3
 --- !u!114 &114972060227489176
 MonoBehaviour:
   m_ObjectHideFlags: 1
