@@ -6,11 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Menu_test.unity
+    path: Assets/Scenes/Menu.unity
     guid: 26e04fed2d398924b82fbb6fbc8d27e1
   - enabled: 1
     path: Assets/Scenes/StarForceRecon-ALPHA.unity
     guid: dd5cebb13f9ca6d4a9b554c17658c8e8
   - enabled: 1
-    path: Assets/Scenes/KalebWork.unity
+    path: Assets/Scenes/Training.unity
     guid: ec941f53f0da3184da314f44e0737e0f

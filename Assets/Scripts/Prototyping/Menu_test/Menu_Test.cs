@@ -17,6 +17,7 @@ public class Menu_Test : MonoBehaviour {
     bool pressed = false;
     public Panels _middleScript;
     public string _levelName;
+    public string _training;
 
     [Header("Canvas")]
     public GameObject _anyCanvas;
@@ -181,6 +182,11 @@ public class Menu_Test : MonoBehaviour {
     public void GameStart()
     {
         SceneManager.LoadScene(_levelName);
+    }
+
+    public void TrainingStart()
+    {
+        SceneManager.LoadScene(_training);
     }
 
     //so that animations dont play right after called.
