@@ -14,6 +14,10 @@ public class Health : MonoBehaviour, IDamageable
 
     public delegate void DamageEventDelegate(Health sender, float damageValue);
 
+
+    // Example from Graeme:
+    public event System.Action<Health, float> OnDamage2;
+
     public event DamageEventDelegate OnDamage;
     public event DamageEventDelegate OnDeath;
     public event DamageEventDelegate OnHeal;
