@@ -2,36 +2,36 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class lvl4light : MonoBehaviour {
-
-    public GameObject lights1, lights2, lights3;
-
-    private IEnumerator coroutine;
-    bool _active;
-
-    void Start()
+public class lvl4light : MonoBehaviour
+{
+    [System.Serializable]
+    public struct ObjectTimeDelay
     {
-        coroutine = WaitAndPrint(1f);
-        _active = true;
+        [Range(0, 5.0f)]
+        public float timeDelay;
+        public GameObject obj;
     }
 
-    void OnTriggerEnter(Collider c) {
-        if (c.gameObject.tag == "Player" && _active == true)
+    [SerializeField]
+    private List<ObjectTimeDelay> enableObjs = new List<ObjectTimeDelay>();
+
+    private bool triggered = false;
+
+    void OnTriggerEnter(Collider c)
+    {
+        if (c.gameObject.tag == "Player" && !triggered)
         {
-            StartCoroutine(coroutine);
-            _active = false;
+            triggered = true;
+            StartCoroutine(DelayedEnable());
         }
     }
-    private IEnumerator WaitAndPrint(float waitTime = 1000f)
+
+    private IEnumerator DelayedEnable()
     {
-        while (true)
+        foreach (var delayObj in enableObjs)
         {
-            yield return new WaitForSeconds(waitTime);
-            lights1.SetActive(true);
-            yield return new WaitForSeconds(waitTime*2);
-            lights2.SetActive(true);
-            yield return new WaitForSeconds(waitTime*3);
-            lights3.SetActive(true);
+            yield return new WaitForSeconds(delayObj.timeDelay);
+            delayObj.obj.SetActive(true);
         }
     }
 }
