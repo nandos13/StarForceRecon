@@ -45,6 +45,7 @@ public class TrainingTutorial : MonoBehaviour {
         {
             _final.Play();
             Invoke("Pause", 2f);
+            _isActive = true;
         }
     }
 
