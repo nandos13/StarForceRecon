@@ -58,7 +58,6 @@ namespace StarForceRecon
         {
             if (member != null)
             {
-                int currentMembers = _squadMembers.Count;
                 _squadMembers.Add(member);
                 member.OnControlTargetDestroyed += TargetDestroyed;
 

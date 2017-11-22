@@ -53,6 +53,11 @@ namespace JakePerry
             targets.Add(target);
         }
 
+        ~GameController()
+        {
+            Destroy();
+        }
+
         static GameController()
         {
             // Initialize InControl
@@ -75,11 +80,7 @@ namespace JakePerry
         /// <summary>Removes target from this controller.</summary>
         public void RemoveTarget(ITarget target)
         {
-            if (target != null)
-            {
-                if (targets.Contains(target))
-                    targets.Remove(target);
-            }
+            targets.Remove(target);
         }
 
         /// <summary>Override to provide additional functionality to the end of Update call.</summary>
