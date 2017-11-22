@@ -2825,7 +2825,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gunPrefab: {fileID: 1897045186664736, guid: c6a6926c84e607c42a4c6bae5651dca9, type: 2}
   rightHand: {fileID: 4648889766293276}
-  handRotation: {x: 0, y: -67.7, z: 62}
+  handRotation: {x: 0, y: 0, z: 80}
 --- !u!114 &114136359842874134
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2884,7 +2884,7 @@ MonoBehaviour:
     useRotationLimits: 1
     XY: 0
     bones:
-    - transform: {fileID: 0}
+    - transform: {fileID: 4794023306912552}
       weight: 1
       solverPosition: {x: 0, y: 0, z: 0}
       solverRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -2893,7 +2893,7 @@ MonoBehaviour:
       length: 0
       sqrMag: 0
       axis: {x: 0, y: 0, z: 0}
-    - transform: {fileID: 0}
+    - transform: {fileID: 4487249473961370}
       weight: 1
       solverPosition: {x: 0, y: 0, z: 0}
       solverRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -2902,12 +2902,12 @@ MonoBehaviour:
       length: 0
       sqrMag: 0
       axis: {x: 0, y: 0, z: 0}
-    - transform: {fileID: 0}
+    - transform: {fileID: 4429674502131558}
       weight: 1
       solverPosition: {x: 0, y: 0, z: 0}
       solverRotation: {x: 0, y: 0, z: 0, w: 0}
       defaultLocalPosition: {x: -0, y: 14.989616, z: 0.30539042}
-      defaultLocalRotation: {x: 0.09020708, y: -0, z: -0, w: 0.99592304}
+      defaultLocalRotation: {x: 0, y: -0, z: -0, w: 1}
       length: 0
       sqrMag: 0
       axis: {x: 0, y: 0, z: 0}

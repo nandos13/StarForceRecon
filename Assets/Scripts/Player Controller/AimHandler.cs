@@ -137,8 +137,11 @@ namespace StarForceRecon
         private void DoSwivel(Vector3 direction)
         {
             Vector3 yLevelOffset = new Vector3(direction.x, 0, direction.z).normalized;
+            Debug.DrawRay(transform.position + yLevelOffset, Vector3.up, Color.magenta);
+
+            Vector3 transformHorizonForward = Vector3.ProjectOnPlane(transform.forward, Vector3.up);
             
-            float aimTheta = Vector3.Angle(transform.forward, yLevelOffset);
+            float aimTheta = Vector3.Angle(transformHorizonForward, yLevelOffset);
             
             if (isSwiveling || aimTheta > maxHipSwivel)
             {
@@ -148,7 +151,7 @@ namespace StarForceRecon
                 transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime * turnSpeed);
             
                 float swivelStopAngle = isSwiveling ? maxHipSwivel / 2 : maxHipSwivel;
-                isSwiveling = Vector3.Angle(transform.forward, yLevelOffset) > swivelStopAngle;
+                isSwiveling = Vector3.Angle(transformHorizonForward, yLevelOffset) > swivelStopAngle;
             }
         }
         

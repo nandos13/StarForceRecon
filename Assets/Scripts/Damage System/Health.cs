@@ -205,9 +205,16 @@ public class Health : MonoBehaviour, IDamageable
         }
     }
 
+    static private bool applicationQuitting = false;
+    void OnApplicationQuit()
+    {
+        applicationQuitting = true;
+    }
+
     void OnDestroy()
     {
-        if (alive)
+        // Dont call death if application quit caused destroy.
+        if (alive && !applicationQuitting)
         {
             // Call death of script, raising OnDeath event
             Death(_currentHealth);
