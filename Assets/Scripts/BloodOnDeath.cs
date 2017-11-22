@@ -36,6 +36,11 @@ public class BloodOnDeath : MonoBehaviour
             h.OnDeath += OnDeath;
     }
 
+    private void OnDestroy()
+    {
+        StopAllCoroutines();
+    }
+
     private void OnDeath(Health sender, float damageValue)
     {
         if (blood != null)
