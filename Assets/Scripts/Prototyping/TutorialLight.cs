@@ -6,7 +6,7 @@ public class TutorialLight : MonoBehaviour {
 
     public GameObject rep, jax, mer;
 
-    public GameObject game;
+    public GameObject game, hudCanvas;
 
     public GameObject cam, camfake;
     public GameObject real, fake;
@@ -33,5 +33,6 @@ public class TutorialLight : MonoBehaviour {
         Destroy(fake);
         Destroy(camfake);
         game.SetActive(true);
+        hudCanvas.SetActive(true);
     }
 }
