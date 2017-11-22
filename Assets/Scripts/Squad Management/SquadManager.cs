@@ -8,6 +8,8 @@ namespace StarForceRecon
     {
         #region Switch event, IControllable interface
 
+        public delegate void ControllableDestroy(IControllable sender);
+
         public interface IControllable
         {
             void OnSwitchTo();
@@ -17,6 +19,9 @@ namespace StarForceRecon
             bool Controllable { get; }
 
             UnityEngine.Transform transform { get; }
+            
+            /// <summary>Should be raised when the object is destroyed.</summary>
+            event ControllableDestroy OnControlTargetDestroyed;
         }
 
         public delegate void SquadMemberSwitchEvent();
@@ -55,6 +60,7 @@ namespace StarForceRecon
             {
                 int currentMembers = _squadMembers.Count;
                 _squadMembers.Add(member);
+                member.OnControlTargetDestroyed += TargetDestroyed;
 
                 // If no characters are selected
                 if (selected == null)
@@ -69,6 +75,13 @@ namespace StarForceRecon
             }
         }
 
+        private static void TargetDestroyed(IControllable sender)
+        {
+            _squadMembers.Remove(sender);
+            if (selected == sender)
+                Switch();
+        }
+
         private static void DoSwitch(IControllable to)
         {
             selected.OnSwitchAway();
@@ -81,7 +94,11 @@ namespace StarForceRecon
         public static void Switch(bool reverse = false)
         {
             if (!_canSwitchSquadMembers) return;
-            if (_squadMembers.Count == 0) throw new System.Exception("No existing squad members. Cannot switch.");
+            if (_squadMembers.Count == 0)
+            {
+                selected = null;
+                return;
+            }
 
             // Get a list of the currently selectable members
             List<IControllable> selectable = _squadMembers.Where(character => character.Controllable).ToList();

@@ -56,6 +56,9 @@ namespace StarForceRecon
         [SerializeField, Range(0.2f, 1.0f)]
         private float selectionDelay = 0.2f;
 
+        [SerializeField]
+        private Color cursorColor = Color.red;
+
         #endregion
 
         #region Private State Trackers & References
@@ -156,16 +159,36 @@ namespace StarForceRecon
         {
             ControllerManager<KeyboardMouseController<SFRInputSet>, SFRInputSet>.RemoveTarget(controllerID, this);
             ControllerManager<DualStickController<SFRInputSet>, SFRInputSet>.RemoveTarget(controllerID, this);
+
+            if (OnControlTargetDestroyed != null)
+                OnControlTargetDestroyed.Invoke(this);
         }
 
         #endregion
 
         #region Visual Cursor
 
-        private Canvas CreateCursor(out UnityEngine.UI.Image cursorSprite)
+        public static void DisableCursor()
+        {
+            if (cursorCanvas == null)
+                CreateCursor(out cursorSprite);
+
+            cursorCanvas.enabled = false;
+        }
+
+        public static void EnableCursor()
+        {
+            if (cursorCanvas == null)
+                CreateCursor(out cursorSprite);
+
+            cursorCanvas.enabled = true;
+        }
+
+        private static Canvas CreateCursor(out UnityEngine.UI.Image cursorSprite)
         {
             GameObject canvasObject = new GameObject("Aiming Cursor");
             canvasObject.hideFlags = HideFlags.HideAndDontSave;
+            GameObject.DontDestroyOnLoad(canvasObject);
             canvasObject.AddComponent<PlayerController.CursorDestroyBehaviour>();
 
             GameObject cursorObject = new GameObject("Cursor sprite");
@@ -469,7 +492,15 @@ namespace StarForceRecon
             this.enabled = true;
 
             // Change cursor colour to this character's colour
-            cursorSprite.color = Color.red;
+            cursorSprite.color = cursorColor;
+        }
+
+        event SquadManager.ControllableDestroy OnControlTargetDestroyed;
+
+        event SquadManager.ControllableDestroy SquadManager.IControllable.OnControlTargetDestroyed
+        {
+            add { OnControlTargetDestroyed += value; }
+            remove { OnControlTargetDestroyed -= value; }
         }
 
         void SquadManager.IControllable.OnSwitchAway()

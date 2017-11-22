@@ -26,6 +26,8 @@ public class TrainingTutorial : MonoBehaviour {
         _final = GetComponent<AudioSource>();
         _isActive = false;
 
+        StarForceRecon.PlayerController.DisableCursor();
+
         Invoke("Game", 0.3f);
     }
 

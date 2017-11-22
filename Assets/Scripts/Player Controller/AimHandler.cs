@@ -196,6 +196,12 @@ namespace StarForceRecon
         /// <returns>True if a point was found. False if ray is parallel to horizontal plane or ray direction moves away from plane.</returns>
         private bool CharacterHorizonIntersect(Vector2 viewportCoordinates, out Vector3 intersect)
         {
+            if (Camera.main == null)
+            {
+                intersect = Vector3.zero;
+                return false;
+            }
+
             Plane characterHorizon = new Plane(Vector3.up, transform.position);
             Ray cursorRay = Camera.main.ViewportPointToRay(viewportCoordinates);
 
@@ -213,6 +219,13 @@ namespace StarForceRecon
         /// <summary>Calculates an aim target from a viewport location.</summary>
         private bool GetDesiredTargetFromViewport(out Vector3 desiredTarget, out Collider colliderUnderCursor, Vector2 viewportCoordinates)
         {
+            if (Camera.main == null)
+            {
+                desiredTarget = Vector3.zero;
+                colliderUnderCursor = null;
+                return false;
+            }
+
             Ray cursorRay = Camera.main.ViewportPointToRay(viewportCoordinates);
 
             int hits = Physics.RaycastNonAlloc(cursorRay, rayHitsNonAlloc,

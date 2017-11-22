@@ -34,5 +34,6 @@ public class TutorialLight : MonoBehaviour {
         Destroy(camfake);
         game.SetActive(true);
         hudCanvas.SetActive(true);
+        StarForceRecon.PlayerController.EnableCursor();
     }
 }
