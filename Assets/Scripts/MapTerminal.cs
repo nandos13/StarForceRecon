@@ -9,14 +9,23 @@ public class MapTerminal : MonoBehaviour
     bool _paused;
     bool canShowMap = false;
 
-    void OnTriggerEnter()
+    void OnTriggerEnter(Collider other)
     {
-        canShowMap = true;
+
+        if (other.gameObject.tag == "Player")
+        {
+            canShowMap = true;
+        }
+            
     }
 
     void OnTriggerExit(Collider other)
     {
-        canShowMap = false;
+        if (other.gameObject.tag == "Player")
+        {
+            canShowMap = false;
+        }
+            
     }
 
     void Update()

@@ -182,6 +182,12 @@ public class CameraController : MonoBehaviour, JakePerry.GameController<SFRInput
         }
     }
 
+    private void OnDestroy()
+    {
+        ControllerManager<DualStickController<SFRInputSet>, SFRInputSet>.RemoveTarget("Camera Rotation", this);
+        ControllerManager<KeyboardMouseController<SFRInputSet>, SFRInputSet>.RemoveTarget("Camera Rotation", this);
+    }
+
     /// <summary>
     /// Sets the camera's current destination to switch to, as well as the time it should take to get there.
     /// The camera will travel at a constant speed to reach the destination in the specified amount of time.

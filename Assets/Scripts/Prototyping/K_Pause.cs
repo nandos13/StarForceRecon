@@ -45,6 +45,11 @@ public class K_Pause : MonoBehaviour {
             Cursor.lockState = CursorLockMode.None;
         _pauseCanvas.SetActive(state);
         _paused = state;
+
+        if (state)
+            StarForceRecon.PlayerController.DisableCursor();
+        else
+            StarForceRecon.PlayerController.EnableCursor();
     }
 
     public void Continue()
@@ -58,6 +63,7 @@ public class K_Pause : MonoBehaviour {
     public void Menu()
     {
         Time.timeScale = 1.0f;
+        StarForceRecon.PlayerController.DisableCursor();
         SceneManager.LoadScene(_menu);
     }
 
