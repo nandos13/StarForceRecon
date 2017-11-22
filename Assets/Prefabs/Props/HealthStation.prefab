@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 33453284287747022}
   - component: {fileID: 23932087664251430}
   - component: {fileID: 95276507151395798}
+  - component: {fileID: 65565606311450236}
   m_Layer: 0
   m_Name: HealthStation
   m_TagString: Untagged
@@ -83,6 +84,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1706443209566532}
   m_Mesh: {fileID: 4300000, guid: 5d1e6530a9d82f742be3a5b9e2af09e5, type: 3}
+--- !u!65 &65565606311450236
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1706443209566532}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.9410902, y: 1.8946404, z: 0.83356255}
+  m_Center: {x: 0, y: 0.9473202, z: 0.61678123}
 --- !u!95 &95276507151395798
 Animator:
   serializedVersion: 3
