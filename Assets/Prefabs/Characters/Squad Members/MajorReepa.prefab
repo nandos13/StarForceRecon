@@ -2824,8 +2824,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunPrefab: {fileID: 1897045186664736, guid: c6a6926c84e607c42a4c6bae5651dca9, type: 2}
-  rightHand: {fileID: 0}
-  handRotation: {x: 0, y: -160, z: 62}
+  rightHand: {fileID: 4648889766293276}
+  handRotation: {x: 0, y: -67.7, z: 62}
 --- !u!114 &114136359842874134
 MonoBehaviour:
   m_ObjectHideFlags: 1
