@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0c9488838872b74482a224992457739, type: 3}
   m_Name: AR
   m_EditorClassIdentifier: 
-  _damage: 1
+  _damage: 1.5
   _spread: 4
   _semiAuto: 0
   _fireRateRPM: 550

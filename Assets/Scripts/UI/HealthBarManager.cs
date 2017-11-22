@@ -18,7 +18,7 @@ public class HealthBarManager : MonoBehaviour {
     public void AddHealthBar(Health health)
     {
         GameObject go = Instantiate(prefab);
-        go.transform.parent = transform;
+        go.transform.SetParent(transform);
         HealthBar hb = go.GetComponent<HealthBar>();
         hb.health = health;
         hb.name = "HB_" + health.gameObject.name;
