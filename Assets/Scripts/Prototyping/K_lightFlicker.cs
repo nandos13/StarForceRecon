@@ -13,7 +13,9 @@ public class K_lightFlicker : MonoBehaviour {
     {
         flickeringLight = GetComponent<Light>();
         flicker_sound = GetComponent<AudioSource>();
-        StartCoroutine(Flickering());
+
+        if (flicker_sound != null || flickeringLight != null)
+            StartCoroutine(Flickering());
     }
 
     IEnumerator Flickering()
@@ -21,8 +23,12 @@ public class K_lightFlicker : MonoBehaviour {
         while (true)
         {
             yield return new WaitForSeconds(Random.Range(minWaitTime, maxWaitTime));
-            flickeringLight.enabled = !flickeringLight.enabled;
-            flicker_sound.Play();
+
+            if (flickeringLight != null)
+                flickeringLight.enabled = !flickeringLight.enabled;
+
+            if (flicker_sound != null)
+                flicker_sound.Play();
         }
     }
 }
