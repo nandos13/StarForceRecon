@@ -64,6 +64,7 @@ namespace JakePerry
             if (GameObject.FindObjectOfType<InControlManager>() == null)
             {
                 InControlManager manager = InControlManager.Instance;
+                GameObject.DontDestroyOnLoad(manager);
             }
         }
 

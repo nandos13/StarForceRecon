@@ -93,6 +93,7 @@ namespace StarForceRecon
             // Initialize aimer canvas
             if (cursorCanvas == null)
                 cursorCanvas = CreateCursor(out cursorSprite);
+            EnableCursor();
 
             // Initialize Input
             _keyboardController = ControllerManager<KeyboardMouseController<SFRInputSet>, SFRInputSet>.GetController(controllerID, this);
