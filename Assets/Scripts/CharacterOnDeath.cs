@@ -7,9 +7,17 @@ using StarForceRecon;
 
 public class CharacterOnDeath : MonoBehaviour
 {
-    [SerializeField, Range(1f, 100f)]
-    private float deadBodyDuration = 10.0f;
+    private const float deathDuration = 3.0f;
+    private const float timeStoppedWaitTime = 1.0f;
+
+    [SerializeField]
+    private UnityEngine.UI.Image vignetteImage = null;
+
+    private static Coroutine deathCoroutine = null;
+
     Health health;
+
+    public Canvas DeathCanvasPrefab;
 
     private bool IsDead = false;
 
@@ -98,13 +106,75 @@ public class CharacterOnDeath : MonoBehaviour
         cameraController.enabled = false;
 
         SquadManager.CanSwitchSquadMembers = false;
-        //Invoke("GameOver", deadBodyDuration);
+
+        if (deathCoroutine == null)
+            deathCoroutine = StartCoroutine(deathTimer());
     }
 
+    private IEnumerator deathTimer()
+    {
+        // Stop being able to pause the game
+        K_Pause pauser = FindObjectOfType<K_Pause>();
+        if (pauser)
+            Destroy(pauser);
 
+        // Clone the vignette image
+        UnityEngine.UI.Image vignette = null;
+        if (vignetteImage)
+            vignette = Instantiate<UnityEngine.UI.Image>(vignetteImage);
 
-    //void GameOver()
-    //{
-    //    Destroy(this.gameObject);
-    //}
+        // Wait for time and slow down timescale
+        float elapsed = 0;
+        while (elapsed < deathDuration)
+        {
+            elapsed += Time.unscaledDeltaTime;
+
+            float normalized = Mathf.Clamp01(elapsed / deathDuration);
+            Time.timeScale = 1.0f - normalized;
+
+            if (vignette != null)
+            {
+                Color vignetteColor = vignette.color;
+                vignetteColor.a = 1.0f - normalized;
+                vignette.color = vignetteColor;
+            }
+
+            yield return null;
+        }
+
+        yield return new WaitForSecondsRealtime(timeStoppedWaitTime);
+
+        GameOver();
+        deathCoroutine = null;
+    }
+
+    private UnityEngine.UI.Image CreateVignette()
+    {
+        if (vignetteImage == null)
+            return null;
+
+        GameObject canvasObject = new GameObject("Vignette");
+        canvasObject.hideFlags = HideFlags.HideAndDontSave;
+
+        GameObject vignetteObject = new GameObject("Sprite");
+        vignetteObject.transform.parent = canvasObject.transform;
+
+        Canvas canvas = canvasObject.AddComponent<Canvas>();
+        canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+
+        UnityEngine.UI.Image vignette = Instantiate(vignetteImage);
+
+        return vignette;
+    }
+
+    void GameOver()
+    {
+        Canvas canvas = GameObject.Instantiate(DeathCanvasPrefab);
+        canvas.enabled = true;
+        canvas.gameObject.SetActive(true);
+
+        StarForceRecon.PlayerController.DisableCursor();
+        UnityEngine.Cursor.lockState = CursorLockMode.None;
+        UnityEngine.Cursor.visible = true;
+    }
 }
