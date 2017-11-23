@@ -26,6 +26,7 @@ public class DialogueTracker : MonoBehaviour {
 
     // Use this for initialization
     void Awake () {
+        StarForceRecon.PlayerController.DisableCursor();
         _active = false;
         TextStart();
 	}
@@ -54,6 +55,8 @@ public class DialogueTracker : MonoBehaviour {
         }
         _active = true;
         skipText.SetActive(false);
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 
     void TextSkip()
@@ -62,6 +65,8 @@ public class DialogueTracker : MonoBehaviour {
         _dialogueCanvas.SetActive(false);
         _skip.SetActive(true);
         _skipCanvas.SetActive(true);
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 
     public void GameStart()

@@ -45,23 +45,18 @@ public class TrainingTutorial : MonoBehaviour {
         {
             _final.Play();
             Invoke("Pause", 2f);
+            Invoke("GameStart", 4f);
             _isActive = true;
         }
     }
 
     void Pause()
     {
-        Time.timeScale = 0.0f;
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
         _canvas.SetActive(true);
     }
 
-    public void GameStart()
+    void GameStart()
     {
-        Time.timeScale = 1.0f;
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
         SceneManager.LoadScene(_game);
     }
 }
