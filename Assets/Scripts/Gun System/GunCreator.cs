@@ -64,6 +64,14 @@ public class GunCreator : MonoBehaviour
             Vector3 fwd = (rotation * rightHand.forward).normalized;
             Gizmos.color = Color.blue;
             Gizmos.DrawRay(rightHand.position, fwd * 0.2f);
+
+            Vector3 right = (rotation * rightHand.right).normalized;
+            Gizmos.color = Color.red;
+            Gizmos.DrawRay(rightHand.position, right * 0.2f);
+
+            Vector3 up = (rotation * rightHand.up).normalized;
+            Gizmos.color = Color.green;
+            Gizmos.DrawRay(rightHand.position, up * 0.2f);
         }
     }
 }
