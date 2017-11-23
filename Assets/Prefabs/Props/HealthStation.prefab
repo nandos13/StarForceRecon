@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 23932087664251430}
   - component: {fileID: 95276507151395798}
   - component: {fileID: 65565606311450236}
+  - component: {fileID: 114109193134056030}
   m_Layer: 0
   m_Name: HealthStation
   m_TagString: Untagged
@@ -113,3 +114,16 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114109193134056030
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1706443209566532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cd9c9ddd11ae344cbe525fc5ed9230e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uses: 2
+  healingPower: 50

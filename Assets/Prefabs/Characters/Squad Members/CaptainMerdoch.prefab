@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4331514202922582}
   - component: {fileID: 137164695112889256}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Engineer_BaseMesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35,7 +35,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4697966427229750}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: L_Skel_clavicle_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -50,7 +50,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4816662938896440}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: R_Skel_index01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -65,7 +65,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4590897791943216}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: R_Skel_ankle_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,9 @@ GameObject:
   - component: {fileID: 114457321182028674}
   - component: {fileID: 114303312316281196}
   - component: {fileID: 114748658987000384}
-  m_Layer: 0
+  - component: {fileID: 114003713245595470}
+  - component: {fileID: 114001720916036894}
+  m_Layer: 8
   m_Name: CaptainMerdoch
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -108,7 +110,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4969018807038438}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: L_Skel_index01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -123,7 +125,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4631805702696708}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: R_Skel_index02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -138,7 +140,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4969618187421500}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: L_Skel_index02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -153,7 +155,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4584257861435636}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: L_Skel_middle02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -168,7 +170,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4327792245545390}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: L_Skel_middle03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -183,7 +185,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4906794830358774}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: R_Skel_ring02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -198,7 +200,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4682088648056476}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: R_Skel_palm_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -213,7 +215,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4050226220731450}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: L_Skel_palm_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -228,7 +230,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4321454653830262}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: MASTER_CTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -243,7 +245,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4675192978017992}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: R_Skel_index03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -261,7 +263,7 @@ GameObject:
   - component: {fileID: 54816380831870798}
   - component: {fileID: 144313281254379312}
   - component: {fileID: 136581488224810146}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: R_Skel_shoulder_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -279,7 +281,7 @@ GameObject:
   - component: {fileID: 54322219688784848}
   - component: {fileID: 144863256908338326}
   - component: {fileID: 136986982560519426}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: L_Skel_elbow_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -297,7 +299,7 @@ GameObject:
   - component: {fileID: 54257909603234186}
   - component: {fileID: 144482011755086950}
   - component: {fileID: 136344403265765874}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: L_Skel_shoulder_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -315,7 +317,7 @@ GameObject:
   - component: {fileID: 54055447610495752}
   - component: {fileID: 144899027477807178}
   - component: {fileID: 136684808369695408}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: R_Skel_elbow_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -330,7 +332,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4426027153859898}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: L_Skel_wrist_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -345,7 +347,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4258017566956578}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: L_Skel_forearm_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -360,7 +362,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4574662231011852}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: R_Skel_ball_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -375,7 +377,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4802836059050728}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: L_Skel_thumb03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -390,7 +392,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4062103606447702}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: L_Skel_ankle_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -405,7 +407,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4891762730563684}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: R_Skel_thumb03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -420,7 +422,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4117226550027302}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: R_Skel_thumb02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -435,7 +437,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4447057419755430}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: L_Skel_toe_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -450,7 +452,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4523311597547526}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: L_Skel_middle01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -465,7 +467,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4489705878844298}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: L_Skel_ring01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -480,7 +482,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4291844829720400}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: R_Skel_clavicle_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -495,7 +497,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4548490257040078}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: L_Skel_thumb01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -510,7 +512,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4706656761141242}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: L_Skel_pinky01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -525,7 +527,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4968304567402070}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: L_Skel_index03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -540,7 +542,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4765067922632510}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: R_Skel_ring01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -555,7 +557,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4718570402759620}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: L_Skel_ball_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -573,7 +575,7 @@ GameObject:
   - component: {fileID: 54203814150460340}
   - component: {fileID: 144423799058686376}
   - component: {fileID: 135094147242017186}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Skel_head_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -588,7 +590,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4431840981405896}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Skel_hip_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -603,7 +605,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4016901944974688}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: L_Skel_pinky02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -618,7 +620,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4082938293854632}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: L_Skel_pinky03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -633,7 +635,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4112979618787872}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: playerPivot_CTRL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -651,7 +653,7 @@ GameObject:
   - component: {fileID: 54134620213907616}
   - component: {fileID: 144663184017447434}
   - component: {fileID: 136486742736826308}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: L_Skel_thigh_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -667,7 +669,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4201961498642772}
   - component: {fileID: 95092804539675316}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Engineer Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -684,7 +686,7 @@ GameObject:
   - component: {fileID: 4980662170576844}
   - component: {fileID: 54006877808651728}
   - component: {fileID: 65309441361956474}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Skel_root_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -699,7 +701,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4906801785808166}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: L_Skel_ring03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -714,7 +716,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4425713401996442}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: R_Skel_pinky01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -729,7 +731,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4946021458297470}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: R_Skel_forearm_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -744,7 +746,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4774078203117336}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: R_Skel_thumb01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -759,7 +761,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4251566118153298}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: R_Skel_middle02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -777,7 +779,7 @@ GameObject:
   - component: {fileID: 54904621058801866}
   - component: {fileID: 144680261041843656}
   - component: {fileID: 65062666488850098}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Skel_chest_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -792,7 +794,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4296851662380286}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: R_Skel_pinky02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -807,7 +809,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4631544387411958}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Skel_neck_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -822,7 +824,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4763164943586234}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: R_Skel_wrist_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -837,7 +839,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4040876190681800}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Skel_spine02_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -852,7 +854,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4653768639959274}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: R_Skel_middle03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -867,7 +869,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4861711026673650}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: L_Skel_thumb02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -882,7 +884,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4965741833346924}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: L_Skel_ring02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -900,7 +902,7 @@ GameObject:
   - component: {fileID: 54588428980796844}
   - component: {fileID: 144818287933370172}
   - component: {fileID: 136727416790196324}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: L_Skel_knee_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -915,7 +917,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4926173916215718}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: R_Skel_pinky03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -930,7 +932,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4921307768441174}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: R_Skel_ring03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -945,7 +947,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4639956427222340}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: R_Skel_toe_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -960,7 +962,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4262532765252006}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: R_Skel_middle01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -978,7 +980,7 @@ GameObject:
   - component: {fileID: 54705047011538138}
   - component: {fileID: 144176951108804550}
   - component: {fileID: 136081284804447940}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: R_Skel_knee_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -996,7 +998,7 @@ GameObject:
   - component: {fileID: 54537974680536088}
   - component: {fileID: 144991618042020588}
   - component: {fileID: 136700912839803256}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: R_Skel_thigh_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1011,7 +1013,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4874901865740094}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Skel_spine01_jnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1263,8 +1265,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1123198262269438}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 16.363817, y: 0, z: -153.42645}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4201961498642772}
@@ -2134,6 +2136,43 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114001720916036894
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1123198262269438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e1dcfc05207d9b468295298e111bbcb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBar: {fileID: 0}
+  _damageLayer:
+    _layer: 0
+  _maxHealth: 100
+  _currentHealth: 0
+  _isAlive: 1
+  _startingHealth: 100
+  _startRandom: 0
+  _startMinimum: 60
+  _startMaximum: 100
+  _rechargeWhenLow: 0
+  _lowThresholdRecharge: 15
+  _delayAfterDamage: 2
+  _gainPerSecond: 5
+--- !u!114 &114003713245595470
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1123198262269438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec2e597781d758143b54c9522eb8ff8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  display: 0
 --- !u!114 &114104992525011554
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2161,7 +2200,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _groundCheckDist: 0.1
   _gravityMultiplier: 2
-  _moveSpeedMultiplier: 3
+  _moveSpeedMultiplier: 3.25
   _animSpeedMultiplier: 1
   _canRoll: 1
   _rollSpeed:
@@ -2291,7 +2330,7 @@ MonoBehaviour:
     useRotationLimits: 1
     XY: 0
     bones:
-    - transform: {fileID: 4874901865740094}
+    - transform: {fileID: 0}
       weight: 1
       solverPosition: {x: 0, y: 0, z: 0}
       solverRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -2300,7 +2339,7 @@ MonoBehaviour:
       length: 0
       sqrMag: 0
       axis: {x: 0, y: 0, z: 0}
-    - transform: {fileID: 4040876190681800}
+    - transform: {fileID: 0}
       weight: 1
       solverPosition: {x: 0, y: 0, z: 0}
       solverRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -2309,7 +2348,7 @@ MonoBehaviour:
       length: 0
       sqrMag: 0
       axis: {x: 0, y: 0, z: 0}
-    - transform: {fileID: 4514617284493412}
+    - transform: {fileID: 0}
       weight: 1
       solverPosition: {x: 0, y: 0, z: 0}
       solverRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -2599,7 +2638,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 0, z: -1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 31.383581, y: 0.0000038146973, z: -0.000045776367}
+  m_ConnectedAnchor: {x: 31.383537, y: -0.000089645386, z: -0.0007095337}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 1, z: 0}
   m_TwistLimitSpring:
@@ -2643,7 +2682,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 16.105, y: 4.754474, z: 0.54196286}
+  m_ConnectedAnchor: {x: 16.105654, y: 4.754487, z: 0.5420332}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: -1}
   m_TwistLimitSpring:
@@ -2687,7 +2726,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 18.731598, z: 3.614302}
+  m_ConnectedAnchor: {x: -0.00000074505806, y: 18.731588, z: 3.6142457}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: 1}
   m_TwistLimitSpring:
@@ -2731,7 +2770,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -16.105022, y: 4.754536, z: 0.54196316}
+  m_ConnectedAnchor: {x: -16.105654, y: 4.7545466, z: 0.5420194}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: 1}
   m_TwistLimitSpring:
@@ -2775,7 +2814,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -8.528621, y: -15.352531, z: 0.9332249}
+  m_ConnectedAnchor: {x: -8.528138, y: -15.352531, z: 0.93320394}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 1, z: 0}
   m_TwistLimitSpring:
@@ -2819,7 +2858,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 29.480629, z: 0.30464864}
+  m_ConnectedAnchor: {x: 0.00000004656613, y: 29.480629, z: 0.30473322}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: 1}
   m_TwistLimitSpring:
@@ -2863,7 +2902,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 0, z: -1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -31.383564, y: 0.0000019073486, z: 0.0000030994415}
+  m_ConnectedAnchor: {x: -31.383518, y: 0.00008773804, z: 0.00067830086}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: -1, z: 0}
   m_TwistLimitSpring:
@@ -2907,7 +2946,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -25.54048, y: 0.000049591064, z: -0.0000006467817}
+  m_ConnectedAnchor: {x: -25.540413, y: -0.00017738342, z: -0.00003402723}
   serializedVersion: 2
   m_SwingAxis: {x: 1, y: 0, z: 0}
   m_TwistLimitSpring:
@@ -2951,7 +2990,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 0, z: -1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 25.54057, y: 0.000017166138, z: -0.0000007829585}
+  m_ConnectedAnchor: {x: 25.540514, y: 0.00018882751, z: -0.0000012584205}
   serializedVersion: 2
   m_SwingAxis: {x: -1, y: 0, z: 0}
   m_TwistLimitSpring:
@@ -2995,7 +3034,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 8.528619, y: -15.352501, z: 0.9332249}
+  m_ConnectedAnchor: {x: 8.528138, y: -15.352501, z: 0.93320537}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: -1, z: 0}
   m_TwistLimitSpring:

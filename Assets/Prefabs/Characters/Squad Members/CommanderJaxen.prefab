@@ -2893,7 +2893,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _groundCheckDist: 0.1
   _gravityMultiplier: 2
-  _moveSpeedMultiplier: 3
+  _moveSpeedMultiplier: 3.25
   _animSpeedMultiplier: 1
   _canRoll: 1
   _rollSpeed:
