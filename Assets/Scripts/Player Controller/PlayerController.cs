@@ -201,9 +201,10 @@ namespace StarForceRecon
             UnityEngine.UI.CanvasScaler scaler = canvasObject.AddComponent<UnityEngine.UI.CanvasScaler>();
             scaler.uiScaleMode = UnityEngine.UI.CanvasScaler.ScaleMode.ScaleWithScreenSize;
             scaler.referenceResolution = new Vector2(1920, 1080);
-            scaler.matchWidthOrHeight = 1f;
+            scaler.matchWidthOrHeight = 0.5f;
 
             UnityEngine.UI.Image image = cursorObject.AddComponent<UnityEngine.UI.Image>();
+            image.rectTransform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
             image.sprite = Resources.Load<Sprite>("Sprites/AimCursor");
 
             cursorSprite = image;
