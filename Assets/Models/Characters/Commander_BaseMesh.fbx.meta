@@ -1,58 +1,203 @@
 fileFormatVersion: 2
-guid: 82496a8ddb7b9d4408d1f4ab83aeb6c5
-timeCreated: 1511137099
-licenseType: Free
+guid: 0bc3b45d6c58fbc4387d58e4b0afbcaa
+timeCreated: 1511406847
+licenseType: Pro
 ModelImporter:
   serializedVersion: 21
   fileIDToRecycleName:
-    100000: Belt_low
-    100002: Body_low
-    100004: Body_low1
-    100006: Boots_low
-    100008: BumPad_low
-    100010: //RootNode
-    100012: Helmet_low
-    100014: HelmetBits_low
-    100016: KneePads_low
-    100018: ShoulderPads_low
-    100020: ThighPads_low
-    100022: transform1
-    100024: transform10
-    100026: transform2
-    100028: transform3
-    100030: transform4
-    100032: transform5
-    100034: transform6
-    100036: transform7
-    100038: transform8
-    100040: transform9
-    100042: Vest_low
-    400000: Belt_low
-    400002: Body_low
-    400004: Body_low1
-    400006: Boots_low
-    400008: BumPad_low
-    400010: //RootNode
-    400012: Helmet_low
-    400014: HelmetBits_low
-    400016: KneePads_low
-    400018: ShoulderPads_low
-    400020: ThighPads_low
-    400022: transform1
-    400024: transform10
-    400026: transform2
-    400028: transform3
-    400030: transform4
-    400032: transform5
-    400034: transform6
-    400036: transform7
-    400038: transform8
-    400040: transform9
-    400042: Vest_low
-    2300000: Body_low1
-    3300000: Body_low1
-    4300000: Body_low1
+    100000: //RootNode
+    100002: Commander_baseMesh
+    100004: L_FK_elbow_jnt
+    100006: L_FK_forearm_jnt
+    100008: L_FK_palm_jnt
+    100010: L_FK_shoulder_jnt
+    100012: L_FK_wrist_jnt
+    100014: L_IK_elbow_jnt
+    100016: L_IK_forearm_jnt
+    100018: L_IK_palm_jnt
+    100020: L_IK_shoulder_jnt
+    100022: L_IK_wrist_jnt
+    100024: L_Skel_ankle_jnt
+    100026: L_Skel_ball_jnt
+    100028: L_Skel_clavicle_jnt
+    100030: L_Skel_elbow_jnt
+    100032: L_Skel_forearm_jnt
+    100034: L_Skel_index01
+    100036: L_Skel_index02
+    100038: L_Skel_index03
+    100040: L_Skel_index_END
+    100042: L_Skel_knee_jnt
+    100044: L_Skel_middle01
+    100046: L_Skel_middle02
+    100048: L_Skel_middle03
+    100050: L_Skel_middle_END
+    100052: L_Skel_palm_jnt
+    100054: L_Skel_pinky01
+    100056: L_Skel_pinky02
+    100058: L_Skel_pinky03
+    100060: L_Skel_pinky_END
+    100062: L_Skel_ring01
+    100064: L_Skel_ring02
+    100066: L_Skel_ring03
+    100068: L_Skel_ring_END
+    100070: L_Skel_shoulder_jnt
+    100072: L_Skel_thigh_jnt
+    100074: L_Skel_thumb01
+    100076: L_Skel_thumb02
+    100078: L_Skel_thumb03
+    100080: L_Skel_thumb_END
+    100082: L_Skel_toe_jnt
+    100084: L_Skel_wrist_jnt
+    100086: MASTER_CTRL
+    100088: playerPivot_CTRL
+    100090: R_FK_elbow_jnt
+    100092: R_FK_forearm_jnt
+    100094: R_FK_palm_jnt
+    100096: R_FK_shoulder_jnt
+    100098: R_FK_wrist_jnt
+    100100: R_IK_elbow_jnt
+    100102: R_IK_forearm_jnt
+    100104: R_IK_palm_jnt
+    100106: R_IK_shoulder_jnt
+    100108: R_IK_wrist_jnt
+    100110: R_Skel_ankle_jnt
+    100112: R_Skel_ball_jnt
+    100114: R_Skel_clavicle_jnt
+    100116: R_Skel_elbow_jnt
+    100118: R_Skel_forearm_jnt
+    100120: R_Skel_index01
+    100122: R_Skel_index02
+    100124: R_Skel_index03
+    100126: R_Skel_index_END
+    100128: R_Skel_knee_jnt
+    100130: R_Skel_middle01
+    100132: R_Skel_middle02
+    100134: R_Skel_middle03
+    100136: R_Skel_middle_END
+    100138: R_Skel_palm_jnt
+    100140: R_Skel_pinky01
+    100142: R_Skel_pinky02
+    100144: R_Skel_pinky03
+    100146: R_Skel_pinky_END
+    100148: R_Skel_ring01
+    100150: R_Skel_ring02
+    100152: R_Skel_ring03
+    100154: R_Skel_ring_END
+    100156: R_Skel_shoulder_jnt
+    100158: R_Skel_thigh_jnt
+    100160: R_Skel_thumb01
+    100162: R_Skel_thumb02
+    100164: R_Skel_thumb03
+    100166: R_Skel_thumb_END
+    100168: R_Skel_toe_jnt
+    100170: R_Skel_wrist_jnt
+    100172: root_CTRL
+    100174: Skel_chest_jnt
+    100176: Skel_hat_jnt
+    100178: Skel_head_jnt
+    100180: Skel_hip_jnt
+    100182: Skel_neck_jnt
+    100184: Skel_root_jnt
+    100186: Skel_spine01_jnt
+    100188: Skel_spine02_jnt
+    400000: //RootNode
+    400002: Commander_baseMesh
+    400004: L_FK_elbow_jnt
+    400006: L_FK_forearm_jnt
+    400008: L_FK_palm_jnt
+    400010: L_FK_shoulder_jnt
+    400012: L_FK_wrist_jnt
+    400014: L_IK_elbow_jnt
+    400016: L_IK_forearm_jnt
+    400018: L_IK_palm_jnt
+    400020: L_IK_shoulder_jnt
+    400022: L_IK_wrist_jnt
+    400024: L_Skel_ankle_jnt
+    400026: L_Skel_ball_jnt
+    400028: L_Skel_clavicle_jnt
+    400030: L_Skel_elbow_jnt
+    400032: L_Skel_forearm_jnt
+    400034: L_Skel_index01
+    400036: L_Skel_index02
+    400038: L_Skel_index03
+    400040: L_Skel_index_END
+    400042: L_Skel_knee_jnt
+    400044: L_Skel_middle01
+    400046: L_Skel_middle02
+    400048: L_Skel_middle03
+    400050: L_Skel_middle_END
+    400052: L_Skel_palm_jnt
+    400054: L_Skel_pinky01
+    400056: L_Skel_pinky02
+    400058: L_Skel_pinky03
+    400060: L_Skel_pinky_END
+    400062: L_Skel_ring01
+    400064: L_Skel_ring02
+    400066: L_Skel_ring03
+    400068: L_Skel_ring_END
+    400070: L_Skel_shoulder_jnt
+    400072: L_Skel_thigh_jnt
+    400074: L_Skel_thumb01
+    400076: L_Skel_thumb02
+    400078: L_Skel_thumb03
+    400080: L_Skel_thumb_END
+    400082: L_Skel_toe_jnt
+    400084: L_Skel_wrist_jnt
+    400086: MASTER_CTRL
+    400088: playerPivot_CTRL
+    400090: R_FK_elbow_jnt
+    400092: R_FK_forearm_jnt
+    400094: R_FK_palm_jnt
+    400096: R_FK_shoulder_jnt
+    400098: R_FK_wrist_jnt
+    400100: R_IK_elbow_jnt
+    400102: R_IK_forearm_jnt
+    400104: R_IK_palm_jnt
+    400106: R_IK_shoulder_jnt
+    400108: R_IK_wrist_jnt
+    400110: R_Skel_ankle_jnt
+    400112: R_Skel_ball_jnt
+    400114: R_Skel_clavicle_jnt
+    400116: R_Skel_elbow_jnt
+    400118: R_Skel_forearm_jnt
+    400120: R_Skel_index01
+    400122: R_Skel_index02
+    400124: R_Skel_index03
+    400126: R_Skel_index_END
+    400128: R_Skel_knee_jnt
+    400130: R_Skel_middle01
+    400132: R_Skel_middle02
+    400134: R_Skel_middle03
+    400136: R_Skel_middle_END
+    400138: R_Skel_palm_jnt
+    400140: R_Skel_pinky01
+    400142: R_Skel_pinky02
+    400144: R_Skel_pinky03
+    400146: R_Skel_pinky_END
+    400148: R_Skel_ring01
+    400150: R_Skel_ring02
+    400152: R_Skel_ring03
+    400154: R_Skel_ring_END
+    400156: R_Skel_shoulder_jnt
+    400158: R_Skel_thigh_jnt
+    400160: R_Skel_thumb01
+    400162: R_Skel_thumb02
+    400164: R_Skel_thumb03
+    400166: R_Skel_thumb_END
+    400168: R_Skel_toe_jnt
+    400170: R_Skel_wrist_jnt
+    400172: root_CTRL
+    400174: Skel_chest_jnt
+    400176: Skel_hat_jnt
+    400178: Skel_head_jnt
+    400180: Skel_hip_jnt
+    400182: Skel_neck_jnt
+    400184: Skel_root_jnt
+    400186: Skel_spine01_jnt
+    400188: Skel_spine02_jnt
+    4300000: Commander_baseMesh
     9500000: //RootNode
+    13700000: Commander_baseMesh
   materials:
     importMaterials: 1
     materialName: 0
@@ -69,7 +214,7 @@ ModelImporter:
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
-    animationCompression: 3
+    animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -80,7 +225,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 10
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     importVisibility: 1
@@ -119,7 +264,7 @@ ModelImporter:
     rootMotionBoneName: 
     rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
-    hasExtraRoot: 1
+    hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 2
