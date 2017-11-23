@@ -11,7 +11,7 @@ public class CharacterOnDeath : MonoBehaviour
     private const float timeStoppedWaitTime = 1.0f;
 
     [SerializeField]
-    private UnityEngine.UI.Image vignetteImage = null;
+    private Sprite vignetteImage = null;
 
     private static Coroutine deathCoroutine = null;
 
@@ -121,7 +121,7 @@ public class CharacterOnDeath : MonoBehaviour
         // Clone the vignette image
         UnityEngine.UI.Image vignette = null;
         if (vignetteImage)
-            vignette = Instantiate<UnityEngine.UI.Image>(vignetteImage);
+            vignette = CreateVignette();
 
         // Wait for time and slow down timescale
         float elapsed = 0;
@@ -162,9 +162,16 @@ public class CharacterOnDeath : MonoBehaviour
         Canvas canvas = canvasObject.AddComponent<Canvas>();
         canvas.renderMode = RenderMode.ScreenSpaceOverlay;
 
-        UnityEngine.UI.Image vignette = Instantiate(vignetteImage);
+        UnityEngine.UI.CanvasScaler scaler = canvasObject.AddComponent<UnityEngine.UI.CanvasScaler>();
+        scaler.uiScaleMode = UnityEngine.UI.CanvasScaler.ScaleMode.ScaleWithScreenSize;
+        scaler.referenceResolution = new Vector2(1920, 1080);
+        scaler.matchWidthOrHeight = 0.5f;
 
-        return vignette;
+        UnityEngine.UI.Image image = vignetteObject.AddComponent<UnityEngine.UI.Image>();
+        image.rectTransform.localScale = Vector3.one;
+        image.sprite = vignetteImage;
+
+        return image;
     }
 
     void GameOver()
