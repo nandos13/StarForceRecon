@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Name: LayerDefinition
   m_EditorClassIdentifier: 
   _strings:
-  - 
-  - 
+  - Player
+  - Enemy
   - 
   - 
   - 
