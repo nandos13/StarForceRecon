@@ -50,6 +50,18 @@ public class CharacterOnDeath : MonoBehaviour
         AimIK aimIK = GetComponent<AimIK>();
         aimIK.enabled = false;
 
+        GunCreator gc = GetComponent<GunCreator>();
+        gc.enabled = false;
+
+        AimHandler aimH = GetComponent<AimHandler>();
+        aimH.enabled = false;
+
+        Health hp = GetComponent<Health>();
+        hp.enabled = false;
+
+        Equipment eq = GetComponent<Equipment>();
+        eq.enabled = false;
+
         Animator anim = GetComponentInChildren<Animator>();
         anim.enabled = false;
 
@@ -76,8 +88,8 @@ public class CharacterOnDeath : MonoBehaviour
         {
             if (rb.gameObject == this.gameObject)
                 rb.isKinematic = true;
-
-            rb.isKinematic = false;
+            else
+                rb.isKinematic = false;
         }
 
        
