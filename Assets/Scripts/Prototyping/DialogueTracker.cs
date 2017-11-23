@@ -7,6 +7,9 @@ public class DialogueTracker : MonoBehaviour {
 
     public GameObject _dialogue, _dialogueCanvas;
     public GameObject _skip, _skipCanvas;
+    public GameObject skipText;
+
+    bool _active;
 
     public string _game;
 
@@ -23,14 +26,16 @@ public class DialogueTracker : MonoBehaviour {
 
     // Use this for initialization
     void Awake () {
+        _active = false;
         TextStart();
 	}
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F) && _active == false)
         {
             TextSkip();
+            _active = true;
         }
     }
 	
@@ -47,6 +52,8 @@ public class DialogueTracker : MonoBehaviour {
             yield return new WaitForSeconds(delayObj.timeDelay);
             delayObj.obj.SetActive(true);
         }
+        _active = true;
+        skipText.SetActive(false);
     }
 
     void TextSkip()
