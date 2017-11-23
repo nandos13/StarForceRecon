@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using JakePerry;
@@ -59,6 +60,9 @@ namespace StarForceRecon
         [SerializeField]
         private Color cursorColor = Color.red;
 
+        [SerializeField, Range(0.1f, 1.0f)]
+        private float colorFadeTime = 0.25f;
+
         #endregion
 
         #region Private State Trackers & References
@@ -79,6 +83,8 @@ namespace StarForceRecon
         private static UnityEngine.UI.Image cursorSprite = null;
 
         private Interaction.IInteractable closestInteractable = null;
+
+        private Coroutine cursorColorFader = null;
 
         #endregion
 
@@ -204,7 +210,7 @@ namespace StarForceRecon
             scaler.matchWidthOrHeight = 0.5f;
 
             UnityEngine.UI.Image image = cursorObject.AddComponent<UnityEngine.UI.Image>();
-            image.rectTransform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+            image.rectTransform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
             image.sprite = Resources.Load<Sprite>("Sprites/AimCursor");
 
             cursorSprite = image;
@@ -494,7 +500,29 @@ namespace StarForceRecon
             this.enabled = true;
 
             // Change cursor colour to this character's colour
-            cursorSprite.color = cursorColor;
+            if (cursorColorFader != null)
+                StopCoroutine(cursorColorFader);
+            cursorColorFader = StartCoroutine(CursorColorFade(cursorSprite.color, cursorColor, 0.15f));
+        }
+
+        private IEnumerator CursorColorFade(Color start, Color end, float time)
+        {
+            float elapsed = 0;
+            while (elapsed < time)
+            {
+                elapsed += Time.deltaTime;
+                float normalized = Mathf.Clamp01(elapsed / time);
+
+                Color newColor = new Color();
+                newColor.r = Mathf.Lerp(start.r, end.r, normalized);
+                newColor.g = Mathf.Lerp(start.g, end.g, normalized);
+                newColor.b = Mathf.Lerp(start.b, end.b, normalized);
+                newColor.a = Mathf.Lerp(start.a, end.a, normalized);
+
+                cursorSprite.color = newColor;
+
+                yield return null;
+            }
         }
 
         event SquadManager.ControllableDestroy OnControlTargetDestroyed;
