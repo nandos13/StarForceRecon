@@ -38,4 +38,4 @@ Material:
     - _Gloss: 0.4113519
     - _speed: 2
     m_Colors:
-    - _colour: {r: 1, g: 1, b: 1, a: 1}
+    - _colour: {r: 0.6617647, g: 0.6617647, b: 0.6617647, a: 0}
