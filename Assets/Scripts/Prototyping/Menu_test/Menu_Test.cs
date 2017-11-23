@@ -19,6 +19,8 @@ public class Menu_Test : MonoBehaviour {
     public string _levelName;
     public string _training;
 
+    bool _anyKey;
+
     [Header("Canvas")]
     public GameObject _anyCanvas;
     public GameObject _menuCanvas;
@@ -51,6 +53,7 @@ public class Menu_Test : MonoBehaviour {
         _menuCanvas.SetActive(false);
         _exitCanvas.SetActive(false);
         Panels _middleScript = GetComponent<Panels>();
+        _anyKey = false;
     }
 
     //Updating for the hologram
@@ -67,6 +70,12 @@ public class Menu_Test : MonoBehaviour {
         {
             _one.SetActive(true);
             _two.SetActive(false);
+        }
+
+        if (Input.anyKeyDown && _anyKey == false)
+        {
+            AnyKey();
+            _anyKey = true;
         }
     }
 
