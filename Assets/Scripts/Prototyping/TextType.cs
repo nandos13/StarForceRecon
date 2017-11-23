@@ -10,7 +10,7 @@ public class TextType : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+        StartCoroutine(ShowText());
 	}
 
     IEnumerator ShowText()

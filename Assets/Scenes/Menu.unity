@@ -3320,7 +3320,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _camera: {fileID: 1043348833}
   _middleScript: {fileID: 513469627}
-  _levelName: StarForceRecon-ALPHA
+  _levelName: Brief
   _training: Training
   _anyCanvas: {fileID: 1703884725}
   _menuCanvas: {fileID: 2034701830}
@@ -3920,6 +3920,18 @@ Prefab:
       propertyPath: m_CastShadows
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: 9383780160592b7468813e5c05c242c9, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e8b88d0f3dc3e104aa4b5f04c19d8c10, type: 2}
+    - target: {fileID: 2300006, guid: 9383780160592b7468813e5c05c242c9, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e8b88d0f3dc3e104aa4b5f04c19d8c10, type: 2}
+    - target: {fileID: 2300008, guid: 9383780160592b7468813e5c05c242c9, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e8b88d0f3dc3e104aa4b5f04c19d8c10, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9383780160592b7468813e5c05c242c9, type: 3}
   m_IsPrefabParent: 0

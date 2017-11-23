@@ -15791,7 +15791,7 @@ MonoBehaviour:
   real: {fileID: 765870528}
   fake: {fileID: 354751428}
   _canvas: {fileID: 1844426914}
-  _game: StarForceRecon-ALPHA
+  _game: Brief
 --- !u!65 &1439592428
 BoxCollider:
   m_ObjectHideFlags: 0
