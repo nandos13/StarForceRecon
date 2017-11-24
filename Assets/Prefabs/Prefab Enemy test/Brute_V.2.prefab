@@ -827,7 +827,7 @@ GameObject:
   - component: {fileID: 195517843913373338}
   - component: {fileID: 114256300867110794}
   m_Layer: 0
-  m_Name: Brute_old
+  m_Name: Brute_V.2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

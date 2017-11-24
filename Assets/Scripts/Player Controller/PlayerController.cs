@@ -192,8 +192,9 @@ namespace StarForceRecon
         {
             if (cursorCanvas == null)
                 CreateCursor(out cursorSprite);
-
-            cursorCanvas.enabled = false;
+            
+            if (cursorCanvas != null)
+                cursorCanvas.enabled = false;
         }
 
         public static void EnableCursor()

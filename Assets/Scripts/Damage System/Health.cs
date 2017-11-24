@@ -5,10 +5,13 @@ using JakePerry;
 
 /* This script should be placed on each enemy & playable character in the scene.
  * Handles health, damage, healing, etc. */
+ [RequireComponent(typeof(AiSound))]
 public class Health : MonoBehaviour, IDamageable
 {
     [SerializeField]
     private HealthBar healthBar;
+
+    AiSound aisound;
 
     #region Delegates & Events
 
@@ -104,7 +107,7 @@ public class Health : MonoBehaviour, IDamageable
 
     void Start()
     {
-        
+        aisound = GetComponent<AiSound>();
     }
 
     bool hasHealthBar = false;
@@ -164,7 +167,10 @@ public class Health : MonoBehaviour, IDamageable
     {
         _isAlive = false;
         _currentHealth = 0;
-        
+
+        if(aisound != null)
+        aisound.Dead();
+
         // Raise event
         RaiseEvent(OnDeath, damage);
     }
