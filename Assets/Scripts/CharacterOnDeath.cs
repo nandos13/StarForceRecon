@@ -150,6 +150,7 @@ public class CharacterOnDeath : MonoBehaviour
 
         deathCoroutine = null;
 
+        Time.timeScale = 1.0f;
         SceneManager.LoadScene("Menu");
     }
 

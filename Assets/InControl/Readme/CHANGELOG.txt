@@ -1,9 +1,14 @@
+### v1.6.17
+* Added another device to Xbox 360 Windows profile.
+* Fixed Unity 2017.2 compatibility issues.
+* Fixed various problems with `InControlInputModule` in Unity 2017.x
+
 ### v1.6.16
 * Added prevent sleep / screensaver option to native module.
 * Added `InputDevice.Passive` which causes a device to never be considered active (defaults to `false`).
 * Fixed a few profiles that were missing `DeviceClass` and/or `DeviceStyle` settings.
 * Fixed touch swipe control's "one swipe per touch" setting to work with analog targets.
-* Fixed PlayerAction.RemoveBinding to be more robust and never throw an exception.
+* Fixed `PlayerAction.RemoveBinding` to be more robust and never throw an exception.
 * Fixed issue where native module caused certain keyboards (especially Logitech G110) to lock up.
 * Fixed crash in native module that occurred when connecting/disconnecting devices (thanks Matthew!).
 
