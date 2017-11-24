@@ -2416,7 +2416,7 @@ MonoBehaviour:
   - {fileID: 195389320930129222}
   playerScripts: []
   selectionDelay: 0.2
-  cursorColor: {r: 1, g: 0, b: 0, a: 1}
+  cursorColor: {r: 0, g: 0.5862069, b: 1, a: 1}
   colorFadeTime: 0.25
 --- !u!135 &135094147242017186
 SphereCollider:
