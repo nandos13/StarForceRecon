@@ -120,8 +120,7 @@ public class CharacterOnDeath : MonoBehaviour
 
         // Clone the vignette image
         UnityEngine.UI.Image vignette = null;
-        if (vignetteImage)
-            vignette = CreateVignette();
+        vignette = CreateVignette();
 
         // Wait for time and slow down timescale
         float elapsed = 0;
@@ -135,7 +134,7 @@ public class CharacterOnDeath : MonoBehaviour
             if (vignette != null)
             {
                 Color vignetteColor = vignette.color;
-                vignetteColor.a = 1.0f - normalized;
+                vignetteColor.a = normalized;
                 vignette.color = vignetteColor;
             }
 
@@ -168,7 +167,10 @@ public class CharacterOnDeath : MonoBehaviour
         scaler.matchWidthOrHeight = 0.5f;
 
         UnityEngine.UI.Image image = vignetteObject.AddComponent<UnityEngine.UI.Image>();
-        image.rectTransform.localScale = Vector3.one;
+        image.rectTransform.pivot = new Vector2(0.5f, 0.5f);
+        image.rectTransform.anchorMin = new Vector2(0, 0);
+        image.rectTransform.anchorMax = new Vector2(1, 1);
+
         image.sprite = vignetteImage;
 
         return image;
