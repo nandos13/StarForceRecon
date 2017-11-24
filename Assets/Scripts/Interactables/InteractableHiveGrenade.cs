@@ -49,17 +49,13 @@ public class InteractableHiveGrenade : MonoBehaviour, Interaction.IInteractable
 
     Vector3 Interaction.IInteractable.FocusPoint { get { return transform.TransformPoint(focusPointOffset); } }
 
-    Interaction.InteractionType Interaction.IInteractable.Type { get { return Interaction.InteractionType.DestructableEnvironment; } }
+    Interaction.InteractionType Interaction.IInteractable.Type { get { return Interaction.InteractionType.HiveDestruct; } }
 
     bool Interaction.IInteractable.ForceCharacterSwap { get { return lockCharacter; } }
 
     void Interaction.IInteractable.OnCompleteInteraction()
     {
         StartCoroutine(GrenadeExplosionTimer(grenadeFuseTime));
-
-        Animator animator = GetComponentInParent<Animator>();
-        if (animator != null)
-            animator.SetTrigger("GrenadeInteraction");
     }
 
     private IEnumerator GrenadeExplosionTimer(float seconds)

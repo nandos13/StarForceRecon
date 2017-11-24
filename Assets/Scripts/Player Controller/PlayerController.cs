@@ -44,6 +44,17 @@ namespace StarForceRecon
         [SerializeField, Range(0.2f, 2.0f)]
         private float cursorFadeTime = 1.0f;
 
+        [Tooltip("Minimum time between melee attacks.")]
+        [SerializeField, Range(0.0f, 2.0f)]
+        private float meleeCooldown = 0.8f;
+
+        [Tooltip("Melee attacks will affect any enemies with their transform position inside this box.")]
+        [SerializeField]
+        private BoxCollider meleeArea;
+
+        [SerializeField, Range(0.0f, 10.0f)]
+        private float meleeDamage = 3.0f;
+
         [Header("Character Switching")]
 
         [Tooltip("A list of AI scripts which will be enabled when the character is not being controlled by the player")]
@@ -70,6 +81,7 @@ namespace StarForceRecon
         private ThirdPersonController _tpc = null;
         private AimHandler _aimHandler = null;
         private Equipment _equipment = null;
+        private Animator animator = null;
 
         private static readonly Vector2 CENTER_VIEWPORT = new Vector2(0.5f, 0.5f);
         private static readonly Vector3 HORIZON_SCALE_VECTOR = new Vector3(1, 0, 1);
@@ -109,6 +121,7 @@ namespace StarForceRecon
             _tpc = GetComponent<ThirdPersonController>();
             _aimHandler = GetComponent<AimHandler>();
             _equipment = GetComponent<Equipment>();
+            animator = GetComponentInChildren<Animator>();
 
             if (_tpc == null)
                 throw new System.MissingFieldException("No Third Person Controller component found.");
@@ -396,11 +409,37 @@ namespace StarForceRecon
         /// <summary>Attempts to do a melee attack.</summary>
         private void StartMeleeAttack()
         {
-            if (!meleeLocked)
+            if (!meleeLocked && meleeArea != null)
             {
-                // TODO
-                //meleeLocked = true;
+                // Do animation
+                animator.SetTrigger("Melee");
+
+                // Damage all within melee area
+                Collider[] collidersInMeleeArea = Physics.OverlapBox(meleeArea.center, meleeArea.bounds.extents);
+                foreach (var col in collidersInMeleeArea)
+                {
+                    Health health = col.GetComponentInChildren<Health>();
+
+                    DamageLayer.Mask mask = new DamageLayer.Mask();
+                    mask.SetLayerState(DamageLayer.Utils.NameToLayer("Enemy"), true);
+                    mask.SetLayerState(DamageLayer.Utils.NameToLayer("Player"), false);
+
+                    DamageLayer.Modifier modifier = new DamageLayer.Modifier();
+
+                    DamageData damage = new DamageData(this, meleeDamage, mask, modifier);
+
+                    health.ApplyDamage(damage);
+                }
+
+                meleeLocked = true;
+                StartCoroutine(meleeLockCooldown(meleeCooldown));
             }
+        }
+
+        private IEnumerator meleeLockCooldown(float lockTime)
+        {
+            yield return new WaitForSeconds(lockTime);
+            meleeLocked = false;
         }
 
         #region Interaction IInteractor Methods
@@ -448,6 +487,12 @@ namespace StarForceRecon
 
                 foreach (Behaviour behaviour in playerScripts)
                     behaviour.enabled = false;
+            }
+
+            if (info.Target.Type == Interaction.InteractionType.HiveDestruct)
+            {
+                if (animator != null)
+                    animator.SetTrigger("GrenadeInteraction");
             }
         }
 

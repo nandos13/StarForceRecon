@@ -93,14 +93,14 @@ namespace StarForceRecon
             
             // Set bindings for Actions
             AddDefaultBinding("fire", Mouse.LeftButton);
-            AddDefaultBinding("interact", Mouse.RightButton);
+            AddDefaultBinding("melee", Mouse.RightButton);
             AddDefaultBinding("rotateCameraLeft", Key.Q);
             AddDefaultBinding("rotateCameraRight", Key.E);
             AddDefaultBinding("flashlight", Key.T);
             AddDefaultBinding("crouch", Key.C);
 
             AddDefaultBinding("roll", Key.Space);
-            AddDefaultBinding("melee", Key.F);
+            AddDefaultBinding("interact", Key.F);
             AddDefaultBinding("reload", Key.R);
             AddDefaultBinding("switchForward", Key.Tab);
 
