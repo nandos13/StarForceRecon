@@ -34,8 +34,9 @@ public class ExposiveBarrel : MonoBehaviour
         damageValue = 50;
         Detonate();
         GetComponent<MeshRenderer>().enabled = false;
-        Destroy(gameObject, 20f);
+        //Destroy(gameObject, 20f);
         transform.Find("FlamesParticleEffect").gameObject.SetActive(true);
+        transform.Find("Barrel_destroyed").GetComponent<MeshRenderer>().enabled = true;
 
     }
 
