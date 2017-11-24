@@ -5,10 +5,12 @@ using System.Collections;
 public class ExposiveBarrel : MonoBehaviour
 {
     [SerializeField]
-    float damage = 50;
-    public ParticleSystem particles;
-    Rigidbody rb;
-    Health health;
+    private float damage = 50;
+
+    [SerializeField]
+    private GameObject standard;
+    [SerializeField]
+    private GameObject destroyed;
    
     bool exploded = false;
 
@@ -22,59 +24,59 @@ public class ExposiveBarrel : MonoBehaviour
 
     public BlastSettings explosion = new BlastSettings();
 
+    private void Awake()
+    {
+        if (!standard || !destroyed)
+            throw new System.NullReferenceException();
+
+        standard.SetActive(true);
+        destroyed.SetActive(false);
+    }
+
     private void Start()
     {
-        health = GetComponent<Health>();
+        Health health = GetComponent<Health>();
         if (health)
             health.OnDeath += OnDeath;
     }
 
     private void OnDeath(Health sender, float damageValue)
     {
-        damageValue = 50;
         Detonate();
-        GetComponent<MeshRenderer>().enabled = false;
-        //Destroy(gameObject, 20f);
-        transform.Find("FlamesParticleEffect").gameObject.SetActive(true);
-        transform.Find("Barrel_destroyed").GetComponent<MeshRenderer>().enabled = true;
-
-    }
-
-    void EnableRagdoll()
-    {
-        rb.isKinematic = false;
-        rb.detectCollisions = true;
     }
 
     void Detonate()
     {
         if (exploded == false)
         {
-            if (particles)
-            {
-            particles.Play();
-            Vector3 explosionPos = transform.position; // position of gameObject
-            Collider[] colliders = Physics.OverlapSphere(explosionPos, explosion.radius); // Overlap takes all colliders that are within the Sphere's radius of the gameObject and puts them into an Array[colliders]
-                foreach (Collider hit in colliders) // access each collider thats within our Spheres radius
-                {
-                    rb = hit.GetComponent<Rigidbody>();   // when hit a collider, get the component called rigidbody
-                    if (rb != null)
-                    {
-                        EnableRagdoll();
-                        rb.AddExplosionForce(explosion.power, explosionPos, explosion.radius, explosion.explosiveLift, ForceMode.Impulse);    // if rb has been hit, explosion on force on all rigidbodies
-                    }                                                                                 // -- needs to do damage on impact. -- //
+            standard.SetActive(false);
+            destroyed.SetActive(true);
 
-                    Health health = hit.GetComponent<Health>();
-                    if (health)
-                    {
-                       
-                        DamageLayer.Mask damageMask = new DamageLayer.Mask(255); // TODO - this is everything, make enemy only?
-                        DamageLayer.Modifier damageModifier = new DamageLayer.Modifier();
-                        DamageData damageData = new DamageData(this, damage, damageMask, damageModifier);
-                        health.ApplyDamage(damageData);
-                    }
+            Collider[] colliders = Physics.OverlapSphere(transform.position, explosion.radius);
+            foreach (var col in colliders)
+            {
+                // Apply knockback
+                Rigidbody rb = col.GetComponent<Rigidbody>();
+                if (rb)
+                    rb.AddExplosionForce(explosion.power, transform.position, explosion.radius);
+
+                // Apply damage
+                Health health = col.GetComponent<Health>();
+                if (health)
+                {
+                    DamageLayer.Mask mask = new DamageLayer.Mask();
+                    mask.SetLayerState(DamageLayer.Utils.NameToLayer("Enemy"), true);
+                    mask.SetLayerState(DamageLayer.Utils.NameToLayer("Player"), true);
+
+                    DamageLayer.Modifier modifier = new DamageLayer.Modifier();
+                    modifier.SetModifier(DamageLayer.Utils.NameToLayer("Enemy"), 1.0f);
+                    modifier.SetModifier(DamageLayer.Utils.NameToLayer("Player"), 0.5f);
+
+                    DamageData damageData = new DamageData(this, damage, mask, modifier);
+                    health.ApplyDamage(damageData);
                 }
             }
+
             exploded = true;
         }
     }
