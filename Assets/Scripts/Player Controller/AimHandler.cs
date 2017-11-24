@@ -119,6 +119,7 @@ namespace StarForceRecon
         /// <returns>The final aim point.</returns>
         public void AimAtPoint(Vector3 desiredTarget, Collider targetCollider = null)
         {
+            // Calculate final desired point
             Vector3 targetPoint = desiredTarget;
             if (targetCollider != null)
             {
@@ -128,8 +129,34 @@ namespace StarForceRecon
                                 ancestorCollider, true, (uint)smartAimIterations, aimTags, aimableLayers, smartAimIgnoreTags, 0.0f))
                     targetPoint = hit.point;
             }
-            
-            aimIKTarget.position = targetPoint;
+
+            if (gunOrigin.position == desiredTarget) return;
+
+            // Move point over time
+            Vector3 toCurrentTarget = aimIKTarget.position - gunOrigin.position;
+            Vector3 toDesiredPoint = desiredTarget - gunOrigin.position;
+            if (toCurrentTarget == toDesiredPoint) return;
+
+            Quaternion toCurrentTargetAngle = Quaternion.LookRotation(toCurrentTarget, Vector3.up);
+            Quaternion toDesiredPointAngle = Quaternion.LookRotation(toDesiredPoint, Vector3.up);
+            Quaternion rotationToNewPoint = Quaternion.RotateTowards(toCurrentTargetAngle, toDesiredPointAngle, 720 * Time.deltaTime);
+
+            float totalAngleDifference = Quaternion.Angle(toCurrentTargetAngle, toDesiredPointAngle);
+            float angleThisFrame = Quaternion.Angle(toCurrentTargetAngle, rotationToNewPoint);
+            float normalizedProgress = totalAngleDifference == 0 ? 1 : Mathf.Clamp01(angleThisFrame / totalAngleDifference);
+
+            float differenceInMagnitude = Mathf.Abs(toCurrentTarget.magnitude - toDesiredPoint.magnitude);
+            float newPointMagnitude = Mathf.Min(toCurrentTarget.magnitude, toDesiredPoint.magnitude) + differenceInMagnitude * normalizedProgress;
+            Vector3 finalTargetPoint = ((rotationToNewPoint * Vector3.forward).normalized * newPointMagnitude) + gunOrigin.position;
+
+            #if DEBUG
+            Debug.DrawRay(aimIKTarget.position, Vector3.up, Color.blue);
+            Debug.DrawRay(desiredTarget, Vector3.up, Color.magenta);
+            Debug.DrawRay(finalTargetPoint, Vector3.up, Color.red);
+            #endif
+
+            // Set new target point and turn to face
+            aimIKTarget.position = finalTargetPoint;
             DoSwivel(gunOrigin.forward);
         }
 
