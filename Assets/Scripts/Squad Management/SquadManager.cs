@@ -143,5 +143,20 @@ namespace StarForceRecon
 
             return false;
         }
+
+        public static bool SwitchTo(IControllable character)
+        {
+            if (!_canSwitchSquadMembers) return false;
+
+            if (_squadMembers.Contains(character) 
+                && selected != character
+                && character.Controllable)
+            {
+                DoSwitch(character);
+                return true;
+            }
+
+            return false;
+        }
     }
 }

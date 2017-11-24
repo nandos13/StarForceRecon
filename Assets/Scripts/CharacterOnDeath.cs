@@ -1,14 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 using RootMotion.FinalIK;
 using StarForceRecon;
 
 public class CharacterOnDeath : MonoBehaviour
 {
     private const float deathDuration = 3.0f;
-    private const float timeStoppedWaitTime = 1.0f;
+    private const float preFailScreenTime = 1.0f;
+    private const float failScreenTime = 1.2f;
 
     [SerializeField]
     private Sprite vignetteImage = null;
@@ -141,10 +142,15 @@ public class CharacterOnDeath : MonoBehaviour
             yield return null;
         }
 
-        yield return new WaitForSecondsRealtime(timeStoppedWaitTime);
+        yield return new WaitForSecondsRealtime(preFailScreenTime);
 
         GameOver();
+
+        yield return new WaitForSecondsRealtime(failScreenTime);
+
         deathCoroutine = null;
+
+        SceneManager.LoadScene("Menu");
     }
 
     private UnityEngine.UI.Image CreateVignette()

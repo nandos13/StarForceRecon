@@ -310,6 +310,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1231533017301450
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4873079564950750}
+  - component: {fileID: 65336838383155068}
+  m_Layer: 8
+  m_Name: MeleeArea
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1239524675399694
 GameObject:
   m_ObjectHideFlags: 1
@@ -1538,6 +1554,7 @@ Transform:
   m_LocalScale: {x: 1.0000005, y: 1, z: 1.0000005}
   m_Children:
   - {fileID: 4988175581432786}
+  - {fileID: 4873079564950750}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
@@ -2589,6 +2606,19 @@ Transform:
   m_Father: {fileID: 4217589190500868}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4873079564950750
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1231533017301450}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.3227228, y: 0.75, z: 0.91685474}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4036082273591316}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4886616065532898
 Transform:
   m_ObjectHideFlags: 1
@@ -3035,6 +3065,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 32.209957, y: 44.83316, z: 24.793846}
   m_Center: {x: 0, y: 7.064049, z: 0.46661472}
+--- !u!65 &65336838383155068
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1231533017301450}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.8, y: 1.5, z: 0.5}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &65416829568908718
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -3100,8 +3142,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e28ce42a443f0654ebe0efa0302d7446, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vignetteImage: {fileID: 0}
-  DeathCanvasPrefab: {fileID: 0}
+  vignetteImage: {fileID: 21300000, guid: aaa2b421eb319f44c912ae19d35bffd4, type: 3}
+  DeathCanvasPrefab: {fileID: 223101571484217464, guid: 6f7a0bb3112b54d4f8f86cc902f1bbd3,
+    type: 2}
 --- !u!114 &114225786117988500
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3293,6 +3336,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   closeAimRadius: 1.16
   cursorFadeTime: 1
+  meleeCooldown: 0.8
+  meleeArea: {fileID: 65336838383155068}
+  meleeDamage: 3
   aiScripts:
   - {fileID: 114589370016238878}
   - {fileID: 114604170085346030}
