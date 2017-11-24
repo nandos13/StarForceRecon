@@ -17,7 +17,7 @@ public class ExposiveBarrel : MonoBehaviour
     {
         public float radius = 5.0f;    // radius at which the explosive will effect rigidbodies
         public float power = 10.0f;    // explosive power/force
-        public float explosiveLift = 1.0f;     // determine how the explosion reacts. a higher value means rigidbidoes will fly upward
+        public float explosiveLift = 10.0f;     // determine how the explosion reacts. a higher value means rigidbidoes will fly upward
     }
 
     public BlastSettings explosion = new BlastSettings();
@@ -31,7 +31,7 @@ public class ExposiveBarrel : MonoBehaviour
 
     private void OnDeath(Health sender, float damageValue)
     {
-        damageValue = 100f;
+        damageValue = 50;
         Detonate();
         GetComponent<MeshRenderer>().enabled = false;
         Destroy(gameObject, 20f);

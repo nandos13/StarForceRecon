@@ -91,10 +91,9 @@ GameObject:
   - component: {fileID: 114104992525011554}
   - component: {fileID: 195389320930129222}
   - component: {fileID: 114457321182028674}
-  - component: {fileID: 114303312316281196}
   - component: {fileID: 114748658987000384}
   - component: {fileID: 114003713245595470}
-  - component: {fileID: 114001720916036894}
+  - component: {fileID: 114408909826185406}
   m_Layer: 8
   m_Name: CaptainMerdoch
   m_TagString: Player
@@ -2087,7 +2086,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1123198262269438}
   serializedVersion: 2
-  m_Mass: 100
+  m_Mass: 2
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -2136,31 +2135,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114001720916036894
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1123198262269438}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e1dcfc05207d9b468295298e111bbcb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthBar: {fileID: 0}
-  _damageLayer:
-    _layer: 0
-  _maxHealth: 100
-  _currentHealth: 0
-  _isAlive: 1
-  _startingHealth: 100
-  _startRandom: 0
-  _startMinimum: 60
-  _startMaximum: 100
-  _rechargeWhenLow: 0
-  _lowThresholdRecharge: 15
-  _delayAfterDamage: 2
-  _gainPerSecond: 5
 --- !u!114 &114003713245595470
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2223,7 +2197,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   _rollTime: 1
   _directionalBlendDamp: 0.1
---- !u!114 &114303312316281196
+--- !u!114 &114408909826185406
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -2261,7 +2235,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gunPrefab: {fileID: 1042768778928926, guid: 7b55469abe474c44faafae75cd572b17, type: 2}
   rightHand: {fileID: 4682088648056476}
-  handRotation: {x: -94.24, y: 0, z: -20.88}
+  handRotation: {x: -164.05, y: -110.21, z: -99.59}
 --- !u!114 &114479604997758662
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2307,7 +2281,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e28ce42a443f0654ebe0efa0302d7446, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deadBodyDuration: 10
+  vignetteImage: {fileID: 0}
+  DeathCanvasPrefab: {fileID: 0}
 --- !u!114 &114767307269506378
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2330,7 +2305,7 @@ MonoBehaviour:
     useRotationLimits: 1
     XY: 0
     bones:
-    - transform: {fileID: 0}
+    - transform: {fileID: 4874901865740094}
       weight: 1
       solverPosition: {x: 0, y: 0, z: 0}
       solverRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -2339,7 +2314,7 @@ MonoBehaviour:
       length: 0
       sqrMag: 0
       axis: {x: 0, y: 0, z: 0}
-    - transform: {fileID: 0}
+    - transform: {fileID: 4040876190681800}
       weight: 1
       solverPosition: {x: 0, y: 0, z: 0}
       solverRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -2348,7 +2323,7 @@ MonoBehaviour:
       length: 0
       sqrMag: 0
       axis: {x: 0, y: 0, z: 0}
-    - transform: {fileID: 0}
+    - transform: {fileID: 4514617284493412}
       weight: 1
       solverPosition: {x: 0, y: 0, z: 0}
       solverRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -2396,6 +2371,7 @@ MonoBehaviour:
   playerScripts: []
   selectionDelay: 0.2
   cursorColor: {r: 1, g: 0, b: 0, a: 1}
+  colorFadeTime: 0.25
 --- !u!135 &135094147242017186
 SphereCollider:
   m_ObjectHideFlags: 1
