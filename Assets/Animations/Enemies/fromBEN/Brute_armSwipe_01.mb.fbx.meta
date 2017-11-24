@@ -1,0 +1,204 @@
+fileFormatVersion: 2
+guid: 2a96857492ca17d4ca1846509685acb8
+timeCreated: 1511482121
+licenseType: Pro
+ModelImporter:
+  serializedVersion: 21
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: MASTER_CTRL
+    100004: Mesh_Brute
+    100006: playerPivot_CTRL
+    100008: Skel_chest_jnt
+    100010: Skel_chin_jnt
+    100012: Skel_head_END
+    100014: Skel_head_jnt
+    100016: Skel_hip_jnt
+    100018: Skel_jaw_jnt
+    100020: Skel_L_ankle_jnt
+    100022: Skel_L_ball_jnt
+    100024: Skel_L_clavical_jnt
+    100026: Skel_L_elbow_jnt
+    100028: Skel_L_index01_jnt
+    100030: Skel_L_index02_jnt
+    100032: Skel_L_index03_jnt
+    100034: Skel_L_index_END
+    100036: Skel_L_knee_jnt
+    100038: Skel_L_palm_jnt
+    100040: Skel_L_pinky01_jnt
+    100042: Skel_L_pinky02_jnt
+    100044: Skel_L_pinky03_jnt
+    100046: Skel_L_pinky_END
+    100048: Skel_L_shoulder_jnt
+    100050: Skel_L_thigh_jnt
+    100052: Skel_L_thumb01_jnt
+    100054: Skel_L_thumb02_jnt
+    100056: Skel_L_thumb03_jnt
+    100058: Skel_L_thumb_END
+    100060: Skel_L_toe_jnt
+    100062: Skel_L_wrist_jnt
+    100064: Skel_neck_jnt
+    100066: Skel_R_ankle_jnt
+    100068: Skel_R_ball_jnt
+    100070: Skel_R_clavical_jnt
+    100072: Skel_R_elbow_jnt
+    100074: Skel_R_index01_jnt
+    100076: Skel_R_index02_jnt
+    100078: Skel_R_index03_jnt
+    100080: Skel_R_index_END
+    100082: Skel_R_knee_jnt
+    100084: Skel_R_palm_jnt
+    100086: Skel_R_pinky01_jnt
+    100088: Skel_R_pinky02_jnt
+    100090: Skel_R_pinky03_jnt
+    100092: Skel_R_pinky_END
+    100094: Skel_R_shoulder_jnt
+    100096: Skel_R_thigh_jnt
+    100098: Skel_R_thumb01_jnt
+    100100: Skel_R_thumb02_jnt
+    100102: Skel_R_thumb03_jnt
+    100104: Skel_R_thumb_END
+    100106: Skel_R_toe_jnt
+    100108: Skel_R_wrist_jnt
+    100110: Skel_root_jnt
+    100112: Skel_spine01_jnt
+    100114: Skel_spine02_jnt
+    100116: Skel_spine03_jnt
+    400000: //RootNode
+    400002: MASTER_CTRL
+    400004: Mesh_Brute
+    400006: playerPivot_CTRL
+    400008: Skel_chest_jnt
+    400010: Skel_chin_jnt
+    400012: Skel_head_END
+    400014: Skel_head_jnt
+    400016: Skel_hip_jnt
+    400018: Skel_jaw_jnt
+    400020: Skel_L_ankle_jnt
+    400022: Skel_L_ball_jnt
+    400024: Skel_L_clavical_jnt
+    400026: Skel_L_elbow_jnt
+    400028: Skel_L_index01_jnt
+    400030: Skel_L_index02_jnt
+    400032: Skel_L_index03_jnt
+    400034: Skel_L_index_END
+    400036: Skel_L_knee_jnt
+    400038: Skel_L_palm_jnt
+    400040: Skel_L_pinky01_jnt
+    400042: Skel_L_pinky02_jnt
+    400044: Skel_L_pinky03_jnt
+    400046: Skel_L_pinky_END
+    400048: Skel_L_shoulder_jnt
+    400050: Skel_L_thigh_jnt
+    400052: Skel_L_thumb01_jnt
+    400054: Skel_L_thumb02_jnt
+    400056: Skel_L_thumb03_jnt
+    400058: Skel_L_thumb_END
+    400060: Skel_L_toe_jnt
+    400062: Skel_L_wrist_jnt
+    400064: Skel_neck_jnt
+    400066: Skel_R_ankle_jnt
+    400068: Skel_R_ball_jnt
+    400070: Skel_R_clavical_jnt
+    400072: Skel_R_elbow_jnt
+    400074: Skel_R_index01_jnt
+    400076: Skel_R_index02_jnt
+    400078: Skel_R_index03_jnt
+    400080: Skel_R_index_END
+    400082: Skel_R_knee_jnt
+    400084: Skel_R_palm_jnt
+    400086: Skel_R_pinky01_jnt
+    400088: Skel_R_pinky02_jnt
+    400090: Skel_R_pinky03_jnt
+    400092: Skel_R_pinky_END
+    400094: Skel_R_shoulder_jnt
+    400096: Skel_R_thigh_jnt
+    400098: Skel_R_thumb01_jnt
+    400100: Skel_R_thumb02_jnt
+    400102: Skel_R_thumb03_jnt
+    400104: Skel_R_thumb_END
+    400106: Skel_R_toe_jnt
+    400108: Skel_R_wrist_jnt
+    400110: Skel_root_jnt
+    400112: Skel_spine01_jnt
+    400114: Skel_spine02_jnt
+    400116: Skel_spine03_jnt
+    4300000: Mesh_Brute
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: Mesh_Brute
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

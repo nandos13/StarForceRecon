@@ -1,0 +1,248 @@
+fileFormatVersion: 2
+guid: 8d4176764660c004a9f9b9c5cac3dc59
+timeCreated: 1511482123
+licenseType: Pro
+ModelImporter:
+  serializedVersion: 21
+  fileIDToRecycleName:
+    100000: JNT_chest
+    100002: JNT_chin
+    100004: JNT_hat
+    100006: JNT_head
+    100008: JNT_hip
+    100010: JNT_jaw
+    100012: JNT_neck
+    100014: JNT_root
+    100016: JNT_spine_01
+    100018: JNT_spine_02
+    100020: JNT_spine_03
+    100022: L_FK_jnt_elbow
+    100024: L_FK_jnt_shoulder
+    100026: L_FK_jnt_wrist
+    100028: L_JNT_ankle
+    100030: L_JNT_ball
+    100032: L_JNT_Clav
+    100034: L_JNT_elbow
+    100036: L_JNT_index_01
+    100038: L_JNT_index_02
+    100040: L_JNT_index_03
+    100042: L_JNT_index_END
+    100044: L_JNT_knee
+    100046: L_JNT_middle_01
+    100048: L_JNT_middle_02
+    100050: L_JNT_middle_03
+    100052: L_JNT_middle_END
+    100054: L_JNT_palm
+    100056: L_JNT_pinky_01
+    100058: L_JNT_pinky_02
+    100060: L_JNT_pinky_03
+    100062: L_JNT_pinky_END
+    100064: L_JNT_ring_01
+    100066: L_JNT_ring_02
+    100068: L_JNT_ring_03
+    100070: L_JNT_ring_END
+    100072: L_JNT_shoulder
+    100074: L_JNT_thigh
+    100076: L_JNT_thumb_01
+    100078: L_JNT_thumb_02
+    100080: L_JNT_thumb_03
+    100082: L_JNT_thumb_END
+    100084: L_JNT_toe
+    100086: L_JNT_wrist
+    100088: master_CTRL
+    100090: pivot_CTRL
+    100092: R_FK_jnt_elbow
+    100094: R_FK_jnt_shoulder
+    100096: R_FK_jnt_wrist
+    100098: R_JNT_ankle
+    100100: R_JNT_ball
+    100102: R_JNT_Clav
+    100104: R_JNT_elbow
+    100106: R_JNT_index_01
+    100108: R_JNT_index_02
+    100110: R_JNT_index_03
+    100112: R_JNT_index_END
+    100114: R_JNT_knee
+    100116: R_JNT_middle_01
+    100118: R_JNT_middle_02
+    100120: R_JNT_middle_03
+    100122: R_JNT_middle_END
+    100124: R_JNT_palm
+    100126: R_JNT_pinky_01
+    100128: R_JNT_pinky_02
+    100130: R_JNT_pinky_03
+    100132: R_JNT_pinky_END
+    100134: R_JNT_ring_01
+    100136: R_JNT_ring_02
+    100138: R_JNT_ring_03
+    100140: R_JNT_ring_END
+    100142: R_JNT_shoulder
+    100144: R_JNT_thigh
+    100146: R_JNT_thumb_01
+    100148: R_JNT_thumb_02
+    100150: R_JNT_thumb_03
+    100152: R_JNT_thumb_END
+    100154: R_JNT_toe
+    100156: R_JNT_wrist
+    100158: Slinger
+    100160: //RootNode
+    400000: JNT_chest
+    400002: JNT_chin
+    400004: JNT_hat
+    400006: JNT_head
+    400008: JNT_hip
+    400010: JNT_jaw
+    400012: JNT_neck
+    400014: JNT_root
+    400016: JNT_spine_01
+    400018: JNT_spine_02
+    400020: JNT_spine_03
+    400022: L_FK_jnt_elbow
+    400024: L_FK_jnt_shoulder
+    400026: L_FK_jnt_wrist
+    400028: L_JNT_ankle
+    400030: L_JNT_ball
+    400032: L_JNT_Clav
+    400034: L_JNT_elbow
+    400036: L_JNT_index_01
+    400038: L_JNT_index_02
+    400040: L_JNT_index_03
+    400042: L_JNT_index_END
+    400044: L_JNT_knee
+    400046: L_JNT_middle_01
+    400048: L_JNT_middle_02
+    400050: L_JNT_middle_03
+    400052: L_JNT_middle_END
+    400054: L_JNT_palm
+    400056: L_JNT_pinky_01
+    400058: L_JNT_pinky_02
+    400060: L_JNT_pinky_03
+    400062: L_JNT_pinky_END
+    400064: L_JNT_ring_01
+    400066: L_JNT_ring_02
+    400068: L_JNT_ring_03
+    400070: L_JNT_ring_END
+    400072: L_JNT_shoulder
+    400074: L_JNT_thigh
+    400076: L_JNT_thumb_01
+    400078: L_JNT_thumb_02
+    400080: L_JNT_thumb_03
+    400082: L_JNT_thumb_END
+    400084: L_JNT_toe
+    400086: L_JNT_wrist
+    400088: master_CTRL
+    400090: pivot_CTRL
+    400092: R_FK_jnt_elbow
+    400094: R_FK_jnt_shoulder
+    400096: R_FK_jnt_wrist
+    400098: R_JNT_ankle
+    400100: R_JNT_ball
+    400102: R_JNT_Clav
+    400104: R_JNT_elbow
+    400106: R_JNT_index_01
+    400108: R_JNT_index_02
+    400110: R_JNT_index_03
+    400112: R_JNT_index_END
+    400114: R_JNT_knee
+    400116: R_JNT_middle_01
+    400118: R_JNT_middle_02
+    400120: R_JNT_middle_03
+    400122: R_JNT_middle_END
+    400124: R_JNT_palm
+    400126: R_JNT_pinky_01
+    400128: R_JNT_pinky_02
+    400130: R_JNT_pinky_03
+    400132: R_JNT_pinky_END
+    400134: R_JNT_ring_01
+    400136: R_JNT_ring_02
+    400138: R_JNT_ring_03
+    400140: R_JNT_ring_END
+    400142: R_JNT_shoulder
+    400144: R_JNT_thigh
+    400146: R_JNT_thumb_01
+    400148: R_JNT_thumb_02
+    400150: R_JNT_thumb_03
+    400152: R_JNT_thumb_END
+    400154: R_JNT_toe
+    400156: R_JNT_wrist
+    400158: Slinger
+    400160: //RootNode
+    4300000: Slinger
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: Slinger
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
