@@ -4931,6 +4931,12 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c00fc8d8185be0643b1fd485b2ab8392, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &437371499 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114408909826185406, guid: c00fc8d8185be0643b1fd485b2ab8392,
+    type: 2}
+  m_PrefabInternal: {fileID: 437371498}
+  m_Script: {fileID: 11500000, guid: 3e1dcfc05207d9b468295298e111bbcb, type: 3}
 --- !u!1 &442655269
 GameObject:
   m_ObjectHideFlags: 0
@@ -9326,7 +9332,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Right trigger to destroy hive
+  m_Text: F Key to destroy hives
 --- !u!222 &858166451
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -16819,7 +16825,7 @@ Prefab:
         type: 2}
       propertyPath: health
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 437371499}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b6217be6f88922a41970ccc3adc44d72, type: 2}
   m_IsPrefabParent: 0
