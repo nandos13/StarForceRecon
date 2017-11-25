@@ -107,6 +107,17 @@ public class ThirdPersonController : MonoBehaviour
         }
     }
 
+    public void Animate(Vector3 direction)
+    {
+        if (direction.magnitude <= 0)
+        {
+            _animator.SetBool("IsWalking", false);
+            return;
+        }
+
+        UpdateAnimator(direction);
+    }
+
     public void Move(Vector3 direction, bool roll = false, bool crouch = false, bool applyMoveVelocity = false)
     {
         if (direction.magnitude <= 0)

@@ -246,21 +246,22 @@ namespace StarForceRecon
         /// <summary>Calculates an aim target from a viewport location.</summary>
         private bool GetDesiredTargetFromViewport(out Vector3 desiredTarget, out Collider colliderUnderCursor, Vector2 viewportCoordinates)
         {
-            if (Camera.main == null)
+            Camera cam = Camera.main;
+            if (cam == null)
             {
                 desiredTarget = Vector3.zero;
                 colliderUnderCursor = null;
                 return false;
             }
 
-            Ray cursorRay = Camera.main.ViewportPointToRay(viewportCoordinates);
+            Ray cursorRay = cam.ViewportPointToRay(viewportCoordinates);
 
             int hits = Physics.RaycastNonAlloc(cursorRay, rayHitsNonAlloc,
                             1000.0f, aimableLayers.value, QueryTriggerInteraction.Collide);
 
             if (hits > 0)
             {
-                RaycastingHelper.SortByDistanceNonAlloc(ref rayHitsNonAlloc, Camera.main.transform.position, hits);
+                RaycastingHelper.SortByDistanceNonAlloc(ref rayHitsNonAlloc, cam.transform.position, hits);
 
                 RaycastHit hit;
                 if (FirstMatchingTag(out hit, rayHitsNonAlloc, aimTags, hits))

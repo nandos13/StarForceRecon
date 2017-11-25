@@ -67,7 +67,7 @@ public class CameraController : MonoBehaviour, JakePerry.GameController<SFRInput
     #region General
 
     [Header("General")]
-    [Range(7.0f, 30.0f), SerializeField]    private float _hoverDistance = 10.0f;
+    [Range(4.0f, 30.0f), SerializeField]    private float _hoverDistance = 10.0f;
     [Range(10.0f, 85.0f), SerializeField]   private float _pitch = 45.0f;
     [Range(0.0f, 0.25f), Tooltip("How much of a priority is the player's aim point for the camera? \nat 0: Aiming further away from the player will not offset the camera.\nat 0.25: Aiming further away will cause the camera to focus on a point 25% of the way between the character and their aim point.")]
     [SerializeField]    private float _aimOffset = 0.1f;
@@ -82,15 +82,8 @@ public class CameraController : MonoBehaviour, JakePerry.GameController<SFRInput
         get { return new Vector3(Mathf.Cos(Mathf.Deg2Rad * _rotation), 0, Mathf.Sin(Mathf.Deg2Rad * _rotation)); }
     }
 
-    #endregion
-
-    #region Starting variables
-
-    [Header("Start Transform")]
-    [Tooltip("If true, the following settings will be applied to the camera's transform at start")]
-    [SerializeField]    private bool _overrideTransformAtStart = false;
-    [Range(0, 360), SerializeField] private float _startRotation = 0;
-    [SerializeField]    private Vector3 _startLookPosition = Vector3.zero;
+    [Range(0, 360), SerializeField]
+    private float startRotation = 0;
 
     #endregion
 
@@ -121,14 +114,14 @@ public class CameraController : MonoBehaviour, JakePerry.GameController<SFRInput
         // Get a reference to the camera
         _cam = Camera.main;
 
-        // Set start transform
-        if (_overrideTransformAtStart)
-        {
-            _cam.transform.rotation = Quaternion.Euler(new Vector3(0, _startRotation, 0));
-            _rotation = -_startRotation;
-            _currentLookPoint = _startLookPosition;
-            _destinationLookPoint = _startLookPosition;
-        }
+        // Initialize position and rotation
+        _rotation = startRotation;
+        _cam.transform.rotation = Quaternion.Euler(new Vector3(0, startRotation, 0));
+
+        Vector3 characterPosOffset = SquadManager.GetCurrentSquaddie.transform.position + GetRotationalOffset() * _hoverDistance;
+        _cam.transform.position = characterPosOffset;
+        _currentLookPoint = characterPosOffset;
+        _destinationLookPoint = characterPosOffset;
 
         // Set follow points to current squad members location
         SquadManager.IControllable currentSquaddie = SquadManager.GetCurrentSquaddie;
@@ -330,15 +323,6 @@ public class CameraController : MonoBehaviour, JakePerry.GameController<SFRInput
         Gizmos.DrawWireSphere(_destinationLookPoint, 0.4f);
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(_currentLookPoint, 0.3f);
-
-        if (_overrideTransformAtStart)
-        {
-            Gizmos.color = Color.blue;
-            Gizmos.DrawRay(transform.position, Quaternion.Euler(new Vector3(0, _startRotation, 0)) * Vector3.right);
-
-            Gizmos.color = Color.magenta;
-            Gizmos.DrawWireSphere(_startLookPosition, 0.2f);
-        }
     }
 
     #region GameController.ITarget Implementation

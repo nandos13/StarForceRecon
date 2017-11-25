@@ -36,6 +36,9 @@ public class SquadFollow : MonoBehaviour
     private void Update()
     {
         if (currentPlayer != null)
+        {
             navAgent.SetDestination(currentPlayer.transform.position);
+            tpc.Animate(navAgent.nextPosition - transform.position);
+        }
     }
 }

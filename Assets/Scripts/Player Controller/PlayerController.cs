@@ -160,6 +160,7 @@ namespace StarForceRecon
             float horizontalDistance = Vector3.Distance(transform.position,
                 new Vector3(_aimHandler.AimPoint.x, 0, _aimHandler.AimPoint.z));
             aiming = (horizontalDistance >= closeAimRadius);
+            _aimHandler.IKState = aiming;
 
             // Check for interactables around the character
             CheckClosestInteractable();
