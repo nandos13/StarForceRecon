@@ -38,7 +38,15 @@ public class SquadFollow : MonoBehaviour
         if (currentPlayer != null)
         {
             navAgent.SetDestination(currentPlayer.transform.position);
-            tpc.Animate(navAgent.nextPosition - transform.position);
+            if (navAgent.velocity.magnitude > 0.5f && navAgent.remainingDistance > navAgent.radius)
+            {
+                tpc.Animate((navAgent.steeringTarget - transform.position).normalized);
+                #if DEBUG
+                Debug.DrawLine(navAgent.steeringTarget, transform.position, Color.yellow);
+                #endif
+            }
+            else
+                tpc.StopMovement();
         }
     }
 }

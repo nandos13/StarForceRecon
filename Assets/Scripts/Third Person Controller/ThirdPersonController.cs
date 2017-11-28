@@ -115,6 +115,8 @@ public class ThirdPersonController : MonoBehaviour
             return;
         }
 
+        direction = transform.InverseTransformDirection(direction);
+
         UpdateAnimator(direction);
     }
 
@@ -135,9 +137,6 @@ public class ThirdPersonController : MonoBehaviour
 
         // Project movement vector onto ground plane to prevent bunnyhopping off inclines, etc.
         direction = Vector3.ProjectOnPlane(direction, _groundNormal);
-
-        _forward = direction.z;
-        _right = direction.x;
 
         // Add extra gravity if airborne
         if (!_grounded)
@@ -245,6 +244,9 @@ public class ThirdPersonController : MonoBehaviour
 
     private void UpdateAnimator(Vector3 move)
     {
+        _forward = move.z;
+        _right = move.x;
+
         // Update animator parameters
         _animator.SetBool("IsWalking", true);
 
