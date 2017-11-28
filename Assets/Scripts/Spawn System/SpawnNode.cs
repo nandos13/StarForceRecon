@@ -40,6 +40,8 @@ public class SpawnNode : MonoBehaviour
 
     void Awake ()
     {
+        WinCondition.IncrementNodeCounter();
+
         // Create empty object to contain all spawned enemies
         _enemyEmptyParent = new GameObject("enemies");
         _enemyEmptyParent.transform.parent = this.transform;
@@ -290,6 +292,7 @@ public class SpawnNode : MonoBehaviour
 
     void OnDestroy()
     {
+        WinCondition.DecrementNodeCounter();
         if (_zone)
             _zone.RemoveNode(this);
     }
