@@ -290,9 +290,17 @@ public class SpawnNode : MonoBehaviour
         }
     }
 
+    bool isQuitting = false;
+    void OnApplicationQuit()
+    {
+        isQuitting = true;
+    }
+
     void OnDestroy()
     {
-        WinCondition.DecrementNodeCounter();
+        if (!isQuitting)
+            WinCondition.DecrementNodeCounter();
+
         if (_zone)
             _zone.RemoveNode(this);
     }

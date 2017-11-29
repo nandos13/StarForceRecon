@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /* Terrible win condition so the game can be completed. */
 public class WinCondition : MonoBehaviour
@@ -13,6 +14,13 @@ public class WinCondition : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        SceneManager.activeSceneChanged += SceneManager_activeSceneChanged;
+    }
+
+    private void SceneManager_activeSceneChanged(Scene arg0, Scene arg1)
+    {
+        nodesLeft = 0;
+        instance = null;
     }
 
     public static void IncrementNodeCounter()
@@ -25,7 +33,7 @@ public class WinCondition : MonoBehaviour
         nodesLeft--;
 
         if (instance == null)
-            throw new System.Exception("No instance of WinCondition exists. Create one in the scene please <3");
+            return;
 
         if (nodesLeft == 0)
         {
