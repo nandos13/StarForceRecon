@@ -2342,7 +2342,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: bbb59d49c35cd1348b4f3ce8b38c259e, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.7
+  m_Volume: 0.8
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -15919,7 +15919,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Tab or Shift to swap
+  m_Text: Use the mouse wheel to swap
 --- !u!222 &1446063360
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -25138,9 +25138,7 @@ MonoBehaviour:
   _aimOffset: 0.1
   _aimOffsetMaxDistance: 4.5
   _rotationSpeed: 150
-  _overrideTransformAtStart: 1
-  _startRotation: 0
-  _startLookPosition: {x: 0, y: 0, z: 0}
+  startRotation: 0
 --- !u!81 &2087933526
 AudioListener:
   m_ObjectHideFlags: 0
