@@ -63,7 +63,7 @@ public class WinCondition : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(3.0f);
         Time.timeScale = 1f;
-        SceneManager.LoadScene("Menu");
+        SceneManager.LoadScene("Credits");
     }
 
     private class Coroutiner : MonoBehaviour
