@@ -50,6 +50,22 @@ public class WinCondition : MonoBehaviour
                 UnityEngine.Cursor.lockState = CursorLockMode.None;
                 UnityEngine.Cursor.visible = true;
             }
+
+            // Start coroutine for going to menu
+            GameObject go = new GameObject("Win Timer");
+            go.hideFlags = HideFlags.HideAndDontSave;
+            Coroutiner co = go.AddComponent<Coroutiner>();
+            co.StartCoroutine(instance.WinTimer());
         }
     }
+
+    private IEnumerator WinTimer()
+    {
+        yield return new WaitForSecondsRealtime(3.0f);
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("Menu");
+    }
+
+    private class Coroutiner : MonoBehaviour
+    { }
 }
