@@ -7494,7 +7494,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hudCanvas: {fileID: 17673899}
   _pauseCanvas: {fileID: 644102610}
-  _menu: Menu_test
+  _menu: Menu
 --- !u!1 &716988495
 GameObject:
   m_ObjectHideFlags: 0
