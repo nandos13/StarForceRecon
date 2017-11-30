@@ -12,7 +12,8 @@ public class soundPlay : MonoBehaviour {
 
     void Start()
     {
-        sound = GetComponent<AudioSource>();
+            sound = GetComponent<AudioSource>();
+
         _isActive = false;
     }
 
