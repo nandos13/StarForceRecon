@@ -21,13 +21,19 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 2
         time: 0
-        value: -5198.6
+        value: -5008
         inSlope: 0
         outSlope: 0
         tangentMode: 136
       - serializedVersion: 2
-        time: 27
-        value: -700
+        time: 27.966667
+        value: -661
+        inSlope: 24.857143
+        outSlope: 24.857143
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 28
+        value: -487
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -39,7 +45,7 @@ AnimationClip:
     classID: 224
     script: {fileID: 0}
   m_PPtrCurves: []
-  m_SampleRate: 10
+  m_SampleRate: 60
   m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -59,7 +65,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 27
+    m_StopTime: 28
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -80,13 +86,19 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 2
         time: 0
-        value: -5198.6
+        value: -5008
         inSlope: 0
         outSlope: 0
         tangentMode: 136
       - serializedVersion: 2
-        time: 27
-        value: -700
+        time: 27.966667
+        value: -661
+        inSlope: 24.857143
+        outSlope: 24.857143
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 28
+        value: -487
         inSlope: 0
         outSlope: 0
         tangentMode: 136

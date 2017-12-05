@@ -5,10 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class EndGame : MonoBehaviour {
 
+    public float creditsWaitTime = 1f;
+
     IEnumerator WaitandLoad()
     {
         // suspend execution for 5 seconds
-        yield return new WaitForSeconds(17);
+        yield return new WaitForSeconds(creditsWaitTime);
         SceneManager.LoadScene("Menu");
         //print("WaitAndPrint " + Time.time);
     }
